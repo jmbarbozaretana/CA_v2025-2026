@@ -1,0 +1,105 @@
+%% 2do Examen parcial S2 2025
+%% José Miguel Barboza Retana
+
+\Problema{9}{Sistemas trifásicos}
+
+\vspace{2mm}
+
+%% Problema equivalente: Planta de fabricación de vehículos
+%% Contexto: línea de montaje con motores y horno de pintura
+
+\begin{center}
+\includegraphics[scale=0.35]{coche-electrico}
+\end{center}
+
+Una fábrica de vehículos eléctricos en China dispone de una línea de montaje en la que hay varias secciones que requieren alimentación trifásica. En ella, se encuentran dos motores trifásicos balanceados que accionan parte del sistema automatizado de ensamble. Ambos motores están conectados en paralelo a la alimentación trifásica general de la planta. Además, la planta cuenta con un horno trifásico que se utiliza para proceso de pintura también conectado en paralelo a la misma red de energía. La red de alimentación trifásica es balanceada, con una tensión de línea de \(240\ \mathrm{V}_{\text{rms}}\) para una secuencia de fase positiva y una frecuencia de $60\,$Hz.
+
+\vspace{3mm}
+
+Los consumos de las cargas (cada una trifásica y balanceada) son:
+
+\begin{itemize}
+  \item Motor A: $S_{A}=200\ \mathrm{kVA}$ con $f_p=0.4\,\downarrow$.
+  \item Motor B: $S_{B}=200\ \mathrm{kVA}$ con $f_p=0.8\,\downarrow$
+  \item Horno de pintura: $S_{H}=400\ \mathrm{kVA}$ con $f_p=1$.
+\end{itemize}
+
+Responda lo siguiente:
+
+\begin{subpunto}
+  \item Calcule la potencia aparente, activa y reactiva de cada una de las cargas trifásicas.\partialPoints{3}
+  \solution{
+  \begin{itemize}
+  \item \underline{\textbf{Motor A}}$\,\rightarrow\calif{1\,pto}$
+  \begin{align*}
+  \mathbf{S_A} &= 200\angle{\arccos{(0.4)}}\\
+  \mathbf{S_A} &= 80 + j183,3\,\mathrm{kVA}\\
+  \mathbf{P_A} &= 80\,\mathrm{kW}\\
+  \mathbf{Q_A} &= 183,3\,\mathrm{kVAR}
+  \end{align*}
+  \item \underline{\textbf{Motor B}}$\,\rightarrow\calif{1\,pto}$
+  \begin{align*}
+  \mathbf{S_B} &= 200\angle{\arccos{(0.8)}}\\
+  \mathbf{S_B} &= 160 + j120\,\mathrm{kVA}\\
+  \mathbf{P_B} &= 160\,\mathrm{kW}\\
+  \mathbf{Q_B} &= 120\,\mathrm{kVAR}
+  \end{align*}
+  \item \underline{\textbf{Horno}}$\,\rightarrow\calif{1\,pto}$
+  \begin{align*}
+  \mathbf{S_H} &= 400\angle{\arccos{(1)}}\\
+  \mathbf{S_H} &= 400 + j0\,\mathrm{kVA}\\
+  \mathbf{P_H} &= 400\,\mathrm{kW}\\
+  \mathbf{Q_H} &= 0\,\mathrm{kVAR}
+  \end{align*}
+  \end{itemize}
+  }
+  \item Calcule la potencia compleja total consumida por las tres cargas trifásicas. \partialPoints{1}
+  \solution{
+  \begin{align*}
+  \mathbf{S_T} &= \mathbf{S_A}+\mathbf{S_B}+\mathbf{S_H}\\
+  \mathbf{S_T} &= 640 + j303,3\,\mathrm{kVA}\\
+  \mathbf{S_T} &= 708.23\angle{25.35^\circ{}}\,\mathrm{kVA}\rightarrow\calif{1\,pto}  
+  \end{align*}
+  }
+  \item Encuentre el factor de potencia equivalente de toda la carga trifásica. \partialPoints{1}
+  \solution{
+  \begin{align*}
+  f_p &= \cos(25.36)\,\downarrow\\
+  f_p &= 0.9037\,\downarrow\,(retraso)\,\rightarrow\calif{1\,pto}
+  \end{align*}
+  }
+  \item Calcule la magnitud de la corriente de línea. \partialPoints{2}
+  \solution{  
+  \begin{align*}
+  \mathbf{S_T} &= 3\mathbf{V_L}\conj{\mathbf{I_{p}}}\rightarrow\mathrm{(suponiendo\,carga\,delta)}\\
+  S_T &= 3 V_L \dfrac{I_L}{\sqrt{3}}\\
+  S_T &= \sqrt{3} V_L I_L\\
+  I_L &= \dfrac{S_T}{\sqrt{3}V_L}\\
+  I_L &= 1.71\,\mathrm{kA_{rms}}\rightarrow\calif{2\,ptos} 
+  \end{align*}
+  }
+  \item Determine el valor de la carga trifásica requerida para llevar el sistema a un factor de potencia unitario. \partialPoints{2}
+  \solution{
+  \begin{align*}
+  Q_{C_{total}} &= 303.3\,\mathrm{kVAR}\\
+  Q_{C_{fase}} &= \dfrac{Q_{C_{total}}}{3} = 101.1\,\mathrm{kVAR}\\
+  Q_{C_{fase}} &= \left|\mathbf{V_L}\mathbf{\conj{I}_p}\right|\\
+  Q_{C_{fase}} &= \left|\mathbf{V_L}\conj{\left(\dfrac{\mathbf{V_L}}{\mathbf{Z_C}}\right)}\right|\\
+  Q_{C_{fase}} &= \dfrac{V_L^2}{\left|\dfrac{1}{j\omega C}\right|}\\ 
+  Q_{C_{fase}} &= V_L^2 \omega C\\
+  C &= \dfrac{Q_{C_{fase}}}{V_L^2 \omega} \\
+  C &= \dfrac{101.1\,\mathrm{k}}{240^2 2\pi 60} \\
+  C &= 4.66\,\mathrm{mF}\rightarrow\calif{2\,ptos}
+  \end{align*}
+  }
+\end{subpunto}
+
+
+
+
+
+
+	
+
+
+

@@ -1,0 +1,89 @@
+%% 3er Examen parcial S2 2025
+%% Saúl Guadamuz
+
+\Problema{10}{Redes de dos puertos}
+
+\vspace{2mm}
+
+El circuito de la siguiente figura es el modelo híbrido de un amplificador tipo emisor común:
+
+\begin{center}
+\includegraphics[scale=1]{prob04}
+\end{center}
+
+Sus parámetros son $h_{11} = 45 \, \Omega$, $h_{12} = 5 \times 10^{-4}$, $h_{21} = 80$ y $h_{22} = 12.5 \, \mu S$.
+
+\begin{subpunto}
+\item Calcule $R_L$ tal que $\dfrac{\mathbf{I}_2}{\mathbf{I}_1} = 79$. \partialPoints{3}
+
+\solution{
+Tomando las ecuaciones de puerto a partir de los parámetros h y la relación eléctrica en el puerto de salida se tiene:
+\begin{itemize}
+\item $\mathbf{V_1} = 45\mathbf{I_1}+5\times 10^{-4}\mathbf{V_2}$
+\item $\mathbf{I_2} = 80\mathbf{I_1}+12.5\mu\mathbf{V_2}$
+\item $\mathbf{V_2} = -\mathbf{I_2}R_L$
+\item $\dfrac{\mathbf{I_2}}{\mathbf{I_1}} = 79$
+\end{itemize}
+
+Tomando la segunda y la tercera ecuación
+
+\begin{align*}
+	\mathbf{I_2} &= 80\mathbf{I_1}+12.5\mu\left(-\mathbf{I_2}R_L\right)\\
+	\mathbf{I_2}\left(1+12.5\mu R_L\right) &= 80\mathbf{I_1}\\
+	\dfrac{\mathbf{I_2}}{\mathbf{I_1}}\left(1+12.5\mu R_L\right) &= 80\\
+	79(1+12.5\mu R_L) &= 80\\
+	R_L &= 1012,66\,\Omega
+\end{align*}
+
+}
+
+\item Calcule la $R_{in} = \dfrac{\mathbf{V}_1}{\mathbf{I}_1}$ resultante con la $R_L$ calculada en el punto anterior. \partialPoints{2}
+
+\solution{
+Tomando la primera ecuación del punto anterior:
+
+\begin{align*}
+	\mathbf{V_1} &= 45\mathbf{I_1}+5\times 10^{-4}\mathbf{V_2}\\
+	\mathbf{V_1} &= 45\mathbf{I_1}+5\times 10^{-4}(-\mathbf{I_2}R_L)\\
+	\mathbf{V_1} &= 45\mathbf{I_1}+5\times 10^{-4}(-79\mathbf{I_1}1012.66)\\
+	\dfrac{\mathbf{V_1}}{\mathbf{I_1}} &= 5\\
+	R_{in} &= 5\,\Omega
+\end{align*}
+}
+
+\item Determine el rango que puede tener $h_{22}$ para que se cumpla que $R_{in} \leq 10 \, \Omega$. \partialPoints{3}
+	
+\solution{
+Utilizando parte del procedimiento del punto anterior
+
+\begin{align*}
+R_{in} &\leq 10\\
+h_{11}-79h_{12}\dfrac{\left[\dfrac{h_{21}}{79}-1\right]}{h_{22}} &\leq 10\\
+45-79\cdot 5\times10^{-4}\dfrac{\left[\dfrac{80}{79}-1\right]}{h_{22}} &\leq 10\\
+-\dfrac{1}{2000}\dfrac{1}{h_{22}} &\leq 10-45\\
+\dfrac{1}{2000h_{22}} &\geq 35\\
+\dfrac{1}{2000\cdot 35} &\geq h_{22}\\
+14.29\mu S &\geq h_{22}
+\end{align*}
+}
+
+\item Calcule el valor de $R_L$ para que $R_{in} = 10 \, \Omega$. \partialPoints{2}
+
+\solution{
+Tomando la primera ecuación de puerto se tiene:	
+
+\begin{align*}
+\mathbf{V_1} &= 45\mathbf{I_1}+5\times 10^{-4}\mathbf{V_2}\\
+\mathbf{V_1} &= 45\mathbf{I_1}+5\times 10^{-4}(-\mathbf{I_2}R_L)\\
+\mathbf{V_1} &= 45\mathbf{I_1}+5\times 10^{-4}(-79\mathbf{I_1}R_L)\\
+\dfrac{\mathbf{V_1}}{\mathbf{I_1}} &= 45 - 79\cdot5\times 10^{-4}R_L\\
+R_{in} &= 45 - 79\cdot5\times 10^{-4}R_L\\
+10 &= 45 - 79\cdot5\times 10^{-4}R_L\\
+-35 &= - 79\cdot5\times 10^{-4}R_L\\
+R_L &= 886.08\,\Omega
+\end{align*}
+
+}
+
+\end{subpunto}
+

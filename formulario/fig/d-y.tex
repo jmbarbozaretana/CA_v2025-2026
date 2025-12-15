@@ -1,0 +1,42 @@
+\documentclass[class=article,border=1pt]{standalone}
+\usepackage[europeanresistors,americaninductors,RPvoltages]{circuitikz}
+\usetikzlibrary{calc}
+\usepackage{verbatim}
+\usepackage{textcomp}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+\usepackage{amsmath}
+
+
+\begin{document}
+\begin{circuitikz}[american, scale=0.75]
+  %% Source Delta
+  \coordinate (Csource);
+  \draw ($(Csource)+({-30}:3)$) to[V,l_=$\mathbf{V}_{ab}$] ($(Csource)+({90}:3)$) coordinate (Sa);
+  \draw ($(Csource)+({30-180}:3)$) to[V,l=$\mathbf{V}_{bc}$]  ($(Csource)+({-30}:3)$)  coordinate (Sb);
+  \draw ($(Csource)+({90}:3)$)  to[V,l_=$\mathbf{V}_{ca}$] ($(Csource)+({30-180}:3)$) coordinate (Sc);  
+  
+  % Load
+  \coordinate (Cload)  at ($(Csource)+(8,0)$);
+   \draw ($(Cload)+(0,0)$) to[generic,l_=$\mathbf{Z}_{Y}$] ($(Cload)+({90}:3)$) coordinate (La);
+  \draw ($(Cload)+({-30}:3)$) coordinate (Lc) to[generic,l_=$\mathbf{Z}_{Y}$] ($(Cload)+(0,0)$);
+  \draw ($(Cload)+({30-180}:3)$)  coordinate (Lb) to[generic,l=$\mathbf{Z}_{Y}$] ($(Cload)+(0,0)$);
+  
+  
+  \draw ($(Csource)+({90}:3)$) node[above]{$a$};
+  \draw ($(Csource)+({-30}:3)$) node[below right]{$b$};
+  \draw ($(Csource)+({30-180}:3)$) node[below left]{$c$};
+  
+  \draw ($(Cload)+({90}:3)$) node[above]{$A$};
+  \draw ($(Cload)+({-30}:3)$) node[below right]{$C$};
+  \draw ($(Cload)+({30-180}:3)$) node[below left]{$B$};
+  
+  \draw ($(Cload)+(0,0)$) node[above right]{$N$};
+  
+  %% Connections
+  \draw ($(Sa)+(0,0)$) to [short,i=$\mathbf{I}_{a}$] ($(La)+(0,0)$);
+  \draw ($(Sb)+(0,0)$) to [short,i=$\mathbf{I}_{b}$] ($(Lb)+(0,0)$);
+  \draw ($(Sc)+(0,0)$) to [short,-] ($(Sc)+(0,-2)$)  to [short,i=$\mathbf{I}_{c}$] ($(Lc)+(0,-2)$) to [short,-] (Lc)
+  ;
+\end{circuitikz}
+\end{document}

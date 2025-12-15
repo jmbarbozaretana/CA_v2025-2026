@@ -1,0 +1,27 @@
+\documentclass[convert=false,border=0pt]{standalone}
+%\usepackage{array,tabularx}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{verbatim}
+\usepackage{textcomp}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{amssymb, amsmath, amsbsy}
+\usetikzlibrary{shapes,arrows}
+\usepackage[europeanresistors,americaninductors,RPvoltages]{circuitikz}
+\pgfplotsset{width=10cm,compat=1.9}
+
+\begin{document}
+\begin{circuitikz}[american, scale=1.25]
+ 
+  \coordinate (Cload)  at (0,0);
+  \foreach \anch/\ang in {2/60,3/-180,1/-60}{%
+    \draw (Cload) to[generic,l_=$\mathbf{Z}_{\anch}$,*-] +({-\ang+90}:3) coordinate (L\anch) ;
+  }
+  %% Connections
+ \draw ($(Cload)+({150}:3)$) to[generic,l=$\mathbf{Z}_c$] ($(Cload)+({30}:3)$);
+ \draw ($(Cload)+({30}:3)$) to[generic,l=$\mathbf{Z}_a$] ($(Cload)+({-90}:3)$);
+ \draw ($(Cload)+({-90}:3)$) to[generic,l=$\mathbf{Z}_b$] ($(Cload)+({150}:3)$);
+ 
+\end{circuitikz}
+\end{document}

@@ -1,0 +1,47 @@
+%% Quiz 1 Tutoría S1 2023
+%% William Quirós Solano
+
+\Pregunta{3}{Sea el siguiente circuito RLC serie y el diagrama fasorial adjunto de la corriente $\mathbf{I}_s$ entregada por la fuente.}
+
+\begin{center}
+  \includegraphics[scale=1]{p01}
+\end{center}
+
+Considerando $R\neq 0$, $C\neq 0$ y $L\neq 0$, determine las fases ($\theta_R$, $\theta_L$, $\theta_C$) de los fasores respectivos $\mathbf{V}_{R}$, $\mathbf{V}_{L}$ y $\mathbf{V}_{C}$. 
+    
+
+\shortsolution{
+
+\bigskip
+\textbf{Respuesta:}
+    \begin{align*}
+    \theta_R &= 132^{\circ}\\
+    \theta_L &= 222^{\circ}=-138^{\circ}\\
+    \theta_C &= 42^{\circ}
+    \end{align*}
+}
+
+
+\solution{
+
+\bigskip
+\textbf{Solución:}
+
+El fasor de $\mathbf{I}_s$ se debe expresar como
+
+\begin{align*}
+\mathbf{I}_s &= |\mathbf{I}_s|\angle{(180^{\circ}-48^{\circ})}\\
+\mathbf{I}_s &= |\mathbf{I}_s|\angle{132^{\circ}}
+\end{align*}
+
+\begin{itemize}
+\item 
+Cómo la tensión $\mathbf{V}_R$ debe estar en fase con $\mathbf{I}_s$, se debe cumplir que  $\theta_R = 132^{\circ}$. \calif{1\,pto}
+
+\item 
+En el caso del inductor, la ley de impedancias de Ohm define que $\mathbf{V}_L=j\omega L \mathbf{I}_s$, lo que implica que la tensión del mismo tendrá $90^{\circ}$ de adelante respecto a $\mathbf{I}_s$. Por lo tanto, $\theta_L=132^{\circ}+90^{\circ}=222^{\circ}=-138^{\circ}$.\calif{1\,pto} 
+
+\item 
+Para el capacitor, se sabe que en este la tensión sobre el mismo tendrá $90^{\circ}$ de retraso respecto a la corriente $\mathbf{I}_s$, por lo que $\theta_C=132^{\circ}-90^{\circ}=42^{\circ}$. \calif{1\,pto}
+\end{itemize}
+}

@@ -1,0 +1,41 @@
+%% Quiz 4 Tutoría S12023
+%% Laura Cabrera
+
+\Pregunta{3}{Para un circuito RLC en serie con $R=1\,k\Omega$, $L=1\,mH$ y $C=3\,\mu F$, encuentre la frecuencia de resonancia y las frecuencias de potencia media, todas expresadas en Hertz.}
+
+\shortsolution{
+\textbf{Respuesta:}
+
+\begin{itemize}
+\item $f_0=2905.8\,Hz$
+\item $f_1=53.03\,Hz$
+\item $f_2=159.21\,kHz$
+\end{itemize}
+
+}
+
+\solution{
+\textbf{Solución:}
+
+Un circuito RLC presenta un comportamiento resonante a la frecuencia de:
+
+
+\begin{equation*}
+	f_0=\dfrac{\omega_0}{2\pi}=\dfrac{1}{2\pi\sqrt{LC}}=\dfrac{1}{\sqrt{2\pi(1\times 10^{-3})(3\times 10^{-6})}} = 2905.8\,Hz
+\end{equation*}
+
+\calif{1\,pto}
+
+\bigskip
+
+Además, para el cálculo de las frecuencias de media potencia se tiene que:
+
+\begin{align*}
+	f_1 &= \dfrac{\omega_1}{2\pi} = \dfrac{1}{2\pi}\left(-\dfrac{R}{2L}+\sqrt{\left(\dfrac{R}{2L}\right)^2 + \dfrac{1}{LC}}\right) = 53\,Hz\\
+	f_2 &= \dfrac{\omega_2}{2\pi} = \dfrac{1}{2\pi}\left(\dfrac{R}{2L}+\sqrt{\left(\dfrac{R}{2L}\right)^2 + \dfrac{1}{LC}}\right) = 159.21\,kHz
+\end{align*}
+
+\calif{1\,pto cada frecuencia}
+}
+
+

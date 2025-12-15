@@ -1,0 +1,284 @@
+\documentclass[12pt,oneside,letterpaper, landscape]{article}
+
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{ifthen}                     % provide if-then-else operators
+\usepackage{amsmath}
+\usepackage{biblatex}
+\usepackage{amssymb,amstext}            % AMS-math and symbols package
+
+\usepackage{ftcap}                      % switch \abovecaptionskip and
+                                        % \belowcaptionskip for tables, in 
+                                        % order to avoid the caption to be
+                                        % too near to the table itself
+\usepackage{booktabs}                   % book type tabulars
+\usepackage{rotating}
+\usepackage{tabularx}
+\usepackage{multicol}
+
+
+\usepackage{enumerate}
+\usepackage{setspace}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage[dvipsnames,table]{xcolor}
+
+%
+% page layout
+%
+\setlength{\oddsidemargin}{0cm}         % Margin for odd numbered pages
+\setlength{\evensidemargin}{0cm}        % Margin for even numbered pages
+\addtolength{\topmargin}{-1.5cm}        % space between top and head
+\addtolength{\headsep}{0.25cm}          % space between head and text
+\setlength{\textwidth}{228mm}           % text width
+\setlength{\textheight}{155mm}          % text height
+\setlength{\headheight}{47pt}         % fancy headers wanted this
+\parindent0em                           % indentation width of first line
+\setlength{\headsep}{15pt}
+\setlength{\topsep}{0pt}
+\setlength{\itemsep}{0pt}
+
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead[]{
+\footnotesize{Instituto Tecnológico de Costa Rica\\
+Escuela de Ingeniería Electrónica\\
+EL-2114 Circuitos Eléctricos en Corriente Alterna
+}}
+\chead[]{}
+\rhead[]{\footnotesize{II Semestre 2023}}
+\lfoot[]{}
+\cfoot[]{}
+\rfoot[]{\thepage}
+\renewcommand{\headrulewidth}{1pt}
+\renewcommand{\footrulewidth}{0pt}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\begin{center}
+\textbf{\underline{\Large{Segundo Parcial CA-IIS2023}}}
+\end{center}
+
+\bigskip
+
+\begin{multicols}{2}
+    \textbf{\large{Programación ordinaria:}}
+    
+    \begin{itemize}
+        \item \textbf{Fecha de aplicación:} \textcolor{red}{sábado 28 de octubre 2023}
+        \item \textbf{Hora de inicio:} \textcolor{red}{1:00 pm}
+        \item \textbf{Duración:} \textcolor{red}{4 horas}
+        \item \textbf{Modalidad:} \textcolor{red}{presencial}
+    \end{itemize}
+    
+    \textbf{\large{Programación extraordinaria:}}
+    
+    \begin{itemize}
+        \item \textbf{Fecha de aplicación:} \textcolor{red}{lunes 30 de octubre 2023}
+        \item \textbf{Hora de inicio:} \textcolor{red}{8:00 am o 1:00 pm}
+        \item \textbf{Duración:} \textcolor{red}{4 horas}
+        \item \textbf{Modalidad:} \textcolor{red}{presencial}
+    \end{itemize}
+
+\end{multicols}
+
+\bigskip
+
+\textbf{\large{Materiales permitidos para los estudiantes durante la aplicación del examen:}}
+\begin{itemize}
+    \item No se permite ningún tipo de calculadora electrónica programable.
+    \item Formulario oficial del curso impreso o fotocopiado y no puede tener ningún tipo de anotación adicional. 
+    \item Accesorios de oficina: lapiceros, lápiz de escribir, lapices de colores, etc.
+    \item Hojas blancas/rayadas/cuadriculadas o cuaderno de examen.
+    \item Diagramas de Bode impresos. 
+\end{itemize}
+
+
+\bigskip
+
+\textbf{\large{Aulas reservadas:}}
+\begin{itemize}
+    \item Grupo 01. Cartago. Laura Cabrera Quirós. Aula: K1-211
+    \item Grupo 02. Cartago. José Miguel Barboza Retana. Aula: K1-518
+	\item Grupo 03. Cartago. William Quirós Solano. Aula: K1-418    
+    \item Grupo 50. San Carlos. Saúl Guadamuz Brenes. Aula: Por definir.
+\end{itemize}
+
+\clearpage
+
+
+\large{\textbf{Aspectos importantes:}}
+
+\normalsize
+
+\begin{itemize}
+\item La prueba deberá ser resuelta por los estudiantes en forma individual, clara y ordenada. 
+
+\item El estudiante que llegue después de 30 min de iniciada la prueba no tendrá derecho de realizar el examen.
+
+\item El examen estará conformado por preguntas cortas y de desarrollo. 
+
+\item En el diseño de los ejercicios o las preguntas que conforman el examen, respetar un margen de puntos desde \textcolor{blue}{1 a 3 pts} por pregunta corta y de \textcolor{blue}{6 a 12 pts} para las preguntas de desarrollo.
+
+\item \textcolor{blue}{En el diseño de las preguntas de desarrollo, plantear el ejercicio de forma que no tenga más de 2 o 3 preguntas o ítemes, esto con el fin de evitar problemas muy extensos}.
+
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\definecolor{cssgreen}{rgb}{0.0, 0.5, 0.0}
+\definecolor{yellow2}{rgb}{1,0.55,0.0}
+\definecolor{ligthgray}{rgb}{1,0.55,0.0}
+
+\newcommand{\listo}{\textcolor{cssgreen}{Listo}}
+\newcommand{\pendiente}{\textcolor{red}{\textbf{Pendiente}}}
+
+\vspace{2mm}
+
+\textbf{\Large{Cronograma de actividades:}}
+
+\begin{center}
+\begin{longtable}{|>{\centering\arraybackslash}m{10mm}|m{120mm}|>{\centering\arraybackslash}m{50mm}|>{\centering\arraybackslash}m{25mm}|}
+\hline 
+\rowcolor{cyan}$\mathbf{N^{o}}$ 
+& \centering \textbf{Actividad} 
+& \textbf{Fecha} 
+& \textbf{Estado}\\
+\hline 
+1 
+& Asignación de las preguntas por diseñar para cada profesor. 
+& \textcolor{black}{20 de set 2023}  
+& \listo\\ 
+\hline 
+
+2 
+& Desarrollo de cada una de los ejercicios asignados. Entregar el ejercicio con solución completa y puntajes respectivos.
+& \textcolor{black}{20 de set - 16 de oct 2023} & \pendiente\\ 
+\hline
+
+3 
+& Revisión de cada pregunta del examen según distribución propuesta más adelante. Recordar que la revisión implica hacer un análisis muy detallado de: la redacción de la pregunta, consistencia de los datos de la pregunta, de la respuesta correcta, de las respuestas que no son correctas, asignación de puntos, etc. Este es un paso muy importante que no se debe hacer a la carrera. 
+& \textcolor{black}{17 - 23 de oct 2023} 
+& \pendiente\\ 
+\hline 
+
+4 
+& Impresión de los exámenes
+& \textcolor{black}{24 - 27 de oct 2023}
+& \pendiente\\ 
+\hline
+
+5 
+& \textcolor{magenta}{\textbf{Aplicación de la prueba}}
+& \textcolor{magenta}{\textbf{28 de oct 2023}}
+& \pendiente \\ 
+\hline
+
+7
+& Revisión de los exámenes para definir los puntos obtenidos por estudiante y así calcular la curva.
+& \textcolor{black}{28 de oct - 08 de nov 2023}
+& \pendiente\\ 
+\hline
+
+\end{longtable} 
+\end{center}
+
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+\textbf{\large{Propuesta detallada:}}
+
+
+\begin{center}
+\begin{longtable}{|m{26mm}|m{19mm}|m{120mm}|m{20mm}|m{20mm}|}
+\hline 
+\rowcolor{white!50!blue}\centering \textbf{Ítem} 
+& \centering \textbf{Diseñador} 
+& \centering\arraybackslash\textbf{Sugerencias} 
+& \centering\arraybackslash\textbf{Tipo}
+& \centering\arraybackslash\textbf{Revisor} \\
+
+\hline 
+Pregunta 01
+& José M.  
+& \underline{Unidad}: 1 \newline \underline{Detalle}: Medición trifásica de potencia. 
+& R. Corta
+& Laura\\
+\hline
+
+Pregunta 02
+& Saúl  
+& \underline{Unidad}: 1 \newline 
+\underline{Detalle}: Diagramas de Bode.
+& R. Corta
+& José M.\\
+\hline
+
+Pregunta 03
+& William  
+& \underline{Unidad}: 2 
+\newline \underline{Detalle}: Resonancia.
+& R. Corta
+& Saúl\\
+\hline
+
+
+Pregunta 04
+& Laura  
+& \underline{Unidad}: 2 
+\newline \underline{Detalle}: Complementar esta pregunta según lo que se plantee en el problema de desarrollo del tema de Transformada de Laplace.
+& R. Corta
+& William\\
+\hline
+
+\rowcolor{white!60!gray}\textbf{Problema 01}
+& José M.   
+& \underline{Unidad}: 1 
+\newline \underline{Detalle}: Circuitos trifásicos balanceados.
+& Desarrollo
+& Laura\\
+\hline
+
+\rowcolor{white!60!gray}\textbf{Problema 02}
+& Saúl  
+& \underline{Unidad}: 1 
+\newline \underline{Detalle}: Función de respuesta en frecuencia $H(\omega)$ $\pm$ Bode.
+& Desarrollo
+& José M.\\
+\hline
+
+\rowcolor{white!60!gray}\textbf{Problema 03}
+& William
+& \underline{Unidad}: 2 
+\newline \underline{Detalle}: Filtros pasivos/activos.
+& Desarrollo
+& Saúl\\
+\hline
+
+\rowcolor{white!60!gray}\textbf{Problema 04}
+& Laura   
+& \underline{Unidad}: 2 
+\newline \underline{Detalle}: Análisis de Circuitos con Transformada de Laplace.
+& Desarrollo
+& William\\
+\hline
+ 
+\end{longtable} 
+\end{center}
+
+\textcolor{blue}{NOTA IMPORTANTE: Las sugerencias indicadas en cada pregunta son con el fin de que se trate de evaluar cosas diferentes, no repetir cosas. Pero, pueden ser creativos en cada caso, no se limiten a lo que se anotó como detalle en el espacio de sugerencias de la pregunta.}\\
+
+
+
+
+\end{document}

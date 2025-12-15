@@ -1,0 +1,26 @@
+\documentclass[12pt,oneside,letterpaper]{extarticle}
+
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc} 
+\usepackage{relsize}
+\usepackage{ftcap}                      % switch \abovecaptionskip and
+                                        % \belowcaptionskip for tables, in 
+                                        % order to avoid the caption to be
+                                        % too near to the table itself
+\usepackage{booktabs}                   % book type tabulars
+\usepackage{stackengine}
+
+\usepackage[virtualmode]{extractor} 
+\pagestyle{empty}
+
+\graphicspath{{./}{DIRECTORY/fig/}}
+
+%\showsolution
+\begin{document}
+
+\renewcommand{\EstimatedTimePerPoint}{352} %% 352s por punto
+\renewcommand{\EstimatedTimeLabel}{} %% Originalmente es TE:
+\input{DIRECTORY/QUESTION}
+
+\end{document}

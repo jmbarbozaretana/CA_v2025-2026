@@ -1,0 +1,35 @@
+%% Quiz 1 Tutoría S12023
+%% William Quirós Solano
+
+\Pregunta{2}{Dada la suma fasorial de corrientes}
+
+\begin{align*}
+\mathbf{I}_3=\mathbf{I}_1+\mathbf{I}_2
+\end{align*}
+Considerando que $\mathbf{I}_{3}=1+j$ A e $\mathbf{I}_{2}=2j^2 e^{-j90^{\circ}}$ A, determine la onda de corriente alterna $i_{1}(\omega t)$ asociada al fasor $\mathbf{I}_1$.
+
+\shortsolution{
+
+\bigskip
+\textbf{Respuesta:}
+    \begin{align*}
+    i_{1}(\omega t)= \sqrt{2}\cos(\omega t -45^{\circ})\,A
+    \end{align*}
+
+}
+
+\solution{
+\textbf{Solución:}
+
+\begin{align*}
+\mathbf{I}_3 &= \mathbf{I}_1 + \mathbf{I}_2\\
+1+j &= \mathbf{I}_1 + 2 \cdot(-1) \cdot e^{-j\frac{pi}{2}}\\
+1+j &= \mathbf{I}_1 + -2(-j)\\
+1+j-2j &= \mathbf{I}_1\\
+\mathbf{I}_1 &= 1-j = \sqrt{2}\angle{-45^{\circ}}
+\end{align*}
+
+Por lo tanto $i_1(\omega t) = \sqrt{2}\cos(\omega t -45^{\circ})\,A$
+
+\calif{1\,pto por manejar el fasor $\mathbf{I}_2$ de forma correcta, 0.5\,ptos por el valor correcto de $\mathbf{I}_1$ y 0.5\,ptos por la expresión correcta de $i_1(\omega t)$}
+}

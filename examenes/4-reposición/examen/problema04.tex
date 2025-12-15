@@ -1,0 +1,144 @@
+%% 3er Examen parcial S2 2025
+%% Laura Cabrera Quirós
+
+\Problema{12}{Análisis de circuitos con series de Fourier}
+
+\vspace{2mm}
+
+Sea el circuito de la siguiente figura:
+
+\begin{center}
+  \includegraphics[scale=1]{prob04}
+\end{center}
+
+donde la señal para la fuente $v_s(t)$ está dada por:
+
+\begin{equation*}
+	v_s(t)=3+\sum_{n=1}^{6}\left[\dfrac{A}{ n}\cos(2\pi nt)-\dfrac{B}{n}\sin(2\pi nt)\right]\,V 
+\end{equation*}
+
+y donde $A$ y $B$ son constantes reales positivas. Considerando que la frecuencia fundamental es de $2\pi\,rad/s$, realice lo siguiente:
+
+\begin{subpunto}
+	
+	\item Encuentre la representación de amplitud y fase para $v_s(t)$, en términos de $A$ y $B$. \partialPoints{3}
+	
+	\solution{
+	Se deben convertir lo coeficientes de $v_s(t)$ a representación en magnitud/fase. Para el valor CD sería el valor de $a_o=3$, mientras que para la parte CA:
+	
+	\begin{align*}
+		A_n\angle \theta&=a_n-jb_n=\dfrac{A}{ n}-j(-\dfrac{B}{n})=\dfrac{A}{ n}+j\dfrac{B}{n}\\
+		&=\sqrt{\left(\dfrac{A}{n}\right)^2+\left(\dfrac{B}{n}\right)^2}\angle \tan^{-1}\left(\dfrac{B/n}{A/n}\right)\\
+		&=\dfrac{\sqrt{A^2+B^2}}{n}\angle \tan^{-1}\left(\dfrac{B}{A}\right)
+	\end{align*}
+	\calif{1 pto por amplitud y uno por fase}
+
+	Así, la representación final estaría dada por:
+
+	\begin{equation*}
+		v_s(t)=3+\dfrac{\sqrt{A^2+B^2}}{n}\cos(2\pi nt+\tan^{-1}(B/A)) 
+	\end{equation*}
+	\calif{1 pto}
+	}
+	
+	\item Determine la expresión para la tensión $v_o(t)$ considerando la fuente $v_s(t)$ dada. Su respuesta también deberá estar en términos de $A$ y $B$. \partialPoints{5}
+	
+	\solution{
+	
+
+	Para el caso en CD, el valor de $\mathbf{V}_o= 0$. Puede verse directamente del comportamiento de la bobina en CD, o más adelante en expresión general de $\mathbf{V}_o$ para cualquier $n$. \calif{1 Pto} 
+	
+	Sabiendo que $\omega_o=2\pi$ y por lo tanto $\omega_n=2\pi n$, el circuito se puede representar como:
+	\begin{center}
+		\includegraphics[scale=1]{prob04_sol}
+	\end{center}
+
+	
+
+	Así, se puede encontrar la impedancia equivalente para $\mathbf{V}_o$:
+	
+	
+	\begin{eqnarray*}
+		\mathbf{Z}_{eq}=\dfrac{4(j10\pi n)}{4+j10\pi n}=\dfrac{j40\pi n}{4+j10\pi n}=\dfrac{j20\pi n}{2+j5\pi n}
+	\end{eqnarray*}
+	
+	Y mediante un divisor:
+	\begin{eqnarray*}
+		\mathbf{V}_o&=&\dfrac{\mathbf{V}_s\left(\dfrac{j20\pi n}{2+j5\pi n}\right)}{2+\left(\dfrac{j20\pi n}{2+j5\pi n}\right)}=\dfrac{\mathbf{V}_s\left(\dfrac{j20\pi n}{2+j5\pi n}\right)}{\dfrac{4+j10\pi n+j20\pi n}{2+j5\pi n}}\\
+		&=&\dfrac{\mathbf{V}_s(j20\pi n)}{4+j10\pi n+j20\pi n}\\
+		\\
+		&=&\dfrac{\mathbf{V}_s(j20\pi n)}{4+j30\pi n}=\dfrac{\mathbf{V}_s(20\pi n\angle(90^o))}{\sqrt{4^2+(30\pi n)^2}\angle\tan^{-1}(30\pi n/4)}\\
+		&=&	\mathbf{V}_s \dfrac{j20\pi n}{\sqrt{16+900(\pi n)^2}}	\angle (90^o-\tan^{-1}(15\pi n/2))
+	\end{eqnarray*}
+	\calif{2 Pts por expresión, 1 Pto por pasarla a polar}
+	
+	A partir de lo encontrado en punto anterior, se tiene:
+	
+	
+	
+	\begin{align*}
+		\mathbf{V}_s&=\dfrac{\sqrt{A^2+B^2}}{n}\angle \tan^{-1}\left(\dfrac{B}{A}\right)
+	\end{align*}
+	
+
+
+	Y por lo tanto:
+	\begin{align*}
+		\mathbf{V}_o&=\left(\dfrac{\sqrt{A^2+B^2}}{n}\angle \tan^{-1}\left(\dfrac{B}{A}\right)\right)\dfrac{j20\pi n}{\sqrt{16+900(\pi n)^2}}	\angle (90^o-\tan^{-1}(15\pi n/2))\\
+		&=\dfrac{\sqrt{A^2+B^2}(j20\pi)}{\sqrt{16+900(\pi n)^2}}	\angle (\tan^{-1}(B/A)+90^o-\tan^{-1}(15\pi n/2))
+	\end{align*}
+	
+	
+	Finalmente, regresando al tiempo:
+	
+	\begin{align*}
+		v_o(t)&=\dfrac{\sqrt{A^2+B^2}(j20\pi)}{\sqrt{16+900(\pi n)^2}}\cos\left(2\pi nt+\tan^{-1}(B/A)+90^o-\tan^{-1}(15\pi n/2)\right) 
+	\end{align*}
+	\calif{1 Pto}
+	}
+
+	\item Se sabe que los espectros de amplitud y fase para $v_s(t)$ están dados por la siguiente representación espectral:
+	\begin{center}
+		\includegraphics[scale=1]{prob04_espectroAmp}\\
+		\includegraphics[scale=1]{prob04_espectroFase}\\
+	\end{center}
+
+Encuentre los valores de $A$ y $B$, y exprese $v_s(t)$ incorporando los valores encontrados.  \partialPoints{4}
+	
+	\solution{
+		
+	De punto 1.1 se encontró que:
+	
+		\begin{align*}
+		A_n\angle \theta_n&=\dfrac{\sqrt{A^2+B^2}}{n}\angle \tan^{-1}(B/A)
+	\end{align*}
+	Y por lo tanto:
+	\begin{align*}
+		A_n=\dfrac{\sqrt{A^2+B^2}}{n} && \theta_n=\tan^{-1}(B/A)
+	\end{align*}
+		
+	Del espectro de amplitud, se puede ver que cuando $n=1$, $A_1=\pi\sqrt{\pi^2+4}$. Así:
+	
+	\begin{align*}
+		\sqrt{A^2+B^2}&=\pi\sqrt{\pi^2+4}\\
+		\sqrt{A^2+B^2}&=\sqrt{\pi^2(\pi^2+4)}\\
+		\sqrt{A^2+B^2}&=\sqrt{\pi^4+4\pi^2}
+	\end{align*}
+	De donde se puede despejar que $A=\pi^2$ y $B=2\pi$. Mismo análisis se puede hacer con $n=2$ o $n=3$. Para excluir el caso inverso, es decir valor de A en B y viceversa, se debe utilizar el espectro de fase donde se puede ver que todos lo valores generan un ángulo de $32.48^o$. En este caso, y asegurando trabajar en unidades correctas para los ángulos:
+	\begin{align*}
+		\tan^{-1}\left(\dfrac{B}{A}\right)&=32.48^o\\
+		\left(\dfrac{B}{A}\right)&=\tan(32.48^o)\\
+		\dfrac{B}{A}&\simeq0.6365\simeq\dfrac{2}{\pi}=\dfrac{2\pi}{\pi^2}
+	\end{align*}
+	Comprobando los valores de A y B.\calif{1.5 Ptos por cada una}	
+	
+	Finalmente, la expresión final de $v_o(t)$ sería:
+	\begin{align*}
+		v_o(t)&=\dfrac{\sqrt{\pi^4+4\pi^2}(j20\pi)}{\sqrt{16+900(\pi n)^2}}\cos\left(2\pi nt+\tan^{-1}(2/\pi)+90^o-\tan^{-1}(15\pi n/2)\right) 
+	\end{align*}
+	\calif{1 Pto}
+		
+		}
+	
+	
+\end{subpunto}

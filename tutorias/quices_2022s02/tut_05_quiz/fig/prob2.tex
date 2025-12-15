@@ -1,0 +1,24 @@
+\documentclass[class=article,border=10pt]{standalone}
+\usepackage{array,tabularx}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{verbatim}
+\usepackage{textcomp}
+\usepackage{biblatex}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usetikzlibrary{shapes,arrows}
+\usepackage[europeanresistors,americaninductors,RPvoltages]{circuitikz}
+\pgfplotsset{width=10cm,compat=1.9}
+
+\begin{document}
+
+\begin{circuitikz}  [american, scale=1]
+    \draw (0,0) to[sV, V=$v_{s}(t)$] (0,3)
+    (0,3) to [R,R=$R_1$] (3,3)
+    (3,3) to[R,R=$R_2$] (3,0) 
+    (6,0) to[C=$C$, v>=$v_{o}(t)$] (6,3)   
+    (0,0) to [short,-] (6,0)
+    (3,3)to [L,i=$i(t)$,L=$L$] (6,3);
+\end{circuitikz}
+\end{document}

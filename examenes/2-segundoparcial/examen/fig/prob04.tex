@@ -1,0 +1,20 @@
+\documentclass[class=article,border=1pt]{standalone}
+\usepackage{verbatim}
+\usepackage{textcomp}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+\usepackage[europeanresistors,americaninductors,RPvoltages]{circuitikz}
+
+\begin{document}
+    \begin{circuitikz}  [american, scale=0.8]
+		\draw         
+        (0,0) to[V, v=$480\,$V] (0,2)
+        (0,2) to[closing switch, l=$t_0$] (0,4)
+        (0,4) to [R,l=$20\,\Omega$] (4,4)
+        (4,4) to [L,l=$2\,$mH,*-*] (4,0)
+        (4,4) to [R,l=$60\,\Omega$] (8,4)
+        (8,4) to [C,l=$5\,\mu$F,i=$i_C(t)$] (8,0)
+        (8,0) to [short] (0,0)
+        ;
+    \end{circuitikz}
+\end{document}

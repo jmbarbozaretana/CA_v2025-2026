@@ -1,0 +1,30 @@
+\documentclass[class=article,border=2pt]{standalone}
+\usepackage{verbatim}
+\usepackage{textcomp}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+\usepackage[europeanresistors,americaninductors,RPvoltages]{circuitikz}
+\usepackage{amsmath}
+
+\begin{document}
+
+\begin{circuitikz} [american,scale=1]
+
+\draw 
+    (0,0) to[sV, v=$\mathbf{V}_s$] (0,3)
+    (4,3) to [L,a=$j\omega L$,v^=$\mathbf{V}_o$, -] (4,0)
+    (0,0) to [short,-] (4,0)
+    (0,3) to [R, a=$R$] (4,3)
+    ;
+
+    
+\end{circuitikz}
+
+
+
+
+
+\end{document}
+
+
+

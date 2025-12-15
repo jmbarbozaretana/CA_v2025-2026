@@ -1,0 +1,81 @@
+%% Quiz 3 Tutoría S22023
+%% L. Cabrera/William Quirós
+
+\Pregunta{5}{Sea la señal periódica $f(t)$  de la siguiente figura:}
+
+\begin{center}
+	\includegraphics[scale=1.2]{p02}
+\end{center}
+
+
+Encuentre la serie trogonométrica de Fourier para $f(t)$.
+
+    
+\shortsolution{
+
+\bigskip
+\textbf{Respuesta:}
+\begin{equation*}
+	f(t)=\dfrac{3}{2}-\sum_{k=1}^{\infty}\dfrac{4}{(n\pi)^2}\cos(n\pi t)
+\end{equation*}
+con $=2k-1$.
+}
+
+
+\solution{
+\bigskip
+\textbf{Solución:}
+
+Esta función puede describirse para un periodo como
+
+\begin{equation*}
+	f(t)=\begin{cases}
+		-t+1 & -1<t<0\\
+		t+1  & 0<t<1\\		
+	\end{cases}
+\end{equation*}
+
+Sin embargo, el cálculo de la serie se simplificaría considerando que la señal tiene simetría par, por lo que se sabe que $b_n=0$ \calif{1\,pto así o calculada}. \\
+
+Para los oeficientes $a_0$ y $a_n$ se tiene entonces,
+
+\begin{align*}
+	a_0 &= \dfrac{2}{T}\int_{t_0}^{t_0+T/2}f(t)dt\\
+		&= \dfrac{2}{2}\int_{0}^{1}(t+1)dt\\
+		&= \left(\dfrac{t^2}{2}\right)\Big|^1_0 + t\Big|^1_0\\
+		&= \dfrac{1}{2}-0+1-0\\
+	a_0 &= \dfrac{3}{2} \\
+\end{align*}
+Este coeficiente puede encontrarse con la integral o también directamente de la gráfica (valor CD). \calif{1\,pto}
+
+\bigskip
+
+Por otro lado, para $a_n$
+
+\begin{align*}
+	a_n &= \dfrac{4}{T}\int_{t_0}^{t_0+T/2}f(t)\cos(n\omega_0t)\,dt\\
+	    &= \dfrac{4}{2}\int_{0}^{1}(t+1)\cos(n\pi t)\,dt\\
+		&= 2\left(\int_{0}^{1}t\cos(n\pi t)\,dt+\int_{0}^{1}\cos(n\pi t)\,dt\right)\\
+		&= 2\left(\dfrac{\cos(n\pi t)+n\pi t\sen(n\pi t)}{(n\pi)^2}\right)\Big|^1_0+2\left(\dfrac{\sen(n\pi t)}{(n\pi)}\right)\Big|^1_0\\
+		&= 2\left(\dfrac{\cos(n\pi)}{(n\pi)^2}+\dfrac{n\pi\sen(n\pi)}{(n\pi)^2} - \dfrac{\cos(0)}{(n\pi)^2} - 0 \right) + 2\left( \dfrac{\sen(n\pi)}{(n\pi)}- \dfrac{\sen(0)}{(n\pi)} \right)\\
+		&= \dfrac{2 \left((-1)^n+0-1\right)}{(n\pi)^2}+\dfrac{2 \left(0-0\right)}{n\pi}\\
+	&=\dfrac{2 \left((-1)^n-1\right)}{(n\pi)^2}\\
+	&=\begin{cases}
+		\dfrac{-4}{(n\pi)^2} & n \mbox{ impar}\\
+		0 & n \mbox{ par}\\
+	\end{cases}
+\end{align*}
+\calif{2\,ptos}
+
+\bigskip
+
+Por lo tanto:
+\begin{equation*}
+	f(t)=\dfrac{3}{2}-\sum_{k=1}^{\infty}\dfrac{4}{(n\pi)^2}\cos(n\pi t)
+\end{equation*}
+con $n=2k-1$. 
+
+\calif{1\,pto}
+
+
+}

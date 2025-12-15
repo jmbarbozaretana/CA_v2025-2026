@@ -1,0 +1,85 @@
+\documentclass[class=article,border=10pt]{standalone}
+\usepackage{verbatim}
+\usepackage{textcomp}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+\usepackage[europeanresistors,americaninductors,RPvoltages]{circuitikz}
+
+\begin{document}
+
+
+\begin{circuitikz} [american, scale=1]
+
+    \draw 
+%portA1
+    (-2,-1) to [short,*-*] (-2,-1)
+    (-2,-1) to [short,-] (-1.5,-1)
+    (-2,1) to [short,*-*] (-2,1)
+    (-2,1) to [short,-] (-1.5,1)
+    (-2,1) to [open, v=$\mathbf{V_{A1}}$] (-2,-1)
+
+%portA2
+    (2,-1) to [short,*-*] (2,-1)
+    (2,-1) to [short,-] (1.5,-1)
+    (2,1) to [short,*-*] (2,1)
+    (2,1) to [short,-] (1.5,1)
+    (2,1) to [open, v^=$\mathbf{V_{A2}}$] (2,-1)
+    
+
+%boxA
+    (-1.5,-1.75) -- (1.5,-1.75) -- (1.5,1.75) -- (-1.5,1.75) -- (-1.5,-1.75)
+    (0,1.1) -- (0,1.1) node[] {$z_{11}=10$\,k$\Omega$}
+    (-0.1,0.4) -- (-0.1,0.4) node[] {$z_{12}=5$\,k$\Omega$}
+    (0,-0.3) -- (0,-0.3) node[] {$z_{21}=20$\,k$\Omega$}
+    (0,-1) -- (0,-1) node[] {$z_{22}=10$\,k$\Omega$}
+
+%portB1
+    (-2,-5.5) to [short,*-*] (-2,-5.5)
+    (-2,-5.5) to [short,-] (-1.5,-5.5)
+    (-2,-3.5) to [short,*-*] (-2,-3.5)
+    (-2,-3.5) to [short,-] (-1.5,-3.5)
+    (-2,-3.5) to [open, v=$\mathbf{V_{B1}}$] (-2,-5.5)
+
+%portB2
+    (2,-5.5) to [short,*-*] (2,-5.5)
+    (2,-5.5) to [short,-] (1.5,-5.5)
+    (2,-3.5) to [short,*-*] (2,-3.5)
+    (2,-3.5) to [short,-] (1.5,-3.5)
+    (2,-3.5) to [open, v^=$\mathbf{V_{B2}}$] (2,-5.5)
+    
+
+%boxB
+    (-1.5,-6.25) -- (1.5,-6.25) -- (1.5,-2.75) -- (-1.5,-2.75) -- (-1.5,-6.25)
+    (-0.07,-3.4) -- (-0.07,-3.4) node[] {$y_{11}=250$\,$\mu$S }
+    (0,-4.1) -- (0,-4.1) node[] {$y_{12}=62.5$\,$\mu$S}
+    (0,-4.8) -- (0,-4.8) node[] {$y_{21}=62.5$\,$\mu$S}
+    (-0.17,-5.5) -- (-0.17,-5.5) node[] {$y_{22}=1\,m$S  }
+
+%A1B1
+    (-2,-1) to [short,-] (-2.5,-1)
+    (-2,1) to [short,-] (-4,1)
+    (-4,1) to [short,*-*] (-4,1)
+    (-2.5,-1) to [short,-] (-2.5,-3.5)
+    (-2,-3.5) to [short,-] (-2.5,-3.5)
+    (-2,-5.5) to [short,-] (-4,-5.5)
+    (-4,-5.5) to [short,*-*] (-4,-5.5)
+
+%A2B2
+    (2,-1) to [short,-] (2.5,-1)
+    (2,1) to [short,-] (4,1)
+    (4,1) to [short,*-*] (4,1)
+    (2.5,-1) to [short,-] (2.5,-3.5)
+    (2,-3.5) to [short,-] (2.5,-3.5)
+    (2,-5.5) to [short,-] (4,-5.5)
+    (4,-5.5) to [short,*-*] (4,-5.5)
+
+
+    ;
+    \draw (-0.7,2) -- (-0.7,2) node[right] {$\textbf{Red A}$};    
+    \draw (-0.7,-2.5) -- (-0.7,-2.5) node[right] {$\textbf{Red B}$};
+
+
+\end{circuitikz}
+
+
+\end{document}

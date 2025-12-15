@@ -1,0 +1,83 @@
+%% Quiz 1 Tutoría S1 2023
+%% William Quirós Solano
+
+\Pregunta{6}{Sea el siguiente circuito}
+
+\begin{center}
+	\includegraphics[scale=1]{p02}
+\end{center}
+
+Si la corriente de la fuente es $i_s(t)= 5\cos(2t+90^{\circ})\,$A, determine la tensión $v_o(t)$.
+
+\shortsolution{
+
+\bigskip
+\textbf{Respuesta:}
+    
+\begin{equation*}
+	v_o(t)=3.03\cos(2t+118.83^{\circ})\,A
+\end{equation*}
+
+}
+
+\solution{
+\textbf{Solución:}
+
+Existen distintas formas de resolver este ejercicio. Entre ellas:
+
+\begin{itemize}
+\item Aplicar ley de tensiones de Kirchoff sobre las dos mallas (derecha y superior), con las dos ecuaciones resultantes, encontrar las corrientes de malla y así luego calcular $\mathbf{V}_o$.
+\item Otra opción es utilizar la ley de corrientes de Kirchoff sobre tres nodos existentes, sin embargo es quizás la estrategia más compleja, ya que se tendrán tres ecuaciones que utilizar para la solución. 
+\item Aplicar alguna conversión delta a estrella o incluso de estrella a delta. Esta conversión provocará que ciertas impedancias queden en serie o paralelo a otras, permitiendo un camino más cómodo hacia la solución. Sin embargo, la conversión requiere un esfuerzo complejo por no ser balanceada. 
+\item Utilizar un modelo equivalente de Thévenin conveniente para simplificar el análisis del circuito.
+\end{itemize}
+
+Vamos a presentar la solución utilizando el modelo equivalente de Thévenin. Primero, se debe calcular la tensión fasorial $\mathbf{V}_{Th}$ del modelo.  \calif{2\,pts}
+
+\begin{center}
+\includegraphics[scale=1]{p02_vth}
+\end{center} 
+
+Calculando $\mathbf{I}_x$
+
+\begin{align*}
+\mathbf{I}_x &= \dfrac{\mathbf{I}_s \cdot \mathbf{Z}_L}{\mathbf{Z}_L+3+4}\\
+\mathbf{I}_x &= \dfrac{5j\cdot 2j}{2j + 7}\\
+\mathbf{I}_x &= 1.37\angle{64.07^{\circ}}\,A
+\end{align*}
+
+
+Calculando $\mathbf{V}_{Th}$
+
+\begin{align*}
+\mathbf{V}_{Th} &= \mathbf{I}_s\cdot 1 + \mathbf{I}_x\cdot 3 \\
+\mathbf{V}_{Th} &= 7.3\angle{122.9^{\circ}}\,V 
+\end{align*}
+
+Seguimos con el cálculo de la impedancia equivalente de Thévenin \calif{2\,pts}
+
+\begin{center}
+\includegraphics[scale=1]{p02_zth}
+\end{center}
+
+\begin{align*}
+\mathbf{Z}_{Th} &= \dfrac{3(4+2j)}{3+4+2j}+1\\
+\mathbf{Z}_{Th} &= 2.83\angle{6.89^{\circ}}\,\Omega 
+\end{align*}
+
+De esta forma el modelo equivalente obtenido es \calif{2\,pts}
+
+\begin{center}
+\includegraphics[scale=1]{modeloeq}
+\end{center}
+
+Para lo cual 
+
+\begin{align*}
+\mathbf{V}_o &= \dfrac{\mathbf{V}_{Th}\cdot 2}{2+ \mathbf{Z}_{Th}}\\
+\mathbf{V}_o &= 3.03\angle{118.03^{\circ}}\,V 
+\end{align*}
+
+Finalmente, $v_o(t) = 3.03\cos(2t+118.83^{\circ})\,V$. \calif{Si la respuesta no se da en forma de onda temporal, se le quita 0.5\,ptos}
+
+}

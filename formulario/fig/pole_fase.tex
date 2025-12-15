@@ -1,0 +1,82 @@
+\documentclass[class=article,border=1pt]{standalone}
+\usepackage{verbatim}
+\usepackage{textcomp}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+\usepackage[europeanresistors,americaninductors]{circuitikz}
+
+\usepackage[active,tightpage]{preview}
+\PreviewEnvironment{tikzpicture}
+\setlength\PreviewBorder{0pt}
+\usepackage{amsmath,amssymb}
+\usepackage{bodegraph}
+
+\usetikzlibrary{intersections}
+\usetikzlibrary{calc}
+\usetikzlibrary{positioning}
+
+\begin{document}
+
+% Define the layers to draw the diagram
+\pgfdeclarelayer{background}
+\pgfdeclarelayer{foreground}
+\pgfsetlayers{background,main,foreground}
+
+\begin{tikzpicture}[>=latex',
+    ref lines/.style={line width=1pts, blue!95},
+    ref points/.style={circle, black, opacity=0.7, fill, minimum size= 1pt, inner sep=0},
+    every node/.style={font=\tiny},
+    bode lines/.style={very thick, black},
+    Gclabel/.style={text=gray,font=\small},
+    xscale=12/3,
+    gnuplot def/.style={samples=100,id=\arabic{idGnuplot},prefix=gnuplot/\jobname},
+    semilog lines/.style={thin, black!00},
+    semilog lines 2/.style={thin, black!00},
+    semilog label x/.style={white,semilog lines,below,font=\tiny},
+    semilog label y/.style={white,semilog lines,right,font=\tiny},
+    semilog half lines/.style={semilog lines 2, dashed,font=\tiny},
+    Black lines/.style={very thick, blue,font=\tiny},
+    Black grid/.style={ultra thin,brown,font=\tiny},
+    Black abaque mag/.style={gray,ultra thin,dashed,smooth},
+    Black abaque phase/.style={gray,ultra thin,smooth},
+    Black label points/.style={gray,font=\tiny},
+    Black label axes/.style={Black grid, font=\tiny},
+    Nyquist lines/.style={very thick, blue},
+    Nyquist grid/.style={ultra thin,brown},
+    Nyquist label axes/.style={Nyquist grid,font=\tiny},
+    Nyquist label points/.style={font=\tiny},
+    Temp lines/.style={very thick, blue},
+    Temp grid/.style={ultra thin,brown},
+    Temp label axes/.style={Temp grid, font=\tiny},
+    Temp label points/.style={font=\tiny},
+    Abaque grid/.style={ultra thin,brown!80},
+    Abaque lines/.style={thick, blue,smooth}
+    ]
+
+
+\begin{scope}[yscale=3/100,xscale=50/100]
+\UnitedB
+\OrdBode{20}
+\semilog{-1}{1}{-20}{40}
+
+%Draw lines (Magnitude)
+\draw[line width = 1pt, blue,dashed] (-1,20) -- (-0.5,20) -- (0.5,0) --(1,0);
+\draw[->,line width = 0.5pt, black] (-1,20) -- (1.05,20) node [below]{$\omega$};
+
+% Labels
+\node (A) [Gclabel, black!90, text=black,scale=0.7] 
+    at (-0.75,15) {$0^{\circ}$};
+\node (B) [Gclabel, black!90, text=black,scale=0.7] 
+    at (0.8,-6) {$-90N^{\circ}$}; 
+    
+\node [Gclabel, black, scale=0.7] at (-0.5,27) {$\frac{p}{10}$};
+\draw (-0.5,20)--(-0.5,21.5);
+\node [Gclabel, black, scale=0.7] at (0,27) {$p$};
+\draw (0,20)--(0,21.5);
+\node [Gclabel, black, scale=0.7] at (0.5,27) {$10p$};
+\draw (0.5,20)--(0.5,21.5);
+
+\end{scope}
+
+\end{tikzpicture}
+\end{document}

@@ -1,0 +1,76 @@
+%% Quiz 1 Tutoría S2 2023
+%% Laura Cabrera
+
+\Pregunta{6}{Para el siguiente circuito considere que $v_s(t)=3\cos(t)\,V$.}
+
+\begin{center}
+  \includegraphics[scale=1]{p02}
+\end{center}
+
+Determine la onda de tensión $v_o(t)$ y la potencia promedio consumida por dicha resistencia de $3\,\Omega$. 
+    
+
+\shortsolution{
+
+\bigskip
+\textbf{Respuesta:}
+    \begin{align*}
+    v_o(t) &= 3.18\cos(t+45^o)\,V\\
+    P &= 1.6875\,W
+    \end{align*}
+}
+
+
+\solution{
+
+\bigskip
+\textbf{Solución:}
+
+Al pasar al dominio fasorial se obtiene
+
+\begin{center}
+	\includegraphics[scale=1]{p02 - resp}
+\end{center}
+
+
+La tensión en $\mathbf{V}_a$ se puede obtener mediante un equivalente:
+
+\begin{align*}
+\mathbf{Z}_{eq} &= \dfrac{1}{\frac{1}{3+1}+\frac{1}{4j}}\\
+&=2\sqrt{2}\angle 45^o=2+2j\,\Omega
+\end{align*}
+
+Usandolo para un divisor:
+
+\begin{align*}
+	\mathbf{V}_{a} &= \dfrac{\mathbf{V}_{s}(2+2j)}{-2j+2+2j}\\
+	&=3+3j=3\sqrt{2}\angle 45^oV
+\end{align*}
+
+
+Nuevamente, con divisor:
+
+\begin{align*}
+	\mathbf{V}_{o} &= \dfrac{\mathbf{V}_{a}(3)}{3+1}\\
+	&=\dfrac{3\sqrt{2}\angle 45^o(3)}{4}\\
+	&=\frac{9\sqrt{2}}{4}\angle 45^o=3.18\angle 45^\circ{}\,V 
+\end{align*}
+
+Esta tensión puede ser encontrada también por otros métodos como LCK o  LTK \calif{3\,ptos independientemente del camino}. 
+
+Por lo tanto, $v_o(t)=3.18\cos(t+45^o)\,V\rightarrow $ \calif{1\,pto}.\\
+
+Finalmente, para el cálculo da la potencia promedio, es necesario encontrar la corriente en la resistencia:
+
+\begin{align*}
+	\mathbf{I}_{R} &= \dfrac{\mathbf{V}_{o}}{R}=\frac{3\sqrt{2}}{4}\angle 45^o\,A
+\end{align*}
+
+Así:
+
+\begin{align*}
+	P &=\dfrac{1}{2}V_mI_m\cos(\theta_v-\theta_i)\\
+	  &=\left(\dfrac{1}{2}\right)\left(\dfrac{9\sqrt{2}}{4}\right)\left(\dfrac{3\sqrt{2}}{4}\right)\cos(0)\\
+	  &=1.6875\,W \rightarrow\calif{2\,ptos}
+\end{align*}
+}

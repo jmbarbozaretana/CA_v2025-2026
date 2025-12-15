@@ -1,0 +1,23 @@
+\documentclass[class=article,border=10pt]{standalone}
+\usepackage{verbatim}
+\usepackage{textcomp}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+\usepackage[europeanresistors,americaninductors,RPvoltages]{circuitikz}
+
+\begin{document}
+
+    \begin{circuitikz}  [american, scale=0.85]
+        \draw 
+		(1,0) to[V, v=$v_{in}(t)$] (1,4)         
+        (1,4) to [short, -] (1,4)
+        (1,4) to [R, R=$1\,$k$\Omega$, -] (4,4)
+        (4,0) to [R, R=$5\,$k$\Omega$] (4,4)
+        (7,0) to [C, C=$4\;\mu$F] (7,4)
+        (8.2,4) to [open, v^=$v_{out}(t)$] (8.2,0)
+        (1,0) to [short,-o] (8.2,0)
+        (4,4) to [short,-o] (8.2,4)
+        ;
+    \end{circuitikz}
+
+\end{document}

@@ -1,0 +1,29 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+% Programa de Licenciatura en Ingeniería Electrónica
+% Instituto Tecnológico de Costa Rica
+% Curso: EL2114  Circuitos Eléctricos en Corriente Alterna
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[11pt,oneside,letterpaper]{article}
+
+\usepackage{tecPrograma}
+\input{config}
+
+\renewcommand{\Prof}{Ing.~Por Definir}
+\renewcommand{\OtrasCarreras}{Licenciatura en Ingeniería en Computadores}
+
+\thiscourse{EL2114}
+
+\renewcommand{\PalabrasClave}{ca}
+
+\addbibresource{literatura.bib}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+\begin{document}
+\graphicspath{{./}{./fig/}{./img/}}
+
+\ifpartea{\input{parte_a}}
+\ifparteb{\input{parte_b}}
+
+\end{document}

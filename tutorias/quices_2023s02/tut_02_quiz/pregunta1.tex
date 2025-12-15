@@ -1,0 +1,43 @@
+%% Quiz 2 Tutoría S22023
+%% Saúl Guadamuz Brenes
+
+\Pregunta{5}{Una fuente balanceada en $Y$ se conecta a una carga balanceada en $\Delta$. Se sabe que la corriente de línea tiene una magnitud de $5 \, A_{rms}$. Si la potencia total consumida por la carga es de $3.12 \, kW$ y el ángulo de cada una de las impedancias de carga es de $-30^\circ$, calcule la magnitud de la tensión de línea y el valor de las impedancias de carga.}
+
+\shortsolution{
+
+\bigskip
+\textbf{Respuesta:}
+    \begin{align*}
+    	V_L &= 416 \, V_{rms} \\
+    	\phr{Z_{\Delta}} &= 144.19 \angle -30^\circ \, \Omega = 124.872 - j72.092 \, \Omega
+    \end{align*}
+}
+
+\solution{
+\textbf{Solución:}
+
+Sabemos que la potencia total es $P_T = \sqrt{3}V_L I_L \cos \theta$, por lo que la tensión de línea es
+\begin{align*}
+	V_L &= \dfrac{P_T}{\sqrt{3} I_L \cos \theta} = \dfrac{3120}{\sqrt{3}(5)\cos (-30^\circ)} \\
+			&= 416 \, V_{rms} \quad \calif{1\,pts}
+\end{align*}
+
+En una conexión $Y-\Delta$ sabemos que en la carga $I_L = \sqrt{3}I_p$, entonces
+\begin{align*}
+	I_p &= \dfrac{I_L}{\sqrt{3}} = \dfrac{5}{\sqrt{3}} \\
+			&= 2.886 \, A_{rms} \quad \calif{2\,pts}
+\end{align*}
+
+La magnitud de la impedancia sería
+\begin{equation*}
+	Z_\Delta = \dfrac{V_L}{I_L} = \dfrac{416.133}{2.886} = 144.19 \, \Omega \quad \calif{1\,pts}
+\end{equation*}
+y el enunciado brinda el ángulo, así es que las impedancias de carga son
+\begin{equation*}
+	\phr{Z}_\Delta = 144.19 \angle -30^\circ \, \Omega = 124.872 - j72.092 \, \Omega \quad \calif{1\,pts}
+\end{equation*}
+
+Se hace meritorio mencionar que esta no es la única forma de resolver el ejercicio.
+
+\clearpage
+}

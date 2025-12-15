@@ -1,0 +1,351 @@
+\documentclass[12pt,oneside,letterpaper, landscape]{article}
+
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{ifthen}                     % provide if-then-else operators
+\usepackage{amsmath}
+\usepackage{amssymb,amstext}            % AMS-math and symbols package
+
+\usepackage{ftcap}                      % switch \abovecaptionskip and
+                                        % \belowcaptionskip for tables, in 
+                                        % order to avoid the caption to be
+                                        % too near to the table itself
+\usepackage{booktabs}                   % book type tabulars
+\usepackage{rotating}
+\usepackage{tabularx}
+\usepackage{multicol}
+
+
+\usepackage{enumerate}
+\usepackage{setspace}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage[dvipsnames,table]{xcolor}
+
+%
+% page layout
+%
+\setlength{\oddsidemargin}{0cm}         % Margin for odd numbered pages
+\setlength{\evensidemargin}{0cm}        % Margin for even numbered pages
+\addtolength{\topmargin}{-1.5cm}        % space between top and head
+\addtolength{\headsep}{0.25cm}          % space between head and text
+\setlength{\textwidth}{228mm}           % text width
+\setlength{\textheight}{155mm}          % text height
+\setlength{\headheight}{47pt}         % fancy headers wanted this
+\parindent0em                           % indentation width of first line
+\setlength{\headsep}{15pt}
+\setlength{\topsep}{0pt}
+\setlength{\itemsep}{0pt}
+
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead[]{
+\footnotesize{Instituto Tecnológico de Costa Rica\\
+Escuela de Ingeniería Electrónica\\
+EL-2114 Circuitos Eléctricos en Corriente Alterna
+}}
+\chead[]{}
+\rhead[]{\footnotesize{II Semestre 2021}}
+\lfoot[]{}
+\cfoot[]{}
+\rfoot[]{\thepage}
+\renewcommand{\headrulewidth}{1pt}
+\renewcommand{\footrulewidth}{0pt}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\begin{center}
+\textbf{\underline{\Large{Examen de Reposición CA-IIS2021}}}
+\end{center}
+
+\bigskip
+
+\begin{multicols}{2}
+    \textbf{\large{Programación ordinaria:}}
+    
+    \begin{itemize}
+        \item \textbf{Fecha de aplicación:} \textcolor{red}{miércoles 1 de diciembre 2021}
+        \item \textbf{Hora de inicio:} \textcolor{red}{7:30 am}
+        \item \textbf{Duración:} \textcolor{red}{5 horas}
+        \item \textbf{Modalidad:} \textcolor{red}{TEC Digital/GAAP ó ClassMarker.com}
+    \end{itemize}
+    
+    \textbf{\large{Programación extraordinaria:}}
+    
+    \begin{itemize}
+        \item \textbf{Fecha de aplicación:} \textcolor{red}{miércoles 1 de diciembre 2021}
+        \item \textbf{Hora de inicio:} \textcolor{red}{1:00 pm}
+        \item \textbf{Duración:} \textcolor{red}{1 hora 30 min por estudiante}
+        \item \textbf{Modalidad:} \textcolor{red}{Oral, con cita previa por ZOOM}
+    \end{itemize}
+
+\end{multicols}
+
+\bigskip
+\bigskip
+
+\large{\textbf{Aspectos importantes:}}
+
+\normalsize
+
+\begin{itemize}
+\item La prueba deberá ser resuelta por los estudiantes en forma individual, clara y ordenada. 
+
+\item La prueba se programará en el TEC Digital o en ClassMarker.com para una duración total de 5 horas.
+
+\item Al estudiante que inicie la prueba 30 minutos después del inicio de la misma (8:00 am) no se le considerará su respuesta y deberá gestionar su debida justificación para tener derecho a aplicar la prueba en la programación extraordinaria.
+
+\item Se le solicitará al TEC Digital la posibilidad de apoyo el día de la aplicación del examen para atender situaciones extraordinarias que podrían presentarse durante el desarrollo de la prueba con la plataforma. 
+
+\item El examen estará conformado por preguntas de selección única, en donde el estudiante seleccionaría una respuesta de las opciones propuestas. Si la respuesta seleccionada por el estudiante es la correcta y si el estudiante presenta posteriormente la justificación/validación correcta, obtendrá los puntos relacionados de esa pregunta y estos serán asignados.
+
+\item La justificación anterior se realizará por medio de un documento que el estudiante debe subir al TEC Digital. Este documento debe ser en formato PDF, totalmente legible, el cual puede generarse al escanear o fotografiar su solución. Esta solución debe estar escrita a mano, sea en papel o sobre una tablet con stylus o del tipo gráfica. 
+
+\item \textcolor{blue}{Se desarrollará 1 versión para cada pregunta. La idea es que estas preguntas sean una versión nueva denominada \underline{e} de las preguntas que se seleccionen a partir de las versiones a,b,c y d del primer, segundo y tercer parcial.}
+
+\item El examen se programará en la plataforma con aleatoriedad de preguntas y orden de las opciones de respuestas. Además, el detalle de que los estudiantes NO podrán devolverse a preguntas anteriores, una vez que avanzan a una pregunta siguiente.
+
+\item Para cada ejercicio se tendrá un tiempo máximo estimado/sugerido que se anotará con el fin de apoyar al estudiante a la hora de resolver los ejercicios. El tiempo sugerido no implicará ninguna restricción temporal para resolver el ejercicio, únicamente es una guía para el estudiante. Este aparecerá junto al número de puntos de la pregunta.
+
+\item \textcolor{blue}{No se realizarán asignaciones parciales de puntaje a la calificación de cada pregunta para los estudiantes, significando que solo las preguntas con la respuesta correcta seleccionada serán las consideradas en la revisión contra justificación enviada por el estudiante. En base a esta revisión, se asignan los puntos completos de la pregunta o se asigna 0pts. En ninguna situación se asigará un porcentaje parcial de los puntos correspondientes de una pregunta como resultado de la revisión de la justificación/explicación que envía el estudiante.}
+
+
+\end{itemize}
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\definecolor{green(html/cssgreen)}{rgb}{0.0, 0.5, 0.0}
+\definecolor{yellow2}{rgb}{1,0.55,0.0}
+
+\textbf{\large{Cronograma de actividades:}}
+
+\begin{center}
+\begin{longtable}{|>{\centering\arraybackslash}m{10mm}|m{123mm}|>{\centering\arraybackslash}m{50mm}|>{\centering\arraybackslash}m{25mm}|}
+\hline 
+\rowcolor{cyan}$\mathbf{N^{o}}$ 
+& \centering \textbf{Actividad} 
+& \textbf{Fecha} 
+& \textbf{Estado}\\
+\hline 
+1 
+& Asignación de las preguntas de selección única por diseñar para cada profesor. 
+& \textcolor{black}{27 de noviembre}  
+& \textcolor{black}{Pendiente}\\ 
+\hline 
+
+2 
+& Desarrollo de cada una de las preguntas de selección única asignadas para las cuatro versiones del examen. Cada pregunta debe tener solución completa y puntaje asignado.
+& \textcolor{black}{27-29 de noviembre} & \textcolor{black}{Pendiente}\\ 
+\hline
+
+3 
+& Revisión de cada pregunta del examen según distribución propuesta más adelante. Recordar que la revisión implica hacer un análisis muy detallado de: la redacción de la pregunta, consistencia de los datos de la pregunta, de la respuesta correcta, de las respuestas que no son correctas, asignación de puntos, etc. Este es un paso muy importante que no se debe hacer a la carrera. 
+& \textcolor{black}{30 de noviembre} 
+& \textcolor{black}{Pendiente}\\ 
+\hline 
+
+4 
+& Ensamble cada pregunta en el tool de aplicación (TEC Digital/GAAP y Classmarker.com).
+& \textcolor{black}{30 de noviembre}
+& \textcolor{black}{Pendiente}\\ 
+\hline
+
+5 
+& Pruebas de funcionamiento y configuración de la prueba en la plataforma de uso para dejar lista su aplicación.
+& \textcolor{black}{30 de noviembre}
+& \textcolor{black}{Pendiente}\\ 
+\hline
+
+6 
+& \textcolor{red}{Aplicación de la prueba}
+& \textcolor{red}{1 de diciembre}
+& \textcolor{red}{Pendiente}\\ 
+\hline
+
+7
+& Revisión de las soluciones escaneadas y definición de resultados (sin curva).
+& \textcolor{black}{1 de diciembre}
+& \textcolor{black}{Pendiente}\\ 
+\hline
+
+\end{longtable} 
+\end{center}
+
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\textbf{\large{Planificación del examen:}}
+
+\begin{center}
+\begin{longtable}{|>{\centering\arraybackslash}m{15mm}|m{85mm}|>{\centering\arraybackslash}m{55mm}|>{\centering\arraybackslash}m{35mm}|}
+\hline 
+\rowcolor{cyan}\centering \textbf{Unidad} 
+& \centering \textbf{Nombre} 
+& \centering \textbf{Duración en clases (semanas lectivas)} 
+& \centering\arraybackslash\textbf{Número de Preguntas} \\
+
+\hline 
+
+1 
+& Análisis de Circuitos en CA  
+& 2,5
+& 3\\
+\hline
+
+2 
+& Potencia para CA  
+& 2,5
+& 2\\
+\hline
+
+3 
+& Circuitos Trifásicos  
+& 1,5
+& 1\\
+\hline
+
+4 
+& Redes de dos Puertos  
+& 2
+& 2\\
+\hline
+
+5 
+& Respuesta en Frecuencia  
+& 3
+& 2\\
+\hline
+ 
+6 
+& Transformada de Laplace  
+& 2,5
+& 3\\
+\hline
+
+7 
+& Series de Fourier  
+& 2
+& 2\\
+\hline
+ 
+\end{longtable} 
+\end{center}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\textbf{\large{Planificación del examen:}}
+
+\begin{center}
+\begin{longtable}{|m{30mm}|m{40mm}|m{138mm}|}
+\hline 
+\rowcolor{cyan}\centering \textbf{Unidad} 
+& \centering \textbf{Responsable} 
+& \centering\arraybackslash\textbf{Detalles} \\
+
+\hline 
+Pregunta 01
+& Profesor A  
+& \underline{Unidad}: 1 
+\newline \underline{Detalle}: Seleccionar algún ejercicio del primer parcial.\\
+\hline
+Pregunta 02
+& Profesor A  
+& \underline{Unidad}: 1 
+\newline \underline{Detalle}: Seleccionar algún ejercicio del primer parcial.\\
+\hline
+Pregunta 03
+& Profesor A  
+& \underline{Unidad}: 1 
+\newline \underline{Detalle}: Seleccionar algún ejercicio del primer parcial.\\
+\hline
+Pregunta 04
+& Profesor A  
+& \underline{Unidad}: 2 
+\newline \underline{Detalle}: Seleccionar algún ejercicio del primer parcial.\\
+\hline
+Pregunta 05
+& Profesor A  
+& \underline{Unidad}: 2 
+\newline \underline{Detalle}: Seleccionar algún ejercicio del primer parcial.\\
+\hline
+Pregunta 06
+& Profesor B  
+& \underline{Unidad}: 3 
+\newline \underline{Detalle}: Seleccionar algún ejercicio del primer parcial.\\
+\hline
+Pregunta 07
+& Profesor B  
+& \underline{Unidad}: 4 
+\newline \underline{Detalle}: Seleccionar algún ejercicio del segundo parcial.\\
+\hline
+Pregunta 08
+& Profesor B  
+& \underline{Unidad}: 4 
+\newline \underline{Detalle}: Seleccionar algún ejercicio del segundo parcial.\\
+\hline
+Pregunta 09
+& Profesor B  
+& \underline{Unidad}: 5 
+\newline \underline{Detalle}: Seleccionar algún ejercicio del segundo parcial.\\
+\hline
+Pregunta 10
+& Profesor B  
+& \underline{Unidad}: 5 
+\newline \underline{Detalle}: Seleccionar algún ejercicio del segundo parcial.\\
+\hline
+Pregunta 11
+& Profesor C  
+& \underline{Unidad}: 6 
+\newline \underline{Detalle}: Seleccionar algún ejercicio del segundo parcial.\\
+\hline
+Pregunta 12
+& Profesor C  
+& \underline{Unidad}: 6 
+\newline \underline{Detalle}: Seleccionar algún ejercicio del segundo parcial.\\
+\hline
+Pregunta 13
+& Profesor C  
+& \underline{Unidad}: 6 
+\newline \underline{Detalle}: Seleccionar algún ejercicio del tercer parcial.\\
+\hline
+Pregunta 14
+& Profesor C  
+& \underline{Unidad}: 7
+\newline \underline{Detalle}: Seleccionar algún ejercicio del tercer parcial.\\
+\hline
+Pregunta 15
+& Profesor C  
+& \underline{Unidad}: 7
+\newline \underline{Detalle}: Seleccionar algún ejercicio del tercer parcial.\\
+\hline
+ 
+\end{longtable} 
+\end{center}
+
+Profesor A: Luis Miguel Esquivel Sancho
+
+Profesor B: William Quiros Solano
+ 
+Profesor C: José Miguel Barboza Retana
+
+\vspace{5mm}
+
+El profesor B revisa las preguntas del profesor A.
+
+El profesor C revisa las preguntas del profesor B.
+
+El profesor A revisa las preguntas del profesor C.
+
+\end{document}

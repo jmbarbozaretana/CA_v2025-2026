@@ -1,0 +1,20 @@
+\documentclass[class=article,border=10pt]{standalone}
+\usepackage{verbatim}
+\usepackage{textcomp}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+\usepackage[europeanresistors,americaninductors,RPvoltages]{circuitikz}
+
+\begin{document}
+
+\begin{circuitikz}  [american, scale=1]
+    \draw 
+    (0,0) to[sV, v=$v_s(t)$, i=$i_{s}(t)$] (0,3.5)
+    (0,3.5) to [C, l=$0.5\,F$] (3,3.5)
+    (3,3.5) to [R, l=$3\,\Omega$,v=$v_o(t)$] (6,3.5)
+    (3,0) to [L, l=$4\,$H] (3,3.5)
+    (6,0) to [R, l=$1\,\Omega$] (6,3.5)
+    (0,0) to [short,-] (6,0);
+
+\end{circuitikz}
+\end{document}

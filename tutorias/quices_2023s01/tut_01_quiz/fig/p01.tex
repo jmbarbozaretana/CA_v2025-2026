@@ -1,0 +1,44 @@
+\documentclass[class=article,border=10pt]{standalone}
+\usepackage{array,tabularx}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{verbatim}
+\usepackage{textcomp}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usetikzlibrary{shapes,arrows}
+\usepackage[europeanresistors,americaninductors,RPvoltages]{circuitikz}
+\pgfplotsset{width=10cm,compat=1.9}
+
+\begin{document}
+%Circuito
+\begin{circuitikz} [american, scale=1]
+    \draw
+    (0,0) to [sV,v=$\mathbf{V}_{s}$,i=$\mathbf{I}_{s}$] (0,4)
+    (0.5,4) to [R,v=$\mathbf{V}_{R}$,l=$R$] (2.5,4)
+    (5.5,0) to [C,l_=$C$,v^>=$\mathbf{V}_{C}$] (5.5,4)
+    (2.5,4) to [L,v=$\mathbf{V}_{L}$,l=$L$] (5,4)
+    (0,0) to [short,-] (5.5,0)
+    (5,4) to [short,-] (5.5,4)
+    (0,4) to [short,-] (0.5,4);
+\end{circuitikz}
+
+
+%Fasores
+\def \minx {-1.8}
+\def \maxx {1.8}
+\def \miny {-0.5}
+\def \maxy {2}
+\def \delta {0.2}
+\begin{tikzpicture}[scale=1.6]
+
+    % Draw axis
+    \draw [-latex] (\minx,0) -- (\maxx+\delta,0) node [right,scale=0.9]{Re};
+    \draw [-latex] (0,\miny) -- (0,\maxy+\delta) node [above,scale=0.9] {Im};
+        
+    \draw [-latex,blue,line width=1.5] (0,0) -- (-1.3,1.5) [above,font=\small] node at (-0.5,0.77) {$|\mathbf{I_{s}}|$};
+    
+    \draw [<->,blue] (-0.5,0) arc (180:132:0.5) node at (-0.8,0.2) {\small $48^{o}$};
+    
+\end{tikzpicture}
+\end{document}

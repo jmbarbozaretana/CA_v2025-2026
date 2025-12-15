@@ -1,0 +1,31 @@
+\documentclass{standalone}
+
+\usepackage{bodegraph}
+
+
+\begin{document}
+
+
+\begin{tikzpicture}[
+    gnuplot def/.append style={prefix={}},
+]
+
+ \tikzset{
+ semilog lines/.style={black},
+ semilog lines 2/.style={gray,dotted},
+ semilog half lines/.style={gray, dotted},
+ semilog label x/.style={below,font=\tiny},
+ semilog label y/.style={above,font=\tiny} }
+
+\begin{scope}[xscale=9/5, yscale=3/50]
+  \UnitedB
+
+ \semilog{0}{4}{-20}{60} 
+    \BodeGraph[red, samples=500]{0:4}{\KAmp{1} + \PDAmpAsymp{1}{0.5} + \POAmpAsymp{1}{0.05} 
+    + \PDAmpAsymp{1}{0.002} + \POAmpAsymp{1}{0.0002}}
+
+\end{scope}
+
+\end{tikzpicture}
+
+\end{document}

@@ -1,0 +1,30 @@
+\documentclass[class=article,border=1pt]{standalone}
+\usepackage{verbatim}
+\usepackage{textcomp}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+\usepackage[europeanresistors,americaninductors]{circuitikz}
+
+\begin{document}
+
+\begin{circuitikz} [american, scale=1]
+    \draw 
+    (-2,-2.5) to [short,*-*] (7,-2.5)
+    (-2,0.5) to [open, v>=$\mathbf{V}_1$] (-2,-2.5)
+    (-2,0.5) to [short,*-] (-0.5,0.5)
+	(5.5,0.5) to [short, -*] (7,0.5)    
+    
+    (5,-2.5) to [generic, a^=$\mathbf{y}_{22}+\mathbf{y}_{12}$] (5,0.5)
+    (-2,0.5) to [short,-,f^>=$\mathbf{I}_1$] (-1,0.5)
+    (-0.5,0.5) to [generic,l^=$-\mathbf{y}_{12}$] (5.5,0.5)
+    
+    (0,0.5) to [generic,l=$\mathbf{y}_{11}+\mathbf{y}_{12}$] (0,-2.5)
+    
+    (6,0.5) to [short, f<=$\mathbf{I}_{2}$, -] (7,0.5)
+    (7,0.5) to [open, v^=$\mathbf{V_{2}}$] (7,-2.5)
+    ;
+    
+    
+\end{circuitikz}
+
+\end{document}

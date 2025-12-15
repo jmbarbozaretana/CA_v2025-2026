@@ -1,0 +1,24 @@
+%% 2do Examen parcial S1 2022
+%% Roberto Molina Robles 
+
+\Problema{6}{Respuesta en Frecuencia}
+
+\vspace{2mm}
+
+En la siguiente imagen aparece el circuito en pequeña señal de un amplificador con un transistor MOSFET, en el cual se modelan algunas capacitancias parásitas. Asuma los siguientes valores: $R_G=1\,$M$\Omega$, $R_D=10\,$k$\Omega$, $C_f=1\,$nF, $C_D=1\,$nF y $g_m=0.5\,$S.
+
+\begin{center}
+  \includegraphics[scale=1]{prob03}
+\end{center}
+
+\begin{subpunto}
+    \item Considerando $s=j\omega$, encuentre la función de transferencia $\mathbf{H}(s)$ = $\mathbf{V_{out}}(s)$/$\mathbf{V_{in}}(s)$, y usando álgebra acomode la expresión para que quede en su forma general, es decir, como: 
+
+\begin{equation*}
+\mathbf{H}(s) = \dfrac{K\left(s\right)^{\pm n}\left(1+\dfrac{s}{\omega_z}\right)^{n}\left(1+\dfrac{2\zeta_1s}{\omega_k}+\left(\dfrac{s}{\omega_k}\right)^2\right)^{n}...}{\left(1+\dfrac{s}{\omega_p}\right)^{n}\left(1+\dfrac{2\zeta_2s}{\omega_n}+\left(\dfrac{s}{\omega_n}\right)^2\right)^{n}...}
+\end{equation*}
+
+\partialPoints{3}    
+    \item Encuentre el valor de todos los ceros y polos de dicha función de transferencia $\mathbf{H}(s)$. Además, analice la respuesta de magnitud de dicha función y con ello indique el tipo de comportamiento en frecuencia (pasoaltas, pasobajas, pasabanda o rechazabanda) que presenta el circuito y el ancho de banda respectivo. Justifique su respuesta. \partialPoints{3}    
+\end{subpunto}
+

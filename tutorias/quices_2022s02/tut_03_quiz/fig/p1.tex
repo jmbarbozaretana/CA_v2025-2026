@@ -1,0 +1,33 @@
+\documentclass[convert=false,border=1pt]{standalone}
+\usepackage{array,tabularx}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{verbatim}
+\usepackage{textcomp}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usetikzlibrary{shapes,arrows}
+\usepackage[americanvoltages,americanresistors,americaninductors,siunitx]{circuitikz}
+\pgfplotsset{width=10cm,compat=1.9}
+
+\begin{document}
+
+\begin{circuitikz}[ scale=1]
+    
+    \draw
+    (3,3) to [R, l=$5 \,\Omega$, v=$v_x(t)$,o-] (6,3)
+    (6,3) to [R, l=$50\,\Omega$] (6,0)
+    
+    (9,0) to [cV, l_=$5v_x(t)$] (9,3)
+    (9,3) to [R, l=$25\,\Omega$,-o] (12,3)
+    (3,0) to [short,o-o] (12,0)
+    
+    (5.7,3) to [short] (5.7,5)
+    (5.7,5) to [R, l=$150\,\Omega$] (11.5,5)
+    (11.5,5) to [short] (11.5,3);
+    
+    \draw (3,3.3) node[]{\small $\textbf{1}$};
+    \draw (12,3.3) node[]{\small $\textbf{2}$};   
+  
+\end{circuitikz}
+\end{document}

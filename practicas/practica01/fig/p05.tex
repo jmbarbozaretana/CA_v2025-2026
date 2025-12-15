@@ -1,0 +1,29 @@
+\documentclass[class=article,border=10pt]{standalone}
+\usepackage{verbatim}
+\usepackage{textcomp}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+\usepackage[europeanresistors,americaninductors,RPvoltages]{circuitikz}
+
+\begin{document}
+
+
+\begin{circuitikz}  [american, scale=1]
+  \draw 
+    (3.5,2.5) to [R, R=$R_C$, -] (3.5,0)
+    (1,2.5) to [R, R=$10\,\Omega$] (3.5,2.5)
+    (3.5,2.5) to [R, R=$R_B$] (6,2.5) 
+    (7,2.5) to [cV,l=4$\mathbf{I}_1$] (6,2.5)
+    (0,0) to [short,*-*] (8,0)
+    (0,2.5) to [short,*-] (1,2.5)
+    (7,2.5) to [short,-*] (8,2.5)
+    ;
+    
+    \draw (0,2.5) to [short,i=$\mathbf{I}_1$] (1,2.5);
+    \draw (8,2.5) to [short,i_=$\mathbf{I}_2$] (7,2.5);
+    \draw (0,0) to [open, v>=$\mathbf{V}_1$] (0,2.5);
+    \draw (8,0) to [open, v>=$\mathbf{V}_2$] (8,2.5);
+    
+\end{circuitikz}
+
+\end{document}

@@ -1,0 +1,34 @@
+\documentclass[class=article,border=10pt]{standalone}
+\usepackage{verbatim}
+\usepackage{textcomp}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+\begin{document}
+
+% Definition of blocks:
+\tikzset{%
+  block/.style    = {draw, thick, rectangle, minimum height = 3em,
+    minimum width = 3em},
+  sum/.style      = {draw, circle, radius = 1mm, node distance = 1.8cm}, % Adder
+  input/.style    = {coordinate}, % Input
+  output/.style   = {coordinate} % Output
+}
+
+% Defining string as labels of certain blocks.
+\newcommand{\suma}{\small$+$}
+
+
+\begin{tikzpicture}[auto, thick, node distance=2cm, >=triangle 45]
+\draw
+node at (0,0)[right=-3mm]{\textopenbullet}
+node [input, name=input1] {} 
+node at (2,0)[block] (block_a) {\large $h(t)$}
+node [output, right of= block_a] (salida){}
+;
+
+% Joining blocks.
+\draw[->](input1) -- node {$x(t)$}(block_a);
+\draw[->](block_a) -- node {$y(t)$} (salida);
+
+\end{tikzpicture}
+\end{document}

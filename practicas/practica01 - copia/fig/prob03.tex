@@ -1,0 +1,33 @@
+\documentclass[class=article,border=10pt]{standalone}
+\usepackage{verbatim}
+\usepackage{textcomp}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+\usepackage[europeanresistors,americaninductors,RPvoltages]{circuitikz}
+
+\begin{document}
+
+\begin{circuitikz}  [american, scale=0.85]
+    \draw 
+    (-4,0) to[short, o-] ++(0,0) node[left]{$v_{in}(t)$}
+    (-4,0) to[short, -*] ++(2,0) coordinate(shin)
+    (shin) to[resistor,l=$R_G$] ++(0,-3) node[ground] {}
+    (shin) to[short, *-] ++(1,0) coordinate(shin2)
+    (shin2) to[short, *-] ++(0,1) coordinate(ncf)
+    (ncf) to[capacitor,l=$C_f$] ++(4,0) coordinate(cf)
+    (cf) to[short, -*] ++(0,-1)
+    (shin2) to[short, -o] ++(1,0) coordinate(vg)
+    (vg) [yshift=5pt] to[open,v=$V_{GS}$, -o] ++(0,-3.5) coordinate(vs)
+    (vs) to[short, -*] ++(1,0) coordinate(shs1)
+    (shs1) to[short] ++(1,0) coordinate(shs2)
+    (shs1) node[ground] {}
+    (shs2) to[cI,invert,l_=$g_mV_{GS}$] ++(0,3.32) coordinate(vo1)
+    (vo1) to[short, -*] ++(3,0) coordinate(vo3)
+    (vo3) to[capacitor,l=$C_D$] ++(0,-3) node[ground] {}
+    (vo3) to[short, -*] ++(2,0) coordinate(out)
+    (out) to[short, *-o] ++(1,0) node[right]{$v_{out}(t)$}
+    (out) to[resistor,l=$R_D$] ++(0,-3) node[ground] {}
+;
+\end{circuitikz}
+
+\end{document}

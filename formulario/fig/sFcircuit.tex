@@ -1,0 +1,26 @@
+\documentclass[convert=false,border=1pt]{standalone}
+%\usepackage{array,tabularx}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{verbatim}
+\usepackage{textcomp}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usetikzlibrary{shapes,arrows}
+\usepackage[europeanresistors,americaninductors,RPvoltages]{circuitikz}
+\pgfplotsset{width=10cm,compat=1.9}
+
+\begin{document}
+\begin{circuitikz} [american, scale=0.8]
+    \draw 
+    (-8,-2.5) to [short,o-] (-5.5,-2.5) 
+    (-7,0.5) to [short, f<_=$i(t)$] (-7.01,0.5) 
+    (-8,0.5) to [short,o-] (-5.5,0.5)
+    (-8,0.5) to [open, v=$v(t)$] (-8,-2.5)    
+    (-5.5,-2.7) -- (-2.5,-2.7) -- (-2.5,0.7) -- (-5.5,0.7) -- (-5.5,-2.7)
+    ;
+    
+    \draw (-5.4,-1) -- (-5.41,-1) node[right] {$\textbf{Red Lineal}$};
+
+\end{circuitikz}
+\end{document}

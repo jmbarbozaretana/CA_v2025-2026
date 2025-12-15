@@ -1,0 +1,154 @@
+%% 2do Examen parcial S2 2025
+%% Saúl Guadamuz Brenes
+
+
+\Problema{10}{Respuesta en Frecuencia y diagramas de Bode}
+
+\vspace{2mm}
+
+%Considere el circuito de la figura \ref{fig:cir_bode}, cuya entrada es el voltaje $v_s$ de la fuente y la salida es el voltaje $v_o$ en el condensador.
+
+%\begin{figure}[htp]
+%  \centering
+%  \includegraphics[scale=1]{prob03a}
+%  \caption{Circuito para análisis en frecuencia.} 
+%  \label{fig:cir_bode}
+%\end{figure}
+
+Se sabe que un circuito tiene la respuesta en magnitud que se representa en el diagrama de Bode de la Figura \ref{fig:diag_bode}.
+
+
+
+\begin{figure}[htp]
+  \centering
+  \includegraphics[scale=1.25]{prob03b}
+  \caption{Respuesta en frecuencia.}
+  \label{fig:diag_bode}
+\end{figure}
+
+\begin{subpunto}
+	
+	
+%\item Determine la función de respuesta en frecuencia $\mathbf{H}(\omega) = \mathbf{V}_o(\omega) / \mathbf{V}_s(\omega)$ del circuito de la Figura \ref{fig:cir_bode}. Exprésela en la forma estándar. \partialPoints{3}
+%
+%\solution{
+%
+%Se podría realizar el análisis de la forma tradicional (plantenado nodos desde la entrada) pero es más fácil observar que se trata de un amplificador no inversor cuya entrada es $v_a$ y su salida es $v_b$. $v_a$ se puede calcular con un divisor de tensión a partir de $v_s$, mientras que $v_o$ se puede calcular con otro divisor de tensión a partir de $v_b$; claramente todo debe estar en el dominio fasorial.
+%
+%Para el cálculo de $\phr{V}_a$:
+%\begin{align*}
+%	\phr{V}_a &= \dfrac{\phr{V}_s (1/j \omega C)}{R_1 + 1/j \omega C}
+%			  = \dfrac{\phr{V}_s (1/j \omega C)}{(1/j \omega C) (1 + j \omega R_1 C)} \\
+%			  &= \dfrac{\phr{V}_s}{1 + j \omega R_1 C} \quad \calif{0.5\,pt}
+%\end{align*}
+%
+%
+%Como se trata de un amplificador no inversor:
+%\begin{align*}
+%	\phr{V}_b &= \phr{V}_a (1 + R_3/R_2) \\
+%			  &= \dfrac{\phr{V}_s (1 + R_3/R_2)}{1 + j \omega R_1 C} \quad \calif{1\,pt}
+%\end{align*}
+%
+%La salida nuevamente con un divisor de tensión:
+%\begin{align*}
+%	\phr{V}_o &= \dfrac{\phr{V}_b (1/j \omega C)}{R_4 + 1/j \omega C}
+%			  = \dfrac{\phr{V}_b (1/j \omega C)}{(1/j \omega C) (1 + j \omega R_4 C)} \\
+%			  &= \dfrac{\phr{V}_b}{1 + j \omega R_4 C} \\
+%			  &= \dfrac{\phr{V}_s (1 + R_3/R_2)}{(1 + j \omega R_1 C)(1 + j \omega R_4 C)}   \quad \calif{0.5\,pt}
+%\end{align*}
+%
+%Con lo que la respuesta en frecuencia sería:
+%\begin{equation*}
+%	\phr{H}(\omega) = \dfrac{\phr{V}_o}{\phr{V}_s} = \boxed{\dfrac{(1 + R_3/R_2)}{(1 + j \omega R_1 C)(1 + j \omega R_4 C)}} \quad \calif{1\,pt}
+%\end{equation*}
+%
+%}
+    
+\item Obtenga la expresión de la función de respuesta en frecuencia de la Figura \ref{fig:diag_bode}. Exprésela en la forma estándar. Nótese que el valor del gráfico en $\omega = 0.1 \, rad/s$ es de $32 \, dB$  los quiebres en magnitud ocurren en $8 \, rad/s$ y $320 \, rad/s$. El ángulo del término de ganancia es de $0^\circ$. \partialPoints{3}
+    
+\solution{
+
+Examinando el gráfico, se encuentra:
+\begin{itemize}
+	\item Término de ganancia: $10^{32/20} = 40$.
+	\item Un polo simple en $8 \, rad/s$.
+	\item Un polo simple en $320 \, rad/s$.
+\end{itemize}
+
+combinando estos elementos, la función de respuesta en frecuencia sería:
+\begin{equation*}
+	\phr{H}(\omega) = \boxed{\dfrac{40}{(1 + j \omega/8)(1 + j \omega/320)}}
+\end{equation*}
+
+\calif{1\,pt cada término}
+}
+
+    
+\item Si la función de transferencia que da origen a la respuesta de la Figura \ref{fig:diag_bode} está dada por:
+\begin{equation*}
+	\phr{H}(\omega) = \dfrac{\phr{V}_o}{\phr{V}_s} = \dfrac{(1 + R_3/R_2)}{(1 + j \omega R_1 C)(1 + j \omega R_4 C)}
+\end{equation*}
+donde $R_1$, $R_2$, $R_3$ y $R_4$ corresponden a resistencias y $C$ es una capacitancia y se tiene que $C = 0.5 \, \mu F$ y $R_2 = 10 \, k\Omega$. 
+
+Calcule los valores de $R_1$, $R_3$ y $R_4$ para que esta función de transferencia dada tenga la respuesta en frecuencia mostrada en la Figura \ref{fig:diag_bode}. \partialPoints{3}
+    
+\solution{
+
+Igualando las respuestas en frecuencia de las dos partes anteriores
+\begin{equation*}
+	\dfrac{40}{(1 + j \omega/8)(1 + j \omega/320)} = \dfrac{(1 + R_3/R_2)}{(1 + j \omega R_1 C)(1 + j \omega R_4 C)}  
+\end{equation*}
+e igualando términos se obtienen las igualdades:
+\begin{align*}
+	1 + \dfrac{R_3}{R_2} &= 40 \\
+	R_1 C &= \dfrac{1}{8} \\
+	R_4 C &= \dfrac{1}{320}
+\end{align*}
+
+Con los valores de $C$ y $R_2$ dados, el resto se calcula como:
+\begin{align*}
+	R_1 &= \dfrac{1}{8(0.5 \, \mu F)} = \boxed{250 \, k \Omega} \quad \calif{1\,pt} \\
+	R_3 &= (40-1)10 \, k \Omega = \boxed{390 \, k \Omega}  \quad \calif{1\,pt} \\
+	R_4 &= \dfrac{1}{320(0.5 \, \mu F)} = \boxed{6.25 \, k \Omega}  \quad \calif{1\,pt}
+\end{align*}
+
+
+
+}
+
+\item ¿Son los valores de $C$, $R_1$, $R_2$, $R_3$ y $R_4$ encontrados en el ítem anterior los únicos posibles para lograr la respuesta en frecuencia solicitada? Justifique su respuesta. \partialPoints{1}
+
+\solution{
+
+La solución no es única. Esto se puede justificar ya sea con el concepto de escalamiento en magnitud o viendo que, al escoger otros valores de $C$ y $R_2$, se calculan otros valores de $R_1$, $R_3$ y $R_4$. \calif{1\,pt}
+}
+
+\item Si a la función de transferencia de la Figura \ref{fig:diag_bode} se le agregara un cero en el origen, ¿cómo cambiaría el diagrama de Bode de magnitud? Realice el diagrama del mismo en hoja semilogarítmica. \partialPoints{3}
+    
+\solution{
+
+Al agregar un cero en el origen, se agrega una asíntota adicional:
+\begin{figure}[htp]
+	\centering
+		\includegraphics[scale=1]{prob03_sol1}
+	\caption{ }
+	\label{fig:cir_bode1}
+\end{figure}
+
+que cambia el inicio del diagrama a una pendiente de $20 \, dB/dec$ desde $12 \, dB$ en $\omega = 0.1 \, rad/s$ hasta $\omega = 8 \, rad/s$, a continuación la pendiente queda en $0 \, dB/dec$ hasta $\omega = 320 \, rad/s$ desde donde baja a $-20 \, dB/dec$, formando así un comportamiento pasa-banda.
+\begin{figure}[htp]
+	\centering
+		\includegraphics[scale=1]{prob03_sol2}
+	\caption{ }
+	\label{fig:cir_bode2}
+\end{figure}
+
+
+}
+ 
+\end{subpunto}
+
+
+
+
+

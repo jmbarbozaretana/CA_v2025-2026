@@ -1,0 +1,44 @@
+\documentclass[12pt,oneside,letterpaper]{extarticle}
+
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{ifthen}                     % provide if-then-else operators
+\usepackage{amsmath}
+\usepackage{relsize}
+\usepackage{ftcap}                      % switch \abovecaptionskip and
+% \belowcaptionskip for tables, in 
+% order to avoid the caption to be
+% too near to the table itself
+\usepackage{booktabs}                   % book type tabulars
+\usepackage{rotating}
+\usepackage{tabularx}
+\usepackage{multicol}
+\usepackage{paralist}
+
+\usepackage[numbered]{tarea}  % Commands for multiple choice
+
+% 
+% page layout
+% 
+\usepackage{vmargin}
+\setpapersize{USletter}
+
+% left,top,right,bottom,headheight,headsep,footheight,footsep
+%
+\setmarginsrb{20mm}{9mm}{20mm}{7mm}{15pt}{15pt}{7mm}{10mm}
+
+% 
+% Fraction of Float Object / Text
+% 
+\renewcommand{\topfraction}{0.90}       % how much of top of page should be 
+% allowed to be float object?
+\renewcommand{\bottomfraction}{0.90}    % how much of bottom of page should be
+% allowed to be float object?
+\renewcommand{\textfraction}{0.10}      % how much of page must be text?
+
+\graphicspath{{./}{./fig/}}
+
+%\showsolution
+\begin{document}
+  \include{enunciado}
+\end{document}

@@ -1,0 +1,67 @@
+%% Quiz 5 Tutoría S12023
+%% William Quirós Solano	
+
+\Pregunta{5}{Dado el siguiente circuito}
+
+\begin{center}
+	\includegraphics[scale=1]{p02}
+\end{center}
+
+donde la fuente $v_{s}(t)$ está definida por
+
+\begin{align*}
+	v_{s}(t)=4+\dfrac{2}{\pi}\sum_{n=1}^{\infty}\dfrac{1}{n}\cos(nt)
+\end{align*}
+
+Determine la serie trigonométrica de Fourier en su representación de Amplitud-Fase para la tensión de salida $v_{o}(t)$.
+
+\solution{
+\textbf{Solución:}
+
+Para el valor CD de la fuente correspondiente a $4\,$V dado que el condensador se comporta como un abierto y la bobina como un corto, la tensión de salida será
+
+\begin{align*}
+	V_o=4\,V\rightarrow\calif{1\,pto}
+\end{align*}
+
+Por otro lado, para el análisis en CA se tiene que la fuente tiene el fasor
+
+\begin{align*}
+	\mathbf{V_s}=\dfrac{2}{n\pi}\angle{0^{\circ}}\rightarrow\calif{1\,pto}
+\end{align*}
+
+Y considerando la frecuencia de operación $\omega_{0}=1\,rad/s$, entonces las impedancias de la bobina y el condensador son
+
+\begin{align*}
+	\mathbf{Z_L}=jn\\
+	\mathbf{Z_C}=\dfrac{1}{jn}
+\end{align*}
+
+Y dado que la fuente está en paralelo con el resistor, el fasor de tensión de salida se puede obtener con un divisor de tensión dado por
+
+\begin{align*}
+	\mathbf{V_o} &= \dfrac{\mathbf{V_s \mathbf{Z_C}}}{\mathbf{Z_C}+\mathbf{Z_L}}\\
+	\mathbf{V_o} &= \dfrac{\dfrac{2}{n\pi}\cdot\dfrac{1}{jn}}{\dfrac{1}{jn}+jn}\cdot\dfrac{jn}{jn}\\
+	\mathbf{V_o} &= \dfrac{2}{\pi n}\cdot\dfrac{1}{1+(jn)^2}\\
+	\mathbf{V_o} &= \dfrac{2}{\pi n (1-n^2)} \rightarrow\calif{2\,ptos}
+\end{align*}
+
+Con lo anterior y el valor CD entonces la serie para la tensión de salida $v_{o}(t)$ es
+
+\begin{align*}
+v_{o}(t)=4-\dfrac{2}{\pi}\sum_{n=1}^{\infty}\dfrac{1}{n(n^2-1)}\cos(nt)\,V\rightarrow\calif{1\,pto}
+\end{align*}
+
+}
+
+\shortsolution{
+\textbf{Respuesta:}
+
+\begin{align*}
+v_{o}(t)=4-\dfrac{2}{\pi}\sum_{n=1}^{\infty}\dfrac{1}{n(n^2-1)}\cos(nt)\,V
+\end{align*}
+
+}
+
+
+

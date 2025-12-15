@@ -1,0 +1,1716 @@
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% tecPrograma.sty
+% Paquete con comandos y formato básico para programas de cursos en el TEC
+% (C) 2023-2024 Pablo Alvarado
+%     Escuela de Ingeniería Electrónica
+%     Instituto Tecnológico de Costa Rica
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 
+% Debe redefinir los siguientes comandos (ver plantilla para ejemplo)
+%
+% \Depto          <Departamento en el TEC>
+% \sDepto         <Dpto en el TEC, versión corta>
+% \Plan           <Plan de estudios>
+% \sPlan          <Plan de est., versión corta>
+% \CodigoCurso    <Código del curso>
+% \NombreCurso    <Nombre largo del curso>
+% \sNombreCurso   <Nombre del curso, versión corta>
+% \Prof           <Nombre del profesor o profesora>
+% \Claves         <lista de claves para el pdf>
+% \OtrasCarreras  <lista de otras carreras con el curso, separadas por \\>
+%
+% Define también los siguientes comandos:
+%
+% \atrXY          Nombre del atributo con XY en AC,HC,DI,HI,CI,AF,IN,AP,
+%                 TE,EE,PM
+% \atrcite[txt]   Referencia a documento de definición de atributos del TEC
+%                 Si [txt] se omite, usa el nombre completo del documento.
+% \buildAtrTable  Crea una tabla de atributos
+% \buildObjTable  Crea una tabla de objetivos
+% \msubsection    Sección en margen, usadas en las partes
+% \paginaTitulo   Genera la portada del programa
+% \porhacer       Marca con un color de fondo un texto corto con asuntos
+%                 pendientes der hacer.
+% \Porhacer       Marca con un color de fondo un texto largo con asuntos
+%                 pendientes de hacer.
+% \semestre[opt]  Muestra el semestre actual, o el indicado por opt={I,II}     
+% \showAttributes Crea una tabla con siglas y nombres de atributos
+% \InsertODS      Agrega texto estandar y tabla de ODS (llama a \buildODSTable}
+% \BuildODSTable  Crea una tabla de ODS dada la lista de metas ordenada
+%
+% Se definen además los siguientes entornos (usados con \begin{} \end{})
+%
+% datosGenerales Crea tabla de datos generales en la parte a y se ocupa
+%                de dar un formato uniforme a esa tabla.
+% contenido      Entorno enumerado con cinco niveles de anidación
+
+
+
+% Changelog
+% v0.7   Agrega funcionalidad para utilizar los ODS
+% v0.6   Versión utilizada para plantila de oficio ViDA 968-2024
+% v0.5.2 Versión utilizada en primer catálogo de la carrera
+
+
+% Package-Header
+\NeedsTeXFormat{LaTeX2e}[1995/06/01]
+\def\tecProgramaVersion{2024/12/02 v0.6 tecPrograma}
+\ProvidesPackage{tecPrograma}[\tecProgramaVersion]
+\message{\tecProgramaVersion}
+
+% Other packages
+
+\RequirePackage[utf8]{inputenc} % input encoding
+\RequirePackage[spanish]{babel} %
+
+\RequirePackage{ifthen}
+\RequirePackage[table,dvipsnames,svgnames,x11names]{xcolor}
+\RequirePackage[breakable]{tcolorbox}
+
+\RequirePackage{ifpdf}
+
+% different languages
+\RequirePackage{calc}
+\RequirePackage[scaled]{helvet}         % use helvetica font
+
+% Formato de la página particular de los programas
+\RequirePackage[paper=letterpaper, 
+                left=58mm,
+                right=22mm,
+                top=33mm,
+                bottom=24mm,
+                footskip=20pt,
+                headheight=20mm,
+                headsep=7mm,
+                reversemp,
+                marginparwidth=33mm,
+                marginparsep=1mm
+                ]{geometry}
+
+\RequirePackage{lastpage}    % Referencia a la última página
+\RequirePackage{url}         % Allows linebreaks in URLs
+\RequirePackage{fancyhdr}
+
+\RequirePackage{tikz}
+\usetikzlibrary{positioning}
+
+\RequirePackage[explicit]{titlesec}
+\RequirePackage{enumitem}                   % replaces paralist
+\RequirePackage{footnote}
+\RequirePackage{microtype}
+\RequirePackage{siunitx}
+\RequirePackage{booktabs}
+\RequirePackage{longtable}
+\RequirePackage{tabularx}
+\RequirePackage{ragged2e}
+\RequirePackage{multirow}
+\RequirePackage{soul}
+\RequirePackage{amsmath}
+\RequirePackage{xspace}
+
+\RequirePackage{csquotes}
+\RequirePackage[natbib=true,style=trad-unsrt,backend=biber]{biblatex}
+\RequirePackage[calc]{datetime2}
+
+\RequirePackage{expl3}
+\RequirePackage{xparse}   % Para comandos que crean tablas de atributos
+\RequirePackage{xstring}  % y de objetivos
+
+\DeclareBibliographyCategory{obligatoria}
+\DeclareBibliographyCategory{complementaria}
+
+\defbibheading{obligatoria}{\textbf{Obligatoria:}}
+\defbibheading{complementaria}{\textbf{Complementaria:}}
+
+\ifpdf
+  \RequirePackage[pdfencoding=auto,
+                  psdextra,
+                  pdftex,%
+                  linktoc=all,
+                  hyperindex,
+                  colorlinks,
+                  urlcolor=tecAzul,        %\href to external url
+                  filecolor=tecAzul,       %\href to local file
+                  linkcolor=tecAzul,       %\ref and \pageref
+                  citecolor=white,         %\cite
+                  plainpages=false,
+                  pdfpagelabels,
+                  pdfpagemode=UseOutlines, % use bookmarks (None,UseOutlines)
+                  bookmarksnumbered=true,
+                  pdfpagelayout=OneColumn, % SinglePage,OneColumn,TwoColumnLeft
+                  pdfview=FitH, % FitB,FitBH,FitBV,Fit,FitH,FitV
+                  pdfstartview=FitH, % FitB,FitBH,FitBV,Fit,FitH,FitV
+                  unicode,
+                  ]{hyperref}
+\else
+  \RequirePackage[dvips,
+                  colorlinks,
+                  urlcolor=tecAzul,        %\href to external url
+                  filecolor=tecAzul,       %\href to local file
+                  linkcolor=tecAzul,       %\ref and \pageref
+                  citecolor=white,
+                  unicode]{hyperref}
+\fi
+
+\newcommand{\Depto}{Escuela de Ingeniería Electrónica}
+\newcommand{\sDepto}{Escuela de Ing.\ Electrónica}
+\newcommand{\Plan}{Licenciatura en Ingeniería Electrónica}
+\newcommand{\sPlan}{Lic.\ Ing.\ Electrónica}
+\newcommand{\OtrasCarreras}{}
+\newcommand{\CodigoCurso}{No indicado (use renewcommand CodigoCurso)}
+\newcommand{\NombreCurso}{No indicado (use renewcommand NombreCurso)}
+\newcommand{\sNombreCurso}{\NombreCurso}
+\newcommand{\Prof}{No indicado (use renewcommand Prof)}
+\newcommand{\PalabrasClave}{No indicadas (use renewcommand PalabrasClave)}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Curricular areas, as defined by AAPIA, CEAB, etc.
+%% Deprecated: en la versión 0.6 esto dejó de usarse, pero se mantiene por
+%%             programas viejos que aun lo tengan
+\newcommand{\areaMTname}{Matemática}
+\newcommand{\areaCNname}{Ciencias Naturales}
+\newcommand{\areaCIname}{Ciencias de la Ingeniería}
+\newcommand{\areaDIname}{Diseño de Ingeniería}
+\newcommand{\areaECname}{Estudios Complementarios}
+
+%% Use \areaXY to show the <name of the area>, and \areaXY[50] to show
+%% 50% <name of the area>
+
+\newcommand{\areaMT}[1][0]{%
+  \ifnum#1=0
+    \areaMTname%
+  \else
+    #1\%~\areaMTname%
+  \fi%
+}
+\newcommand{\areaCN}[1][0]{%
+  \ifnum#1=0
+    \areaCNname%
+  \else
+    #1\%~\areaCNname%
+  \fi%
+}
+\newcommand{\areaCI}[1][0]{%
+  \ifnum#1=0
+    \areaCIname%
+  \else
+    #1\%~\areaCIname%
+  \fi%
+}
+\newcommand{\areaDI}[1][0]{%
+  \ifnum#1=0
+    \areaDIname%
+  \else
+    #1\%~\areaDIname%
+  \fi%
+}
+\newcommand{\areaEC}[1][0]{%
+  \ifnum#1=0
+    \areaECname%
+  \else
+    #1\%~\areaECname%
+  \fi%
+}
+
+\newcommand{\showAreas}{
+  {\tecrowcolors
+  \begin{tabular}{c|l}
+    \toprule
+    MT & \areaMT \\
+    CN & \areaCN \\
+    CI & \areaCI \\
+    DI & \areaDI \\
+    EC & \areaEC \\
+    \bottomrule
+  \end{tabular}
+  \hidetecrowcolors}
+}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Attribute names at TEC as defined in
+% "Hernández-Campos, et al. Metodologìa para la incorporación
+%    y evaluación de los atributos del TEC"
+\newcommand{\atrAC}{Aprendizaje continuo}
+\newcommand{\atrHC}{Habilidades de comunicación}
+\newcommand{\atrDI}{Diseño}
+\newcommand{\atrHI}{Herramientas de ingeniería}
+\newcommand{\atrCI}{Conocimiento de ingeniería}
+\newcommand{\atrAF}{Administración de proyectos y finanzas}
+\newcommand{\atrIN}{Investigación}
+\newcommand{\atrAP}{Análisis de problemas}
+\newcommand{\atrTE}{Trabajo individual y en equipo}
+\newcommand{\atrEE}{Ética y equidad}
+\newcommand{\atrPM}{Persona ingeniera y el mundo}
+
+
+\newcommand{\atrcite}[1][Metodología para la incorporación y
+evaluación de los atributos del TEC]{%
+  \href{https://www.tec.ac.cr/atributos-tec}{#1}%
+}
+% old url: https://hdl.handle.net/2238/14020
+
+
+\newcommand{\showAttributes}{
+  {\tecrowcolors
+  \begin{tabular}{c|l}
+    \toprule
+    AC & \atrAC \\
+    HC & \atrHC \\
+    DI & \atrDI \\
+    HI & \atrHI \\
+    CI & \atrCI \\
+    AF & \atrAF \\
+    IN & \atrIN \\
+    AP & \atrAP \\
+    TE & \atrTE \\
+    EE & \atrEE \\
+    PM & \atrPM \\
+    \bottomrule
+  \end{tabular}
+  \hidetecrowcolors}
+}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Course names
+% \defcourse defines some internal commands with code and name of the courses
+% \course{EL8888} will show the code and name of the course
+% \course*{EL8888} shows only the name of the course
+
+\newcommand{\defcourse}[2]{%
+  \expandafter\newcommand\csname #1\endcsname{%
+    {\expandafter\insertcodeseparator#1\relax}~#2%
+  }%
+  \expandafter\newcommand\csname #1n\endcsname{#2}%
+  \expandafter\newcommand\csname #1c\endcsname{{\expandafter\insertcodeseparator#1\relax}}%
+}
+\def\insertcodeseparator#1#2#3#4#5#6\relax{#1#2\,#3#4#5#6}
+
+\NewDocumentCommand{\course}{s m}{%
+  \IfBooleanTF{#1}{% if the starred version called course*
+    \ifcsname #2n\endcsname
+      \ifcsname r@#2\endcsname
+        \hyperref[#2]{\expandafter\csname #2n\endcsname}
+      \else
+        \expandafter\csname #2n\endcsname
+      \fi
+    \else
+      \porhacer{Código #2 sin definir}
+    \fi
+  }{%
+    \ifcsname #2\endcsname
+      \ifcsname r@#2\endcsname
+        \hyperref[#2]{\csname #2\endcsname}
+      \else
+        \csname #2\endcsname
+      \fi        
+    \else
+      \porhacer{Código #2 sin definir}
+    \fi
+  }%
+}
+
+\NewDocumentCommand{\coursecode}{m}{%
+  \ifcsname #1c\endcsname % Revisa si el comando \<code>c existe
+    \hyperref[#1]{\csname #1c\endcsname}   % Si existe, lo ejecuta
+  \else
+    \porhacer{Código #1 sin definir} % Si no, muestra un error
+  \fi
+}
+
+
+\newcommand{\thiscourse}[1]{%
+  \renewcommand{\CodigoCurso}{\expandafter\csname #1c\endcsname}
+  \renewcommand{\NombreCurso}{\expandafter\csname #1n\endcsname}
+}
+
+% Mayúsculas exactamente como en el plan del DAR:
+
+\defcourse{AE4208}{Desarrollo de emprendedores}
+
+\defcourse{CA2125}{Elementos de computación}
+\defcourse{CA3125}{Análisis y diseño de algoritmos}
+
+\defcourse{CI0200}{Examen diagnóstico}
+\defcourse{CI0202}{Inglés básico}
+\defcourse{CI1230}{Inglés I}
+\defcourse{CI1231}{Inglés II}
+\defcourse{CI1403}{Comunicación técnica}
+
+\defcourse{CM3207}{Métodos numéricos para ingeniería}
+
+\defcourse{CS1502}{Introducción a la técnica ciencia y tecnología}
+\defcourse{CS2303}{Relaciones laborales}
+\defcourse{CS3404}{Seminario de ética para la ingeniería}
+\defcourse{CS5300}{Desarrollo tecnológico y sostenibilidad}
+
+\defcourse{EL0000}{Curso inexistente de pruebas}
+\defcourse{EL1100}{Introducción a la ingeniería}
+\defcourse{EL1200}{Introducción a la electrónica}
+\defcourse{EL2110}{Laboratorio de mediciones eléctricas}
+\defcourse{EL2111}{Laboratorio de circuitos eléctricos}
+\defcourse{EL2113}{Circuitos eléctricos en corriente continua}
+\defcourse{EL2114}{Circuitos eléctricos en corriente alterna}
+\defcourse{EL2207}{Elementos activos}
+\defcourse{EL3212}{Circuitos discretos}
+\defcourse{EL3215}{Laboratorio de electrónica analógica}
+\defcourse{EL3216}{Circuitos integrados analógicos}
+\defcourse{EL3217}{Taller de diseño analógico}
+\defcourse{EL3307}{Diseño lógico}
+\defcourse{EL3310}{Diseño de sistemas digitales}
+\defcourse{EL3313}{Taller de diseño digital}
+\defcourse{EL4201}{Procesamiento electrónico de potencia}
+\defcourse{EL4314}{Arquitectura de computadoras I}
+\defcourse{EL4419}{Análisis y control de sistemas lineales}
+\defcourse{EL4513}{Teoría electromagnética I}
+\defcourse{EL4514}{Teoría electromagnética II}
+\defcourse{EL4607}{Normalización técnica (estándares industriales)}
+\defcourse{EL4702}{Probabilidad y estadística}
+\defcourse{EL4703}{Señales y sistemas}
+\defcourse{EL5408}{Control automático}
+\defcourse{EL5409}{Laboratorio de control automático}
+\defcourse{EL5513}{Comunicaciones eléctricas I}
+\defcourse{EL5521}{Comunicaciones eléctricas II}
+\defcourse{EL5522}{Taller de comunicaciones eléctricas}
+\defcourse{EL5609}{Formulación de proyectos}
+\defcourse{EL5610}{Taller integrador}
+\defcourse{EL5617}{Trabajo final de graduación}
+\defcourse{EL5800}{Teoría electiva I}
+\defcourse{EL5830}{Teoría Electiva II}
+\defcourse{EL5840}{Taller electivo}
+
+\defcourse{EL5805}{Procesamiento digital de señales}
+\defcourse{EL5807}{Introducción al diseño de circuitos integrados}
+\defcourse{EL5811}{Verificación funcional de circuitos integrados}
+\defcourse{EL5841}{Taller de sistemas embebidos}
+\defcourse{EL5842}{Taller de instrumentación}
+\defcourse{EL5850}{Gráficos por computadora}
+\defcourse{EL5851}{Sistemas operativos empotrados}
+\defcourse{EL5853}{Introducción a sistemas espaciales}
+\defcourse{EL5854}{Sistemas fotovoltaicos}
+\defcourse{EL5855}{Ingeniería de pruebas para circuitos integrados}
+\defcourse{EL5856}{Taller de circuitos electrónicos para sistemas energéticos}
+\defcourse{EL5857}{Aprendizaje automático}
+\defcourse{EL5858}{Introducción a sistemas aeroespaciales}
+
+\defcourse{FH1000}{Centros de formación humanística}
+
+\defcourse{FI1101}{Física general I}
+\defcourse{FI1102}{Física general II}
+\defcourse{FI1201}{Laboratorio física general I}
+\defcourse{FI2103}{Física general III}
+
+\defcourse{MA0101}{Matemática general}
+\defcourse{MA1102}{Cálculo diferencial e integral}
+\defcourse{MA1103}{Cálculo y álgebra lineal}
+\defcourse{MA2104}{Cálculo superior}
+\defcourse{MA2105}{Ecuaciones diferenciales}
+
+\defcourse{MI2101}{Dibujo técnico}
+
+\defcourse{PI4001}{Dirección de personal}
+\defcourse{PI5516}{Ingeniería económica}
+
+\defcourse{QU1102}{Laboratorio de química básica I}
+\defcourse{QU1106}{Química básica I}
+
+\defcourse{SE1100}{Actividad cultural I}
+\defcourse{SE1200}{Actividad deportiva I}
+\defcourse{SE1400}{Actividad cultural-deportiva}
+
+\defcourse{SO4604}{Seguridad y salud ocupacional}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ODS definitions
+% \defods defines some internal commands with code and name of the ODS
+% \defods{id}[short name]{long name}
+%
+% Then, the following commands can be used:
+% \ODStipo{id}   -> "Meta" or "Objetivo"
+% \ODSdesc{id}   -> long name
+% \ODSshort{id}  -> short name
+% \ODScode{id}   -> id
+
+\ExplSyntaxOn
+
+% Internal variables
+\tl_new:N \l__tp_ods_sanitized_id_tl
+\tl_new:N \l__tp_ods_prop_basename_tl
+
+% Command to define an ODS
+% #1: id (e.g., 4 or 4.4)
+% #2: optional short name
+% #3: long description
+\NewDocumentCommand{\defods}{ m O{} m }
+{
+  \__tp_ods_define:nnn { #1 } { #2 } { #3 }
+}
+
+\cs_new_protected:Npn \__tp_ods_define:nnn #1#2#3
+{
+  % Sanitize the ID for use in cs names (replace . with _)
+  \tl_set:Nn \l__tp_ods_sanitized_id_tl { #1 }
+  \tl_replace_all:Nnn \l__tp_ods_sanitized_id_tl { . } { _ }
+
+  % Build the base name for the property list, e.g., "tp_ods_4_4"
+  \tl_set:Nx \l__tp_ods_prop_basename_tl { tp_ods_ \tl_use:N \l__tp_ods_sanitized_id_tl }
+
+  % Create and populate the property list with full expansion
+  \exp_args:Nx \prop_gclear_new:c { \tl_use:N \l__tp_ods_prop_basename_tl }
+  \exp_args:Nxx \prop_gput:cnn { \tl_use:N \l__tp_ods_prop_basename_tl } { code } { #1 }
+  \exp_args:Nxx \prop_gput:cnn { \tl_use:N \l__tp_ods_prop_basename_tl } { short } { #2 }
+  \exp_args:Nxx \prop_gput:cnn { \tl_use:N \l__tp_ods_prop_basename_tl } { desc } { #3 }
+}
+
+% --- Accessor Commands ---
+
+% Internal helper to get a property from an ODS id
+\cs_new:Npn \__tp_ods_get:nn #1#2
+{
+  % Sanitize the ID
+  \tl_set:Nn \l__tp_ods_sanitized_id_tl { #1 }
+  \tl_replace_all:Nnn \l__tp_ods_sanitized_id_tl { . } { _ }
+
+  % Build the base name for the property list
+  \tl_set:Nx \l__tp_ods_prop_basename_tl { tp_ods_ \tl_use:N \l__tp_ods_sanitized_id_tl }
+
+  % Check if the property list exists and get the value
+  \exp_args:Nx \prop_if_exist:cTF { \tl_use:N \l__tp_ods_prop_basename_tl }
+    {
+      % Property list exists, try to get the key
+      \exp_args:Nxx \prop_get:cnN { \tl_use:N \l__tp_ods_prop_basename_tl } { #2 } \l_tmpa_tl
+      \quark_if_no_value:NTF \l_tmpa_tl
+        { \porhacer{ODS~#1~clave~'#2'~no~encontrada} }
+        { \tl_use:N \l_tmpa_tl }
+    }
+    {
+      % Property list doesn't exist
+      \porhacer{ODS~#1~no~definido}
+    }
+}
+
+% \ODScode{<id>} -> returns the id
+\NewDocumentCommand{\ODScode}{m}
+{%
+  \__tp_ods_get:nn { #1 } { code }%
+}
+
+% \ODSshort{<id>} -> returns the short description
+\NewDocumentCommand{\ODSshort}{m}
+{%
+  \__tp_ods_get:nn { #1 } { short }%
+}
+
+% \ODSdesc{<id>} -> returns the long description
+\NewDocumentCommand{\ODSdesc}{m}
+{%
+  \__tp_ods_get:nn { #1 } { desc }%
+}
+
+% \ODStipo{<id>} -> returns "ODS" or "Meta"
+\NewDocumentCommand{\ODStipo}{m}
+{
+  \str_if_in:nnTF { #1 } { . }
+    { Meta } % True case: a dot is present
+    { ODS } % False case: no dot
+}
+
+\ExplSyntaxOff
+
+% Descripciones de los ODS aprobados por consejo de escuela en
+% Sesión 14-2025, Artículo 12.
+
+% \defods{1}[Fin de la Pobreza]{Eliminar la pobreza extrema y
+%              garantizar el acceso a recursos básicos como alimentos, vivienda,
+%              salud y educación para todos.}
+% \defods{1.1}{Erradicar la pobreza extrema en todo el
+%              mundo.}
+% \defods{1.2}{Reducir al menos a la mitad la proporción
+%              de personas en pobreza multidimensional.}
+% \defods{1.3}{Implementar sistemas de protección social para todos,
+%              incluyendo los más vulnerables.}
+% \defods{1.4}{Garantizar el acceso equitativo a los
+%              recursos económicos, servicios y derechos básicos.}
+% \defods{1.5}{Fortalecer la resiliencia ante desastres y choques económicos.} 
+% \defods{1.a}{Movilizar recursos financieros significativos para erradicar
+%              la pobreza.} 
+% \defods{1.b}{Crear políticas sólidas a nivel nacional y regional
+%              para combatir la pobreza.}
+% \defods{2}[Hambre Cero]{Lograr la seguridad alimentaria
+%              y promover una agricultura sostenible para garantizar
+%              alimentos nutritivos y suficientes.}
+% \defods{2.1}{Asegurar el acceso a alimentos nutritivos
+%              para todas las personas, especialmente los más
+%              vulnerables.}
+% \defods{2.2}{Erradicar todas las formas de
+%              malnutrición, enfocándose en niños y personas en
+%              riesgo.}
+% \defods{2.3}{Duplicar la productividad y los ingresos
+%              de los pequeños productores agrícolas.}
+% \defods{2.4}{Implementar sistemas de producción de
+%              alimentos sostenibles.}
+% \defods{2.5}{Mantener la diversidad genética de
+%              semillas, cultivos y animales domésticos.}
+% \defods{2.a}{Aumentar las inversiones en
+%              infraestructura rural y tecnología agrícola.}
+% \defods{2.b}{Corregir y prevenir las restricciones
+%              comerciales en mercados agrícolas.}
+% \defods{2.c}{Garantizar el funcionamiento adecuado de
+%              los mercados de alimentos y sus derivados.}
+
+\defods{3}[\href{https://www.un.org/sustainabledevelopment/es/health/}%
+                {Salud y Bienestar}]%
+           {Garantizar una vida sana para todos y reducir la mortalidad materna,
+            infantil y combatir enfermedades.}
+
+% \defods{3.1}{Reducir la mortalidad materna mundial.} 
+% \defods{3.2}{Acabar con la mortalidad prevenible de niños menores de
+%              cinco años.}
+% \defods{3.3}{Combatir enfermedades transmisibles como
+%              el SIDA, la malaria y la tuberculosis.}
+% \defods{3.4}{Reducir la mortalidad prematura causada
+%              por enfermedades no transmisibles.}
+% \defods{3.5}{Fortalecer la prevención y el tratamiento
+%              de la adicción a sustancias.}
+% \defods{3.6}{Reducir las muertes y lesiones relacionadas con
+%              accidentes de tráfico.} 
+% \defods{3.7}{Asegurar el acceso a servicios de salud sexual y reproductiva.} 
+\defods{3.8}{Lograr la cobertura sanitaria universal.}
+% \defods{3.9}{Reducir las enfermedades relacionadas con la
+%              contaminación ambiental.}
+% \defods{3.a}{Fortalecer la implementación del Convenio
+%              Marco de la OMS sobre el tabaco.}
+% \defods{3.b}{Asegurar el acceso a medicamentos y vacunas
+%              asequibles.}
+% \defods{3.c}{Aumentar la financiación y la contratación de personal
+%              de salud en países en desarrollo.}
+% \defods{3.d}{Mejorar la capacidad de respuesta ante riesgos
+%              sanitarios globales.}
+
+\defods{4}[\href{https://www.un.org/sustainabledevelopment/es/education/}%
+                {Educación de Calidad}]%
+           {Asegurar el acceso a educación de calidad y equitativa, promoviendo
+            oportunidades de aprendizaje para toda la vida.}
+
+% \defods{4.1}{Asegurar que todos los niños completen una educación
+%              primaria y secundaria de calidad.}
+%\defods{4.2}{Garantizar el acceso a una educación preescolar de
+%              calidad.}
+\defods{4.3}{Asegurar el acceso equitativo a una formación técnica,
+             profesional y superior.}
+\defods{4.4}{Aumentar las habilidades técnicas y profesionales
+             necesarias para el empleo.}
+% \defods{4.5}{Eliminar las desigualdades de género y de otro tipo en
+%              el acceso a la educación.}
+%\defods{4.6}{Garantizar que todos los jóvenes y adultos tengan
+%              competencias básicas de lectura y aritmética.}
+\defods{4.7}{Promover la educación para el desarrollo sostenible y la
+             ciudadanía global.}
+% \defods{4.a}{Crear entornos de aprendizaje seguros, inclusivos y
+%              eficaces.}
+% \defods{4.b}{Aumentar el número de becas disponibles para los países
+%              en desarrollo.}
+% \defods{4.c}{Aumentar la oferta de profesores calificados mediante
+%              la cooperación internacional.}
+
+% \defods{5}[Igualdad de género]{Eliminar todas las formas de
+%            discriminación y violencia contra mujeres y niñas, promoviendo su
+%            participación igualitaria.}
+% \defods{5.1}{Poner fin a todas las formas de discriminación contra
+%              mujeres y niñas.}
+% \defods{5.2}{Eliminar todas las formas de violencia contra mujeres y
+%              niñas en los ámbitos público y privado.}
+% \defods{5.3}{Eliminar prácticas nocivas como el matrimonio infantil
+%              y la mutilación genital femenina.}
+% \defods{5.4}{Reconocer y valorar el trabajo doméstico y de cuidados
+%              no remunerados.}
+% \defods{5.5}{Garantizar la plena participación de mujeres en todos
+%              los niveles de toma de decisiones.}
+% \defods{5.6}{Asegurar el acceso universal a los derechos
+%              reproductivos.}
+% \defods{5.a}{Llevar a cabo reformas para garantizar la igualdad de
+%              acceso a los recursos económicos.}
+% \defods{5.b}{Promover el uso de tecnología que empodere a las
+%              mujeres.}
+% \defods{5.c}{Adoptar políticas sólidas y leyes para promover la
+%              igualdad de género.}
+
+
+\defods{6}[\href{https://www.un.org/sustainabledevelopment/es/water-and-sanitation/}%
+                {Agua limpia y saneamiento}]%
+           {Garantizar acceso a agua limpia y saneamiento para todos,
+            mejorando su calidad y uso eficiente.}
+% \defods{6.1}{Lograr el acceso universal y equitativo al agua
+%              potable.}
+% \defods{6.2}{Lograr acceso adecuado y equitativo a servicios de
+%              saneamiento e higiene.}
+% \defods{6.3}{Mejorar la calidad del agua mediante la reducción de la
+%              contaminación.}
+
+\defods{6.4}{Aumentar el uso eficiente de los recursos hídricos.} 
+
+% \defods{6.5}{Implementar la gestión integrada de los recursos
+%              hídricos en todos los niveles.}
+% \defods{6.6}{Proteger y restaurar los ecosistemas relacionados con
+%             el agua.}
+% \defods{6.a}{Ampliar la cooperación internacional para la gestión
+%              del agua.}
+% \defods{6.b}{Apoyar y fortalecer la participación comunitaria en la
+%              gestión del agua.}
+
+\defods{7}[\href{https://www.un.org/sustainabledevelopment/es/energy/}%
+                {Energía asequible y no contaminante}]%
+           {Promover el acceso a energía asequible, fiable y sostenible,
+            reduciendo la dependencia de combustibles fósiles.}
+           
+\defods{7.1}{Garantizar el acceso universal a servicios energéticos
+             asequibles y modernos.}
+\defods{7.2}{Aumentar significativamente la proporción de energía
+             renovable en la matriz energética.}
+\defods{7.3}{Mejorar la eficiencia energética mundial.}
+\defods{7.a}{Facilitar el acceso a tecnología y financiamiento en
+             energía limpia.}
+% \defods{7.b}{Expandir la infraestructura energética para
+%              proporcionar acceso a energía en países en desarrollo.}
+
+
+\defods{8}[\href{https://www.un.org/sustainabledevelopment/es/economic-growth/}%
+                {Trabajo decente y crecimiento económico}]%
+           {Fomentar el crecimiento económico inclusivo y el empleo pleno,
+            asegurando condiciones laborales justas.}
+
+% \defods{8.1}{Mantener el crecimiento económico per cápita,
+%              especialmente en países en desarrollo.}
+\defods{8.2}{Lograr niveles elevados de productividad económica
+             mediante la diversificación.}
+% \defods{8.3}{Promover políticas de empleo decente y apoyar las
+%              pequeñas empresas.}
+% \defods{8.4}{Mejorar progresivamente la eficiencia en el consumo de
+%              recursos globales.}
+% \defods{8.5}{Alcanzar el empleo pleno y productivo, y asegurar la
+%              igualdad de remuneración.}
+% \defods{8.6}{Reducir la proporción de jóvenes sin empleo ni
+%              formación.}
+% \defods{8.7}{Erradicar el trabajo forzoso y las formas modernas de
+%              esclavitud.}
+\defods{8.8}{Proteger los derechos laborales y promover condiciones de
+             trabajo seguras.}
+% \defods{8.9}{Promover un turismo sostenible que cree empleo y
+%              fomente la cultura local.}
+% \defods{8.10}{Reducir las desigualdades económicas entre países y
+%              dentro de los países.}
+% \defods{8.a}{Aumentar la ayuda para el comercio a los países en
+%              desarrollo.}
+% \defods{8.b}{Desarrollar políticas de empleo juvenil a nivel
+%              nacional.}
+
+\defods{9}[\href{https://www.un.org/sustainabledevelopment/es/infrastructure/}%
+               {Industria, innovación e infraestructura}]%
+           {Desarrollar infraestructuras resilientes y promover la
+            industrialización inclusiva y sostenible.}
+
+\defods{9.1}{Desarrollar infraestructuras de calidad, fiables y
+             resilientes para apoyar el desarrollo económico.}
+% \defods{9.2}{Promover la industrialización inclusiva y sostenible,
+%              incrementando el empleo y el PIB industrial.}
+%\defods{9.3}{Mejorar el acceso de las pequeñas empresas industriales
+%             a los servicios financieros y los mercados.}
+\defods{9.4}{Modernizar la infraestructura industrial para que sea más
+             sostenible, eficiente y limpia.}
+\defods{9.5}{Fomentar la investigación científica y mejorar las
+             capacidades tecnológicas en los países en desarrollo.}
+% \defods{9.a}{Facilitar el desarrollo de infraestructuras sostenibles
+%             en países en desarrollo.}
+%\defods{9.b}{Apoyar la innovación nacional, diversificación
+%             industrial y agregar valor a los productos.}
+\defods{9.c}{Aumentar el acceso a las tecnologías de la información y
+             comunicación, especialmente Internet.}
+
+
+
+% \defods{10}[Reducción de las Desigualdades]{Reducir desigualdades
+%               económicas, sociales y políticas, garantizando oportunidades
+%               equitativas para todos.}
+
+% \defods{10.1}{Lograr y sostener un crecimiento de los ingresos del
+%               40\% más pobre de la población.}
+% \defods{10.2}{Potenciar la inclusión social, económica y política
+%               para todos, sin discriminación.}
+% \defods{10.3}{Garantizar la igualdad de oportunidades y reducir las
+%               desigualdades de resultados.}
+% \defods{10.4}{Adoptar políticas fiscales, salariales y de protección
+%               social para la igualdad.}
+% \defods{10.5}{Mejorar la regulación y supervisión de las
+%               instituciones financieras y los mercados globales.}
+% \defods{10.6}{Asegurar que los países en desarrollo estén más
+%               representados en las instituciones económicas globales.}
+% \defods{10.7}{Facilitar la migración y movilidad segura, regular y
+%               responsable.}
+% \defods{10.a}{Aplicar el principio de trato especial y diferenciado
+%               para los países en desarrollo.}
+% \defods{10.b}{Alentar la asistencia oficial para el desarrollo (AOD)
+%               y los flujos financieros hacia países necesitados. 10.c Reducir los
+%               costos de transacción de las remesas por debajo del 3\%.}
+
+\defods{11}[\href{https://www.un.org/sustainabledevelopment/es/cities/}%
+                 {Ciudades y comunidades sostenibles}]%
+            {Hacer que las ciudades y comunidades sean
+             sostenibles y resilientes, con acceso a vivienda y
+             servicios básicos.}
+
+% \defods{11.1}{Garantizar el acceso a viviendas adecuadas, seguras y
+%               asequibles para todos.}
+% \defods{11.2}{Proporcionar acceso a sistemas de transporte seguros,
+%               asequibles y sostenibles.}
+% \defods{11.3}{Aumentar la urbanización inclusiva y sostenible, mejorando la planificación participativa.} 
+% \defods{11.4}{Proteger y salvaguardar el patrimonio cultural y
+%               natural.}
+% \defods{11.5}{Reducir significativamente el número de personas
+%               afectadas por desastres, incluidos desastres relacionados con el
+%               cambio climático.}
+% \defods{11.6}{Reducir el impacto ambiental negativo de las ciudades,
+%               en particular la calidad del aire y la gestión de desechos.}
+% \defods{11.7}{Proporcionar acceso universal a espacios públicos
+%               seguros, inclusivos y accesibles.}
+% \defods{11.a}{Apoyar los vínculos positivos entre áreas urbanas,
+%               periurbanas y rurales.}
+\defods{11.b}{Aumentar el número de ciudades que adoptan y aplican
+              políticas y planes integrados para la resiliencia y la
+              sostenibilidad.}
+% \defods{11.c}{Apoyar a los países en desarrollo en la construcción
+%               de edificios sostenibles y resilientes.}
+
+
+
+\defods{12}[\href{https://www.un.org/sustainabledevelopment/es/sustainable-consumption-production/}%
+                 {Producción y consumo responsables}]%
+            {Adoptar patrones sostenibles de producción y consumo, 
+             reduciendo desechos y promoviendo la reutilización y
+             reciclaje.}
+% \defods{12.1}{Implementar el Marco Decenal de Programas sobre
+%               Producción y Consumo Sostenibles, con la participación de todos los
+%               países.}
+\defods{12.2}{Lograr la gestión sostenible y el uso eficiente de los
+              recursos naturales.}
+% \defods{12.3}{Reducir a la mitad el desperdicio de alimentos per
+%               cápita a nivel mundial.}
+\defods{12.4}{Lograr la gestión ambientalmente racional de los
+              productos químicos y los desechos.}
+\defods{12.5}{Reducir sustancialmente la generación de residuos
+              mediante la prevención, reducción, reciclaje y reutilización.}
+% \defods{12.6}{Alentar a las empresas a adoptar prácticas sostenibles
+%               y publicar informes de sostenibilidad.}
+% \defods{12.7}{Promover prácticas de contratación pública que sean
+%               sostenibles.}
+% \defods{12.8}{Garantizar que las personas de todo el mundo tengan la
+%               información y los conocimientos necesarios para el desarrollo
+%               sostenible.}
+% \defods{12.a}{Apoyar a los países en desarrollo en mejorar sus
+%               capacidades científicas y tecnológicas hacia un consumo sostenible.}
+% \defods{12.b}{Desarrollar e implementar herramientas para
+%               monitorizar los impactos del turismo sostenible.}
+\defods{12.c}{Racionalizar los subsidios a los combustibles fósiles
+              que fomentan el consumo irresponsable.}
+
+\defods{13}[\href{https://www.un.org/sustainabledevelopment/es/climate-change-2/}%
+                 {Acción por el clima}]%
+            {Tomar medidas urgentes para combatir el cambio climático
+             y sus efectos en todo el planeta.}
+% \defods{13.1}{Fortalecer la resiliencia y la capacidad de adaptación
+%               a los riesgos relacionados con el clima y los desastres naturales.}
+\defods{13.2}{Integrar las medidas contra el cambio climático en las
+              políticas y estrategias nacionales.}
+% \defods{13.3}{Mejorar la educación, sensibilización y capacidad
+%              humana e institucional sobre la mitigación, adaptación y alerta
+%              temprana al cambio climático.}
+%\defods{13.a}{Implementar los compromisos asumidos por los países
+%              desarrollados en el Acuerdo de París.}
+%\defods{13.b}{Promover mecanismos para elevar la capacidad de
+%              planificación y gestión climática en los países en 
+%              desarrollo, especialmente los más vulnerables.}
+
+% \defods{14}[Vida  submarina]{Proteger y utilizar de forma sostenible
+%             los océanos y mares, cruciales para la supervivencia humana.}
+% \defods{14.1}{Reducir significativamente la contaminación marina, en
+%               especial la causada por actividades terrestres.}
+% \defods{14.2}{Gestionar y proteger de manera sostenible los
+%               ecosistemas marinos y costeros.}
+% \defods{14.3}{Minimizar los impactos de la acidificación de los
+%               océanos, abordando sus efectos.}
+% \defods{14.4}{Regular eficazmente la recolección pesquera, poniendo
+%               fin a la sobrepesca y la pesca ilegal.}
+% \defods{14.5}{Conservar al menos el 10\% de las áreas marinas y
+%               costeras.}
+% \defods{14.6}{Eliminar los subsidios que contribuyen a la pesca
+%               excesiva e ilegal.}
+% \defods{14.7}{Aumentar los beneficios económicos de los países en
+%               desarrollo derivados de la gestión sostenible de sus
+%               recursos marinos.}
+% \defods{14.a}{Incrementar el conocimiento científico, la
+%               investigación y la transferencia de tecnología marina.}
+% \defods{14.b}{Facilitar el acceso de los pequeños pescadores a los
+%               recursos marinos y mercados.}
+% \defods{14.c}{Mejorar la implementación del derecho internacional
+%               aplicable a la conservación y uso sostenible de los océanos.}
+
+
+
+\defods{15}[\href{https://www.un.org/sustainabledevelopment/es/biodiversity/}%
+                 {Vida de ecosistemas terrestres}]%
+            {Proteger y restaurar ecosistemas terrestres,
+              combatiendo la desertificación y conservando la
+              biodiversidad.}
+
+% \defods{15.1}{Garantizar la conservación, restauración y uso
+%               sostenible de los ecosistemas terrestres.}
+\defods{15.2}{Promover la gestión sostenible de los bosques y detener
+              la deforestación.}
+% \defods{15.3}{Combatir la desertificación y restaurar las tierras
+%               degradadas.}
+% \defods{15.4}{Garantizar la conservación de los ecosistemas
+%               montañosos, promoviendo sus beneficios.}
+% \defods{15.5}{Tomar medidas urgentes para detener la pérdida de
+%               biodiversidad y la extinción de especies.}
+% \defods{15.6}{Promover la utilización justa y equitativa de los
+%               recursos genéticos.}
+% \defods{15.7}{Combatir la caza furtiva y el tráfico de especies
+%               protegidas.}
+% \defods{15.8}{Evitar la introducción de especies exóticas invasoras
+%               y reducir su impacto.}
+% \defods{15.9}{Integrar los valores de los ecosistemas y la
+%               biodiversidad en las políticas nacionales.}
+% \defods{15.a}{Aumentar la financiación para la conservación de la
+%               biodiversidad.}
+% \defods{15.b}{Movilizar recursos financieros para la gestión
+%               sostenible de los bosques.}
+% \defods{15.c}{Mejorar la capacidad mundial para combatir la caza
+%               furtiva y el tráfico de especies.}
+
+\defods{16}[\href{https://www.un.org/sustainabledevelopment/es/peace-justice/}%
+                 {Paz, justicia e instituciones sólidas}]%
+            {Promover sociedades pacíficas e inclusivas, garantizando acceso a la
+             justicia y construyendo instituciones sólidas.}
+
+% \defods{16.1}{Reducir significativamente todas las formas de
+%               violencia.}
+% \defods{16.2}{Poner fin a la violencia, explotación y abuso contra
+%               niños.}
+% \defods{16.3}{Promover el estado de derecho y garantizar el acceso
+%               equitativo a la justicia.}
+% \defods{16.4}{Reducir los flujos financieros y de armas ilegales.}
+% \defods{16.5}{Reducir la corrupción y el soborno en todas sus
+%               formas.}
+% \defods{16.6}{Desarrollar instituciones eficaces, responsables y
+%               transparentes en todos los niveles.}
+% \defods{16.7}{Garantizar la toma de decisiones inclusivas,
+%               participativas y representativas.}
+% \defods{16.8}{Fortalecer la participación de los países en
+%               desarrollo en las instituciones de gobernanza mundial.}
+% \defods{16.9}{Proporcionar identidad legal para todos, incluyendo el
+%               registro de nacimientos.}
+% \defods{16.10}{Garantizar el acceso público a la información y
+%               proteger las libertades fundamentales.}
+% \defods{16.a}{Fortalecer las instituciones nacionales para prevenir
+%               la violencia y combatir el crimen.}
+
+\defods{16.b}{Promover y aplicar leyes y políticas no
+              discriminatorias.}
+
+
+\defods{17}[\href{https://www.un.org/sustainabledevelopment/es/globalpartnerships/}%
+            {Alianzas para lograr los objetivos}]%
+            {Fomentar alianzas globales para alcanzar los ODS y
+              fortalecer la cooperación internacional.}
+
+% \defods{17.1}{Fortalecer la movilización de recursos internos para
+%               mejorar la capacidad nacional.}
+% \defods{17.2}{Asegurar que los países desarrollados cumplan sus
+%               compromisos de ayuda oficial para el desarrollo.}
+% \defods{17.3}{Movilizar recursos financieros adicionales para los
+%               países en desarrollo.}
+% \defods{17.4}{Ayudar a los países en desarrollo a manejar su deuda.}
+% \defods{17.5}{Invertir en los países menos desarrollados para
+%               fomentar la innovación.}
+\defods{17.6}{Aumentar la cooperación internacional para la ciencia,
+              la tecnología y la innovación.}
+\defods{17.7}{Promover el acceso a la tecnología y el conocimiento en
+              países en desarrollo.}
+\defods{17.8}{Fortalecer la capacidad tecnológica de los países menos
+              desarrollados.}
+% \defods{17.9}{Aumentar el apoyo a la creación de capacidades en los
+%               países en desarrollo.}
+% \defods{17.10}{Promover un sistema de comercio multilateral
+%               universal, abierto y no discriminatorio.}
+% \defods{17.11}{Aumentar las exportaciones de los países en
+%               desarrollo.}
+% \defods{17.12}{Eliminar las barreras comerciales para los países
+%               menos desarrollados.}
+% \defods{17.13}{Aumentar la estabilidad macroeconómica mundial.}
+% \defods{17.14}{Mejorar la coherencia de las políticas para el
+%                desarrollo sostenible.}
+% \defods{17.15}{Respetar el espacio de políticas de cada país para la
+%                implementación de los ODS.}
+% \defods{17.16}{Mejorar las alianzas globales para el desarrollo
+%                sostenible.}
+\defods{17.17}{Fomentar alianzas eficaces entre los sectores público,
+               privado y civil.}
+\defods{17.18}{Mejorar la disponibilidad de datos desglosados para el
+               desarrollo sostenible.}
+\defods{17.19}{Desarrollar nuevas herramientas para medir el progreso
+               en los ODS y las metas globales.}
+
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Command to build ODS table from a list of metas
+% Usage: \buildODSTable{4.4,9.4,9.c}
+
+\ExplSyntaxOn
+
+% Variables para procesar la tabla de ODS
+\seq_new:N \l__tp_ods_table_metas_seq
+\tl_new:N \l__tp_ods_table_current_obj_tl
+\tl_new:N \l__tp_ods_table_previous_obj_tl
+\bool_new:N \l__tp_ods_table_first_obj_bool
+\tl_new:N \l__tp_ods_table_body_tl % Variable para construir el cuerpo de la tabla
+
+% --- Funciones auxiliares ---
+
+% Función auxiliar expandible que usa argumentos delimitados para capturar texto.
+\cs_new:Npn \__tp_ods_extract_objective_aux:w #1.#2\q_stop { #1 }
+
+% Función expandible principal. Prepara la llamada a la función auxiliar.
+\cs_new:Nn \__tp_ods_extract_objective:n
+{
+  \__tp_ods_extract_objective_aux:w #1.\q_stop
+}
+
+
+% Función PROTEGIDA para agregar las filas de encabezado de un objetivo al cuerpo de la tabla.
+\cs_new_protected:Npn \__tp_ods_add_header:n #1
+{
+  \message{    [add_header]      Agregando encabezado para ODS '#1'}%
+  \tl_put_right:Nn \l__tp_ods_table_body_tl
+  {
+    \exp_not:n { \textbf{\ODStipo{#1}~\ODScode{#1}} & \ODSshort{#1} \\ }%
+    \exp_not:n { & \emph{\ODSdesc{#1}} \\ }%
+  }
+}
+
+% Función PROTEGIDA para procesar una sola meta y añadirla al cuerpo de la tabla.
+\cs_new_protected:Npn \__tp_ods_process_meta:n #1
+{
+  \message{  [process_meta] --> Procesando meta: '#1'}%
+  
+  \tl_set:Nx \l__tp_ods_table_current_obj_tl { \__tp_ods_extract_objective:n { #1 } }
+  \message{  [process_meta]     Objetivo extraido: '\tl_use:N \l__tp_ods_table_current_obj_tl'}%
+
+  \tl_if_eq:NNTF \l__tp_ods_table_current_obj_tl \l__tp_ods_table_previous_obj_tl
+    {
+      \message{  [process_meta]     Mismo objetivo. Agregando solo fila de meta.}%
+      \tl_put_right:Nn \l__tp_ods_table_body_tl { \exp_not:n { \qquad \ODStipo{#1}~\ODScode{#1} & \ODSdesc{#1} \\ }%
+      }
+    }
+    {
+      \message{  [process_meta]     ¡Nuevo objetivo detectado!}%
+      \bool_if:NF \l__tp_ods_table_first_obj_bool
+        {
+          \message{  [process_meta]     No es el primer ODS, agregando midrule.}%
+          \tl_put_right:Nn \l__tp_ods_table_body_tl { \midrule }
+        }
+
+      \exp_args:NV \__tp_ods_add_header:n \l__tp_ods_table_current_obj_tl
+
+      \message{  [process_meta]     Agregando fila de meta.}%
+      \tl_put_right:Nn \l__tp_ods_table_body_tl { \exp_not:n { \qquad \ODStipo{#1}~\ODScode{#1} & \ODSdesc{#1} \\ }%
+      }
+
+      \message{  [process_meta]     Actualizando variables de estado.}%
+      \tl_set_eq:NN \l__tp_ods_table_previous_obj_tl \l__tp_ods_table_current_obj_tl
+      \bool_set_false:N \l__tp_ods_table_first_obj_bool
+    }
+  \message{  [process_meta] <-- Fin del procesamiento para '#1'}%
+}
+
+% --- Comando principal ---
+\NewDocumentCommand{\buildODSTable}{m}
+{
+  \message{^^J[buildODSTable] ==> Iniciando. Argumento: '#1'}%
+  \tl_clear:N \l__tp_ods_table_previous_obj_tl
+  \bool_set_true:N \l__tp_ods_table_first_obj_bool
+  \tl_clear:N \l__tp_ods_table_body_tl
+  \message{[buildODSTable] Variables inicializadas.}%
+
+  \seq_set_split:Nnn \l__tp_ods_table_metas_seq { , } { #1 }
+  \message{[buildODSTable] Secuencia de metas creada.}%
+
+  \message{[buildODSTable] Mapeando la secuencia para construir el cuerpo de la tabla...}%
+  \seq_map_function:NN \l__tp_ods_table_metas_seq \__tp_ods_process_meta:n
+  \message{[buildODSTable] Mapeo completado.}%
+
+  \message{[buildODSTable] Imprimiendo longtable...}%
+  \begin{longtable}{@{}>{\RaggedLeft\arraybackslash}p{0.2\linewidth}p{0.76\linewidth}}
+    \toprule
+    \tl_use:N \l__tp_ods_table_body_tl
+    \bottomrule
+  \end{longtable}
+  \message{[buildODSTable] <== Finalizado.^^J}%
+}
+
+\ExplSyntaxOff
+
+\newcommand{\InsertODS}[1]{%
+  Este curso contribuye a la concientización del estudiantado sobre
+  los \href{https://www.un.org/sustainabledevelopment/es/}{Objetivos
+    del Desarrollo Sostenible (ODS)} de la ONU, con el fin de que las
+  competencias desarrolladas le permitan aportar, a lo largo de su vida
+  profesional particularmente al logro de los siguientes objetivos:
+  \begin{center}
+    \buildODSTable{#1}
+  \end{center}
+}
+
+
+% --------------------------------------------------------------------------
+
+\newcommand{\rreaviejo}[1][Reglamento del régimen enseñanza-aprendizaje y
+sus reformas (derogado)]{\href{https://www.tec.ac.cr/reglamento-regimen-ensenanza-aprendizaje-instituto-tecnologico-costa-rica-sus-reformas-asi}{#1}}
+\newcommand{\rrea}[1][Reglamento del régimen enseñanza-aprendizaje del ITCR]{\href{https://tec.ac.cr/reglamento-regimen-ensenanza-aprendizaje-instituto-tecnologico-costa-rica}{#1}}
+\newcommand{\reqa}[1][Reglamento para la equiparación de
+asignaturas]{\href{https://www.tec.ac.cr/reglamento-equiparacion-asignaturas-instituto-tecnologico-costa-rica}{#1}}
+\newcommand{\segunreqa}{Solo por \reqa[procedimiento ordinario].}
+\newcommand{\code}[1]{\texttt{#1}}
+% La RAE indica usar hardware y software en italicas
+\newcommand{\hardware}{\emph{hardware}\xspace}
+\newcommand{\Hardware}{\emph{Hardware}\xspace}
+\newcommand{\software}{\emph{software}\xspace}
+\newcommand{\Software}{\emph{Software}\xspace}
+
+% --------------------------------------------------------------------------
+
+\definecolor{tecAzul}{RGB}{0,40,85}       % según manual de imagen 2020
+\definecolor{tecRojo}{RGB}{239,51,64}     % según manual de imagen 2020
+
+\definecolor{tecNaranja}{RGB}{255,174,57} % según manual de imagen 2016
+
+\definecolor{tecVerde}{RGB}{133,189,64}   % según manual de imagen 2016
+\definecolor{tecCian}{RGB}{37,158,205}    % según manual de imagen 2016
+\definecolor{tecTurq}{RGB}{35,168,156}    % según manual de imagen 2016
+
+% Al color C \in {R,G,B} -> 255 - p (255-C) , con p el porcentaje
+% \definecolor{fondo}{RGB}{252,217,214}   % tecRojo al 20%
+\definecolor{fondo}{RGB}{251,175,58}      % tecAmarillo al 100%
+\definecolor{white}{rgb}{1.0,1.0,1.0}     % white
+\definecolor{dkgray}{gray}{0.4}           % dark gray
+\definecolor{filaspares}{rgb}{1.0,1.0,1.0}
+%\definecolor{filaspares}{rgb}{0.9,0.9,0.9}
+
+% Set as default sans serif
+\renewcommand{\familydefault}{\sfdefault}
+\RequirePackage{sfmath}
+
+\newlength{\margoffset}
+\setlength{\margoffset}{\dimexpr \marginparwidth+\marginparsep\relax}
+
+% footrule eliminada en plantilla del 6/11/2024 ViDa 968
+\renewcommand{\footrulewidth}{0.0pt}
+\renewcommand{\headrulewidth}{0.0mm}
+
+%\let\oldfootrule\footrule
+%\renewcommand{\footrule}{{\color{tecAzul}\oldfootrule}}
+
+
+% Command to change between draft or release mode:
+\newboolean{draftmode}                 % boolean used to control draft-mode
+\setboolean{draftmode}{false}
+
+\newcommand{\ifdraft}[2]{\ifthenelse{\boolean{draftmode}}{#1}{#2}}
+
+\setlength{\parindent}{0em}             % indentation width of first line
+\setlength{\parskip}{1.3ex}             % space between paragraphs
+
+%\renewcommand\thesection{\Roman{section}}
+\renewcommand\thesubsection{\arabic{subsection}.}
+
+\newif\iftodoraisebox % Flag to raise the porhacer box
+\newcounter{mgsection}
+\newcommand{\theMgSection}{\arabic{mgsection}.}
+\setcounter{mgsection}{1}
+
+\newcommand{\msubsection}[1]{\stepcounter{mgsection}%
+  \bigskip
+  \todoraiseboxtrue\leavevmode%
+  \marginpar{\@afterindentfalse\@afterheading\textcolor{tecAzul}%
+  {\bf\large\theMgSection~\parbox[t][][t]{\marginparwidth}{#1}}}%
+  \phantomsection
+  \addcontentsline{toc}{subsection}{\theMgSection.~#1}%
+  \hspace{-0.55ex}}%
+
+\titleformat{\section}%                    % command
+{\color{tecAzul}\normalfont\Large\bfseries}% format
+{}%                                        % label
+{0pt}%                                     % sep
+{\texorpdfstring{\hspace{-\margoffset}%    % before-code
+  \makebox[\dimexpr\linewidth][l]{%
+    \parbox{\dimexpr\textwidth+\marginparwidth+\marginparsep\relax}%
+    {\raggedright\Roman{section}~parte:~\textcolor{tecAzul}{#1}}}}%
+{\Roman{section}~parte:~#1}}%
+{}                                         % after-code
+
+\titleformat{\subsection}%
+{\color{tecAzul}\normalfont\large\bfseries}% format
+{}%                                        % label
+{0pt}%                                     % sep
+{\hspace{-\margoffset}%                    % before-code
+  \makebox[\dimexpr\linewidth][l]{%
+    \parbox{\dimexpr\textwidth+\marginparwidth+\marginparsep\relax}%
+    {\raggedright\arabic{subsection}.~\textcolor{tecAzul}{#1}}}}%
+{}                                          % after-code
+
+
+% include all packages and define all required general macros
+
+\renewenvironment{thebibliography}[1]
+     {%\section{\refname}%
+      \@mkboth{\MakeUppercase\refname}{\MakeUppercase\refname}%
+      \list{\@biblabel{\@arabic\c@enumiv}}%
+           {\settowidth\labelwidth{\@biblabel{#1}}%
+            \leftmargin\labelwidth
+            \advance\leftmargin\labelsep
+            \@openbib@code
+            \usecounter{enumiv}%
+            \let\p@enumiv\@empty
+            \renewcommand\theenumiv{\@arabic\c@enumiv}}%
+      \sloppy
+      \clubpenalty4000
+      \@clubpenalty \clubpenalty
+      \widowpenalty4000%
+      \sfcode`\.\@m}
+     {\def\@noitemerr
+       {\@latex@warning{Empty `thebibliography' environment}}%
+      \endlist}
+
+\newcommand{\paginaTitulo}{%
+  \savegeometry{contentsgeom}
+  \newgeometry{margin=20mm,top=14mm,left=0mm,bottom=30mm}
+  %
+  \thispagestyle{empty}
+  %
+  \raisebox{80mm}{%
+    \mbox{%
+      \begin{tikzpicture}
+	\fill[fill=tecAzul] (0,0) rectangle (10.7,1.6);
+        \node[inner sep=0pt] (tec) at(16.0,0.80)
+              {\includegraphics[height=16.5mm]{Firma_TEC-4}};
+      \end{tikzpicture}}}
+  
+
+  \vspace*{48mm}
+
+  \hspace{26mm}
+  \begin{minipage}{\linewidth+\margoffset}
+    {\Large Programa del curso \CodigoCurso}
+
+    \vspace*{2.5mm}
+    {\LARGE \color{tecAzul}\bf\NombreCurso}
+  \end{minipage}
+
+  \vspace*{8mm}
+  \hspace{37mm}
+  \begin{minipage}{4.85in}
+    \large
+    \textbf{\Depto} \newline
+    \ifthenelse{\equal{\OtrasCarreras}{}}{%
+      \textbf{Carrera de \Plan} \newline }{%
+      \textbf{Carreras de} \begin{tabular}[t]{@{}>{\bfseries}l} \Plan \\ \OtrasCarreras \end{tabular}%
+      \newline %
+    }
+    % Última revisión eliminada en acuerdo ViDa 968-2024 06/11/2024
+    % \vspace*{5mm}
+    % \small
+    % [Última revisión del programa: \today]
+  \end{minipage}
+  \normalsize
+  \loadgeometry{contentsgeom}
+  \newpage
+}
+
+\newlist{compactitem}{itemize}{3}
+\setlist[compactitem]{topsep=0.3ex,
+                      partopsep=0pt,
+                      parsep=0pt,
+                      itemsep=0pt,
+                      leftmargin=*}
+\setlist[compactitem,1]{label=\textbullet}
+\setlist[compactitem,2]{label=\textopenbullet}
+\setlist[compactitem,3]{label=*}
+
+\newlist{compactenum}{enumerate}{5}
+\setlist[compactenum]{topsep=0.3ex,
+                      partopsep=0ex,
+                      parsep=0pt,
+                      itemsep=0pt,
+                      leftmargin=*}
+\setlist[compactenum,1]{label=\arabic*.}
+\setlist[compactenum,2]{label=\arabic{compactenumi}.\arabic*.}
+\setlist[compactenum,3]{label=\arabic{compactenumi}.\arabic{compactenumii}.\arabic*}
+\setlist[compactenum,4]{label=\arabic{compactenumi}.\arabic{compactenumii}.\arabic{compactenumiii}.\arabic*}
+\setlist[compactenum,5]{label=\arabic{compactenumi}.\arabic{compactenumii}.\arabic{compactenumiii}.\arabic{compactenumiv}.\arabic*}
+
+\newlist{contenido}{enumerate}{5}
+\setlist[contenido]{topsep=0.3ex,
+                      partopsep=0ex,
+                      parsep=0pt,
+                      itemsep=0pt,
+                      leftmargin=*}
+\setlist[contenido,1]{label=\arabic*.}
+\setlist[contenido,2]{label=\arabic{contenidoi}.\arabic*.}
+\setlist[contenido,3]{label=\arabic{contenidoi}.\arabic{contenidoii}.\arabic*}
+\setlist[contenido,4]{label=\arabic{contenidoi}.\arabic{contenidoii}.\arabic{contenidoiii}.\arabic*}
+\setlist[contenido,5]{label=\arabic{contenidoi}.\arabic{contenidoii}.\arabic{contenidoiii}.\arabic{contenidoiv}.\arabic*}
+
+
+% El comando \porhacer{texto} solo pone el fondo de un texto corto en un
+% color resaltado.  Para textos largos, use \Porhacer
+\NewDocumentCommand{\porhacer}{m}{%
+  \colorbox{fondo}{$\langle$\textsl{#1}$\rangle$}%
+  \todoraiseboxfalse%
+}
+
+
+% El comando \Porhacer{texto} y \Porhacer*{texto} crea una caja de
+% color de fondo y acomoda el texto allí.  Hay un problema con esto,
+% que requiere subir la caja a la fuerza para alinearla con el título
+% de secciones.  El problema ocurre solo al inicio de una de las
+% subsecciones, por lo que tiene por el momento un parche que detecta
+% si es la primera vez que se usa luego de una sección para subir la
+% caja (msubsection se encarga de hacer todoraisebox true), y si ya se
+% usó cualquier \Porhacer, no lo sube.  Si por alguna razón no desea
+% subir la caja al inicio de sección, entonces puede usar \Porhacer*.
+% Esto será por ejemplo cuando use texto normal después de un
+% msubsection, y luego un Porhacer.
+\NewDocumentCommand{\Porhacer}{s +m}{%
+  \IfBooleanF{#1}{%
+    \iftodoraisebox
+    \vspace{-3.2\parskip}%
+    \fi
+  }%
+  \begin{tcolorbox}[%
+    left=0pt,
+    right=0pt,
+    colback=fondo,
+    colframe=fondo,
+    frame code={},
+    arc=0pt,
+    breakable,
+    top=0pt,
+    bottom=0pt,
+    boxsep=0pt,
+    before upper={\setlength{\parskip}{0.5ex}}
+    ]
+    #2
+  \end{tcolorbox}%
+  \todoraiseboxfalse%
+}
+
+% Command to show the semester number as "I Semestre 2023"
+% \semestre shows the semestre \today is in.
+% \semestre[foo] shows "foo Semestre, YYYY", where YYYY is
+%                the year \today is in.
+\newcommand{\semestre}[1][\relax]{%
+  \ifx#1\relax%
+    \ifnum\month<7%
+      I%
+    \else%
+      II%
+    \fi%
+  \else%
+    #1%
+  \fi%
+  ~Semestre~\the\year%
+}
+
+% --------------------------------------------------------------------------
+
+\newboolean{parte_a}
+\setboolean{parte_a}{true}
+\newcommand{\ifpartea}[1]{\ifthenelse{\boolean{parte_a}}{#1}{}}
+
+\newboolean{parte_b}
+\setboolean{parte_b}{true}
+\newcommand{\ifparteb}[1]{\ifthenelse{\boolean{parte_b}}{\clearpage #1}{}}
+
+% --------------------------------------------------------------------------
+% Comandos para la construcción automática de tablas de atributos
+% Se usa por ejemplo con \buildAtrTable{CI:A,HI:M,AP:I}
+% Un * marca al atributo como punto de control, p.ej. {CI:A,*HI:M,AP:I}
+% Un + marca al atributo para recolección de evidencia, p.ej. {+CI:A,HI:M,AP:I}
+
+\NewDocumentCommand{\buildAtrTable}{ >{ \SplitList { , } } m }
+{
+  {%\small
+    \tecrowcolors
+    %\setlength{\arrayrulewidth}{0.75pt}
+    \begin{center}
+      \begin{tabular}{lcc}
+        \toprule
+        \multicolumn{2}{c}{\textbf{Atributo}} & \textbf{Nivel} \\
+        \midrule
+        \ProcessList { #1 } { \processAtr }
+        \bottomrule
+      \end{tabular}
+    \end{center}%
+    \normalsize%
+    \hidetecrowcolors%
+  }
+}
+
+\NewDocumentCommand{\processAtr}{ >{ \SplitArgument { 1 } { : } } m }
+{
+  \processAtrAux #1
+}
+
+\NewDocumentCommand{\processAtrAux}{ m m }
+{
+  \IfBeginWith{#1}{*} % Check if the attribute begins with *
+  {
+    \StrGobbleLeft{#1}{1}[\tempatr]% Remove * and store result in \tempatr
+    \expandafter\gdef\expandafter\tempatr\expandafter{\tempatr}% Make \tempatr globally defined
+    \textbf{\csname atr\tempatr\endcsname} & \textbf{(\tempatr)} &
+    \textbf{
+      \IfStrEqCase{#2}{
+        {I} {Inicial}
+        {M} {Intermedio}
+        {A} {Avanzado}
+      }[Unknown]
+    }\raisebox{0.2ex}{\tiny{(P.C.)}}
+  }
+  {
+    \IfBeginWith{#1}{+} % Check if the attribute begins with +
+    {
+      \StrGobbleLeft{#1}{1}[\tempatr]% Remove + and store result in \tempatr
+      \expandafter\gdef\expandafter\tempatr\expandafter{\tempatr}% Make \tempatr globally defined
+      \textit{\csname atr\tempatr\endcsname} & \textit{(\tempatr)} &
+      \textit{
+        \IfStrEqCase{#2}{
+          {I} {Inicial}
+          {M} {Intermedio}
+          {A} {Avanzado}
+        }[Unknown]
+      }
+    }
+    {
+      \csname atr#1\endcsname & (#1) &
+      \IfStrEqCase{#2}{
+        {I} {Inicial}
+        {M} {Intermedio}
+        {A} {Avanzado}
+      }[Unknown]
+    }
+  }
+  \\
+}  
+
+% --------------------------------------------------------------------------
+% Comandos para la construcción automática de tablas de objetivos.
+% A partir de la plantilla de noviembre 2024 se usa por ejemplo
+% \buildObjTable{
+%   {Promover el buen uso del las herramientas},
+%   {Continuar con el segundo objetivo},
+%   {Terminar cumpliendo el tercer objetivo}
+% }
+%
+% Este formato es sencillo y solo centraliza el formato de la tabla.
+%
+
+% Para el formato "viejo", ahora necesario en la metodología,  se usa 
+%
+% \buildObjTableAtr{
+%   {Promover el buen uso del las herramientas;{EE:A,PM:I}},
+%   {Continuar con el segundo objetivo;{IN:M}},
+%   {Terminar cumpliendo objetivos;{PM:A,TE:I,HI:M}}
+% }
+%
+% (nótese el prefijo Atr de "Atributos" en el nombre del comando, y
+% que cada objetivo agrega una lista de atributos con su
+% correspondiente nivel).
+
+% Este formato tiene 3 columnas: la primera con el texto de cada
+% objetivo específico, la segunda con el atributo y la tercera con el
+% nivel.
+%
+% ADVERTENCIA: No puede haber ';' en el texto del objetivo en este formato
+%              pues se usa para separar la lista de atributos y niveles.
+%
+
+%% --- versión sin atributos ---
+\newcounter{numObjCounter}
+\newcommand{\numObj}{\stepcounter{numObjCounter}\arabic{numObjCounter}.}
+
+\NewDocumentCommand{\buildObjTable}{ >{\SplitList{,}}+m }{%
+  \setcounter{numObjCounter}{0}
+  \setlength{\LTpost}{0pt}
+  %\setlength{\arrayrulewidth}{0.75pt}
+  {%\small
+    \tecrowcolors
+    \begin{longtable}{@{}r@{\hspace{0.5em}}p{127mm}}
+      \ProcessList{#1}{\processObj} 
+    \end{longtable}
+    \hidetecrowcolors
+    \normalsize
+  }
+}
+
+\NewDocumentCommand{\processObj}{m}{
+  \stepcounter{numObjCounter}\arabic{numObjCounter}. & #1 \\
+}
+
+%% --- versión con atributos ---
+
+\NewDocumentCommand{\buildObjTableAtr}{ >{\SplitList{,}}+m }{%
+  \setcounter{numObjCounter}{0}
+  \setlength{\LTpost}{0pt}
+  %\setlength{\arrayrulewidth}{0.75pt}
+  {%\small
+    \tecrowcolors
+    \begin{longtable}{lcc}
+      \toprule
+      %\makebox[1.25em][r]{}%
+      \textbf{Objetivo}
+      &\bf{Atributos}
+      &\bf{Nivel$^\ast$}%
+      \endhead
+      %
+      \midrule
+      \ProcessList{#1}{\processObjWithAtr}
+      \bottomrule
+    \end{longtable}
+    \nopagebreak[4]%
+    $^\ast$ Nivel de desarrollo de cada atributo: %
+    {\bf{I}}nicial, Inter{\bf{M}}edio o {\bf{A}}vanzado.
+    \hidetecrowcolors
+    \normalsize
+  }
+}
+
+\NewDocumentCommand{\processObjWithAtr}{ >{\SplitArgument{1}{;}}+m }{%
+  \processObjAux #1 %
+}
+
+\NewDocumentCommand{\processObjAux}{+m m}{%
+  % #1 $\rightarrow$ #2 \linebreak \medskip
+  %
+  % #1 is the objective
+  % #2 is the list of attributes in the form LL:L,LL:L,...
+  %
+  % First column with number and second with objective text
+  \parbox[c]{0.69\textwidth}{%
+    %\begin{tabular}[t]{@{}l@{}}
+    %  \makebox[1em][r]{\numObj~}  
+    %\end{tabular}
+    \begin{tabular}[t]{@{}p{0.66\textwidth}@{}}
+      #1
+    \end{tabular}%
+  } &
+  \extractAttributes{#2} & \extractLevels{#2} \\
+}
+
+\NewDocumentCommand{\extractAttributes}{>{\SplitList{,}}m}{%
+  % Split the attribute list into individual attributes  
+  \begin{tabular}[c]{@{}c@{}}
+    \ProcessList{#1}{\extractAttribute} %
+  \end{tabular}%
+}
+
+\NewDocumentCommand{\extractAttribute}{>{\SplitArgument{1}{:}}m}{%
+  \extractAttributeAux #1 %
+}
+
+\NewDocumentCommand{\extractAttributeAux}{ m m }{%
+  #1 \\
+}
+
+\NewDocumentCommand{\extractLevels}{>{\SplitList{,}}m}{%
+  % Split the attribute list into individual attributes  
+  \begin{tabular}[c]{@{}c@{}}
+    \ProcessList{#1}{\extractLevel} %
+  \end{tabular}%
+}
+
+\NewDocumentCommand{\extractLevel}{>{\SplitArgument{1}{:}}m}{%
+  \extractLevelAux #1 %
+}
+
+\NewDocumentCommand{\extractLevelAux}{ m m }{%
+  #2 \\
+}
+
+% --------------------------------------------------------------------------
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% datosGenerales para encapsular formato de primera tabla
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Define adjustable row spacing lengths
+\newlength{\defaultrowspacing}
+\setlength{\defaultrowspacing}{5mm} % Default spacing for rows
+
+\newcommand{\cellbreak}{\vspace{-0.3ex}\newline}
+
+% Define the datosGenerales environment with spacings redefined
+\NewDocumentEnvironment{datosGenerales}{+b}{
+  \hspace*{-\margoffset}
+  \renewcommand{\arraystretch}{1.3}%
+  % \small %
+  \begin{tabularx}{\dimexpr\textwidth+\margoffset\relax}{>{\bfseries\raggedright}p{53mm} X}
+    #1
+  \end{tabularx}
+  \vspace*{1cm} % Optional vertical spacing
+}{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% evaluacion para encapsular formato de tabla de evaluación
+%%
+%% La versión sin * tiene dos columnas de criterio y porcentaje.
+%% La versión con * tiene tres columnas: las dos anteriores y fecha
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%% TO BE DELETED SOON:
+
+\newcommand{\cnbf}[1]{\multicolumn{1}{c}{\textbf{#1}}}
+\newcommand{\hdrcriterio}{\cnbf{Actividad}}
+\newcommand{\hdrporcentaje}{\cnbf{Porcentaje}}
+\newcommand{\hdrcontenido}{\cnbf{Contenido}}
+\newcommand{\hdrfecha}{\cnbf{Fecha}}
+\newcommand{\subev}[1]{\hspace{4mm}{\small{#1}}}
+\newcommand{\tecrowcolors}{\rowcolors{1}{}{}}
+\newcommand{\hidetecrowcolors}{\rowcolors{1}{}{}}
+
+\ExplSyntaxOn
+
+% Formatos predefinidos para tabular
+\cs_new:Npn \__eval_tabular_ap: { \begin{tabular}{lS[table-format=2.1,table-space-text-post={\,\%}]} }
+\cs_new:Npn \__eval_tabular_apc: { \begin{tabular}{lS[table-format=2.1,table-space-text-post={\,\%}]l} }
+\cs_new:Npn \__eval_tabular_apf: { \begin{tabular}{lS[table-format=2.1,table-space-text-post={\,\%}]l} }
+\cs_new:Npn \__eval_tabular_afp: { \begin{tabular}{llS[table-format=2.1,table-space-text-post={\,\%}]} }
+\cs_new:Npn \__eval_tabular_apcf: { \begin{tabular}{lS[table-format=2.1,table-space-text-post={\,\%}]ll} }
+\cs_new:Npn \__eval_tabular_apfc: { \begin{tabular}{lS[table-format=2.1,table-space-text-post={\,\%}]ll} }
+\cs_new:Npn \__eval_tabular_acpf: { \begin{tabular}{llS[table-format=2.1,table-space-text-post={\,\%}]l} }
+\cs_new:Npn \__eval_tabular_acfp: { \begin{tabular}{lllS[table-format=2.1,table-space-text-post={\,\%}]} }
+\cs_new:Npn \__eval_tabular_afpc: { \begin{tabular}{llS[table-format=2.1,table-space-text-post={\,\%}]l} }
+
+% Encabezados predefinidos
+\cs_new:Npn \__eval_headers_ap: { \hdrcriterio & \hdrporcentaje }
+\cs_new:Npn \__eval_headers_apc: { \hdrcriterio & \hdrporcentaje & \hdrcontenido}
+\cs_new:Npn \__eval_headers_apf: { \hdrcriterio & \hdrporcentaje & \hdrfecha }
+\cs_new:Npn \__eval_headers_afp: { \hdrcriterio & \hdrfecha & \hdrporcentaje }
+\cs_new:Npn \__eval_headers_apcf: { \hdrcriterio & \hdrporcentaje & \hdrcontenido& \hdrfecha }
+\cs_new:Npn \__eval_headers_apfc: { \hdrcriterio & \hdrporcentaje & \hdrfecha & \hdrcontenido }
+\cs_new:Npn \__eval_headers_acpf: { \hdrcriterio & \hdrcontenido & \hdrporcentaje & \hdrfecha }
+\cs_new:Npn \__eval_headers_acfp: { \hdrcriterio & \hdrcontenido & \hdrfecha & \hdrporcentaje }
+\cs_new:Npn \__eval_headers_afpc: { \hdrcriterio & \hdrfecha & \hdrporcentaje & \hdrcontenido }
+
+% Comandos que seleccionan el formato apropiado
+\cs_new:Npn \__eval_select_tabular:n #1
+{
+  \str_case:nnF {#1}
+    {
+      {} { \__eval_tabular_ap: }
+      {AP} { \__eval_tabular_ap: }
+      {C} { \__eval_tabular_apc: }
+      {APC} { \__eval_tabular_apc: }
+      {F} { \__eval_tabular_apf: }
+      {APF} { \__eval_tabular_apf: }
+      {AFP} { \__eval_tabular_afp: }
+      {CF} { \__eval_tabular_apcf: }
+      {APCF} { \__eval_tabular_apcf: }
+      {FC} { \__eval_tabular_apfc: }
+      {APFC} { \__eval_tabular_apfc: }
+      {ACPF} { \__eval_tabular_acpf: }
+      {ACFP} { \__eval_tabular_acfp: }
+      {AFPC} { \__eval_tabular_afpc: }
+    }
+    { \__eval_tabular_ap: }
+}
+
+\cs_new:Npn \__eval_select_headers:n #1
+{
+  \str_case:nnF {#1}
+    {
+      {} { \__eval_headers_ap: }
+      {AP} { \__eval_headers_ap: }
+      {C} { \__eval_headers_apc: }
+      {APC} { \__eval_headers_apc: }
+      {F} { \__eval_headers_apf: }
+      {APF} { \__eval_headers_apf: }
+      {AFP} { \__eval_headers_afp: }
+      {CF} { \__eval_headers_apcf: }
+      {APCF} { \__eval_headers_apcf: }
+      {FC} { \__eval_headers_apfc: }
+      {APFC} { \__eval_headers_apfc: }
+      {ACPF} { \__eval_headers_acpf: }
+      {ACFP} { \__eval_headers_acfp: }
+      {AFPC} { \__eval_headers_afpc: }
+    }
+    { \__eval_headers_ap: }
+}
+
+% Comandos de interfaz
+\NewExpandableDocumentCommand{\iniciartabular}{m}
+{
+  \__eval_select_tabular:n {#1}
+}
+
+\NewExpandableDocumentCommand{\agregarheaders}{m}
+{
+  \__eval_select_headers:n {#1}
+}
+
+% El entorno
+\NewDocumentEnvironment{evaluacion}{O{} +b}
+{
+  \begin{center}
+    %\renewcommand{\arraystretch}{1.2}
+    %\small
+    \tecrowcolors
+    \iniciartabular{#1}
+    \toprule
+    \agregarheaders{#1} \\
+    \midrule
+    #2
+    \bottomrule
+    \end{tabular}
+    \hidetecrowcolors
+  \end{center}
+}
+{}
+
+\ExplSyntaxOff
+
+
+
+
+% --------------------------------------------------------------------------
+
+% Allow the use of international characters
+\AtBeginDocument{%
+  \hypersetup{%
+             pdftitle={\CodigoCurso~\NombreCurso},%
+             pdfsubject={Programa del curso},%
+             pdfauthor={\Prof},%
+             pdfkeywords={\PalabrasClave}
+           }%
+  \fancypagestyle{programacurso}{%
+    \fancyheadoffset[L]{\margoffset}%
+    \fancyfootoffset[L]{\margoffset}%
+    \fancyhf{}%
+    \fancyhead[L]{\includegraphics[height=12.5mm]{Firma_TEC-4}}%
+    % Especificación de depto y código eliminadas en plantila del 241106
+    %\fancyfoot[L]{\small\textcolor{tecAzul}{\sDepto\ }%
+    %              {\color{tecRojo}\rule[-1mm]{0.3mm}{1.1em}}%
+    %              \textcolor{tecAzul}{\ \CodigoCurso\ \sNombreCurso}}%
+    \fancyfoot[R]{\footnotesize\textcolor{tecAzul}{Página~\textbf{\thepage}~de~\textbf{\pageref{LastPage}}}}%
+  }%
+  \pagestyle{programacurso}           
+}
+
+\endinput
+

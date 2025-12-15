@@ -1,0 +1,28 @@
+\documentclass[class=article,border=10pt]{standalone}
+\usepackage{array,tabularx}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{verbatim}
+\usepackage{textcomp}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usetikzlibrary{shapes,arrows}
+\usepackage[europeanresistors,americaninductors,RPvoltages]{circuitikz}
+\pgfplotsset{width=10cm,compat=1.9}
+
+\begin{document}
+%Circuito
+\begin{circuitikz} [american, scale=1]
+    \draw
+    (0,0) to [sV,v=$\mathbf{V_{s}}$,i=$\mathbf{I_{s}}$] (0,4)
+    (0.5,4) to [short,-]  (2.5,4)
+    (5,4) to [R,l_=$\mathbf{R}$ , i=$\mathbf{I_{R}}$] (5,0)
+    (2.5,4) to [short,-] (5,4)
+    (7.5,4) to [generic,l=$\mathbf{Z_{B}}$, i=$\mathbf{I_{B}}$] (7.5,0)
+    (2.5,0) to [generic,l=$\mathbf{Z_{A}}$, i=$\mathbf{I_{A}}$] (2.5,4)
+    (0,0) to [short,-] (7.5,0)
+    (5,4) to [short,-] (7.5,4)
+    (0,4) to [short,-] (0.5,4);
+\end{circuitikz}
+
+\end{document}

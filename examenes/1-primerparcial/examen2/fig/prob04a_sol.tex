@@ -1,0 +1,38 @@
+\documentclass[tikz,border=1pt]{standalone}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{width=2cm,compat=1.16}
+
+\begin{document}
+	
+	%Variables
+	\def \minx {-1}
+	\def \maxx {8}
+	\def \miny {-1}
+	\def \maxy {10}
+	\def \delta {0.7}
+	
+	\def \P {6}
+	\def \Q {8}
+	
+	\begin{tikzpicture}[scale=0.6]
+		
+		% Draw axis
+		\draw[step=1,gray!30,thin] (\minx,\miny) grid (\maxx,\maxy);    
+		\foreach \x in {\minx,...,\maxx}
+		\node[anchor=north] at (\x,\miny ) {\x};
+		\foreach \y in {\miny,...,\maxy}
+		\node[anchor=east] at (\minx ,\y) {\y};
+		\draw [->,line width=0.75] (\minx,0) -- (\maxx+\delta,0) node [above,scale=0.9]{Re[cm]};
+		\draw [->,line width=0.75] (0,\miny) -- (0,\maxy+\delta) node [right,scale=0.9] {Im[cm]};
+		
+		% S,P y Q
+		\draw [-stealth,black!60!blue,line width=1.5] (0,0) -- (\P,0) [above,font=\small] node at (4,0.5) {$\mathbf{P}$};
+		\draw [-stealth,black!60!red,line width=1.5] (\P,0) -- (\P,\Q) [above,font=\small] node at (6.5,4) {$\mathbf{Q}$};
+		\draw [-stealth,black!60!green,line width=1.5] (0,0) -- (\P,\Q) [above,font=\small] node at (\P+0.4,\Q+0.1) {$\mathbf{S}$};
+		 
+		
+	\end{tikzpicture}
+	
+\end{document}
+

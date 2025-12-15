@@ -1,0 +1,30 @@
+\documentclass[12pt,oneside,letterpaper]{extarticle}
+
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{ifthen}                     % provide if-then-else operators
+\usepackage{amsmath}
+\usepackage{biblatex} 
+\usepackage{relsize}
+\usepackage{ftcap}                      % switch \abovecaptionskip and
+% \belowcaptionskip for tables, in 
+% order to avoid the caption to be
+% too near to the table itself
+\usepackage{booktabs}                   % book type tabulars
+\usepackage{rotating}
+\usepackage{tabularx}
+\usepackage{multicol}
+\usepackage[europeanresistors,americaninductors,RPvoltages]{circuitikz}
+\usepackage{paralist}
+
+%\usepackage[numbered]{examen}  % Commands for multiple choice  
+\usepackage[virtualmode]{examen}
+
+
+
+\graphicspath{{./}{./fig/}}
+
+\showsolution
+\begin{document}
+  \include{version_a}
+\end{document}

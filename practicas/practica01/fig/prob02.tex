@@ -1,0 +1,54 @@
+\documentclass[class=article,border=10pt]{standalone}
+\usepackage{verbatim}
+\usepackage{textcomp}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+\usepackage[europeanresistors,americaninductors,RPvoltages]{circuitikz}
+
+\begin{document}
+
+\begin{circuitikz} [american, scale=1]
+    \draw 
+    (-2.5,-2.5) to [short,-] (-2,-2.5)
+    (-2,0.5) to [open, v^=$\mathbf{V_{x}}$] (-2,-2.5)
+    (-2,0.5) to [short,*-*] (-2,0.5)
+    
+    (-2,0.5) to [generic,l=$\mathbf{Z_{1}}$,-] (1,0.5) 
+    (1,0.5) to [generic,l=$\mathbf{Z_{2}}$,-] (1,-2.5)
+    (1,0.5) to [generic,l=$\mathbf{Z_{3}}$,-] (4,0.5)
+    (5,-2.5) to [R,l_=$8\,\Omega$, -] (5,0.5)
+    (5,-2.5) to [short, -] (4,-2.5)
+    (5,0.5) to [short, -] (4,0.5)
+   
+    (4,0.5) to [short,-*] (4,0.5)
+    (4,0.5) to [open, v^=$\mathbf{V_{2}}$] (4,-2.5)
+    (-2,-2.5) to [short, *-*] (4,-2.5)
+    ;
+    \draw 
+    (-6,-2.5) to [short,*-*] (-6,-2.5)
+    (-6,-2.5) to [short,-] (-5.5,-2.5)
+    (-6,0.5) to [short,-] (-5.5,0.5)
+    (-6,0.5) to [open, v=$\mathbf{V_{1}}$] (-6,-2.5)
+    (-8,-2.5) to [V, v=$\mathbf{V_{s}}$] (-8,0.5)
+    (-8,0.5) to [R,l=$20\,\Omega$, -] (-6,0.5)
+    (-8,-2.5) to [short,-] (-6,-2.5)
+    (-6,0.5) to [short,*-*] (-6,0.5)
+    (-5.5,-2.7) -- (-2.5,-2.7) -- (-2.5,0.7) -- (-5.5,0.7) -- (-5.5,-2.7)
+    (-4.25,0.2) -- (-4.25,0.2) node[] {$y_{11}=3/10\,$S}
+    (-4.2,-0.6) -- (-4.2,-0.6) node[] {$y_{12}=-1/5\,$S}
+    (-4.2,-1.4) -- (-4.2,-1.4) node[] {$y_{21}=-1/5\,$S}
+    (-4.25,-2.2) -- (-4.25,-2.2) node[] {$y_{22}=3/10\,$S}
+    (-2,0.5) to [short,-] (-2.5,0.5)
+    ;
+    
+    \draw[dashed,line width=0.75pt, blue] (4,-3.4) -- (4,1.5);
+    \draw[dashed,line width=0.75pt, blue] (-2,-3.4) -- (-2,1.5);
+    \draw[dashed,line width=0.75pt, blue] (-6,-3.4) -- (-6,1.5);
+    \draw (0.5,-3) -- (0.5,-3) node[right] {$\textbf{Red 2}$};
+    \draw (-4.5,-3) -- (-4.51,-3) node[right] {$\textbf{Red 1}$};
+    \draw (-7.8,-3) -- (-7.8,-3) node[right] {$\textbf{Fuente}$};
+    \draw (4.2,-3) -- (4.2,-3) node[right] {$\textbf{Carga}$};
+
+\end{circuitikz}
+
+\end{document}

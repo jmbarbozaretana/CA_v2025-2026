@@ -1,0 +1,19 @@
+\documentclass[class=article,border=10pt]{standalone}
+\usepackage{verbatim}
+\usepackage{textcomp}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+\usepackage[europeanresistors,americaninductors,RPvoltages]{circuitikz}
+
+\begin{document}
+
+\begin{circuitikz}  [american, scale=0.8]
+    \draw 
+    (-5.25,0) to[sV,l_=$\mathbf{V}_{th}$] ++(0,-2.25) node[ground] {} ++(0,-1)
+    (-5.25,0) to[generic,l=$\mathbf{Z}_{th}$] ++(3,0) coordinate(shin)
+    (shin) to[resistor,l=$R_L$] ++(0,-2.25) node[ground] {}
+    (shin) to[short, *-o] ++(1.25,0) node[right]{$\mathbf{V}_{out}$}
+;
+\end{circuitikz}
+
+\end{document}

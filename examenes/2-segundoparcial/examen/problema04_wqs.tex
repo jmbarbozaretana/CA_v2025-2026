@@ -1,0 +1,121 @@
+%% 2do Examen parcial S2 2025
+%% William Quirós Solano
+
+\Problema{10}{Análisis de Circuitos con Transformada de Laplace}
+\vspace{2mm}
+
+Para el circuito de la Figura \ref{fig:laplace} donde el interruptor $t_0$ se accciona en $t=0\,seg$ y los elementos reactivos inicialmente no tienen energía almacenada.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[scale=1.2]{prob04}
+  \caption{Circuito para análisis con Transformada de Laplace}
+  \label{fig:laplace}
+\end{figure}
+    
+Responda lo siguiente:    
+\begin{subpunto}
+\item Dibuje el circuito en el dominio $s$. \partialPoints{1}
+
+\solution{
+\begin{center}
+\includegraphics[scale=1]{prob04_sol_a}
+\end{center}
+}
+
+\item Obtenga una expresión para la corriente en el condensador $I_C$ en el dominio $s$. Simplifique al máximo. \partialPoints{4}.
+
+\solution{
+Aplicando LCK en el nodo de la bobina
+\begin{align*}
+\dfrac{\frac{480}{s}-V_L}{20}-\dfrac{V_L}{0.002s}-\dfrac{V_L}{60+\frac{2\times 10^5}{s}}=0
+\end{align*}
+\calif{1 pt por la ecuación de nodo correcta}
+
+Sabiendo que la corriente en el condensador es
+\begin{align*}
+I_C=\dfrac{V_L}{60+\frac{2\times 10^5}{s}}=\dfrac{sV_L}{60s+2\times 10^5}
+\end{align*}
+\calif{1 pt por la ecuación para la corriente en el condensador}
+
+despejando de la ecuación de nodo
+\begin{align*}
+\dfrac{480-sV_L}{20s}-\dfrac{500V_L}{s}-\dfrac{sV_L}{60s+2\times 10^5}=0\\
+V_L\Big(\dfrac{1}{20}+\dfrac{500}{s}+\dfrac{s}{60s+2\times 10^5}\Big)=\dfrac{24}{s}\\
+V_L\Big(\dfrac{s+1\times 10^4}{20s}+\dfrac{s}{60s+2\times 10^5}\Big)=\dfrac{24}{s}\\
+V_L\Big(\dfrac{60s^2+2s\times 10^5+60s\times 10^4+2\times10^9 +20s^2}{20s(60s+2\times10^5)}\Big)=\dfrac{24}{s}\\
+V_L=\dfrac{480(60s+2\times 10^5)}{80s^2+8\times10^5+2\times10^9}\\
+V_L=\dfrac{6(60s+2\times 10^5)}{(s^2+10000s+25\times10^6)}
+\end{align*}
+\calif{1 pt por la ecuación de la tensión de nodo}
+
+por lo que la corriente en el condensador es
+\begin{align*}
+I_C=\dfrac{6(60s+2\times 10^5)}{(s^2+10000s+25\times10^6)}\dfrac{s}{(60s+s\times10^5)}=\dfrac{6s}{(s^2+10000s+25\times10^6)}\\
+I_C=\dfrac{6s}{(s+5000)^2}
+\end{align*}
+\calif{1 pt por la ecuación final}
+}
+
+\item Obtenga la expresión para la corriente en el condensador $i_C(t)$ en el dominio temporal. Simplifique al máximo. \partialPoints{2}.
+
+\solution{
+Se procede con las fracciones parciales dado que la expresión es propia
+\begin{align*}
+I_C=\dfrac{6s}{(s+5000)^2}=\dfrac{A}{(s+5000)}+\dfrac{B}{(s+5000)^2}
+\end{align*}
+donde las constantes son
+\begin{align*}
+B=\lim_{s\rightarrow -5000} (s+5000)^2 \dfrac{6s}{(s+5000)^2}= -30000\\
+A=\lim_{s\rightarrow -5000} \dfrac{d}{ds}\Big[(s+5000)^2 \dfrac{6s}{(s+5000)^2}\Big]=6
+\end{align*}
+\calif{0.5 pts por cada constante}
+
+con esto entonces
+\begin{align*}
+I_C=\dfrac{6}{(s+5000)}-\dfrac{30000}{(s+5000)^2}
+\end{align*}
+y obteniendo la transformada inversa
+\begin{align*}
+i_C(t)=6e^{-5000t}u(t)-30000te^{-5000t}u(t)\,A\\
+i_C(t)=(6-30000t)e^{-5000t}u(t)\,A
+\end{align*}
+\calif{1 pt por el cálculo de la expresión final}
+}
+
+\item Esboce la gráfica de $i_C(t)$. Utilice como escala horizontal $1\,cm=25\,\mu s$ y escala vertical $1\,cm=1\,A$.\partialPoints{3}.
+
+\solution{
+La gráfica para la corriente en el condensador es
+\begin{center}
+\includegraphics[scale=1]{prob04_sol_4.png}
+\end{center}
+Con la ecuación y la escala propuesta se pueden considerar los siguientes valores para la revisión
+\begin{center}
+\begin{tabular}{c|c}
+\hline
+Tiempo [$\mu s$] & Corriente [A]\\
+\hline
+0 & \textbf{6}\\
+\hline
+25 & 4.63\\
+\hline
+50 & 3.50\\
+\hline
+75 & 2.57\\
+\hline
+100 & 1.81\\
+\hline
+125 & 1.20\\
+\hline
+150 & 0.70\\
+\hline
+175 & 0.31\\
+\hline
+200 & \textbf{0}\\
+\hline
+\end{tabular}
+\end{center}
+\calif{1 punto por cada extremo de la gráfica o algún punto intermedio y 1 punto por la tendencia correcta de la gráfica}
+}
+\end{subpunto}

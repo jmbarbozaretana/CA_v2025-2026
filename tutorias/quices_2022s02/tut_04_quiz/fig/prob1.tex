@@ -1,0 +1,21 @@
+\documentclass[class=article,border=10pt]{standalone}
+\usepackage{verbatim}
+\usepackage{textcomp}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+\usepackage[europeanresistors,americaninductors,RPvoltages]{circuitikz}
+
+\begin{document}
+
+\begin{circuitikz}  [american, scale=0.8]
+    \draw 
+    (0,0) to[sV, v=$v_{i}(t)$] (0,4)
+    (0,4) to [R, l=$R$, -] (4,4)
+    (4,4) to [R, l=$R$, -] (8,4)
+    (4,4) to [C, l_=$C$, -] (4,0)
+    (8,4) to [C, l_=$C$,v^=$v_{o}(t)$] (8,0)
+    (0,0) to [short,-] (8,0)
+    ;
+\end{circuitikz}
+
+\end{document}

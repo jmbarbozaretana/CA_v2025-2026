@@ -1,0 +1,95 @@
+%% 3er Examen parcial S2 2025
+%% William Quirós
+
+\Problema{8}{Redes de dos puertos}
+
+\vspace{2mm}
+
+Dado el curcuito de la siguiente figura:
+
+\begin{center}
+\includegraphics[scale=1]{prob03_wqs}
+\end{center}
+
+Determine el valor de los cuatro paramétros $h$ del circuito anterior.
+
+\solution{
+El parámetro $h_{11}$ se determina con
+\begin{align*}
+\mathbf{h}_{11} = \dfrac{\mathbf{V}_1}{\mathbf{I}_1}\Bigg|_{\mathbf{V}_2=0}
+\end{align*}
+aplicando LTK en el puerto de entrada
+\begin{align*}
+V_1-400I_1-1200I_1=0\\
+V_1=1600I_1\\
+\dfrac{V_1}{I_1}=1600
+\end{align*}
+por lo tanto
+\begin{align*}
+h_{11}=1600\,\Omega
+\end{align*}
+\calif{2 pts}
+
+El parametro $h_{12}$ se detemina con
+\begin{align*}
+\mathbf{h}_{12} = \dfrac{\mathbf{V}_1}{\mathbf{V}_2}\Bigg|_{\mathbf{I}_1=0}
+\end{align*}
+se observa que cuando el puerto de entrada se abre
+\begin{align*}
+V_1-400I_1-1200I_1=0\\
+V_1=0
+\end{align*}
+y como $V_1$ también es la tensión de ambas terminales del aplificador
+\begin{align*}
+\dfrac{0}{V_2}=0
+\end{align*} 
+por lo que 
+\begin{align*}
+h_{12}=0
+\end{align*}
+\calif{2 pts}
+
+El parametro $h_{21}$ se detemina con
+\begin{align*}
+\mathbf{h}_{21} = \dfrac{\mathbf{I}_2}{\mathbf{I}_1}\Bigg|_{\mathbf{V}_2=0}
+\end{align*}
+se observa que $V_2=0$ y que la corriente de salida se puede escribir como
+\begin{align*}
+I_2=\dfrac{0-V_{sal}}{200}
+\end{align*}
+y como
+\begin{align*}
+\dfrac{V_{sal}500}{1000+500}=\dfrac{V_1 1200}{1200+400}\\
+\dfrac{V_{sal}}{3}=\dfrac{3V_1}{4}\\
+\dfrac{V_{sal}}{3}=\dfrac{3(400+1200I_1)}{4}\\
+V_{sal}=3600I_1
+\end{align*}
+por lo que 
+\begin{align*}
+I_2=-\dfrac{V_{sal}}{200}=-\dfrac{3600I_1}{200}\\
+\dfrac{I_2}{I_1}=-18
+\end{align*}
+por tanto
+\begin{align*}
+h_{21}=-18
+\end{align*}
+\calif{2 pts}
+
+El parametro $h_{22}$ se detemina con
+\begin{align*}
+\mathbf{h}_{22} = \dfrac{\mathbf{I}_2}{\mathbf{V}_2}\Bigg|_{\mathbf{I}_1=0}
+\end{align*}
+se observa que $V_{sal}=0$ dado que las tensiones en las terminales inversora y no inversora es la misma, de manera que
+\begin{align*}
+\dfrac{V_2-V_{sal}}{200}=I_2\\
+\dfrac{V_2}{200}=I_2\\
+\dfrac{I_2}{V2}=\dfrac{1}{200}
+\end{align*}
+por lo que
+\begin{align*}
+h_{22}=\dfrac{1}{200}\,S=0.005\,S=5\,mS
+\end{align*}
+\calif{2 pts}
+
+}
+

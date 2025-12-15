@@ -1,0 +1,75 @@
+%% Quiz 3 Tutoría S22023
+%% L. Cabrera/William Quirós
+
+\Pregunta{5}{Sea $v(t)$ una señal de tensión periódica con periodo igual a $2\pi$ segundos, la cual se puede representar por medio de una serie de Fourier de la siguiente manera:}
+
+\begin{equation*}
+	v(t) = 1+\sum_{k=1}^{4}\left[\dfrac{n}{2}\cos(nt)-\dfrac{2n}{\pi}\sen(nt)\right]\,V
+\end{equation*}
+
+con $n=2k$. Recordando que tanto $n$ como $k$ son números enteros.
+
+\begin{enumerate}
+
+\item Determine la frecuencia fundamental y el valor CD de $v(t)$. \partialPoints{1}
+	
+\shortsolution{
+\textbf{Respuesta:}
+\begin{align*}
+	V_{CD} &= 1 \, V \\
+	\omega_0 &= 1 \,rad/s
+\end{align*}
+}
+	
+\solution{	
+\textbf{Solución:}
+El coeficiente $a_0$ ($n=0$) o valor CD de la señal como se observa en la serie dada es $1\,V$.
+	
+Por su parte, la frecuencia de las bases está dada por $\omega_n=\omega_0 n$. Puede verse que el valor $\omega_0$ que acompaña al $n$ es $1\,rad/s$, con la única particularidad que solo se presentan valores de coeficientes diferentes de cero para $n$ par, es decir $n=2k$.
+		
+}
+	
+
+\item Grafique el espectro para la  magnitud $A_n$ y la fase $\phi_n$ de $v(t)$ hasta el cuarto armónico. \partialPoints{4}
+
+
+\solution{
+\bigskip
+\textbf{Solución:}
+
+Para encontrar los espectros, primero se debe transformar la serie dada a la representación de amplitud y fase.
+	
+\begin{align*}
+	A_n\angle\phi_n &= a_n-jb_n\\
+		            &= \dfrac{n}{2}+j\dfrac{2n}{\pi}\\
+					&= \sqrt{\left(\dfrac{n}{2}\right)^2+\left(\dfrac{2n}{\pi}\right)^2}\angle\tan^{-1}\left(\dfrac{\dfrac{2n}{\pi}}{\dfrac{n}{2}}\right)\\
+					&= \dfrac{n\sqrt{\pi^2+16}}{2\pi}\angle\tan^{-1}\left(\dfrac{4}{\pi}\right)\\
+\end{align*}
+	
+	
+Por lo tanto, $A_n=\dfrac{n\sqrt{\pi^2+16}}{2\pi}$ y $\phi_n=\tan^{-1}\left(\dfrac{4}{\pi}\right)$ \textbf{solamente} para valores pares de $n$ y  0 para los impares. 
+
+Así, los espectros se ven de la siguiente manera:
+
+\begin{center}
+	\includegraphics[scale=1.5]{p01_sol_An}
+	\vspace{1.5cm}
+	\includegraphics[scale=1.5]{p01_sol_phin}
+\end{center}
+
+\calif{2\,ptos por cada espectro}
+
+}
+
+\shortsolution{
+\textbf{Respuesta:}
+
+\begin{center}
+\includegraphics[scale=1.5]{p01_sol_An}
+\vspace{1.5cm}
+\includegraphics[scale=1.5]{p01_sol_phin}
+\end{center}
+}
+
+\end{enumerate}
+

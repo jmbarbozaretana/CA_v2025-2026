@@ -1,0 +1,70 @@
+%%%%%%%%%%%%%%%
+%% Problema2 %%
+%% 2025 S1   %%
+%% JMBR      %%
+
+\Problema{7}{Análisis de Circuitos en CA}
+
+\medskip
+
+Considere el circuito mostrado a continuación:
+
+\begin{center}
+  \includegraphics[scale=1]{prob02}
+\end{center}
+
+Determine la relación de desfase existente entre las ondas de corriente $i_x(t)$ e $i_L(t)$, identificando la relación de adelanto o retraso entre las mismas. 
+
+\shortsolution{
+Respuesta: $i_x(t)$ retrasa $22.83^{\circ{}}$ a $i_L(t)$ o $i_L(t)$ adelanta $22.83^{\circ{}}$ a $i_x(t)$.
+}
+
+\solution{
+\textbf{Solución:}
+
+Tomando el circuito en el dominio fasorial:
+
+\begin{center}
+  \includegraphics[scale=1]{prob02_sol}\calif{1\,pto}
+\end{center}
+
+Analizando los nodos 
+ 
+\setlength{\columnsep}{20pt}      % Espacio entre columnas
+\setlength{\columnseprule}{0.4pt} % Grosor de la línea divisoria 
+
+\begin{multicols}{2}
+
+\begin{align*}
+\mathbf{I}_L &= \dfrac{(4\angle{15^{\circ{}}})(-4j)}{-4j+12j}\\
+\mathbf{I}_L &= 2\angle{-165^{\circ{}}}\rightarrow\calif{1\,pto}
+\end{align*}
+
+\begin{align*}
+\mathbf{I}_y &= \dfrac{(4\angle{15^{\circ{}}})(8)}{8+6j}\\
+\mathbf{I}_y &= \dfrac{16}{5}\angle{-21.87^{\circ{}}}\rightarrow\calif{1\,pto}
+\end{align*}
+\end{multicols}
+
+Luego, se analiza el nodo común de los inductores, donde se debe cumplir:
+
+\begin{align*}
+\mathbf{I}_x + \mathbf{I}_y &= \mathbf{I}_L\\
+\mathbf{I}_x &= \mathbf{I}_L - \mathbf{I}_y\\
+\mathbf{I}_x &= 2\angle{-165^{\circ{}}} - \dfrac{16}{5}\angle{-21.87^{\circ{}}}\\
+\mathbf{I}_x &= 4.96\angle{172.16^{\circ{}}}\rightarrow\calif{2\,ptos}\\
+\end{align*}
+
+Retomando el análisis final, el desfase planteado se concreta como:
+
+\begin{align*}
+\theta_x-\theta_L &= \theta_{desfase}\\
+172.16^{\circ{}} - -165^{\circ{}} &= \theta_{desfase}\\
+337,17^{\circ} &= \theta_{desfase}\\
+337,17^{\circ}-360^{\circ{}} &= \theta_{desfase}\\
+\theta_{desfase} &= -22.83^{\circ{}}\rightarrow\calif{1\,pto}
+\end{align*} 
+
+Por lo tanto, $i_x(t)$ retrasa $22.83^{\circ{}}$ a $i_L(t)$ o $i_L(t)$ adelanta $22.83^{\circ{}}$ a $i_x(t)$. \calif{1\,pto}
+ 
+}

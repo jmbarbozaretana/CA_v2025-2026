@@ -1,0 +1,21 @@
+\documentclass[class=article,border=10pt]{standalone}
+\usepackage{verbatim}
+\usepackage{textcomp}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+\usepackage[europeanresistors,americaninductors]{circuitikz}
+
+\begin{document}
+
+\begin{circuitikz} [american, scale=1]
+    \draw 
+    (0,0) to [sV, l^=$v_{s}(t)$] (0,3)     
+    (0,3) to [short] (2.5,3)
+    (2.5,0) to [C, a^=$C$] (2.5,3)
+    (5,0) to [R, a^= $R$] (5,3)
+    (0,0) to [short, -] (5,0)
+    (2.5,3) to [L,a^=$L$] (5,3)
+    ;
+\end{circuitikz}
+
+\end{document}

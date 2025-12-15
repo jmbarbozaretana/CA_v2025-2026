@@ -1,0 +1,37 @@
+\documentclass[class=article,border=10pt]{standalone}
+\usepackage{verbatim}
+\usepackage{textcomp}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+\usepackage[europeanresistors,americaninductors,RPvoltages]{circuitikz}
+
+\begin{document}
+\begin{circuitikz}  [american, scale=0.85]
+    
+\draw
+(0,0) to[V, l^=\mbox{$v_1(t)$}] (0,4.5)
+(0,-4.5) to[V, l^=\mbox{$v_2(t)$}] (0,0)
+(3,3.8) to[L, l^=\mbox{$100\,$mH}] (3,2.05)
+(3,2.05) to[R, l^=\mbox{$12\,\Omega$}] (3,0.55)
+(3,-4.5) to[R, l_=\mbox{$80\,\Omega$}] (3,0)
+(6,-4.5) to[R, l_=\mbox{$10\,\Omega$}] (6,4.5)
+(3,4.5) to [short] (3,3.8)
+(3,0.55) to [short] (3,0)
+(0,0) to [short] (3,0)
+(0,4.5) to [short] (6,4.5)
+(0,-4.5) to [short] (6,-4.5)
+;
+
+\draw [blue, dashed, thick] (2.5,0.3) -- (4.3,0.3) -- (4.3,3.8) -- (2.5,3.8) -- cycle;
+
+\draw [blue, dashed, thick] (2.5,-0.7) -- (4.3,-0.7) -- (4.3,-4.2) -- (2.5,-4.2) -- cycle;
+
+\draw [blue, dashed, thick] (5.5,-2.5) -- (7.3,-2.5) -- (7.3,2.5) -- (5.5,2.5) -- cycle;
+
+\draw [blue] (3.4,4.1) node{\scriptsize $Secadora$};
+\draw [blue] (3.4,-0.45) node{\scriptsize $Lampara$};
+\draw [blue] (6.4,2.8) node{\scriptsize $Calentador$};      
+    
+    
+\end{circuitikz}
+\end{document}

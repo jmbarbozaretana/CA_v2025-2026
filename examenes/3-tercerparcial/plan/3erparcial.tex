@@ -1,0 +1,225 @@
+\documentclass[12pt,oneside,letterpaper, landscape]{article}
+
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{ifthen}                     % provide if-then-else operators
+\usepackage{amsmath}
+\usepackage{amssymb,amstext}            % AMS-math and symbols package
+
+\usepackage{ftcap}                      % switch \abovecaptionskip and
+                                        % \belowcaptionskip for tables, in 
+                                        % order to avoid the caption to be
+                                        % too near to the table itself
+\usepackage{booktabs}                   % book type tabulars
+\usepackage{rotating}
+\usepackage{tabularx}
+\usepackage{multicol}
+
+
+\usepackage{enumerate}
+\usepackage{setspace}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage[dvipsnames,table]{xcolor}
+
+%
+% page layout
+%
+\setlength{\oddsidemargin}{0cm}         % Margin for odd numbered pages
+\setlength{\evensidemargin}{0cm}        % Margin for even numbered pages
+\addtolength{\topmargin}{-1.5cm}        % space between top and head
+\addtolength{\headsep}{0.25cm}          % space between head and text
+\setlength{\textwidth}{228mm}           % text width
+\setlength{\textheight}{155mm}          % text height
+\setlength{\headheight}{47pt}         % fancy headers wanted this
+\parindent0em                           % indentation width of first line
+\setlength{\headsep}{15pt}
+\setlength{\topsep}{0pt}
+\setlength{\itemsep}{0pt}
+
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead[]{
+\footnotesize{Instituto Tecnológico de Costa Rica\\
+Escuela de Ingeniería Electrónica\\
+EL-2114 Circuitos Eléctricos en Corriente Alterna
+}}
+\chead[]{}
+\rhead[]{\footnotesize{II Semestre 2025}}
+\lfoot[]{}
+\cfoot[]{}
+\rfoot[]{\thepage}
+\renewcommand{\headrulewidth}{1pt}
+\renewcommand{\footrulewidth}{0pt}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\begin{center}
+\textbf{\underline{\Large{Tercer Parcial CA-IIS2025}}}
+\end{center}
+
+\bigskip
+
+\begin{multicols}{2}
+
+\underline{\textbf{\large{Programación ordinaria:}}}   
+\begin{itemize}
+	\item \textbf{Fecha de aplicación:} \textcolor{red}{miércoles 03 de diciembre 2025}
+    \item \textbf{Hora de inicio:} \textcolor{red}{1:00 pm}
+    \item \textbf{Duración:} \textcolor{red}{3 horas}
+    \item \textbf{Modalidad}: \textcolor{red}{presencial}
+\end{itemize}
+    
+\underline{\textbf{\large{Programación extraordinaria:}}}
+\begin{itemize}
+	\item \textbf{Fecha de aplicación:} \textcolor{red}{jueves 04 de diciembre 2025}
+    \item \textbf{Hora de inicio:} \textcolor{red}{7:30 am}
+    \item \textbf{Duración:} \textcolor{red}{3 horas}
+    \item \textbf{Modalidad}: \textcolor{red}{presencial}
+\end{itemize}
+
+\end{multicols}
+
+\bigskip
+
+\textbf{\large{Materiales permitidos para los estudiantes durante la aplicación del examen:}}
+\begin{itemize}
+    \item No se permite ningún tipo de calculadora electrónica programable.
+    \item Formulario oficial del curso impreso o fotocopiado y no puede tener ningún tipo de anotación adicional. 
+    \item Accesorios de oficina: lapiceros, lápiz de escribir, lapices de colores, etc.
+    \item Hojas blancas/rayadas/cuadriculadas o cuaderno de examen.
+\end{itemize}
+
+
+\bigskip
+
+\textbf{\large{Aulas reservadas:}}
+\begin{itemize}
+    \item Grupo 01. Cartago. Laura Cabrera Quirós. Aula: \textcolor{red}{K1-211}
+    \item Grupo 02. Cartago. José Miguel Barboza Retana. Aula: \textcolor{red}{K1-518}
+	\item Grupo 03. Cartago. William Quirós Solano. Aula: \textcolor{red}{K1-418}    
+    \item Grupo 50. San Carlos. Saúl Guadamuz Brenes. Aula: \textcolor{red}{Por definir}
+\end{itemize}
+
+\clearpage
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\definecolor{cssgreen}{rgb}{0.0, 0.5, 0.0}
+\definecolor{yellow2}{rgb}{1,0.55,0.0}
+\definecolor{ligthgray}{rgb}{1,0.55,0.0}
+
+\vspace{10mm}
+
+\textbf{\Large{Cronograma de actividades:}}
+
+\newcommand{\listo}{\textcolor{cssgreen}{Listo}}
+\newcommand{\pendiente}{\textcolor{red}{\textbf{Pendiente}}}
+
+\begin{center}
+\begin{longtable}{|>{\centering\arraybackslash}m{10mm}|m{100mm}|>{\centering\arraybackslash}m{60mm}|>{\centering\arraybackslash}m{25mm}|}
+\hline 
+\rowcolor{cyan}$\mathbf{N^{o}}$ 
+& \centering \textbf{Actividad} 
+& \textbf{Fecha} 
+& \textbf{Estado}\\
+\hline 
+1 
+& Asignación de las preguntas por diseñar para cada profesor. 
+& \textcolor{black}{19 de noviembre 2025}  
+& \listo\\ 
+\hline 
+
+2 
+& Desarrollo de cada una de los ejercicios asignados. Entregar el ejercicio con solución completa y puntajes respectivos.
+& \textcolor{black}{19 - 27 de noviembre 2025} & \pendiente\\ 
+\hline
+
+3 
+& Revisión de cada pregunta del examen según distribución propuesta más adelante. Recordar que la revisión implica hacer un análisis muy detallado de: la redacción de la pregunta, consistencia de los datos de la pregunta, de la respuesta correcta, de las respuestas que no son correctas, asignación de puntos, etc. Este es un paso muy importante que no se debe hacer a la carrera. 
+& \textcolor{black}{28 - 30 de noviembre 2025} 
+& \pendiente\\ 
+\hline 
+
+4 
+& Impresión de los exámenes
+& \textcolor{black}{01 - 02 diciembre 2025}
+& \pendiente\\ 
+\hline
+
+5 
+& \textcolor{red}{Aplicación de la prueba}
+& \textcolor{red}{03 de diciembre 2025}
+& \pendiente \\ 
+\hline
+
+7
+& Revisión de los exámenes para definir los puntos obtenidos por estudiante y así calcular la curva.
+& \textcolor{black}{03 - 06 diciembre 2025}
+& \pendiente\\ 
+\hline
+
+\end{longtable} 
+\end{center}
+
+\clearpage
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\textbf{\large{Propuesta detallada:}}
+
+
+\begin{center}
+\begin{longtable}{|m{26mm}|m{125mm}|m{25mm}|m{25mm}|}
+\hline 
+\rowcolor{white!50!blue}\centering \textbf{Ítem} 
+& \centering\arraybackslash\textbf{Sugerencias}
+& \centering \textbf{Diseñador}  
+& \centering\arraybackslash\textbf{Revisor} \\
+
+\hline 
+\rowcolor{white!60!gray}\textbf{Problema 01}
+& \underline{Unidad 6}: Series de Fourier
+\newline \underline{Detalle}: Cálculo de coeficientes de una serie de Fourier para una señal periódica. 
+& José Miguel 
+& William\\
+\hline
+
+
+\rowcolor{white}\textbf{Problema 02}  
+& \underline{Unidad 6}: Series de Fourier
+\newline \underline{Detalle}: Análisis eléctrico de circuitos para señales periódicas utilizando series de Fourier. 
+& Laura 
+& Saúl\\
+\hline
+
+\rowcolor{white!60!gray}\textbf{Problema 03}  
+& \underline{Unidad 7}: Redes de 2 puertos  
+\newline \underline{Detalle}: Cálculo de parámetros de red.
+& William
+& Laura\\
+\hline
+
+\rowcolor{white}\textbf{Problema 04}  
+& \underline{Unidad 7}: Redes de 2 puertos
+\newline \underline{Detalle}: Análisis eléctricos de circuitos utilizando parámetros de red.
+& Saúl
+& José Miguel\\
+\hline
+ 
+\end{longtable} 
+\end{center}
+
+El \textbf{Problema 02} será tomado para presentarlo como la evidencia sobre la evaluación del atributo de Análisis de Problemas que se observa en el curso como punto de control.
+
+\end{document}

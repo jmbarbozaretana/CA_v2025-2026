@@ -1,0 +1,118 @@
+%% Quiz 3 Tutoría S12023
+%% Saúl Guadamuz Brenes
+
+\Pregunta{7}{Para la siguiente respuesta en frecuencia}
+
+\begin{equation*}
+	\mathbf{H}(\omega) = \dfrac{240 \sqrt{10}(5 + j\omega)}{(12 + j\omega)(25 + j\omega)(40 + j\omega)},
+\end{equation*}
+
+Determine:
+\begin{itemize}
+\item Las expresiones de magnitud $H(\omega)_{dB}$ y fase $\theta(\omega)$.
+\item Dibuje el diagrama asintótico de Bode en magnitud y fase.
+\end{itemize} 
+
+
+\solution{
+\textbf{Solución:}
+
+Reescribiendo la respuesta en frecuencia a su forma canónica:
+\begin{align*}
+	\mathbf{H}(\omega) &= \dfrac{240 \sqrt{10} (5)(1 + j\omega / 5)}{(12)(25)(40) (1 + j\omega /12)(1 + j\omega /25)(1 + j\omega /40)} \\
+	\mathbf{H}(\omega) &= \dfrac{(\sqrt{10} / 10) (1 + j\omega / 5)}{(1 + j\omega /12)(1 + j\omega /25)(1 + j\omega /40)}
+\end{align*}
+\calif{1\,pto por forma estándar}
+
+\bigskip
+\underline{Respuesta en magnitud:} 
+
+\begin{align*}
+H(\omega)_{dB} &= 20\log_{10}\left(\sqrt{10} / 10\right) + 20\log_{10}\left(|1 + j\omega / 5|\right) - 20\log_{10}\left(|1 + j\omega / 12|\right) - 20\log_{10}\left(|1 + j\omega / 25|\right) - 20\log_{10}\left(|1 + j\omega / 40|\right) \\
+H(\omega)_{dB} &= -10 + 20\log_{10}[\sqrt{1 + (\omega / 5)^2}]- 20\log_{10}[ \sqrt{1 + (\omega / 12)^2} ] - 20\log_{10}[ \sqrt{ 1 + (\omega / 25)^2} ] - 20\log_{10}[ \sqrt{1 + (\omega / 40)^2} ]
+\end{align*}
+\calif{1\,pto por cualquiera de las dos expresiones de magnitud anteriores}
+
+\bigskip
+\underline{Respuesta en fase:}
+
+\begin{align*}
+\theta(\omega) &= 0^{\circ} + \arctan \left( \dfrac{\omega}{5} \right)- \arctan \left( \dfrac{\omega}{12} \right) - \arctan \left( \dfrac{\omega}{25} \right) - \arctan \left( \dfrac{\omega}{40} \right)
+\end{align*}
+\calif{1\,pto por la expresión de fase anterior}
+
+\bigskip
+
+Por lo tanto, las asíntotas de magnitud son:
+\begin{itemize}
+	\item Línea recta en $-10 \, dB$.
+	\item Línea a $+20 \, dB / dec$ para $\omega > 5$.
+	\item Línea a $-20 \, dB / dec$ para $\omega > 12$.
+	\item Línea a $-20 \, dB / dec$ para $\omega > 25$.
+	\item Línea a $-20 \, dB / dec$ para $\omega > 40$.
+\end{itemize}
+
+Mientras que las asíntotas de fase son:
+\begin{itemize}
+	\item Línea en $0^\circ$.
+	\item Por el cero en $5$:
+		\begin{equation*}
+			\left\{ \begin{array}{rl}
+ 				0^\circ & \omega < 0.5 \\
+  				45^\circ & \omega = 5 \\
+  				90^\circ & \omega > 50
+       		\end{array} \right.
+		\end{equation*}
+	\item Por el polo en $12$:
+		\begin{equation*}
+			\left\{ \begin{array}{rl}
+ 				0^\circ & \omega < 1.2 \\
+  				-45^\circ & \omega = 12 \\
+  				-90^\circ & \omega > 120
+       		\end{array} \right.
+		\end{equation*}
+	\item Por el polo en $25$:
+		\begin{equation*}
+			\left\{ \begin{array}{rl}
+ 				0^\circ & \omega < 2.5 \\
+  				-45^\circ & \omega = 25 \\
+  				-90^\circ & \omega > 250
+       		\end{array} \right.
+		\end{equation*}
+	\item Por el polo en $40$:
+		\begin{equation*}
+			\left\{ \begin{array}{rl}
+ 				0^\circ & \omega < 4 \\
+  				-45^\circ & \omega = 40 \\
+  				-90^\circ & \omega > 400
+       		\end{array} \right.
+		\end{equation*}
+\end{itemize}
+
+\begin{center}
+\includegraphics[scale=1]{bode_p3}
+\end{center}
+
+\calif{2\,pts por la gráfica de magnitud y 2\,pts por la de fase. Cada gráfico se puede dividir su calificación en 0, 0.5, 1, 1.5 o 2\,pts según lo logrado de forma correcta por el estudiante}
+
+}
+
+\shortsolution{
+
+\textbf{Respuesta:}
+
+\begin{itemize}
+
+\item $H(\omega)_{dB} = -10 + 20\log_{10}[\sqrt{1 + (\omega / 5)^2}] - 20\log_{10}[ \sqrt{1 + (\omega / 12)^2} ] - 20\log_{10}[ \sqrt{ 1 + (\omega / 25)^2} ] - 20 \log_{10}[ \sqrt{1 + (\omega / 40)^2} ]$
+
+\item $\theta(\omega) = 0^{\circ} + \arctan \left( \dfrac{\omega}{5} \right)
+							   - \arctan \left( \dfrac{\omega}{12} \right) - \arctan \left( \dfrac{\omega}{25} \right) - \arctan \left( \dfrac{\omega}{40} \right)$
+
+\end{itemize}
+
+\begin{center}
+\includegraphics[scale=1]{bode_p3}
+\end{center}
+
+
+}

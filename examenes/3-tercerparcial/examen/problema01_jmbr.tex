@@ -1,0 +1,38 @@
+%% 3er Examen parcial S2 2025
+%% José Miguel Barboza
+
+\Problema{8}{Series de Fourier}
+
+\vspace{2mm}
+
+Sea la señal $x(t)$ que se muestra en la siguiente figura:
+
+\begin{center}
+\includegraphics[scale=1]{prob01}
+\end{center}
+
+Determine la expresión para la función de los coeficientes necesarios para una serie trigonométrica de Fourier que sintetice la función $x(t)$.
+
+\solution{
+
+\begin{itemize}
+\item La función $x(t)$ presenta simetría par, por tanto $b_n=0$. \calif{1\,pto}
+\item Al analizar el área bajo la curva de la función en un periodo, se aprecia que la misma es igual a 0, por lo tanto $a_0=0$. \calif{1\,pto}
+\item Tomando el periodo de la señal como $T_0$, la frecuencia fundamental es igual a $\omega_0=\frac{2\pi}{T_0}$. \calif{1\,pto} 
+\end{itemize}
+
+Para el cálculo de los coeficientes $a_n$, lo primero es determinar la función matemática requerida para $x(t)$ en el intervalo a integrar. Al tener simetría para la señal $x(t)$, solo es requerido integrar un intervalo de tiempo de medio periodo iniciando en 0 y hasta $T_0/2$. En ese sentido, en dicho intervalo se tiene un segmento de una línea recta cuya ecuación $x(t)=mt+b$, se define para $m=\frac{-A-A}{T_0/2 -0}=-\frac{4A}{T_0}$ y $b=A$.
+
+Así:
+
+\begin{align*}
+a_n &= \frac{4}{T_0}\int_{0}^{\frac{T_0}{2}}\left(-\dfrac{4A}{T_0}t+A\right)\cos\left(\dfrac{2\pi n}{T_0}t\right)\,dt\rightarrow\calif{1\,pto}\\
+a_n &= \frac{4}{T_0}\dfrac{-4A}{T_0}\int_{0}^{\frac{T_0}{2}}t\cos\left(\dfrac{2\pi n}{T_0}t\right)\,dt + \frac{4}{T_0}A\int_{0}^{\frac{T_0}{2}}\cos\left(\dfrac{2\pi n}{T_0}t\right)\,dt\rightarrow\calif{1\,pto}\\
+a_n &= -\dfrac{16A}{T_0^2}\dfrac{1}{\left(\dfrac{2\pi n}{T_0}\right)^2}\left[\cos\left(\dfrac{2\pi n}{T_0}t\right)+\dfrac{2\pi n}{T_0}t\sin\left(\dfrac{2\pi n}{T_0}t\right)\right]_{0}^{\frac{T_0}{2}}+\dfrac{4A}{T_0}\dfrac{\sin\left(\dfrac{2\pi n}{T_0}t\right)}{\dfrac{2\pi n}{T_0}}\bigg|_{0}^{\frac{T_0}{2}}\rightarrow\calif{1\,pto}\\
+a_n &= -\dfrac{4A}{\pi^2n^2}\left[\cos(\pi n)+\pi n\sin(\pi n)-\cos(0)-0\sin(0)\right] + \dfrac{2A}{\pi n}\left[\sin(\pi n)-\sin(0)\right]\rightarrow\calif{1\,pto}\\
+a_n &= -\dfrac{4A}{\pi^2n^2}\left(\cos(\pi n)-1\right)\rightarrow\calif{1\,pto}\\
+a_n &= \dfrac{4A}{\pi^2n^2}\left(1-\cos(\pi n)\right)\\
+\end{align*}
+
+
+}

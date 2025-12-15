@@ -1,0 +1,60 @@
+%% Quiz 2 Tutoría S12023
+%% José Miguel Barboza Retana
+
+\Pregunta{5}{Considere el siguiente sistema trifásico balanceado con fuentes de alimentación en secuencia acb:}
+
+\begin{center}
+  \includegraphics[scale=1]{p2}
+\end{center}
+    
+Si $\mathbf{Z}_L=1+j\,\Omega$, $\mathbf{Z}_{\Delta}=8+j6\,\Omega$ e $\mathbf{I}_a=10-j12\,A$, determine la tensión fasorial $\mathbf{V}_{cn}$.
+
+\solution{
+
+\bigskip
+\textbf{Solución:}
+
+Se puede determinar la impedancia equivalente por fase. Primero, se puede convertir la carga en una equivalencia en conexión estrella y luego la misma queda en serie con la impedancia de lína $\mathbf{Z}_{L}$. 
+
+\begin{align*}
+\mathbf{Z}_Y = \dfrac{\mathbf{Z}_\Delta}{3} = \dfrac{8+j6}{3}\,\Omega
+\end{align*}
+
+Y así, se tiene
+
+\begin{align*}
+\mathbf{Z}_{eq} &= \mathbf{Z}_L + \mathbf{Z}_Y\\ 
+\mathbf{Z}_{eq} &= 1+j + \dfrac{8+j6}{3}\\
+\mathbf{Z}_{eq} &= \dfrac{11}{3}+j3\,\Omega \qquad\rightarrow\qquad\hfill\calif{2\,ptos}
+\end{align*}
+
+Analizando el resultando anterior y la corriente de línea 
+
+\begin{align*}
+\mathbf{V}_{an} &= \mathbf{I}_a\mathbf{Z}_{eq}\\
+\mathbf{V}_{an} &= (10-12j)\cdot \left(\dfrac{11}{3}+j3\right)\\
+\mathbf{V}_{an} &= \dfrac{218}{3}-j14\,V_{rms} \qquad\rightarrow\qquad\hfill\calif{2\,ptos} 
+\end{align*}
+
+Para una secuencia acb o negativa
+
+\begin{align*}
+\mathbf{V}_{cn} &= \mathbf{V}_{an}\cdot(1\angle{-120^{\circ}})\\
+\mathbf{V}_{cn} &= 74\angle{-130.9^{\circ}}\,V_{p}\\
+\mathbf{V}_{cn} &= 52.33\angle{-130.9^{\circ}}\,V_{rms} \qquad\rightarrow\qquad\hfill\calif{1\,pto}
+\end{align*}
+
+}
+
+\shortsolution{
+
+\bigskip
+\textbf{Respuesta:}
+
+
+\begin{align*}
+\mathbf{V}_{cn} &= 74\angle{-130.9^{\circ}}\,V_{p}\\
+\mathbf{V}_{cn} &= 52.33\angle{-130.9^{\circ}}\,V_{rms}
+\end{align*}
+
+}

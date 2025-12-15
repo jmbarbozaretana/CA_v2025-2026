@@ -1,0 +1,158 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Programa de Licenciatura en Ingeniería Electrónica  %
+% Instituto Tecnológico de Costa Rica                 %
+% Curso: EL2114 Circuitos Eléctricos en Corriente Alte%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% PARTE A                                             %
+% Aspectos relativos al plan de estudios              %
+%                                                     %
+% IMPORTANTE: Esta parte solo puede ser modificada    %
+%             con la debida autorización del Consejo  %
+%             de Escuela.  Si debe modificar algo,    %
+%             comuníquese con la Comisión Curricular. %
+%                                                     %
+%             Procure editar solo parte_b.tex         %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\paginaTitulo
+    
+\section{Aspectos relativos al plan de estudios}
+    
+\subsection{Datos generales}
+    
+\begin{datosGenerales}
+  Nombre del curso:              & \NombreCurso \\
+  Código:                        & \CodigoCurso \\
+  Tipo de curso:                 & Teórico \\
+  Obligatorio o Electivo:        & Obligatorio \\
+  N"o Créditos:                  & 4 \\
+  N"o horas clase/semana:        & 4\,h \\
+  N"o horas extraclase/semana:   & 8\,h \\
+  Ubicación en plan de estudios: & IV Semestre del Plan 809 \\
+  Requisitos:                    & \course{EL2113} \cellbreak
+                                   \course{FI2103} \\
+  Correquisitos:                 & Ninguno \\
+  El curso es requisito de:      & \course{EL3212} \cellbreak
+                                   \course{EL4703} \\
+  Asistencia:                    & Obligatoria \\
+  Suficiencia:                   & Sí \\
+  Posibilidad de reconocimiento: & \segunreqa \\
+  Aprobación del programa:       & Ratificado en Sesión 04-2024, 18/03/2024 \\
+  Actualización del programa:    & \semestre{} \\
+\end{datosGenerales}
+
+\vspace*{1cm}
+
+\newpage
+
+\msubsection{Descripción\\ General}
+%
+Este curso es la continuación del curso de Circuitos Eléctricos en Corriente Continua, en donde se introduce el uso de señales alternas sinusoidales. Primero se aplican las técnicas aprendidas anteriormente ahora a circuitos bajo excitación sinusoidal, y luego se estudia el concepto de frecuencia. La energía en forma alterna y sinusoidal es de especial importancia porque de esta manera es que se transmite la electricidad a las residencias y a la industria. Por otra parte, el análisis de frecuencia es importante cuando se analiza la respuesta de elementos ante ondas con diferentes periodos. 
+
+Este último análisis es fundamental en áreas como el procesamiento digital de señales, control automático, comunicaciones eléctricas, entre muchos otros. Para esto es necesario el uso adecuado de destrezas matemáticas y el razonamiento lógico, ya que se utilizan modelos abstractos de análisis de circuitos. 
+
+El curso busca desarrollar los siguientes atributos de egreso, de
+acuerdo con la \atrcite:
+
+\buildAtrTable{CI:M,HI:I,*AP:M}
+
+En casos de estudiantes con necesidades educativas especiales se elaborará un plan específico de atención con ayuda del Departamento de Orientación y Psicología.
+
+% \newpage
+
+\msubsection{Objetivos}
+% 
+\textbf{Objetivo general}
+
+Al completar el curso el estudiante será capaz de aplicar los conceptos, principios y técnicas matemáticas de análisis de circuitos eléctricos en el dominio del tiempo y en el de la frecuencia ante señales de excitación alternas sinusoidales.
+
+
+\textbf{Objetivos específicos}
+
+Los objetivos específicos planteados para este curso son:
+
+\buildObjTable{%
+  {Analizar el funcionamiento de circuitos eléctricos en régimen permanente sinusoidal.},%
+  {Determinar el análisis de potencia para circuitos eléctricos monofásicos y trifásicos.},%
+  {Analizar y describir el comportamiento de los circuitos eléctricos en función de la frecuencia de excitación sinusoidal.},%
+  {Utilizar la transformada de Laplace para estudiar el comportamiento de circuitos eléctricos bajo distintas señales de excitación.},%
+  {Aplicar el desarrollo de síntesis de series de Fourier para estudiar el comportamiento de circuitos eléctricos bajo distintas señales periódicas de excitación.},%
+  {Estudiar y describir los circuitos eléctricos a partir de su comportamiento como una red de dos puertos.}%
+}
+
+\msubsection{Contenidos}
+% 
+El curso cubre los siguientes temas:
+
+\begin{contenido}
+\item Análisis en estado sinusoidal permanente.
+  \begin{contenido}
+  \item Características de la función sinusoidal.
+  \item Respuesta forzada ante excitaciones sinusoidales.
+  \item La función de excitación compleja.
+  \item El concepto de fasor y diagrama fasorial.
+  \item Relaciones fasoriales para R, L y C.
+  \item Impedancia y admitancia.
+  \item Análisis de circuitos utilizando fasores.
+  \item Linealidad, superposición y transformación de fuentes.
+  \item Teoremas de Thévenin y Norton.
+  \item Circuitos con amplificadores operacionales.
+  \end{contenido}
+\item Análisis de Potencia en Circuitos en CA.
+  \begin{contenido}
+  \item Potencia instantánea.
+  \item Potencia promedio.
+  \item Valores eficaces de corriente y tensión.
+  \item Potencia compleja $\mathbf{S}$.
+  \item Factor de potencia y su corrección.
+  \item Principio de superposición de potencia.
+  \item Teorema de la máxima transferencia de potencia.
+  \item Medición de potencia utilizando vatímetros.
+  \end{contenido}
+\item Circuitos Trifásicos.
+  \begin{contenido}
+  \item Sistemas trifásicos.
+  \item Sistemas balanceados y sistemas NO balanceados.
+  \item Conexiones y conversiones entre $Y$ (estrella) y $\Delta$ (delta).
+  \item Relaciones de potencia en circuitos trifásicos.
+  \item Medición de potencia en circuitos trifásicos.
+  \end{contenido}
+\item Respuesta en Frecuencia.
+  \begin{contenido}
+  \item Función de transferencia, polos y ceros.
+  \item Diagramas de Bode.
+  \item Resonancia en serie y paralelo.
+  \item Filtros.
+  \item Cambios de escala.
+  \end{contenido}
+\item Frecuencia Compleja $s$ y la Transformada de Laplace.
+  \begin{contenido}
+  \item Frecuencia compleja y plano $s$.
+  \item Transformada de Laplace.
+  \item Propiedades de la transformada de Laplace.
+  \item Transformada inversa de Laplace.
+  \item Solución de ecuaciones integrodiferenciales.
+  \item Impedancia $Z(s)$ y admitancia $Y(s)$.
+  \item Análisis de circuitos.
+  \item Funciones de transferencia $H(s)$.
+  \item Convolución y estabilidad.
+  \end{contenido}
+\item Series de Fourier.
+  \begin{contenido}
+  \item Serie trigonométrica de Fourier.
+  \item Consideraciones de simetría.
+  \item Serie exponencial compleja de Fourier.
+  \item Representación espectral de señales.
+  \item Potencia promedio y valores RMS.
+  \item Análisis de circuitos.
+  \end{contenido}
+\item Redes de dos puertos.
+  \begin{contenido}
+  \item Concepto de redes de uno y dos puertos.
+  \item Parámetros de impedancia y red equivalente.
+  \item Parámetros de admitancia y red equivalente.
+  \item Parámetros híbridos, de transmisión y sus inversos.
+  \item Relaciones entre parámetros de dos puertos.
+  \item Interconexión de redes de dos puertos.
+  \end{contenido}
+\end{contenido}

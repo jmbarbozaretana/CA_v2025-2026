@@ -1,0 +1,81 @@
+%%%%%%%%%%%%%%%
+%% Problema4 %%
+%% 2025 S2   %%
+%% WQS       %%
+
+\Problema{8}{Análisis de Potencia en CA}
+
+\medskip
+
+Dado el siguiente circuito
+
+\begin{center}
+\includegraphics[scale=1]{prob04_wqs}
+\end{center}
+
+Conociendo que
+\begin{itemize}
+\item La impedancia $\mathbf{Z}_1$ es inductiva y consume una potencia real de $7.5\,$kW y reactiva de $9\,$kVAR.
+\item La impedancia $\mathbf{Z}_2$ es capacitiva y consume una potencia real de $2.1\,$kW y reactiva de $1.8\,$kVAR.
+\item $\mathbf{V}_o=480\angle 0^{\circ}\,V_{rms}$
+\end{itemize}
+
+Responda lo siguiente:
+\begin{subpunto}
+\item Determine el factor de potencia visto por la fuente.\partialPoints{6}
+
+\solution{
+Calculando las potencias complejas
+\begin{align*}
+\mathbf{S_1}=7,5+j9\,kVA\\
+\mathbf{S_2}=2.1-j1,8\,kVA\\
+\mathbf{S_R}=\dfrac{480^2}{48}\\
+\mathbf{S_L}=j\dfrac{480^2}{19,2}
+\end{align*}
+\calif{2 pts, 0.5 pts por cada potencia compleja correcta}
+
+con esto, la potencia compleja en las impedancias en paralelo es
+\begin{align*}
+\mathbf{S_Z}=\mathbf{S_1}+\mathbf{S_2}+\mathbf{S_R}+\mathbf{S_L}\\
+\mathbf{S_Z}=7500+j9000+2100-j1800+\dfrac{480^2}{48}+j\dfrac{480^2}{19,2}\\
+\mathbf{S_Z}=24000\angle 53.13^{\circ}\,VA
+\end{align*}
+\calif{1 pto por la potencia compleja en las impedancias en paralelo}
+
+y dado que la impedancia está en serie con la fuente y la bobina
+\begin{align*}
+\mathbf{S_Z}=\mathbf{V_o}\mathbf{I_s}^*\\
+\mathbf{I_s}=\Big(\dfrac{\mathbf{S_Z}}{\mathbf{V_o}}\Big)^*=\Big(\dfrac{24000\angle 53.13^{\circ}}{480\angle 0^{\circ}}\Big)^*\\
+\mathbf{I_s}=50\angle-53.13^{\circ}\,A_{rms}
+\end{align*}
+\calif{1 pto por la corriente en la fuente}
+
+con esto entonces
+\begin{align*}
+\mathbf{S_{total}}=\mathbf{S_Z}+(50)^2j0,5\\
+\mathbf{S_{total}}=25011,25\angle54.85^{\circ}\,VA
+\end{align*}
+\calif{1 pto por la potencia compleja total}
+
+por lo que el factor de potencia visto por la fuente es
+\begin{align*}
+fp=\cos(54.85^{\circ})\downarrow
+\end{align*}
+\calif{1 pto por el valor correcto de el factor de potencia y su respectivo comportamiento}
+}
+
+\item El fasor de la fuente $\mathbf{V}_s$.\partialPoints{2}
+
+\solution{
+Sabiendo que la potencial total compleja está dada por
+\begin{align*}
+\mathbf{S_{total}}=\mathbf{V_s}\mathbf{I_s}^*
+\end{align*}
+entonces el fasor de la fuente se calcula con
+\begin{align*}
+\mathbf{V_s}=\dfrac{\mathbf{S_{total}}}{\mathbf{I_s}^*}\\
+\mathbf{V_s}=\dfrac{25011,25\angle54.85^{\circ}}{50\angle53.13^{\circ}}\\
+\mathbf{V_s}=500,22\angle1.72^{\circ}\,V_{rms}
+\end{align*}
+}
+\end{subpunto}

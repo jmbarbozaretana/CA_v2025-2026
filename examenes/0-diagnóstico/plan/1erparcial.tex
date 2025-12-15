@@ -1,0 +1,334 @@
+\documentclass[12pt,oneside,letterpaper, landscape]{article}
+
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{ifthen}                     % provide if-then-else operators
+\usepackage{amsmath}
+\usepackage{amssymb,amstext}            % AMS-math and symbols package
+
+\usepackage{ftcap}                      % switch \abovecaptionskip and
+                                        % \belowcaptionskip for tables, in 
+                                        % order to avoid the caption to be
+                                        % too near to the table itself
+\usepackage{booktabs}                   % book type tabulars
+\usepackage{rotating}
+\usepackage{tabularx}
+\usepackage{multicol}
+
+
+\usepackage{enumerate}
+\usepackage{setspace}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage[dvipsnames,table]{xcolor}
+
+%
+% page layout
+%
+\setlength{\oddsidemargin}{0cm}         % Margin for odd numbered pages
+\setlength{\evensidemargin}{0cm}        % Margin for even numbered pages
+\addtolength{\topmargin}{-1.5cm}        % space between top and head
+\addtolength{\headsep}{0.25cm}          % space between head and text
+\setlength{\textwidth}{228mm}           % text width
+\setlength{\textheight}{155mm}          % text height
+\setlength{\headheight}{47pt}         % fancy headers wanted this
+\parindent0em                           % indentation width of first line
+\setlength{\headsep}{15pt}
+\setlength{\topsep}{0pt}
+\setlength{\itemsep}{0pt}
+
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead[]{
+\footnotesize{Instituto Tecnológico de Costa Rica\\
+Escuela de Ingeniería Electrónica\\
+EL-2114 Circuitos Eléctricos en Corriente Alterna
+}}
+\chead[]{}
+\rhead[]{\footnotesize{I Semestre 2022}}
+\lfoot[]{}
+\cfoot[]{}
+\rfoot[]{\thepage}
+\renewcommand{\headrulewidth}{1pt}
+\renewcommand{\footrulewidth}{0pt}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\begin{center}
+\textbf{\underline{\Large{Primer Parcial CA-IS2022}}}
+\end{center}
+
+\bigskip
+
+\begin{multicols}{2}
+    \textbf{\large{Programación ordinaria:}}
+    
+    \begin{itemize}
+        \item \textbf{Fecha de aplicación:} \textcolor{red}{domingo 27 de marzo 2022}
+        \item \textbf{Hora de inicio:} \textcolor{red}{8:00 am}
+        \item \textbf{Duración:} \textcolor{red}{5 horas}
+        \item \textbf{Modalidad:} \textcolor{red}{TEC Digital/GAAP ó ClassMarker.com}
+    \end{itemize}
+    
+    \textbf{\large{Programación extraordinaria:}}
+    
+    \begin{itemize}
+        \item \textbf{Fecha de aplicación:} \textcolor{red}{lunes 28 de marzo 2022}
+        \item \textbf{Hora de inicio:} \textcolor{red}{7:30 am}
+        \item \textbf{Duración:} \textcolor{red}{2 horas por estudiante}
+        \item \textbf{Modalidad:} \textcolor{red}{Oral, por ZOOM (audio+video disponibles)}
+    \end{itemize}
+
+\end{multicols}
+
+\bigskip
+\bigskip
+
+\large{\textbf{Aspectos importantes:}}
+
+\normalsize
+
+\begin{itemize}
+\item La prueba deberá ser resuelta por los estudiantes en forma individual, clara y ordenada. 
+
+\item La prueba se programará en el TEC Digital o en ClassMarker.com para una duración total de 5 horas.
+
+\item Al estudiante que inicie la prueba 30 minutos después del inicio de la misma (8:30 am) no se le considerará su respuesta y deberá gestionar su debida justificación para tener derecho a aplicar la prueba en la programación extraordinaria.
+
+\item Se le solicitará al TEC Digital la posibilidad de apoyo el día de la aplicación del examen para atender situaciones extraordinarias que podrían presentarse durante el desarrollo de la prueba con la plataforma. 
+
+\item El examen estará conformado por preguntas de selección única, en donde el estudiante seleccionaría una respuesta de las opciones propuestas. Si la respuesta seleccionada por el estudiante es la correcta y si el estudiante presenta posteriormente la justificación/validación correcta, obtendrá los puntos relacionados de esa pregunta y estos serán asignados.
+
+\item La justificación anterior se realizará por medio de un documento que el estudiante debe subir al TEC Digital. Este documento debe ser en formato PDF, totalmente legible, el cual puede generarse al escanear o fotografiar su solución. Esta solución debe estar escrita a mano, sea en papel o sobre una tablet con stylus o del tipo gráfica. 
+
+\item Se desarrollarán 4 versiones equivalentes para cada pregunta. La idea es que estas versiones llamadas a, b, c y d de cada pregunta se diseñen de forma que sean lo más equivalente posible entre sí, donde el procedimiento y dificultad no cambie o cambie muy poco. Inclusive, que no cambie el número de puntos asignados entre versiones.
+
+\item El examen se programará en la plataforma con aleatoriedad de preguntas y orden de las opciones de respuestas. Además, el detalle de que los estudiantes NO podrán devolverse a preguntas anteriores, una vez que avanzan a una pregunta siguiente.
+
+\item Para cada ejercicio se tendrá un tiempo máximo estimado/sugerido que se anotará con el fin de apoyar al estudiante a la hora de resolver los ejercicios. El tiempo sugerido no implicará ninguna restricción temporal para resolver el ejercicio, únicamente es una guía para el estudiante. Este aparecerá junto al número de puntos de la pregunta.
+
+\item En el diseño de los ejercicios o las preguntas que conforman el examen, respetar un margen de puntos desde \textcolor{blue}{1 pto} hasta máximo \textcolor{blue}{4 pts} por pregunta.
+
+\item \textcolor{blue}{En el plan de diseño del examen, se asignará para cada pregunta un margen para la asignación de puntos por pregunta. Este margen servirá para balancear la duración y dificultad del mismo. Por ejemplo, en la pregunta 1 a diseñar se puede utilizar 1-2 pts, en la pregunta 2: 3-4pts, etc. En esta idea el diseño tendrá un balance entre preguntas de menor puntaje y preguntas de mayor puntaje.}
+
+\item \textcolor{blue}{No se realizarán asignaciones parciales de puntaje a la calificación de cada pregunta para los estudiantes, esto significará que se tendrán preguntas sin puntos por equivocar la respuesta correcta o preguntas con el total de puntos respectivos según justificación válida de la respuesta.}
+
+\item \textcolor{blue}{En el diseño de las preguntas, plantear la pregunta únicamente a una respuesta, no múltiples respuestas. Esto será más oportuno para ajustar el puntaje entre 1-4pts y evitar preguntas muy extensas.}
+ 
+
+\end{itemize}
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\definecolor{green(html/cssgreen)}{rgb}{0.0, 0.5, 0.0}
+\definecolor{yellow2}{rgb}{1,0.55,0.0}
+
+\vspace{10mm}
+
+\textbf{\Large{Cronograma de actividades:}}
+
+\begin{center}
+\begin{longtable}{|>{\centering\arraybackslash}m{10mm}|m{123mm}|>{\centering\arraybackslash}m{45mm}|>{\centering\arraybackslash}m{25mm}|}
+\hline 
+\rowcolor{cyan}$\mathbf{N^{o}}$ 
+& \centering \textbf{Actividad} 
+& \textbf{Fecha} 
+& \textbf{Estado}\\
+\hline 
+1 
+& Asignación de las preguntas de selección única por diseñar para cada profesor. 
+& \textcolor{black}{22 de febrero}  
+& \textcolor{blue}{En proceso}\\ 
+\hline 
+
+2 
+& Desarrollo de cada una de las preguntas de selección única asignadas para las cuatro versiones del examen. Cada pregunta debe tener solución completa y puntaje asignado.
+& \textcolor{black}{22 febrero -- 14 de marzo} & \textcolor{black}{Pendiente}\\ 
+\hline
+
+3 
+& Revisión de cada pregunta del examen según distribución propuesta más adelante. Recordar que la revisión implica hacer un análisis muy detallado de: la redacción de la pregunta, consistencia de los datos de la pregunta, de la respuesta correcta, de las respuestas que no son correctas, asignación de puntos, etc. Este es un paso muy importante que no se debe hacer a la carrera. 
+& \textcolor{black}{15--22 de marzo} 
+& \textcolor{black}{Pendiente}\\ 
+\hline 
+
+4 
+& Ensamble cada pregunta en el tool de aplicación (TEC Digital/GAAP y Classmarker.com).
+& \textcolor{black}{23--24 de marzo}
+& \textcolor{black}{Pendiente}\\ 
+\hline
+
+5 
+& Pruebas de funcionamiento y configuración de la prueba en la plataforma de uso para dejar lista su aplicación.
+& \textcolor{black}{25--26 de marzo}
+& \textcolor{black}{Pendiente}\\ 
+\hline
+
+6 
+& \textcolor{red}{Aplicación de la prueba}
+& \textcolor{red}{27 de marzo}
+& \textcolor{red}{Pendiente}\\ 
+\hline
+
+7
+& Revisión de las soluciones escaneadas y definición de resultados (curva).
+& \textcolor{black}{28 marzo -- 1 de abril}
+& \textcolor{black}{Pendiente}\\ 
+\hline
+
+\end{longtable} 
+\end{center}
+
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\textbf{\large{Planificación del examen:}}
+
+\begin{center}
+\begin{longtable}{|>{\centering\arraybackslash}m{15mm}|m{85mm}|>{\centering\arraybackslash}m{55mm}|>{\centering\arraybackslash}m{35mm}|}
+\hline 
+\rowcolor{cyan}\centering \textbf{Unidad} 
+& \centering \textbf{Nombre} 
+& \centering \textbf{Duración en clases (semanas lectivas)} 
+& \centering\arraybackslash\textbf{Número de Preguntas} \\
+
+\hline 
+ 
+1 
+& Análisis de circuitos en CA  
+& 2,5
+& 6\\
+\hline
+
+2 
+& Análisis de potencia en circuitos en CA  
+& 2,5
+& 6\\
+\hline
+ 
+\end{longtable} 
+\end{center}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\textbf{\large{Propuesta detallada:}}
+
+\begin{center}
+\begin{longtable}{|m{25mm}|m{20mm}|m{120mm}|m{20mm}|m{20mm}|}
+\hline 
+\rowcolor{cyan}\centering \textbf{Ítem} 
+& \centering \textbf{Diseñador} 
+& \centering\arraybackslash\textbf{Sugerencias} 
+& \centering\arraybackslash\textbf{Puntaje}
+& \centering\arraybackslash\textbf{Revisor} \\
+
+\hline 
+Pregunta 01
+& Profesor A  
+& \underline{Unidad}: 1 \newline \underline{Detalle}: Manejo de ondas y fasores. Adelantos, retrasos, desfases, suma de ondas, etc.
+& 1-2 pts
+& Profesor C\\
+\hline
+Pregunta 02
+& Profesor B  
+& \underline{Unidad}: 1 \newline \underline{Detalle}: Manejo de fasores y diagrama fasorial. 
+& 1-2 pts
+& Profesor D\\
+\hline
+Pregunta 03
+& Profesor C  
+& \underline{Unidad}: 1 \newline 
+\underline{Detalle}: Análisis de un circuito con R,L, y/o C en CA.
+& 1-2 pts
+& Profesor A\\
+\hline
+Pregunta 04
+& Profesor D  
+& \underline{Unidad}: 1 
+\newline \underline{Detalle}: Análisis de un circuito con R,L y/o C con amplificador operacional en CA.
+& 3-4 pts
+& Profesor B\\
+\hline
+Pregunta 05
+& Profesor A  
+& \underline{Unidad}: 1 
+\newline \underline{Detalle}: Obtención y/o uso del equivalente de Thévenin y/o Norton en análisis de circuitos en CA.
+& 3-4 pts
+& Profesor C\\
+\hline
+Pregunta 06
+& Profesor B  
+& \underline{Unidad}: 1 
+\newline \underline{Detalle}: Aplicación de superposición en análisis de circuitos: CC + CA.
+& {3-4pts}
+& Profesor D\\
+\hline
+Pregunta 07
+& Profesor C  
+& \underline{Unidad}: 2 
+\newline \underline{Detalle}: Potencia compleja: aparente, real y reactiva. Análisis en un circuito de CA con R,L y/o C.
+& 3-4 pts
+& Profesor A\\
+\hline
+Pregunta 08
+& Profesor D  
+& \underline{Unidad}: 2 
+\newline \underline{Detalle}: Potencia compleja: aparente, real y reactiva (superposición para mismas frecuencias en CA). Descripción/datos de potencia de cargas y análisis eléctrico y a partir estos hacer el análisis.
+& 3-4 pts
+& Profesor B\\
+\hline
+Pregunta 09
+& Profesor A  
+& \underline{Unidad}: 2 
+\newline \underline{Detalle}: Potencia compleja: aparente, real y reactiva (superposición para distintas frecuencias en CA).
+& 3-4 pts
+& Profesor C\\
+\hline
+Pregunta 10
+& Profesor B  
+& \underline{Unidad}: 2 
+\newline \underline{Detalle}: Máxima transferencia de potencia promedio en CA ($R_L$ ó $\mathbf{Z_L}$).
+& 1-2 pts
+& Profesor D\\
+\hline
+Pregunta 11
+& Profesor C  
+& \underline{Unidad}: 2
+\newline \underline{Detalle}: Cálculo del factor de potencia. Circuito R,L y/o C y/o corrección del factor de potencia (capacitivo o inductivo).
+& 1-2 pts
+& Profesor A\\
+\hline
+Pregunta 12
+& Profesor D  
+& \underline{Unidad}: 2 
+\newline \underline{Detalle}: Análisis de potencia real para la medición de un vatímetro.
+& 1-2 pts
+& Profesor B\\
+\hline
+ 
+\end{longtable} 
+\end{center}
+
+\textcolor{blue}{NOTA IMPORTANTE: Las sugerencias indicadas en cada pregunta son con el fin de que se trate de evaluar cosas diferentes, no repetir cosas. Pero, pueden ser creativos en cada caso, no se limiten a lo que se anotó como detalle en el espacio de sugerencias de la pregunta.}\\
+
+Profesor A: Roberto Molina Robles
+
+Profesor B: Luis Miguel Esquivel Sancho
+
+Profesor C: José Miguel Barboza Retana
+
+Profesor D: William Quirós Solano
+
+\end{document}

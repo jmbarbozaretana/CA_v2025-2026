@@ -1,0 +1,52 @@
+%% Quiz 2 Tutoría S12023
+%% José Miguel Barboza Retana
+
+\Pregunta{4}{Considere el siguiente sistema trifásico de 3 hilos el cual es alimentado por una fuente balanceada con secuencia positiva y tensión de fase $\mathbf{V}_{\text{cn}}=100\angle{-230^{\circ{}}}\,V_{rms}$:}
+
+\begin{center}
+  \includegraphics[scale=1]{p1}
+\end{center}
+    
+Además, considere que las impedancias correspondientes de la carga son $\mathbf{Z}_a=j10\,\Omega$, $\mathbf{Z}_b=j10\,\Omega$ y $\mathbf{Z}_c=j10\,\Omega$. Según toda la información anterior, determine la potencia compleja total absorbida por la carga trifásica?
+
+\solution{
+\textbf{Solución:}
+
+Las impedancias de línea se encuentran en serie con las impedancias de fase, por lo que la impedancia equivalente es
+
+\begin{align*}
+\mathbf{Z}_{eq} &= \mathbf{Z}_L + \mathbf{Z}_p\\
+\mathbf{Z}_{eq} &= 1 + j + j10\\
+\mathbf{Z}_{eq} &= 1+j11\Omega
+\end{align*}
+
+La corriente de línea $\mathbf{I}_c$ se puede calcular como
+
+\begin{align*}
+\mathbf{I}_c = \dfrac{\mathbf{V}_{cn}}{\mathbf{Z}_{eq}} = \dfrac{100\angle{-230^{\circ}}}{1+j11} = 9.05\angle{45.19^{\circ}}\,A_{rms}\qquad\rightarrow\qquad\hfill\calif{2\,ptos}
+\end{align*}
+
+Luego, la potencia compleja en la carga $\mathbf{Z}_c$ se determina como
+
+\begin{align*}
+\mathbf{S}_p = |\mathbf{I}_c|^2\mathbf{Z}_p = (9.05)^2\cdot j10 = 819.03j\,VA
+\end{align*}
+
+Por último, la potencia compleja total es 
+
+\begin{align*}
+\mathbf{S}_T = 3\mathbf{S}_p = 2.46j\,kVA \qquad\rightarrow\qquad\hfill\calif{2\,ptos}
+\end{align*}
+
+\clearpage
+}
+
+
+\shortsolution{
+\textbf{Respuesta:}
+
+\begin{align*}
+\mathbf{S}_T = 3\mathbf{S}_p = 2.46j\,kVA 
+\end{align*}
+
+}

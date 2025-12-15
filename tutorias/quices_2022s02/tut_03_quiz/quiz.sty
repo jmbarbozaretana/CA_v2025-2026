@@ -1,0 +1,918 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% File:    quiz.sty basado en tutoria.sty                          %
+% Date     05/08/2019                                              %
+% Version: tutoria.sty                                             %
+% Autor:   J. Wickel, P. Alvarado                                  %
+%          Format and page layout for "tutorias" at IE-TEC         %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{quiz}
+
+\typeout{Estilo de quiz para CA en IE-TEC, Stand 05.08.2019}
+
+\RequirePackage[spanish]{babel}
+\RequirePackage[T1]{fontenc}
+\RequirePackage[utf8]{inputenc}
+\RequirePackage{ifthen}
+\RequirePackage{siunitx}                    % Units of the SI
+\RequirePackage{icomma}
+
+\RequirePackage{amsmath}
+\RequirePackage{amssymb}
+\RequirePackage{amstext}
+
+\RequirePackage{ftcap}
+\RequirePackage{booktabs}
+
+\RequirePackage{graphicx}
+\RequirePackage{version}
+\RequirePackage{xcolor}
+\RequirePackage{rotating}
+\RequirePackage{tabularx}
+\RequirePackage{mathrsfs}        % Calygraphic fonts for transforms
+\RequirePackage{paralist}
+\RequirePackage{trsym}           % Para simbolos de transformadas o---o
+\RequirePackage{calc}
+\RequirePackage{multicol}
+\RequirePackage[linktoc=all,hidelinks]{hyperref}
+
+\RequirePackage{setspace}        % Spacing between lines
+\RequirePackage{vmargin}
+
+\RequirePackage{ntheorem}
+
+\theorembodyfont{\normalfont}
+\theoremseparator{.}
+
+\newtheorem{ejercicio}{Ejercicio} % Add [section] for section number dependency
+
+% 
+% page layout
+% 
+\setpapersize{USletter}
+
+% left,top,right,bottom,headheight,headsep,footheight,footsep
+%
+\setmarginsrb{20mm}{7mm}{20mm}{7mm}{15pt}{15pt}{7mm}{10mm}
+
+\sisetup{output-decimal-marker = {,}}
+\DeclareSIQualifier\peak{p}
+\DeclareSIQualifier\ppeak{pp}
+
+
+\newcommand{\tipo}{Quiz}
+\newcommand{\course}{EL\,2114 Circuitos Eléctricos en Corriente Alterna}
+\newcommand{\semester}{II Semestre 2022}
+
+\newcommand{\abcskip}{\smallskip}
+\newcommand{\abcsep}{\medskip}
+\newcommand{\exersep}{\medskip}
+\newlength{\abcwidth}
+
+\newcommand{\footer}{\hfill}
+\newcommand{\header}{\hfill}
+\newcommand{\extrafooter}{\hfill}
+\newcommand{\extraheader}{\hfill}
+
+\newcommand{\headerFont}{\textsf}
+\newcommand{\footerFont}{\small\textsf}
+
+\DeclareOption{numbered}{%
+  \newcommand{\lheader}{\headerFont Nombre:}
+  \newcommand{\rheader}{\headerFont Página \thepage}
+  \newcommand{\cheader}{\headerFont Carné:}
+
+  \newlength{\lhwidth}
+  \settowidth{\lhwidth}{\headerFont Nombre:\  }
+  \newlength{\rhwidth}
+  \settowidth{\rhwidth}{\headerFont Página MM}
+  \newlength{\chwidth}
+  \settowidth{\chwidth}{\headerFont Carné:\ }
+
+  \renewcommand{\header}{%
+    \parbox[c]{\lhwidth}{\flushleft{\lheader}}\hfill
+    \parbox[c]{\chwidth}{\center{\cheader}}\hfill
+    \parbox[c]{\rhwidth}{\flushright{\rheader}}%
+    \parbox[b]{0pt}{\rule[-1em]{0pt}{1ex}}}
+
+  \renewcommand{\extraheader}{%
+    \parbox[c]{\lhwidth}{\flushleft{\lheader}}\hfill
+    \parbox[c]{\chwidth}{\center{\cheader}}\hfill
+    \parbox[c]{\rhwidth}{\flushright{\rheader}}%
+    \parbox[b]{0pt}{\rule[-1em]{0pt}{1ex}}}
+  
+  \newcommand{\lfooter}{\footerFont \tipo\ \course}
+  \newcommand{\rfooter}{\footerFont \deckblattDatum}
+
+  \newlength{\lfwidth}
+  \settowidth{\lfwidth}{\footerFont \tipo \course MMMMM}
+  \newlength{\rfwidth}
+  \settowidth{\rfwidth}{\footerFont MM. MMMMMMMMM MMMM}
+                                        
+  \renewcommand{\footer}{%
+    \parbox[t]{0pt}{\rule[1em]{0pt}{1ex}}
+    \parbox[b]{\lfwidth}{\flushleft{\lfooter}}\hfill
+    \parbox[b]{\rfwidth}{\flushright{\rfooter}}%
+  }
+
+  \renewcommand{\extrafooter}{%
+    \parbox[t]{0pt}{\rule[1em]{0pt}{1ex}}
+    \parbox[b]{\lfwidth}{\flushleft{\lfooter}}\hfill
+    \parbox[b]{\rfwidth}{}%
+  }
+
+  \settoheight{\headheight}{\header}
+  \addtolength{\headheight}{1.7em}
+}
+
+\newcommand{\coverDate}{\today}
+\newcommand{\setDate}[1]{\renewcommand{\coverDate}{#1}}
+
+\newcommand{\tutAuthor}{Profesores y tutores del curso}
+\newcommand{\tutKeywords}{}
+
+% \newcommand{\tutGrupoNumber}{sin definir}
+\newcounter{grupo}
+\renewcommand{\thegrupo}{\arabic{grupo}}
+\newcommand{\tutPuntosTotal}{sin definir}
+
+\newcommand{\tutGrupo}[1]{
+  % \renewcommand{\tutGrupoNumber}{#1}
+  \setcounter{grupo}{#1}
+}
+
+\newcommand{\tutPuntos}[1]{
+  \renewcommand{\tutPuntosTotal}{#1}
+}
+
+\newcommand{\tutNumber}{Add number as first argument of tutHeader}
+\newcommand{\tutTopic}{Add topic as second argument of tutHeader}
+\newcommand{\tutHeader}[3]{%
+  \renewcommand{\tutNumber}{#1}
+  \renewcommand{\tutTopic}{#2}
+  \renewcommand{\time}{#3}
+  %\hypersetup{%
+  %  pdftitle={\tipo~\tutNumber: \tutTopic},%
+  %  pdfsubject={\course},%
+  %  pdfauthor={\tutAuthor},%
+  %  pdfkeywords={\tutKeywords}%
+  %}%
+
+  \setcounter{pregunta}{0}
+  \setcounter{problema}{0}
+
+  \ifthenelse{\boolean{solutionmode}}{}{\setcounter{page}{1}}
+  \phantomsection
+  \noindent\rule{\linewidth}{0.4pt}
+  \addcontentsline{toc}{section}{Grupo~\thegrupo}
+  \begin{minipage}[t]{0.5\linewidth}
+    \begin{flushleft}
+      Instituto Tecnológico de Costa Rica \\
+      Escuela de Ingeniería Electrónica \\
+      \course \\
+      \semester
+    \end{flushleft}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[t]{0.5\linewidth}
+    \begin{flushright}
+      \textbf{\tipo~\tutNumber} \\
+      \textbf{\tutTopic} \\
+      \textbf{Duración:~\time ~ min}\\[3mm]
+      
+      {\large Puntos:} \rule{2cm}{0.4pt}/\tutPuntosTotal\,pts \quad
+      {\large Nota:} \rule{2cm}{0.4pt}
+    \end{flushright}
+  \end{minipage}
+
+  \vspace{2mm}
+  
+  \noindent\rule{\linewidth}{0.4pt}
+
+  \vspace{3mm}
+    
+  \hfill
+  Nombre: \rule{0.6\linewidth}{0.4pt}\hfill
+  Carné:   \rule{0.2\linewidth}{0.4pt}
+  \hfill
+  
+  \noindent\rule[2mm]{\linewidth}{0.4pt}
+
+}
+
+\newlength{\totalPoints}
+
+\newcommand{\partialPoints}[2][visible]{%
+  \addtolength{\totalPoints}{-#2 cm}%
+  \ifthenelse{\equal{#1}{visible}}{%
+    \hspace*{\fill}\fbox{\footnotesize{\textsf{#2
+      \ifthenelse{\lengthtest{#2 cm >1.1cm}}{Pts}{%
+        \ifthenelse{\lengthtest{#2 cm < 0.9cm}}{Pts}{Pt}}}}}}{}}
+
+
+\newcommand{\testSumOfPoints}{%
+  \ifthenelse{\lengthtest{\totalPoints > 0.1cm}}{%
+    %\solution{\rule{\totalPoints}{2em}}%
+    \typeout{
+      examen.sty: Distribución de puntos es inconsistente (muy poca suma)!
+  }}{%
+    \ifthenelse{\lengthtest{\totalPoints < -0.1cm}}{%
+    %\solution{\rule{-\totalPoints}{1em}}%
+    \typeout{
+      examen.sty: Distribución de puntos es inconsistente (suma muy grande)!
+  }}{}}
+}
+
+\DeclareOption{hideupkt} {
+\renewcommand{\partialPoints}[2][hidden]{\addtolength{\totalPoints}{-#2 cm}%
+\ifthenelse{\equal{#1}{visible}}{%
+            \hfill\makebox{(#2
+              \ifthenelse{\lengthtest{#2 cm >1.1cm}}{Puntos}{%
+                \ifthenelse{\lengthtest{#2 cm < 0.9cm}}{Puntos}{Punto}})}}{}}
+}
+
+\newcounter{problema}
+\newcounter{puntaje}
+\newcounter{subp}
+\DeclareOption{quiz}{%
+  % 
+  % Fraction of Float Object / Text
+  %   
+  \renewcommand{\topfraction}{0.90}     % how much of top of page should be 
+  % allowed to be float object?
+  \renewcommand{\bottomfraction}{0.90}  % how much of bottom of page should be
+  % allowed to be float object?
+  \renewcommand{\textfraction}{0.10}    % how much of page must be text?
+  %
+  \renewcommand{\tipo}{Quiz}
+  % 
+}
+
+\ProcessOptions
+
+\renewcommand{\theproblema}{\arabic{problema}}
+\renewcommand{\thepuntaje}{\arabic{puntaje}}
+\renewcommand{\thesubp}{\arabic{puntaje}.\arabic{subp}}
+\numberwithin{figure}{section}
+\numberwithin{table}{section}
+\numberwithin{equation}{section}
+\numberwithin{puntaje}{section}
+\numberwithin{subp}{puntaje}
+
+
+
+\AtBeginDocument{
+  \renewcommand{\figurename}{Figura} %Cambia la palabra "Figura" por "Fig."
+  \renewcommand{\thefigure}{\arabic{figure}}
+  \renewcommand{\thetable}{\arabic{table}}
+  \renewcommand{\theequation}{\arabic{equation}}
+  \graphicspath{{./}{./fig/}}%
+}
+
+
+\setlength{\parindent}{0pt}
+
+
+%-------------------------------------------------------
+%-------------------------------------------------------
+% Problema 
+%
+
+\newcommand{\PuntosProblema}[1]{%
+  \setlength{\totalPoints}{#1 cm}
+  \setlength{\fboxrule}{1.2pt}
+  \fbox{\footnotesize{\textsf{#1
+     \ifthenelse{\lengthtest{#1 cm>1.1cm}}{Pts}{%
+     \ifthenelse{\lengthtest{#1 cm<0.9cm}}{Pts}{Pt}}}}}
+}
+
+\newcommand{\Problema}[2]{%
+  \setlength{\totalPoints}{#1 cm}
+  \refstepcounter{problema}
+
+  \exersep
+  \phantomsection
+  \makebox[\widthof{\underline{\textbf{Problema \arabic{problema}}}}+.5em][l]{\underline{\textbf{Problema \arabic{problema}}}}%
+  #2 \hfill\textbf{\PuntosProblema{#1}}%
+  \addcontentsline{toc}{subsection}{Problema~\arabic{problema}}%
+}
+
+\newenvironment{subpunto}{%
+  \begin{list}{%
+      \theproblema.\arabic{puntaje}.%
+      \addcontentsline{toc}{subsubsection}{Punto~\arabic{problema}.\arabic{puntaje}}%
+    }%
+    {%\setlength{\rightmargin}{\leftmargin}
+      \usecounter{puntaje}}}%
+  {\testSumOfPoints\end{list}}
+%
+\newenvironment{subsubpunto}{%
+  \begin{list}{\theproblema.\arabic{puntaje}.\arabic{subp}.}%
+    {\setlength{\leftmargin}{1.1cm}\setlength{\labelwidth}{1cm}%
+      \usecounter{subp}}}%
+  {\end{list}\bigskip}
+
+% Preguntas
+%
+
+\newcommand{\problem}[1]{#1}
+\newcommand{\solution}[1]{}
+\newcommand{\shortsolution}[1]{}
+
+\newcounter{pregunta}
+\renewcommand{\thepregunta}{\arabic{pregunta}}
+
+\newcommand{\TotalPreguntas}[1]{%
+  \setlength{\totalPoints}{#1 cm}
+  \hfill
+  \setlength{\fboxrule}{1.2pt}
+  \fbox{\footnotesize{\textsf{#1
+        \ifthenelse{\lengthtest{#1 cm >1.1cm}}{Pts}{%
+        \ifthenelse{\lengthtest{#1 cm < 0.9cm}}{Pts}{Pt}}}}}
+}
+
+\newcommand{\Pregunta}[2]{%
+  \refstepcounter{pregunta}%
+  \phantomsection
+  \textbf{Pregunta~\thepregunta.}~#2%
+  \hfill \partialPoints{#1}%
+  \addcontentsline{toc}{subsection}{Pregunta~\thepregunta}
+}
+
+% Encuentre el ancho de tabla correcto
+\settowidth{\abcwidth}{\makebox{\begin{tabular}{l@{\quad}l@{\quad}l} 
+$\bigcirc$ & b) & \\
+\end{tabular}}}
+\setlength{\abcwidth}{-2\abcwidth}
+\addtolength{\abcwidth}{\textwidth}
+
+\newcommand{\marca}{$\bigcirc$\rule{1mm}{0pt}}
+\newcommand{\smarca}{\problem{$\bigcirc$\rule{1mm}{0pt}}%
+                     \solution{$\bigotimes$\rule{1mm}{0pt}}}
+
+% abc-Macro con solución
+% La solución correcta es a
+\newcommand{\Abc}[3]{%
+{\par\abcsep\renewcommand{\arraystretch}{1.1}
+\quad\begin{tabular}{l@{\quad}l@{\quad}p{\abcwidth}} 
+\problem{$\bigcirc$}\solution{$\bigotimes$} & a) & #1\\ 
+$\bigcirc$ & b) & #2\\ 
+$\bigcirc$ & c) & #3
+\end{tabular}\par\abcsep\abcsep}}
+%
+% La solución correcta es b
+\newcommand{\aBc}[3]{%
+{\par\abcsep\renewcommand{\arraystretch}{1.1}
+\quad\begin{tabular}{l@{\quad}l@{\quad}p{\abcwidth}} 
+$\bigcirc$ & a) & #1\\ 
+\problem{$\bigcirc$}\solution{$\bigotimes$} & b) & #2\\ 
+$\bigcirc$ & c) & #3
+\end{tabular}\par\abcsep\abcsep}}
+% La solución correcta es c
+
+\newcommand{\abC}[3]{%
+{\par\abcsep\renewcommand{\arraystretch}{1.1}
+\quad\begin{tabular}{l@{\quad}l@{\quad}p{\abcwidth}} 
+$\bigcirc$ & a) & #1\\ 
+$\bigcirc$ & b) & #2\\ 
+\problem{$\bigcirc$}\solution{$\bigotimes$} & c) & #3
+\end{tabular}\par\abcsep\abcsep}}
+
+\newcommand{\ABc}[3]{%
+{\par\abcsep\renewcommand{\arraystretch}{1.1}
+\quad\begin{tabular}{l@{\quad}l@{\quad}p{\abcwidth}} 
+\problem{$\bigcirc$}\solution{$\bigotimes$} & a) & #1\\
+\problem{$\bigcirc$}\solution{$\bigotimes$} & b) & #2\\
+$\bigcirc$ & c) & #3\\ 
+\end{tabular}\par\abcsep\abcsep}}
+
+\newcommand{\AbC}[3]{%
+{\par\abcsep\renewcommand{\arraystretch}{1.1}
+\quad\begin{tabular}{l@{\quad}l@{\quad}p{\abcwidth}} 
+\problem{$\bigcirc$}\solution{$\bigotimes$} & a) & #1\\
+$\bigcirc$ & b) & #2\\ 
+\problem{$\bigcirc$}\solution{$\bigotimes$} & c) & #3
+\end{tabular}\par\abcsep\abcsep}}
+
+\newcommand{\aBC}[3]{%
+{\par\abcsep\renewcommand{\arraystretch}{1.1}
+\quad\begin{tabular}{l@{\quad}l@{\quad}p{\abcwidth}} 
+$\bigcirc$ & a) & #1\\ 
+\problem{$\bigcirc$}\solution{$\bigotimes$} & b) & #2\\
+\problem{$\bigcirc$}\solution{$\bigotimes$} & c) & #3
+\end{tabular}\par\abcsep\abcsep}}
+
+\newcommand{\ABC}[3]{%
+{\par\abcsep\renewcommand{\arraystretch}{1.1}
+\quad\begin{tabular}{l@{\quad}l@{\quad}p{\abcwidth}} 
+\problem{$\bigcirc$}\solution{$\bigotimes$} & a) & #1\\ 
+\problem{$\bigcirc$}\solution{$\bigotimes$} & b) & #2\\
+\problem{$\bigcirc$}\solution{$\bigotimes$} & c) & #3
+\end{tabular}\par\abcsep\abcsep}}
+
+\newcommand{\abc}[3]{%
+{\par\abcsep\renewcommand{\arraystretch}{1.1}
+\quad\begin{tabular}{l@{\quad}l@{\quad}p{\abcwidth}} 
+$\bigcirc$ & a) & #1\\ 
+$\bigcirc$ & b) & #2\\
+$\bigcirc$ & c) & #3
+\end{tabular}\par\abcsep\abcsep}}
+
+%
+\newcommand{\abcd}[4]{%
+{\par\abcsep\renewcommand{\arraystretch}{1.1}
+\quad\begin{tabular}{l@{\quad}l@{\quad}p{\abcwidth}} 
+$\bigcirc$ & a) & #1\\ 
+$\bigcirc$ & b) & #2\\
+$\bigcirc$ & c) & #3\\
+$\bigcirc$ & d) & #4
+\end{tabular}\par\abcsep\abcsep}}
+
+% abcd-Makro mit eingebauter Musterlösung
+% La solución correcta es a
+
+\newcommand{\Abcd}[4]{%
+{\par\abcsep\renewcommand{\arraystretch}{1.1}
+\quad\begin{tabular}{l@{\quad}l@{\quad}p{\abcwidth}} 
+\problem{$\bigcirc$}\solution{$\bigotimes$} & a) & #1\\ 
+$\bigcirc$ & b) & #2\\ 
+$\bigcirc$ & c) & #3\\
+$\bigcirc$ & d) & #4
+\end{tabular}\par\abcsep\abcsep}}
+
+\newcommand{\aBcd}[4]{%
+{\par\abcsep\renewcommand{\arraystretch}{1.1}
+\quad\begin{tabular}{l@{\quad}l@{\quad}p{\abcwidth}} 
+$\bigcirc$ & a) & #1\\ 
+\problem{$\bigcirc$}\solution{$\bigotimes$} & b) & #2\\ 
+$\bigcirc$ & c) & #3\\
+$\bigcirc$ & d) & #4
+\end{tabular}\par\abcsep\abcsep}}
+
+\newcommand{\abCd}[4]{%
+{\par\abcsep\renewcommand{\arraystretch}{1.1}
+\quad\begin{tabular}{l@{\quad}l@{\quad}p{\abcwidth}} 
+$\bigcirc$ & a) & #1\\
+$\bigcirc$ & b) & #2\\ 
+\problem{$\bigcirc$}\solution{$\bigotimes$} & c) & #3\\ 
+$\bigcirc$ & d) & #4
+\end{tabular}\par\abcsep\abcsep}}
+
+\newcommand{\abcD}[4]{%
+{\par\abcsep\renewcommand{\arraystretch}{1.1}
+\quad\begin{tabular}{l@{\quad}l@{\quad}p{\abcwidth}} 
+$\bigcirc$ & a) & #1\\
+$\bigcirc$ & b) & #2\\ 
+$\bigcirc$ & c) & #3\\
+\problem{$\bigcirc$}\solution{$\bigotimes$} & d) & #4\\ 
+\end{tabular}\par\abcsep\abcsep}}
+
+\newcommand{\ABcd}[4]{%
+{\par\abcsep\renewcommand{\arraystretch}{1.1}
+\quad\begin{tabular}{l@{\quad}l@{\quad}p{\abcwidth}} 
+\problem{$\bigcirc$}\solution{$\bigotimes$} & a) & #1\\ 
+\problem{$\bigcirc$}\solution{$\bigotimes$} & b) & #2\\ 
+$\bigcirc$ & c) & #3\\
+$\bigcirc$ & d) & #4
+\end{tabular}\par\abcsep\abcsep}}
+
+\newcommand{\AbCd}[4]{%
+{\par\abcsep\renewcommand{\arraystretch}{1.1}
+\quad\begin{tabular}{l@{\quad}l@{\quad}p{\abcwidth}} 
+\problem{$\bigcirc$}\solution{$\bigotimes$} & a) & #1\\ 
+$\bigcirc$ & b) & #2\\ 
+\problem{$\bigcirc$}\solution{$\bigotimes$} & c) & #3\\ 
+$\bigcirc$ & d) & #4
+\end{tabular}\par\abcsep\abcsep}}
+
+\newcommand{\AbcD}[4]{%
+{\par\abcsep\renewcommand{\arraystretch}{1.1}
+\quad\begin{tabular}{l@{\quad}l@{\quad}p{\abcwidth}} 
+\problem{$\bigcirc$}\solution{$\bigotimes$} & a) & #1\\ 
+$\bigcirc$ & b) & #2\\ 
+$\bigcirc$ & c) & #3\\
+\problem{$\bigcirc$}\solution{$\bigotimes$} & d) & #4\\ 
+\end{tabular}\par\abcsep\abcsep}}
+
+\newcommand{\aBCd}[4]{%
+{\par\abcsep\renewcommand{\arraystretch}{1.1}
+\quad\begin{tabular}{l@{\quad}l@{\quad}p{\abcwidth}} 
+$\bigcirc$ & a) & #1\\ 
+\problem{$\bigcirc$}\solution{$\bigotimes$} & b) & #2\\ 
+\problem{$\bigcirc$}\solution{$\bigotimes$} & c) & #3\\ 
+$\bigcirc$ & d) & #4
+\end{tabular}\par\abcsep\abcsep}}
+
+\newcommand{\aBcD}[4]{%
+{\par\abcsep\renewcommand{\arraystretch}{1.1}
+\quad\begin{tabular}{l@{\quad}l@{\quad}p{\abcwidth}} 
+$\bigcirc$ & a) & #1\\ 
+\problem{$\bigcirc$}\solution{$\bigotimes$} & b) & #2\\ 
+$\bigcirc$ & c) & #3\\
+\problem{$\bigcirc$}\solution{$\bigotimes$} & d) & #4\\ 
+\end{tabular}\par\abcsep\abcsep}}
+
+\newcommand{\abCD}[4]{%
+{\par\abcsep\renewcommand{\arraystretch}{1.1}
+\quad\begin{tabular}{l@{\quad}l@{\quad}p{\abcwidth}} 
+$\bigcirc$ & a) & #1\\
+$\bigcirc$ & b) & #2\\ 
+\problem{$\bigcirc$}\solution{$\bigotimes$} & c) & #3\\ 
+\problem{$\bigcirc$}\solution{$\bigotimes$} & d) & #4\\ 
+\end{tabular}\par\abcsep\abcsep}}
+
+\newcommand{\aBCD}[4]{%
+{\par\abcsep\renewcommand{\arraystretch}{1.1}
+\quad\begin{tabular}{l@{\quad}l@{\quad}p{\abcwidth}} 
+$\bigcirc$ & a) & #1\\ 
+\problem{$\bigcirc$}\solution{$\bigotimes$} & b) & #2\\ 
+\problem{$\bigcirc$}\solution{$\bigotimes$} & c) & #3\\ 
+\problem{$\bigcirc$}\solution{$\bigotimes$} & d) & #4\\ 
+\end{tabular}\par\abcsep\abcsep}}
+
+\newcommand{\AbCD}[4]{%
+{\par\abcsep\renewcommand{\arraystretch}{1.1}
+\quad\begin{tabular}{l@{\quad}l@{\quad}p{\abcwidth}} 
+\problem{$\bigcirc$}\solution{$\bigotimes$} & a) & #1\\ 
+$\bigcirc$ & b) & #2\\ 
+\problem{$\bigcirc$}\solution{$\bigotimes$} & c) & #3\\ 
+\problem{$\bigcirc$}\solution{$\bigotimes$} & d) & #4\\ 
+\end{tabular}\par\abcsep\abcsep}}
+
+\newcommand{\ABcD}[4]{%
+{\par\abcsep\renewcommand{\arraystretch}{1.1}
+\quad\begin{tabular}{l@{\quad}l@{\quad}p{\abcwidth}} 
+\problem{$\bigcirc$}\solution{$\bigotimes$} & a) & #1\\ 
+\problem{$\bigcirc$}\solution{$\bigotimes$} & b) & #2\\ 
+$\bigcirc$ & c) & #3\\
+\problem{$\bigcirc$}\solution{$\bigotimes$} & d) & #4\\ 
+\end{tabular}\par\abcsep\abcsep}}
+
+\newcommand{\ABCd}[4]{%
+{\par\abcsep\renewcommand{\arraystretch}{1.1}
+\quad\begin{tabular}{l@{\quad}l@{\quad}p{\abcwidth}}
+\problem{$\bigcirc$}\solution{$\bigotimes$} & a) & #1\\
+\problem{$\bigcirc$}\solution{$\bigotimes$} & b) & #2\\
+\problem{$\bigcirc$}\solution{$\bigotimes$} & c) & #3\\
+$\bigcirc$ & d) & #4
+\end{tabular}\par\abcsep\abcsep}}
+
+\newcommand{\ABCD}[4]{%
+{\par\abcsep\renewcommand{\arraystretch}{1.1}
+\quad\begin{tabular}{l@{\quad}l@{\quad}p{\abcwidth}}
+\problem{$\bigcirc$}\solution{$\bigotimes$} & a) & #1\\ 
+\problem{$\bigcirc$}\solution{$\bigotimes$} & b) & #2\\ 
+\problem{$\bigcirc$}\solution{$\bigotimes$} & c) & #3\\ 
+\problem{$\bigcirc$}\solution{$\bigotimes$} & d) & #4\\ 
+\end{tabular}\par\abcsep\abcsep}}
+
+
+\newcommand{\abcde}[5]{%
+{\par\abcsep\renewcommand{\arraystretch}{1.1}
+\quad\begin{tabular}{l@{\quad}l@{\quad}p{\abcwidth}} 
+$\bigcirc$ & a) & #1\\ 
+$\bigcirc$ & b) & #2\\
+$\bigcirc$ & c) & #3\\
+$\bigcirc$ & d) & #4\\
+$\bigcirc$ & e) & #5
+\end{tabular}\par\abcsep\abcsep}}
+
+\newcommand{\Abcde}[5]{%
+{\par\abcsep\renewcommand{\arraystretch}{1.1}
+\quad\begin{tabular}{l@{\quad}l@{\quad}p{\abcwidth}} 
+\problem{$\bigcirc$}\solution{$\bigotimes$} & a) & #1\\ 
+$\bigcirc$ & b) & #2\\ 
+$\bigcirc$ & c) & #3\\
+$\bigcirc$ & d) & #4\\
+$\bigcirc$ & e) & #5
+\end{tabular}\par\abcsep\abcsep}}
+
+\newcommand{\aBcde}[5]{%
+{\par\abcsep\renewcommand{\arraystretch}{1.1}
+\quad\begin{tabular}{l@{\quad}l@{\quad}p{\abcwidth}} 
+$\bigcirc$ & a) & #1\\ 
+\problem{$\bigcirc$}\solution{$\bigotimes$} & b) & #2\\ 
+$\bigcirc$ & c) & #3\\
+$\bigcirc$ & d) & #4\\
+$\bigcirc$ & e) & #5
+\end{tabular}\par\abcsep\abcsep}}
+
+\newcommand{\abCde}[5]{%
+{\par\abcsep\renewcommand{\arraystretch}{1.1}
+\quad\begin{tabular}{l@{\quad}l@{\quad}p{\abcwidth}} 
+$\bigcirc$ & a) & #1\\ 
+$\bigcirc$ & b) & #2\\ 
+\problem{$\bigcirc$}\solution{$\bigotimes$} & c) & #3\\
+$\bigcirc$ & d) & #4\\
+$\bigcirc$ & e) & #5
+\end{tabular}\par\abcsep\abcsep}}
+
+\newcommand{\abcDe}[5]{%
+{\par\abcsep\renewcommand{\arraystretch}{1.1}
+\quad\begin{tabular}{l@{\quad}l@{\quad}p{\abcwidth}} 
+$\bigcirc$ & a) & #1\\ 
+$\bigcirc$ & b) & #2\\ 
+$\bigcirc$ & c) & #3\\
+\problem{$\bigcirc$}\solution{$\bigotimes$} & d) & #4\\
+$\bigcirc$ & e) & #5
+\end{tabular}\par\abcsep\abcsep}}
+
+\newcommand{\abcdE}[5]{%
+{\par\abcsep\renewcommand{\arraystretch}{1.1}
+\quad\begin{tabular}{l@{\quad}l@{\quad}p{\abcwidth}} 
+$\bigcirc$ & a) & #1\\ 
+$\bigcirc$ & b) & #2\\ 
+$\bigcirc$ & c) & #3\\
+$\bigcirc$ & d) & #4\\
+\problem{$\bigcirc$}\solution{$\bigotimes$} & e) & #5
+\end{tabular}\par\abcsep\abcsep}}
+
+
+%
+%----------------------------------------------
+% Definition von \D  als Blank der Laenge einer Ziffer
+%
+\newlength{\digitlen}
+\settowidth{\digitlen}{0}
+\newcommand{\D}{\hspace{\digitlen}}
+%----------------------------------------------
+
+%
+%  Comandos, abreviaciones y notación
+%
+
+\DeclareFontFamily{U}{wncy}{}
+\DeclareFontShape{U}{wncy}{m}{n}{<->wncyr10}{}
+\DeclareSymbolFont{mcy}{U}{wncy}{m}{n}
+\DeclareMathSymbol{\sha}{\mathord}{mcy}{"58} 
+
+
+%%%%%%%%%%%%%%%%%%
+% Math Symbols C %
+%%%%%%%%%%%%%%%%%%
+
+\DeclareSymbolFont{symbolsC}{U}{txsyc}{m}{n}
+\SetSymbolFont{symbolsC}{bold}{U}{txsyc}{bx}{n}
+\DeclareFontSubstitution{U}{txsyc}{m}{n}
+
+\def\re@DeclareMathSymbol#1#2#3#4{%
+    \let#1=\undefined
+    \DeclareMathSymbol{#1}{#2}{#3}{#4}}
+
+\renewcommand{\Re}{\ensuremath{\operatorname{Re}}}
+\renewcommand{\Im}{\ensuremath{\operatorname{Im}}}
+
+\newcommand{\real}[1]{\Re\left\{#1\right\}}
+\newcommand{\imag}[1]{\Im\left\{#1\right\}}
+
+
+\re@DeclareMathSymbol{\multimapinv}{\mathrel}{symbolsC}{18}
+\re@DeclareMathSymbol{\multimapboth}{\mathrel}{symbolsC}{19}
+\re@DeclareMathSymbol{\multimapdot}{\mathrel}{symbolsC}{20}
+\re@DeclareMathSymbol{\multimapdotinv}{\mathrel}{symbolsC}{21}
+\re@DeclareMathSymbol{\multimapdotboth}{\mathrel}{symbolsC}{22}
+\re@DeclareMathSymbol{\multimapdotbothA}{\mathrel}{symbolsC}{23}
+\re@DeclareMathSymbol{\multimapdotbothB}{\mathrel}{symbolsC}{24}
+\re@DeclareMathSymbol{\multimapbothvert}{\mathrel}{symbolsC}{149}
+\re@DeclareMathSymbol{\multimapdotbothvert}{\mathrel}{symbolsC}{150}
+\re@DeclareMathSymbol{\multimapdotbothBvert}{\mathrel}{symbolsC}{151}
+\re@DeclareMathSymbol{\multimapdotbothAvert}{\mathrel}{symbolsC}{152}
+
+
+\newcommand{\prt}[1]{\ensuremath{\mathcal{#1}}}         %% partitioning
+\newcommand{\img}[1]{\ensuremath{\mathcal{#1}}}         %% image as a set
+\newcommand{\reg}[1][R]{\ensuremath{\mathcal{#1}}}      %% region
+\newcommand{\pred}[1]{\ensuremath{\mathrm{#1}}}         %% predicate
+\newcommand{\operat}[2]{\mathcal{#1}\left\{#2\right\}}
+\newcommand{\transf}[1]{\mathscr{#1}}
+\newcommand{\fourier}[1]{\transf{F}\left\{#1\right\}}
+\newcommand{\ifourier}[1]{\transf{F}^{-1}\left\{#1\right\}}
+\newcommand{\laplace}[1]{\transf{L}\left\{#1\right\}}
+\newcommand{\ulaplace}[1]{\transf{L}_u\left\{#1\right\}}
+\newcommand{\blaplace}[1]{\transf{L}_b\left\{#1\right\}}
+\newcommand{\ilaplace}[1]{\transf{L}^{-1}\left\{#1\right\}}
+\newcommand{\ztrans}[1]{\transf{Z}\left\{#1\right\}}
+\newcommand{\iztrans}[1]{\transf{Z}^{-1}\left\{#1\right\}}
+\newcommand{\zutrans}[1]{\transf{Z}_u\left\{#1\right\}}
+\newcommand{\exceq}{\ensuremath{\overset{!}{=}}}
+
+\newcommand{\signum}{\operatorname{signum}}
+\newcommand{\vct}[1]{\ensuremath{\underline{\mathbf{#1}}}}
+\newcommand{\mat}[1]{\ensuremath{\mathbf{#1}}}
+\newcommand{\vctmu}{\vct{\boldsymbol{\mu}}}
+\newcommand{\vctzeta}{\vct{\boldsymbol{\zeta}}}
+\newcommand{\vctpi}{\vct{\boldsymbol{\pi}}}
+\newcommand{\vctvarphi}{\vct{\boldsymbol{\varphi}}}
+\newcommand{\raum}[1]{\ensuremath{\mathbb{#1}}}
+\newcommand{\matSigma}{\mat{\boldsymbol{\Sigma}}}
+\newcommand{\matLambda}{\mat{\boldsymbol{\Lambda}}}
+\newcommand{\matPsi}{\mat{\boldsymbol{\Psi}}}
+\newcommand{\matPhi}{\mat{\boldsymbol{\Phi}}}
+\newcommand{\row}[2]{\ensuremath{\mathbf{\underline{#1}_{#2(\cdot)}}}}
+\newcommand{\col}[2]{\ensuremath{\mathbf{\underline{#1}_{(\cdot) #2}}}}
+\newcommand{\seq}[1]{\ensuremath{#1}}
+\newcommand{\set}[1]{\ensuremath{\mathcal{#1}}}
+\newcommand{\gset}[1]{\ensuremath{#1}} %% set for greek symbols
+\newcommand{\front}[1]{\widehat{\set{#1}}}
+\newcommand{\setlambda}{\set{\boldsymbol{\lambda}}}
+\newcommand{\klass}[1]{\ensuremath{\mathpss{#1}}}
+\newcommand{\graph}[1]{\ensuremath{\mathsf{#1}}}
+\newcommand{\lab}[1]{\ensuremath{\mathpss{L}(#1)}}
+\newcommand{\myfrac}[2]{{\footnotesize #1/#2}}
+\newcommand{\ifthenspc}{\rule{3mm}{0mm}}
+\newcommand{\point}[1]{\ensuremath{\mathsf{#1}}}
+\newcommand{\estim}[1]{\ensuremath{\hat{#1}}}
+\newcommand{\numset}[1]{\ensuremath{\mathbb{#1}}}
+\newcommand{\tuple}[1]{\ensuremath{\left\langle#1\right\rangle}}
+\newcommand{\conj}[1]{\ensuremath{#1^{\ast}}}
+\newcommand{\base}[1]{\set{#1}}
+\newcommand{\zeron}[1]{\ensuremath{\underset{\uparrow}{#1}}}
+\newcommand{\sysT}{\ensuremath{\mathcal{T}}}
+\newcommand{\sys}[1]{\ensuremath{\sysT\left[#1\right]}}
+\newcommand{\sen}{\operatorname{sen}} % sinus in spanish (seno)
+\newcommand{\senh}{\operatorname{senh}} % sinus in spanish (seno)
+\newcommand{\Ln}{\operatorname{Ln}} % sinus in spanish (seno)
+\newcommand{\rect}{\operatorname{rect}} % rectangular
+\newcommand{\tria}{\operatorname{tria}} % triangular
+\newcommand{\sa}{\operatorname{sa}} % sa
+\newcommand{\code}[1]{\texttt{#1}}
+\newcommand{\conv}{\ensuremath{\ast}}
+\newcommand{\cconv}{\ensuremath{\;\,\text{\footnotesize{N}}\!\!\!\!\!\!\bigcirc}}
+\newcommand{\roc}{\ensuremath{\operatorname{ROC}}}
+
+
+%% Natural, Integer and Real Numbers
+\newcommand{\setA}{\ensuremath{\mathbb{A}}}
+\newcommand{\setB}{\ensuremath{\mathrm{I\negthinspace B}}}
+\newcommand{\setC}{\ensuremath{\mathbb{C}}}
+\newcommand{\setD}{\ensuremath{\mathrm{I\negthinspace D}}}
+\newcommand{\setE}{\ensuremath{\mathrm{I\negthinspace E}}}
+\newcommand{\setF}{\ensuremath{\mathrm{I\negthinspace F}}}
+\newcommand{\setG}{\ensuremath{\mathbb{G}}}
+\newcommand{\setH}{\ensuremath{\mathrm{I\negthinspace H}}}
+\newcommand{\setI}{\ensuremath{\mathbb{I}}}
+\newcommand{\setJ}{\ensuremath{\mathbb{J}}}
+\newcommand{\setK}{\ensuremath{\mathrm{I\negthinspace K}}}
+\newcommand{\setL}{\ensuremath{\mathrm{I\negthinspace L}}}
+\newcommand{\setM}{\ensuremath{\mathrm{I\negthinspace M}}}
+\newcommand{\setN}{\ensuremath{\mathrm{I\negthinspace N}}}
+\newcommand{\setO}{\ensuremath{\mathbb{O}}}
+\newcommand{\setP}{\ensuremath{\mathrm{I\negthinspace P}}}
+\newcommand{\setQ}{\ensuremath{\mathbb{Q}}}
+\newcommand{\setR}{\ensuremath{\mathrm{I\negthinspace R}}}
+\newcommand{\setS}{\ensuremath{\mathbb{S}}}
+\newcommand{\setT}{\ensuremath{\mathbb{T}}}
+\newcommand{\setU}{\ensuremath{\mathbb{U}}}
+\newcommand{\setV}{\ensuremath{\mathbb{V}}}
+\newcommand{\setW}{\ensuremath{\mathbb{W}}}
+\newcommand{\setX}{\ensuremath{\mathbb{X}}}
+\newcommand{\setY}{\ensuremath{\mathbb{Y}}}
+\newcommand{\setZ}{\ensuremath{\mathbb{Z}}}
+
+%%
+% Multimap symbols
+%
+\newcommand{\ttoF}{\TransformHoriz}
+\newcommand{\Ftot}{\InversTransformHoriz}
+\newcommand{\ttoZ}{\ttoF}
+\newcommand{\Ztot}{\Ftot}
+\newcommand{\ttoZu}{\overset{z_u}{\ttoF}}
+\newcommand{\Zutot}{\overset{z_u}{\Ftot}}
+\newcommand{\vttoF}{\text{\begin{sideways}$\Ftot$\end{sideways}}}
+\newcommand{\vFtot}{\text{\begin{sideways}$\ttoF$\end{sideways}}}
+\newcommand{\vttoZ}{\vttoF}
+\newcommand{\vZtot}{\vFtot}
+\newcommand{\ttoDF}{\underset{N}{\ttoF}}
+\newcommand{\DFtot}{\underset{N}{\Ftot}}
+
+\newcommand{\thisis}[2]{\underset{#1}{\underbrace{#2}}}
+
+% Numeración de problemas
+\newcounter{ProblemaNr}
+% Número del primer problema
+\newcounter{PrimerProblema}
+
+\newcommand{\setPrimerProblema}[1]{%
+  \setcounter{PrimerProblema}{#1}}
+\newcommand{\resetProblemaNr}{%
+  \setcounter{ProblemaNr}{\value{PrimerProblema}}}
+
+\definecolor{solcolor}{rgb}{0.05,0.05,0.6}     %   dark blue
+\definecolor{ssolcolor}{rgb}{0.1,0.4,0.1}      %   dark green
+\definecolor{ptscolor}{rgb}{0.4,0.0,0.0}       %   dark red
+\definecolor{linkcolor}{rgb}{0.6,0,0}
+\definecolor{citecolor}{rgb}{0.5,0,0}
+\definecolor{urlcolor}{rgb}{0,0,0.5}
+
+
+
+\newboolean{solutionmode}              % boolean used to control solution mode
+\setboolean{solutionmode}{false}       % turn solution mode off
+
+\newcommand{\showsolution}{%
+  \setboolean{solutionmode}{true}      % turn solution mode on
+  \renewcommand{\solution}[1]{\ifsolution{##1}{}}
+  \renewcommand{\problem}[1]{}
+}
+
+\newcommand{\showshortsolution}{%
+  \setboolean{solutionmode}{false}      % turn solution mode off
+  \renewcommand{\shortsolution}[1]{\slshape\small{\color{ssolcolor}##1}\normalfont\normalsize}
+  \renewcommand{\problem}[1]{##1}
+}
+
+
+% Command to mark with red the points to be asigned
+\newcommand{\calif}[1]{{\color{ptscolor}(#1)}}
+
+% Command to change between solution or problem
+\newcommand{\ifsolution}[2]{%
+  \ifthenelse{\boolean{solutionmode}}%
+  {\slshape\small{\color{solcolor}#1}\normalfont\normalsize}{#2}}
+
+\setlength{\parindent}{0pt}
+\newcommand{\codeindent}{\hspace*{3em}}
+
+\newlength{\multiplewidth}
+\newlength{\multiplesepwidth}
+
+\newenvironment{problemas}
+{%
+  \begin{enumerate}
+  \addtolength{\itemsep}{2\parsep}
+  \setcounter{enumi}{\value{Problemasr}}
+}{%
+  \end{enumerate}
+  \setcounter{Problemasr}{\value{enumi}}
+}
+
+\newcommand{\multiplesep}{%
+  \hfill\parbox[t]{\multiplesepwidth}{\hspace*{\multiplesepwidth}}\hfill%
+}
+
+\newcommand{\inittwocolumn}{%
+  \setlength{\multiplesepwidth}{1.5cm}
+  \setlength{\multiplewidth}{0.5\textwidth}
+  \addtolength{\multiplewidth}{-0.6\multiplesepwidth}
+  \addtolength{\multiplewidth}{-\leftmargin}
+}
+
+\newcommand{\initthreecolumn}{%
+  \setlength{\multiplesepwidth}{1cm}
+  \setlength{\multiplewidth}{0.33\textwidth}
+  \addtolength{\multiplewidth}{-0.5\multiplesepwidth}
+  %\addtolength{\multiplewidth}{-\leftmargin}
+}
+
+\newenvironment{multiple}
+{%
+ % \inittwocolumn
+  \begin{enumerate}
+    \addtolength{\itemsep}{0pt}
+    \renewcommand{\labelenumi}{$\bigcirc$ \alph{enumi})}%
+}{%
+  \end{enumerate}
+}
+
+\newcommand{\lmultibox}[1]{%
+  \raisebox{\topsep}{\parbox[t]{\multiplewidth}{#1}}}
+\newcommand{\rmultibox}[1]{%
+  \parbox[t]{\multiplewidth}{#1}}
+
+\newcommand{\ltribox}[1]{%
+  \raisebox{\topsep}{\parbox[t]{\multiplewidth}{#1}}}
+\newcommand{\rtribox}[1]{%
+  \parbox[t]{\multiplewidth}{#1}}
+\newcommand{\mtribox}[1]{%
+  \parbox[t]{\multiplewidth}{#1}}
+
+\newcommand{\maketwocolumn}[2]{%
+  \inittwocolumn
+  \parbox[t]{\multiplewidth}{#1}
+  \multiplesep
+  \parbox[t]{\multiplewidth}{#2}
+}
+
+\newcounter{zaehler}
+\newcommand{\lineas}[1]{%
+\samepage%\vskip 0.5cm
+{\setcounter{zaehler}{1}
+\loop {\vskip1.5ex\rule{\textwidth}{0.5pt}\par}
+   \ifnum\value{zaehler}<#1 \stepcounter{zaehler} \repeat}
+\par\abcskip
+}
+
+\newcommand{\linea}[1] {%
+  \raisebox{-1ex}{\rule{#1}{0.5pt}}
+}
+
+\newcommand{\leereseiten}[1] {%
+{\setcounter{zaehler}{1}
+\loop {\clearpage  \vspace*{20cm}}
+   \ifnum\value{zaehler}<#1 \stepcounter{zaehler} \repeat}
+ \par\abcskip
+}
+
+\endinput
+

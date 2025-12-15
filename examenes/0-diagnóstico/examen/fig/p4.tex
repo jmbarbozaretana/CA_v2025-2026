@@ -1,0 +1,23 @@
+\documentclass[class=article,border=10pt]{standalone}
+\usepackage{verbatim}
+\usepackage{textcomp}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+\usepackage[europeanresistors,americaninductors,RPvoltages]{circuitikz}
+
+\begin{document}
+
+\begin{circuitikz}  [american, scale=1]
+    \draw
+(0,0) node[op amp] (op1) {}
+(op1.-) to [short,-] ++(-1,0) to [R,l_=$R_2$] ++(-1.5,0) to [short,-] ++(-0.5,0) to [R,l_=$R_1$] ++(-2.5,0) to [short,-o] ++ (0,0) node[left]{$V_i$}
+(op1.-)++(-3,0) to [R,l=$R_3$,*-] ++(0,-2.5) to ++(0,0) node[ground]{} 
+(op1.-)++(-0.5,0) to [short,*-] ++(0,1.5) coordinate (leftC)
+(leftC) to [R,l=$R_4$] (leftC -| op1.out) to[short,-*] (op1.out)
+(op1.out) to [short,-o] ++(1,0) coordinate(end) node[right]{$V_o$}
+(op1.out) to [short] ++(0,-0.25) to [R,l=$R_5$] ++(0,-1.75) to ++(0,0) node[ground]{}
+(op1.+) to ++(0,-0.25) [R,l=$R_6$] to ++(0,-1.25) node[ground]{}
+;
+
+\end{circuitikz}
+\end{document}

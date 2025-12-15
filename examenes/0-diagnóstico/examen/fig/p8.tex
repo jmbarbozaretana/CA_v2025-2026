@@ -1,0 +1,19 @@
+\documentclass[class=article,border=10pt]{standalone}
+\usepackage{verbatim}
+\usepackage{textcomp}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+\usepackage[europeanresistors,americaninductors,RPvoltages]{circuitikz}
+
+\begin{document}
+
+\begin{circuitikz}  [american, scale=0.75]
+    \draw (0.5,0) to[sV, v=$\mathbf{V}_s$, i^=$\mathbf{I}_s$] (0.5,5) to [generic,a^=$\mathbf{S}_1$,-] (4.5,5)
+    (4.5,5) to [short,-] (8,5)
+%    (4.5,5) to [generic, a=$\mathbf{S}_2$, -] (9,5)
+    (4.5,0) to [generic,a=$\mathbf{S}_2$,] (4.5,5)
+    (8,5) to[generic,a^=$\mathbf{S}_3$, -] (8,0)
+    (0.5,0) to [short,-] (8,0);
+\end{circuitikz}
+
+\end{document}

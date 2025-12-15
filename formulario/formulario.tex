@@ -1,0 +1,1434 @@
+\documentclass[10pt,twoside,letterpaper]{article}
+
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+%\usepackage[latin1]{inputenc}
+\usepackage{ifthen}                     % provide if-then-else operators
+\usepackage{amsmath}
+\usepackage{amssymb,amstext}            % AMS-math and symbols package
+
+\usepackage{ftcap}                      % switch \abovecaptionskip and
+                                        % \belowcaptionskip for tables, in 
+                                        % order to avoid the caption to be
+                                        % too near to the table itself
+\usepackage{booktabs}                   % book type tabulars
+\usepackage{rotating}
+\usepackage{tabularx}
+\usepackage{multicol}                   % multiple columns environments
+\usepackage{color}
+\RequirePackage{mathrsfs}        % Calygraphic fonts for transforms
+\RequirePackage{trsym}
+
+\renewcommand{\Re}{\operatorname{Re}}
+\renewcommand{\Im}{\operatorname{Im}}
+\newcommand*{\real}[1]{\Re\mathopen{}\left\{#1\right\}\mathclose{}}
+\newcommand*{\imag}[1]{\Im\mathopen{}\left\{#1\right\}\mathclose{}}
+\newcommand{\Ln}{\operatorname{Ln}}
+\newcommand{\sen}{\operatorname{sen}}
+\newcommand{\sa}{\operatorname{sa}}
+\newcommand{\conj}[1]{\ensuremath{{{#1}^{\ast}}}}
+\newcommand{\conv}{\ensuremath{\ast}}
+\newcommand{\cconv}{\ensuremath{\;\,\text{\footnotesize{N}}\!\!\!\!\!\!\bigcirc}}
+\newcommand{\tuple}[1]{\ensuremath{\left\langle#1\right\rangle}}
+\newcommand{\setC}{\ensuremath{\mathbb{C}}}
+\newcommand{\setR}{\ensuremath{\mathrm{I\negthinspace R}}}
+\newcommand{\setZ}{\ensuremath{\mathbb{Z}}}
+\newcommand{\ttoF}{\TransformHoriz}
+
+\newcommand*{\transf}[1]{\mathscr{#1}}
+\newcommand*{\fourier}[1]{\transf{F}\mathopen{}\left\{#1\right\}\mathclose{}}
+\newcommand*{\ifourier}[1]{\transf{F}^{-1}\mathopen{}\left\{#1\right\}\mathclose{}}
+\newcommand*{\laplace}[1]{\transf{L}\mathopen{}\left\{#1\right\}\mathclose{}}
+\newcommand*{\ulaplace}[1]{\transf{L}_u\mathopen{}\left\{#1\right\}\mathclose{}}
+\newcommand*{\blaplace}[1]{\transf{L}_b\mathopen{}\left\{#1\right\}\mathclose{}}
+\newcommand*{\ilaplace}[1]{\transf{L}^{-1}\mathopen{}\left\{#1\right\}\mathclose{}}
+\newcommand*{\ztrans}[1]{\transf{Z}\mathopen{}\left\{#1\right\}\mathclose{}}
+\newcommand*{\iztrans}[1]{\transf{Z}^{-1}\mathopen{}\left\{#1\right\}\mathclose{}}
+\newcommand*{\zutrans}[1]{\transf{Z}_u\mathopen{}\left\{#1\right\}\mathclose{}}
+\newcommand*{\exceq}{\overset{!}{=}}
+
+
+
+%
+% page layout
+%
+\setlength{\oddsidemargin}{0cm}         % Margin for odd numbered pages
+\setlength{\evensidemargin}{0cm}        % Margin for even numbered pages
+\addtolength{\topmargin}{-1.5cm}        % space between top and head
+\addtolength{\headsep}{0cm}          % space between head and text
+\setlength{\textwidth}{180mm}           % text width
+\setlength{\textheight}{225mm}          % text height
+\setlength{\headheight}{13.5pt}         % fancy headers wanted this
+\parindent0em                           % indentation width of first line
+
+\setlength{\columnseprule}{1pt}
+\def\columnseprulecolor{\color{black}}
+
+%
+% Fraction of Float Object / Text
+%
+
+\renewcommand{\topfraction}{0.975}      % how much of top of page should be 
+                                        % allowed to be float object?
+\renewcommand{\bottomfraction}{0.975}   % how much of bottom of page should be
+                                        % allowed to be float object?
+\renewcommand{\textfraction}{0.02}      % how much of page must be text?
+
+\newcommand{\copyrightfooter}{\tiny{\copyright 2019--2022 --- %
+    J.\,M.~Barboza --- %
+    Uso exclusivo ITCR --- Versión \today}}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead[]{}
+\chead[]{}
+\rhead[]{}
+\lfoot[\small\thepage]{\copyrightfooter}
+\cfoot[]{}
+\rfoot[\copyrightfooter]{\small\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\begin{document}
+\graphicspath{{./}{./fig/}}
+
+\begingroup
+\setlength{\tabcolsep}{10pt}
+\renewcommand{\arraystretch}{1.25}
+\begin{center}
+  \begin{tabular}{c}
+    {\Large{Formulario}}\\
+    {\LARGE{EL-2114 Circuitos Eléctricos en Corriente Alterna}}\\
+    {\large{Escuela de Ingeniería Electrónica}}\\
+    {\large{Instituto Tecnológico de Costa Rica}}\\
+    {\large{Prof.: M.Sc. José Miguel Barboza Retana}}\\
+    \hline
+  \end{tabular}
+\end{center}
+\endgroup
+\bigskip
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\large{\underline{\textbf{Unidad 1: Análisis en estado sinusoidal permanente}}}
+
+\normalsize
+
+\medskip
+
+\begin{multicols}{2}
+\textbf{Identidades entre senoides}
+
+\begin{itemize}
+\item $\sen(\omega t \pm 180^{\circ})=-\sen(\omega t)$
+\item $\cos(\omega t \pm 180^{\circ})=-\cos(\omega t)$
+\item $\sen(\omega t \pm 90^{\circ})=\pm\cos(\omega t)$
+\item $\cos(\omega t \pm 90^{\circ})=\mp\sen(\omega t)$
+\end{itemize}
+
+\textbf{Identidad de Euler}
+\begin{itemize}
+\item $e^{\pm j\phi}=\cos(\phi)\pm j \sen(\phi)$
+\item $\cos(\phi) = \dfrac{e^{j\phi}+e^{-j\phi}}{2}$
+\item $\sen(\phi) = \dfrac{e^{j\phi}-e^{-j\phi}}{2j}$
+\end{itemize}
+
+\textbf{Fasores}
+\begin{align*}
+v(t) = V_m\cos(\omega t + \phi)  &\ttoF \mathbf{V}=V_m\angle{\phi}\\
+\dfrac{dv(t)}{dt} &\ttoF j\omega \mathbf{V}\\
+\int v(t)\,dt &\ttoF \dfrac{\mathbf{V}}{j\omega}\\
+\end{align*}
+
+\textbf{Impedancia y admitancia}
+\begin{itemize}
+\item $v(t) = V_m\cos(\omega t + \theta_v) \ttoF \mathbf{V}=V_m\angle{\theta_v}$
+\item $i(t) = I_m\cos(\omega t + \theta_i) \ttoF \mathbf{I}=I_m\angle{\theta_i}$
+\item $\mathbf{Z} = \dfrac{\mathbf{V}}{\mathbf{I}} = R+jX = Z\angle{\theta}=\dfrac{V_m}{I_m}\angle{(\theta_v-\theta_i)}\,[\Omega]$
+\item $\mathbf{Y} = \dfrac{\mathbf{I}}{\mathbf{V}} = G+jB = Y\angle{\varphi}=\dfrac{I_m}{V_m}\angle{(\theta_i-\theta_v)}\,[S]$
+\end{itemize}
+
+\bigskip
+
+\textbf{Ley de Ohm (impedancias)}
+\begin{itemize}
+\item $\mathbf{V}=\mathbf{I}\cdot\mathbf{Z}$
+\end{itemize}
+
+\columnbreak
+
+\textbf{Relaciones fasoriales (R, L y C)}
+\medskip
+\begin{center}
+\begin{tabular}{|w{c}{14mm}|w{c}{20mm}|w{c}{25mm}|}
+    \hline
+    Elemento & Tiempo & Frecuencia\\\hline
+    R & $v(t)=Ri(t)$ & $\mathbf{V}=R\mathbf{I}$\\
+    L & $v(t)=L\dfrac{di(t)}{dt}$ & $\mathbf{V}=j\omega L\mathbf{I}$\\
+    C & $i(t)=C\dfrac{v(t)}{dt}$ & $\mathbf{V}=\dfrac{\mathbf{I}}{j\omega C}$\\\hline
+\end{tabular}
+\end{center}
+
+\bigskip
+
+\textbf{Conversión} $\Delta$ - Y
+
+\begin{align*}
+\mathbf{Z}_a &= \dfrac{\mathbf{Z}_1\mathbf{Z}_2+\mathbf{Z}_2\mathbf{Z}_3+\mathbf{Z}_3\mathbf{Z}_1}{\mathbf{Z}_1}\\
+\mathbf{Z}_ b&= \dfrac{\mathbf{Z}_1\mathbf{Z}_2+\mathbf{Z}_2\mathbf{Z}_3+\mathbf{Z}_3\mathbf{Z}_1}{\mathbf{Z}_2}\\
+\mathbf{Z}_c &= \dfrac{\mathbf{Z}_1\mathbf{Z}_2+\mathbf{Z}_2\mathbf{Z}_3+\mathbf{Z}_3\mathbf{Z}_1}{\mathbf{Z}_3}
+\end{align*}
+
+\begin{align*}
+\mathbf{Z}_1 &= \dfrac{\mathbf{Z}_b\mathbf{Z}_c}{\mathbf{Z}_a+\mathbf{Z}_b+\mathbf{Z}_c}\\
+\mathbf{Z}_2 &= \dfrac{\mathbf{Z}_c\mathbf{Z}_a}{\mathbf{Z}_a+\mathbf{Z}_b+\mathbf{Z}_c}\\
+\mathbf{Z}_3 &= \dfrac{\mathbf{Z}_a\mathbf{Z}_b}{\mathbf{Z}_a+\mathbf{Z}_b+\mathbf{Z}_c}
+\end{align*}
+
+\begin{align*}
+\mathbf{Z}_{\Delta} &= 3\mathbf{Z}_Y\,\text{(equilibrado)}
+\end{align*}
+
+
+\begin{center}
+\includegraphics[scale=1]{delta-estrella}
+\end{center}
+
+\end{multicols}
+\clearpage
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\large{\underline{\textbf{Unidad 2: Análisis de potencia en circuitos en CA}}}
+
+\normalsize
+\medskip
+
+\begin{multicols}{2}
+
+\textbf{Factores iniciales}
+
+\begin{itemize}
+\item $v(t) = V_m\cos(\omega t + \theta_v) \ttoF \mathbf{V}=V_m\angle{\theta_v}$
+\item $i(t) = I_m\cos(\omega t + \theta_i) \ttoF \mathbf{I}=I_m\angle{\theta_i}$
+\item $\theta = \theta_v-\theta_i$
+\item $\mathbf{V}_{rms} = \dfrac{V_m}{\sqrt{2}}\angle{\theta_v}$ 
+\item $\mathbf{I}_{rms} = \dfrac{I_m}{\sqrt{2}}\angle{\theta_i}$
+\end{itemize}
+
+\bigskip
+
+\textbf{Valor eficaz o rms}
+
+\begin{itemize}
+\item $X_{rms} = \sqrt{\dfrac{1}{T}\displaystyle\int_{t_0}^{t_0+T}x(t)^2\,dt}$
+\item $I_{rms} = \sqrt{\dfrac{1}{T}\displaystyle\int_{t_0}^{t_0+T}i(t)^2\,dt}$
+\item $V_{rms} = \sqrt{\dfrac{1}{T}\displaystyle\int_{t_0}^{t_0+T}v(t)^2\,dt}$
+\end{itemize}
+
+\bigskip
+
+\textbf{Potencia instantánea}
+
+\begin{itemize}
+\item $p(t)=v(t)i(t)$
+\item $p(t)=\dfrac{1}{2}V_mI_m\cos(\theta_v-\theta_i) + \dfrac{1}{2}V_mI_m\cos(2\omega t+\theta_v+\theta_i)$
+\end{itemize}
+
+\bigskip
+
+\textbf{Potencia promedio / Potencial real}
+
+\begin{itemize}
+\item $P = \dfrac{1}{T}\displaystyle\int_{t_0}^{t_0+T}p(t)\,dt$
+\item $P = \dfrac{1}{2}\real{\mathbf{V}\conj{\mathbf{I}}}$
+\item $P = \dfrac{1}{2}V_mI_m\cos(\theta_v-\theta_i)$
+\item $P = V_{rms}I_{rms}\cos(\theta_v-\theta_i)$
+\item $P = \real{\mathbf{S}}$
+\end{itemize}
+
+\bigskip
+\columnbreak
+
+\textbf{Máxima transferencia de potencia promedio}
+
+\begin{itemize}
+\item $\mathbf{Z}_{Th} = R_{Th} + jX_{Th}$
+\item $\mathbf{Z}_L = R_L + jX_L$
+\item Máxima transferencia $\rightarrow\,\mathbf{Z}_L = \mathbf{\conj{Z}}_{Th}$
+\item Máxima transferencia (carga resistiva) $\rightarrow R_L = |\mathbf{Z}_{Th}|$
+\end{itemize}
+
+\bigskip
+
+\textbf{Potencia compleja}
+\begin{itemize}
+\item $\mathbf{S}=\dfrac{1}{2}\mathbf{V}\conj{\mathbf{I}}=\mathbf{V}_{rms}\mathbf{\conj{I}}_{rms}=S\angle{\theta} = P+jQ$
+\end{itemize}
+
+\bigskip
+
+\textbf{Potencia aparente}
+\begin{itemize}
+\item $S=|\mathbf{S}|=V_{rms}I_{rms}=\sqrt{P^2+Q^2}$
+\end{itemize}
+
+\bigskip
+
+\textbf{Potencia reactiva}
+\begin{itemize}
+\item $Q = \imag{\mathbf{S}}$
+\item $Q = \dfrac{1}{2}V_mI_m\sen(\theta_v-\theta_i)$
+\item $Q = V_{rms}I_{rms}\sen(\theta_v-\theta_i)$
+\end{itemize}
+
+\bigskip
+
+\textbf{Factor de potencia}
+\begin{itemize}
+\item $f_p = \cos(\theta_v-\theta_i)=\dfrac{P}{S}$
+\end{itemize}
+
+\bigskip
+
+\textbf{Corrección del $f_p$}
+
+\begin{itemize}
+\item $\mathbf{S}_1= P_1+jQ_1 = S_1\angle{\theta_1}\rightarrow\,\text{inicial}$
+\item $\mathbf{S}_2= P_2+jQ_2 = S_2\angle{\theta_2}\rightarrow\,\text{final}$
+\item Capacitiva
+\begin{itemize}
+\item $|Q_C| = Q_1 - Q_2$ 
+\item $|Q_C| = P(\tan\theta_1-\tan \theta_2)$
+\item $C = \dfrac{|Q_C|}{\omega V^{2}_{rms}}$
+\end{itemize}
+\item Inductiva
+\begin{itemize}
+\item $Q_L = |Q_1 - Q_2|$ 
+\item $Q_L = P(\tan|\theta_1|-\tan |\theta_2|)$
+\item $L = \dfrac{V^{2}_{rms}}{\omega Q_L}$
+\end{itemize}
+\end{itemize}
+
+\end{multicols}
+\clearpage
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\large{\underline{\textbf{Unidad 3: Circuitos trifásicos}}}
+\normalsize
+
+\begin{multicols}{2}
+\textbf{Sistemas Balanceados}
+
+\begin{itemize}
+\item $\mathbf{V}_{an}+\mathbf{V}_{bn}+\mathbf{V}_{cn}= 0$
+\item $|\mathbf{V}_{an}| = |\mathbf{V}_{bn}| = |\mathbf{V}_{cn}|$
+\item Sentido positivo o abc
+\begin{itemize}
+\item $\mathbf{V}_{an} = V_p\angle{0^{\circ}}$
+\item $\mathbf{V}_{bn} = V_p\angle{-120^{\circ}}$
+\item $\mathbf{V}_{cn} = V_p\angle{-240^{\circ}} = V_p\angle{120^{\circ}}$
+\end{itemize}
+\item Sentido negativo o acb
+\begin{itemize}
+\item $\mathbf{V}_{an} = V_p\angle{0^{\circ}}$
+\item $\mathbf{V}_{bn} = V_p\angle{-240^{\circ}} = V_p\angle{120^{\circ}}$
+\item $\mathbf{V}_{cn} = V_p\angle{-120^{\circ}}$
+\end{itemize}
+\item Cargas
+\begin{itemize}
+\item $\mathbf{Z}_1 = \mathbf{Z}_2 = \mathbf{Z}_3 = \mathbf{Z}_Y$
+\item $\mathbf{Z}_A = \mathbf{Z}_B = \mathbf{Z}_C = \mathbf{Z}_{\Delta}$
+\item $\mathbf{Z}_{\Delta} = 3\mathbf{Z}_Y$
+\end{itemize}
+\end{itemize}
+
+\bigskip
+\bigskip
+
+\textbf{Conexión estrella-estrella balanceada}
+
+\begin{itemize}
+\item $\mathbf{V}_{an} = V_p\angle{0^{\circ}}$
+\item $\mathbf{V}_{bn} = V_p\angle{-120^{\circ}}$
+\item $\mathbf{V}_{cn} = V_p\angle{-240^{\circ}} = V_p\angle{120^\circ}$
+\item $\mathbf{V}_{ab} = \sqrt{3}V_p\angle{30^{\circ}}$
+\item $\mathbf{V}_{bc} = \sqrt{3}V_p\angle{-90^{\circ}} = \mathbf{V}_{ab}\angle{-120^{\circ}}$
+\item $\mathbf{V}_{ca} = \sqrt{3}V_p\angle{-210^{\circ}} = \sqrt{3}V_p\angle{150^{\circ}} = \mathbf{V}_{ab}\angle{120^{\circ}}$
+\item $\mathbf{I}_a = \dfrac{\mathbf{V}_{an}}{\mathbf{Z}_Y}$
+\item $\mathbf{I}_b = \dfrac{\mathbf{V}_{bn}}{\mathbf{Z}_Y} = \mathbf{I}_a\angle{-120^{\circ}}$
+\item $\mathbf{I}_c = \dfrac{\mathbf{V}_{cn}}{\mathbf{Z}_Y} = \mathbf{I}_a\angle{120^{\circ}}$
+\item $\mathbf{I}_a + \mathbf{I}_b + \mathbf{I}_c = 0$
+\end{itemize}
+
+\begin{center}
+\includegraphics[scale=0.77]{y-y}
+\end{center}
+
+\columnbreak
+
+\textbf{Conexión estrella-delta balanceada}
+
+\begin{itemize}
+\item $\mathbf{V}_{an} = V_p\angle{0^{\circ}}$
+\item $\mathbf{V}_{bn} = V_p\angle{-120^{\circ}}$
+\item $\mathbf{V}_{cn} = V_p\angle{-240^{\circ}} = V_p\angle{120^\circ}$
+\item $\mathbf{V}_{ab} = \sqrt{3}V_p\angle{30^{\circ}}$
+\item $\mathbf{V}_{bc} = \sqrt{3}V_p\angle{-90^{\circ}} = \mathbf{V}_{ab}\angle{-120^{\circ}}$
+\item $\mathbf{V}_{ca} = \sqrt{3}V_p\angle{-210^{\circ}} = \sqrt{3}V_p\angle{150^{\circ}} = \mathbf{V}_{ab}\angle{120^{\circ}}$
+\item $\mathbf{I}_{AB} = \dfrac{\mathbf{V}_{AB}}{\mathbf{Z}_{\Delta}}$
+\item $\mathbf{I}_{BC} = \dfrac{\mathbf{V}_{BC}}{\mathbf{Z}_{\Delta}} = \mathbf{I}_{AB}\angle{-120^{\circ}}$
+\item $\mathbf{I}_{CA} = \dfrac{\mathbf{V}_{CA}}{\mathbf{Z}_{\Delta}} = \mathbf{I}_{AB}\angle{120^{\circ}}$
+\item $\mathbf{I}_a = \sqrt{3}\mathbf{I}_{AB}\angle{-30^{\circ}}$
+\item $\mathbf{I}_b = \sqrt{3}\mathbf{I}_{BC}\angle{-30^{\circ}} = \mathbf{I}_a\angle{-120^{\circ}}$
+\item $\mathbf{I}_c = \sqrt{3}\mathbf{I}_{CA}\angle{-30^{\circ}} = \mathbf{I}_a\angle{-240^{\circ}} = \mathbf{I}_a\angle{120^{\circ}}$
+\end{itemize}
+
+\begin{center}
+\includegraphics[scale=0.77]{y-d}
+\end{center}
+
+\bigskip
+
+\textbf{Conexión delta-estrella balanceada}
+
+\begin{itemize}
+\item $\mathbf{V}_{ab} = V_p\angle{0^{\circ}}$
+\item $\mathbf{V}_{bc} = V_p\angle{-120^{\circ}} $
+\item $\mathbf{V}_{ca} = V_p\angle{-240^{\circ}} = V_p\angle{120^{\circ}}$
+\item $\mathbf{I}_{a} = \dfrac{\mathbf{V}_{ab}}{\sqrt{3}\mathbf{Z}_{Y}}\angle{-30^{\circ}}$
+\item $\mathbf{I}_{b} = \mathbf{I}_{a}\angle{-120^{\circ}}$
+\item $\mathbf{I}_{c} = \mathbf{I}_{a}\angle{120^{\circ}}$
+\end{itemize}
+
+\columnbreak
+
+\begin{center}
+\includegraphics[scale=0.76]{d-y}
+\end{center}
+
+\medskip
+
+\textbf{Conexión delta-delta balanceada}
+
+\begin{itemize}
+\item $\mathbf{V}_{ab} = V_p\angle{0^{\circ}}$
+\item $\mathbf{V}_{bc} = V_p\angle{-120^{\circ}} $
+\item $\mathbf{V}_{ca} = V_p\angle{-240^{\circ}} = V_p\angle{120^{\circ}}$
+\item $\mathbf{I}_{AB} = \dfrac{\mathbf{V}_{AB}}{\mathbf{Z}_{\Delta}}$
+\item $\mathbf{I}_{BC} = \dfrac{\mathbf{V}_{BC}}{\mathbf{Z}_{\Delta}} = \mathbf{I}_{AB}\angle{-120^{\circ}}$
+\item $\mathbf{I}_{CA} = \dfrac{\mathbf{V}_{CA}}{\mathbf{Z}_{\Delta}} = \mathbf{I}_{AB}\angle{120^{\circ}}$
+\item $\mathbf{I}_a = \sqrt{3}\mathbf{I}_{AB}\angle{-30^{\circ}}$
+\item $\mathbf{I}_b = \sqrt{3}\mathbf{I}_{BC}\angle{-30^{\circ}} = \mathbf{I}_a\angle{-120^{\circ}}$
+\item $\mathbf{I}_c = \sqrt{3}\mathbf{I}_{CA}\angle{-30^{\circ}} = \mathbf{I}_a\angle{-240^{\circ}} = \mathbf{I}_a\angle{120^{\circ}}$
+\end{itemize}
+
+\begin{center}
+\includegraphics[scale=0.76]{d-d}
+\end{center}
+
+\medskip
+
+\textbf{Potencia en un sistema balanceado}
+
+\begin{itemize}
+\item $\mathbf{Z}_p = Z_p\angle{\theta}$
+\item $P_p = V_pI_p\cos(\theta)$
+\item $Q_p = V_pI_p\sen(\theta)$
+\item $P_T = 3P_p = \sqrt{3}V_L I_L \cos(\theta)$
+\item $Q_T = 3Q_p = \sqrt{3}V_L I_L \sen(\theta)$
+\item $\mathbf{S}_T = 3\mathbf{S}_p = 3\mathbf{V}_p\conj{\mathbf{I}}_p = P_T + jQ_T$
+\end{itemize}
+
+\medskip
+
+\textbf{Medición de potencia trifásica}
+
+\begin{itemize}
+\item Método de tres vatímetros ($\Delta$ o $Y$)
+\begin{itemize}
+\item No balanceado
+	\begin{itemize}
+	\item $P_T = P_1 + P_2 + P_3$
+	\end{itemize}
+\item Balanceado
+	\begin{itemize}
+	\item $P_1 = P_2 = P_3$
+	\item $P_T = P_1 + P_2 + P_3$
+\end{itemize}
+\end{itemize}
+
+\item Método de dos vatímetros ($\Delta$ o $Y$)
+\begin{itemize}
+\item No balanceados
+	\begin{itemize}	
+	\item $P_T = P_1 + P_2$
+	\end{itemize}
+\item Balanceados
+	\begin{itemize}
+	\item $P_T = P_1 + P_2$
+	\item $Q_T = \sqrt{3}(P_2 - P_1)$
+	\item $S_T = \sqrt{P_T^2 + Q_T^2}$
+	\item $tan(\theta) = \dfrac{Q_T}{P_T}$
+	\item $f_p = \cos(\theta)$
+	\item Si $P_1 = P_2$ (carga resistiva)
+	\item Si $P_1 < P_2$ (carga inductiva)
+	\item Si $P_1 > P_2$ (carga capacitiva)
+	\end{itemize}
+\end{itemize}
+\end{itemize}
+
+
+\end{multicols}
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\large{\underline{\textbf{Unidad 4: Respuesta en frecuencia}}}
+\normalsize
+\medskip
+
+\begin{multicols}{2}
+
+\begin{align*}
+\mathbf{H}(\omega) &= \dfrac{\mathbf{Y}(\omega)}{\mathbf{X}(\omega)}=|\mathbf{H}(\omega)|\angle{\Theta(\omega)}
+\end{align*}
+\medskip
+\begin{align*}
+\mathbf{H}(\omega) &= \dfrac{K(j\omega)^{\pm N}\left(1+\dfrac{j\omega}{z_1}\right)^N\left[1+j\dfrac{2\zeta_1\omega}{\omega_n}+\left(\dfrac{j\omega}{\omega_n}\right)^2\right]^N}{\left(1+\dfrac{j\omega}{p_1}\right)^N\left[1+j\dfrac{2\zeta_2\omega}{\omega_k}+\left(\dfrac{j\omega}{\omega_k}\right)^2\right]^N}
+\end{align*}
+
+\end{multicols}
+
+\medskip
+
+\begingroup
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{|>{\centering\arraybackslash}m{40mm}|>{\centering\arraybackslash}m{60mm}|>{\centering\arraybackslash}m{60mm}|}
+    \hline
+   Factor & Magnitud & Fase  \\\hline
+   $K$ & \includegraphics[scale=0.9]{kmag} & \includegraphics[scale=0.9]{kfase} \\\hline
+   $(j\omega)^N$ & \includegraphics[scale=0.9]{zeroorigen_mag} & \includegraphics[scale=0.9]{zeroorigen_fase}\\\hline
+   $\dfrac{1}{(j\omega)^N}$ & \includegraphics[scale=0.9]{poleorigen_mag} & \includegraphics[scale=0.96]{poleorigen_fase} \\\hline
+   $\left(1+\dfrac{j\omega}{z}\right)^N$ & \includegraphics[scale=0.9]{zero_mag} & \includegraphics[scale=0.9]{zero_fase}\\\hline
+   $\dfrac{1}{\left(1+\dfrac{j\omega}{p}\right)^N}$ & \includegraphics[scale=0.9]{pole_mag} & \includegraphics[scale=0.9]{pole_fase}\\\hline
+   $\left[1+j\dfrac{2\zeta_1\omega}{\omega_n}+\left(\dfrac{j\omega}{\omega_n}\right)^2\right]^N$ & \includegraphics[scale=0.9]{zero2_mag} & \includegraphics[scale=0.9]{zero2_fase}\\\hline
+   $\dfrac{1}{\left[1+j\dfrac{2\zeta_2\omega}{\omega_k}+\left(\dfrac{j\omega}{\omega_k}\right)^2\right]^N}$ & \includegraphics[scale=0.9]{pole2_mag} & \includegraphics[scale=0.9]{pole2_fase}\\\hline
+\end{tabular}
+\endgroup
+
+
+\begin{multicols}{2}
+
+\textbf{Resonancia en serie}
+
+\begin{center}
+\includegraphics[scale=0.95]{rlc_serie}
+\end{center}
+
+\begin{center}
+\includegraphics[scale=1.2]{rlc_Hresponse}
+\end{center}
+
+\begin{itemize}
+\item $\mathbf{V}_s=V_m\angle{\theta}$
+\item $\omega_0 = \dfrac{1}{\sqrt{LC}}\,$rad/s
+\item $\omega_0 = \sqrt{\omega_1\omega_2}$
+\item $B = \omega_2-\omega_1 = \dfrac{R}{L} = \dfrac{\omega_0}{Q}$
+\item $Q = \dfrac{\omega_0 L}{R} = \dfrac{1}{\omega_0 C R}$
+\item $\omega_1 = -\dfrac{R}{2L}+\sqrt{\left(\dfrac{R}{2L}\right)^2+\dfrac{1}{LC}}$
+\item $\omega_2 = \dfrac{R}{2L}+\sqrt{\left(\dfrac{R}{2L}\right)^2+\dfrac{1}{LC}}$
+\item $\omega_1\approx \omega_0-\dfrac{B}{2}\rightarrow(Q\geq 10)$
+\item $\omega_2\approx \omega_0+\dfrac{B}{2}\rightarrow(Q\geq 10)$ 
+\end{itemize}
+
+\bigskip
+
+\textbf{Resonancia en paralelo}
+
+\begin{center}
+\includegraphics[scale=0.95]{rlc_paralelo}
+\end{center}
+
+\begin{center}
+\includegraphics[scale=1.2]{rlc_p_Hresponse}
+\end{center}
+
+\begin{itemize}
+\item $\mathbf{I}_s=I_m\angle{\theta}$
+\item $\omega_0 = \dfrac{1}{\sqrt{LC}}\,$rad/s
+\item $\omega_0 = \sqrt{\omega_1\omega_2}$
+\item $B = \omega_2-\omega_1 = \dfrac{1}{RC} = \dfrac{\omega_0}{Q}$
+\item $Q = \omega_0 RC = \dfrac{R}{\omega_0 L}$
+\item $\omega_1 = -\dfrac{1}{2RC}+\sqrt{\left(\dfrac{1}{2RC}\right)^2+\dfrac{1}{LC}}$
+\item $\omega_2 = \dfrac{1}{2RC}+\sqrt{\left(\dfrac{1}{2RC}\right)^2+\dfrac{1}{LC}}$
+\item $\omega_1\approx \omega_0-\dfrac{B}{2}\rightarrow(Q\geq 10)$
+\item $\omega_2\approx \omega_0+\dfrac{B}{2}\rightarrow(Q\geq 10)$ 
+\end{itemize}
+
+\bigskip
+
+\begin{multicols}{2}
+
+\medskip
+
+\textbf{Escalamiento en magnitud}
+
+\begin{itemize}
+\item $R^{'} = K_m R$
+\item $L^{'} = K_m L$
+\item $C^{'} = \dfrac{C}{K_m}$
+\item $\omega^{'} = \omega$
+\end{itemize}
+
+\textbf{Escalamiento en frecuencia}
+
+\begin{itemize}
+\item $R^{'} = R$
+\item $L^{'} = \dfrac{L}{K_f}$
+\item $C^{'} = \dfrac{C}{K_f}$
+\item $\omega^{'} = K_f\omega$
+\end{itemize}
+
+
+\end{multicols}
+ 
+
+\textbf{Escalamiento en magnitud y frecuencia}
+
+\begin{multicols}{2}
+
+\begin{itemize}
+\item $R^{'} = K_m R$
+\item $L^{'} = \dfrac{K_m}{K_f} L$
+\end{itemize}
+
+\begin{itemize}
+\item $C^{'} = \dfrac{C}{K_m K_f}$
+\item $\omega^{'} = K_f \omega$
+\end{itemize}
+
+\end{multicols}
+
+
+\end{multicols}
+
+\clearpage
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\large{\underline{\textbf{Unidad 5: Frecuencia compleja y la transformada de Laplace}}}
+\normalsize
+\medskip
+
+Transformada Unilateral de Laplace: 
+$\displaystyle X(s)=\int_{0^-}^{\infty} x(t)e^{-st}\,dt\qquad$
+
+\medskip
+
+\textbf{Propiedades de la Transformada Unilateral de Laplace}
+
+\begin{tabular}{llll}
+  \toprule
+  Propiedad & Señal en el tiempo & Transformada & ROC\\
+  \midrule
+  & $x(t)=x(t)u(t)$     & $X(s)$ & $R$ \\[3mm]
+  & $x_1(t)=x_1(t)u(t)$ & $X_1(s)$ & $R_1$ \\[3mm]
+  & $x_2(t)=x_2(t)u(t)$ & $X_2(s)$ & $R_2$ \\[3mm]
+  Linealidad & $\alpha_1 x_1(t) + \alpha_2 x_2(t)$ &
+  $\alpha_1 X_1(s) + \alpha_2 X_2(s)$ & $\geq R_1\cap R_2$ \\[3mm]
+  Desplazamiento temporal & $x(t-\tau), \tau>0$ & $e^{-s\tau}X(s)$ & $R$\\[3mm]
+  Desplazamiento en $s$ & $e^{s_0 t} x(t)$ & $X(s-s_0)$ & $R+s_0$ \\[3mm]
+  Escalamiento en el tiempo & $x(a t), a>0$ & 
+  $\displaystyle \dfrac{1}{a}X\left(\dfrac{s}{a}\right)$ & $aR$ \\[3mm]
+  Convolución & 
+  $\displaystyle x_1(t)\conv x_2(t)$ & $X_1(s)X_2(s)$ & $\geq R_1\cap R_2$\\[3mm]
+  Diferenciación & $\displaystyle \dfrac{dx(t)}{dt}$ &
+  $s X(s) - x(0^-)$ & $\geq R$ \\[3mm]
+  Diferenciación múltiple & $\displaystyle \frac{d^n}{dt^n} x(t)$ &
+  $\displaystyle s^n X(s) -\displaystyle\sum_{i=1}^{n} s^{n-i} x^{(i-1)}(0^-)$\\[3mm]
+  Diferenciación en $s$ &
+  $-t x(t)$ & $\displaystyle \frac{d}{ds}X(s)$ & $R$ \\[3mm]
+  Integración & $\displaystyle \int_{0^-}^{t} x(\tau)\,d\tau$ &
+  $\displaystyle \dfrac{1}{s}X(s)$ & $\geq R\cap\{\sigma>0\}$\\[3mm]
+  Periodicidad en el tiempo & $x(t)=x_1(t-nT)$ &$\dfrac{X_1(s)}{1-e^{-sT}}$ & \\[3mm]
+  Teorema de valor inicial & $x(0^+)$ &
+  $\displaystyle \lim_{s\rightarrow\infty} sX(s)$\\[3mm]
+  Teorema de valor final & $\displaystyle \lim_{t\rightarrow\infty}x(t)$ &
+  $\displaystyle \lim_{s\rightarrow 0} sX(s)$\\[3mm]
+  \bottomrule
+\end{tabular}
+
+\bigskip
+\bigskip
+
+\textbf{Transformadas Unilaterales de Laplace de funciones elementales}
+
+\begin{tabular}{lll|lll}
+  \toprule
+  Señal & Transformada & ROC &
+  Señal & Transformada & ROC \\
+  \midrule
+  $\delta(t)$ & 1 & todo $s$ &
+  $u(t)$ & $\dfrac{1}{s}$ & $\sigma>0$ \\[3mm]
+  $\dfrac{t^{n-1}}{(n-1)!}u(t)$ & $\dfrac{1}{s^n}$ & $\sigma>0$ &
+  $e^{at}u(t)$ & $\dfrac{1}{s-a}$ & $\sigma > a$ \\[3mm]
+  $\dfrac{t^{n-1}}{(n-1)!}e^{at}u(t)$ & $\dfrac{1}{(s-a)^n}$
+  & $\sigma > a$ &
+  $\delta(t-\tau), \tau>0$ & $e^{-s\tau}$ & todo $s$ \\[3mm]
+  $\cos(\omega_0 t)u(t)$ & $\dfrac{s}{s^2+\omega_0^2}$ & $\sigma>0$ &
+  $\sen(\omega_0 t)u(t)$ & $\dfrac{\omega_0}{s^2+\omega_0^2}$ 
+  & $\sigma>0$ \\[3mm]
+  $e^{at}\cos(\omega_0 t)u(t)$ & 
+  $\dfrac{s-a}{(s-a)^2+\omega_0^2}$ & $\sigma>a$ &
+  $e^{at}\sen(\omega_0 t)u(t)$ & 
+  $\dfrac{\omega_0}{(s-a)^2+\omega_0^2}$ & $\sigma>a$ \\[3mm]
+  $\dfrac{d^n}{dt^n}\delta(t)$ & $s^n$ & todo $s$ \\[3mm]
+  \bottomrule
+\end{tabular}
+
+\clearpage
+
+
+\textbf{Modelo del resistor}
+\begin{center}
+\includegraphics[scale=0.9]{R_model}
+\end{center}
+
+\begin{multicols}{2}
+\begin{itemize}
+\item Dominio del tiempo
+\begin{itemize}
+\item $v(t)=Ri(t)$
+\end{itemize}
+\item Dominio $s$
+\begin{itemize}
+\item $V(s)=RI(s)$
+\end{itemize}
+\end{itemize}
+\end{multicols}
+
+\bigskip
+\bigskip
+
+\textbf{Modelo del inductor}
+\begin{center}
+\includegraphics[scale=0.9]{L_model}
+\end{center}
+
+\begin{multicols}{2}
+\begin{itemize}
+\item Dominio del tiempo
+\begin{itemize}
+\item $v(t)=L\dfrac{di(t)}{dt}$
+\end{itemize}
+\medskip
+\item Dominio $s$
+\begin{itemize}
+\item $V(s)=sLI(s)-Li(0^{-})$
+\item $I(s)=\dfrac{1}{sL}V(s)+\dfrac{i(0^{-})}{s}$
+\end{itemize}
+\end{itemize}
+\end{multicols}
+
+\bigskip
+\bigskip
+
+\textbf{Modelo del capacitor}
+\begin{center}
+\includegraphics[scale=0.9]{C_model}
+\end{center}
+
+\begin{multicols}{2}
+\begin{itemize}
+\item Dominio del tiempo
+\begin{itemize}
+\item $i(t)=C\dfrac{dv(t)}{dt}$
+\end{itemize}
+\medskip
+\item Dominio $s$
+\begin{itemize}
+\item $I(s)=sCV(s)-Cv(0^{-})$
+\item $V(s)=\dfrac{1}{sC}I(s)+\dfrac{v(0^{-})}{s}$
+\end{itemize}
+\end{itemize}
+
+\end{multicols}
+
+\clearpage
+
+\begin{multicols}{2}
+
+\textbf{Impedancia en el dominio $s$}
+
+\begin{center}
+\begin{tabular}{>{\centering\arraybackslash}m{20mm} >{\centering\arraybackslash}m{40mm}}
+\hline
+\textbf{Elemento} & $\mathbf{Z(s)=V(s)/I(s)}$\\[0ex]\hline
+Resistor & $R$\\[2ex]
+Inductor & $sL$\\[2ex]
+Capacitor & $\dfrac{1}{sC}$\\[2ex]
+\hline
+\end{tabular}
+\end{center}
+
+\bigskip
+
+\textbf{Admitancia en el dominio $s$}
+
+\begin{itemize}
+\item $Y(s)=\dfrac{1}{Z(s)}$
+\end{itemize}
+
+\bigskip
+
+\textbf{Sistemas LTI (lineales e invariantes en el tiempo)}
+
+\begin{itemize}
+\item $y(t)=x(t)\conv h(t) = \displaystyle \int_{-\infty}^{\infty}h(\tau)x(t-\tau)\,d\tau$
+\item $y(t)=\ilaplace{Y(s)}$
+\item $Y(s)=H(s)X(s)$
+\end{itemize}
+
+\bigskip
+
+\textbf{Estabilidad}
+\begin{itemize}
+\item $\displaystyle \lim_{t\to\infty}|h(t)|=0$
+\end{itemize}
+
+\bigskip
+\bigskip
+
+\textbf{Funciones de transfencia}
+
+\begin{center}
+\includegraphics[scale=1]{sys}
+\end{center}
+
+\begin{itemize}
+\item $X(s)=\laplace{x(t)}$
+\item $Y(s)=\laplace{y(t)}$
+\item $H(s)=\laplace{h(t)}$
+\item $H(s)=\dfrac{Y(s)}{X(s)}$
+\end{itemize}
+
+\end{multicols}
+
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\large{\underline{\textbf{Unidad 6: Series de Fourier}}}
+\normalsize
+
+\begin{multicols}{2}
+
+\textbf{Funciones periódicas}
+
+\begin{itemize}
+\item $x(t) = x(t+nT)$
+\item $\omega_0 = \dfrac{2\pi}{T}$
+\end{itemize}
+
+\bigskip
+
+\textbf{Serie trigonométrica de Fourier}
+
+\begin{itemize}
+\item $x(t) = a_0 + \displaystyle \sum_{n=1}^{\infty}a_n\cos(n\omega_0 t) + \sum_{n=1}^{\infty}b_n\sen(n\omega_0 t)$
+\item $a_0 = \dfrac{1}{T}\displaystyle \int_{t_0}^{t_0+T}x(t)\,dt$
+\item $a_n = \dfrac{2}{T}\displaystyle \int_{t_0}^{t_0+T}x(t)\cos(n\omega_0 t)\,dt$
+\item $b_n = \dfrac{2}{T}\displaystyle \int_{t_0}^{t_0+T}x(t)\sen(n\omega_0 t)\,dt$
+\end{itemize}
+
+\bigskip
+\columnbreak
+
+\textbf{Serie trigonométrica de Fourier: \textit{amplitud-fase}}
+
+\begin{itemize}
+\item $x(t) = a_0 + \displaystyle \sum_{n=1}^{\infty}A_n\cos(n\omega_0 t + \phi_n)$
+\item $A_n\angle{\phi_n} = a_n - jb_n$
+\end{itemize}
+
+\bigskip
+
+\textbf{Serie exponencial de Fourier}
+
+\begin{itemize}
+\item $x(t) = \displaystyle \sum_{n=-\infty}^{\infty}c_n e^{jn\omega_0 t}$
+\item $c_n = \dfrac{1}{T}\displaystyle \int_{t_0}^{t_0+T}x(t)e^{-jn\omega_0 t}\,dt$
+\item $c_0 = a_0$
+\item $c_n = \dfrac{a_n - jb_n}{2} = \dfrac{A_n\angle{\phi_n}}{2}$
+\item $c_n = \conj{c}_{-n}$
+
+\end{itemize}
+
+\newpage
+
+\textbf{Simetría par}
+\begin{itemize}
+\item $x(t) = x(-t)$
+\item $a_0 = \dfrac{2}{T}\displaystyle \int_{t_0}^{t_0+\frac{T}{2}}x(t)\,dt$
+\item $a_n = \dfrac{4}{T}\displaystyle \int_{t_0}^{t_0+\frac{T}{2}}x(t)\cos(n\omega_0 t)\,dt$
+\item $b_n = 0$
+\end{itemize}
+
+\bigskip
+
+\textbf{Simetría impar}
+\begin{itemize}
+\item $x(t) = -x(-t)$
+\item $a_0 = 0$
+\item $a_n = 0$
+\item $b_n = \dfrac{4}{T}\displaystyle \int_{t_0}^{t_0+\frac{T}{2}}x(t)\sen(n\omega_0 t)\,dt$
+\end{itemize}
+
+\bigskip
+
+\textbf{Simetría de media onda}
+\begin{itemize}
+\item $x\left(t-\dfrac{T}{2}\right) = -x(t)$
+\item $a_0 = 0$
+\item $a_n = \left\{\begin{matrix}
+\dfrac{4}{T}\displaystyle \int_{t_0}^{t_0+\frac{T}{2}}x(t)\cos(n\omega_0 t)\,dt & \text{para n impar}\\ 
+0 & \text{para n par}
+\end{matrix}\right.$
+\item $b_n = \left\{\begin{matrix}
+\dfrac{4}{T}\displaystyle \int_{t_0}^{t_0+\frac{T}{2}}x(t)\sen(n\omega_0 t)\,dt & \text{para n impar}\\ 
+0 & \text{para n par}
+\end{matrix}\right.$
+\end{itemize}
+
+\bigskip
+
+\textbf{Análisis de circuitos}
+
+\begin{center}
+\includegraphics[scale=1]{sFcircuit}
+\end{center}
+
+\begin{itemize}
+\item $v(t) = V_{cd} + \displaystyle \sum_{n=1}^{\infty}V_n\cos(n\omega_0 t + \theta_n)$
+\item $i(t) = I_{cd} + \displaystyle \sum_{n=1}^{\infty}I_n\cos(n\omega_0 t + \phi_n)$
+\end{itemize}
+
+\columnbreak
+
+\textbf{Potencia promedio}
+
+\begin{itemize}
+\item $P = V_{cd}I_{cd} + \displaystyle \dfrac{1}{2}\sum_{n=1}^{\infty}V_nI_n\cos(\theta_n-\phi_n)$
+\end{itemize}
+
+\bigskip
+
+\textbf{Valor rms}
+
+\begin{itemize}
+\item $X_{rms} = \sqrt{\dfrac{1}{T}\displaystyle\int_{t_0}^{t_0+T}x^{2}(t)\,dt}$
+\item $X_{rms} = \displaystyle \sqrt{a^{2}_0+\dfrac{1}{2} \displaystyle \sum_{n=1}^{\infty}A^2_n}$
+\item $X_{rms} = \displaystyle \sqrt{a^{2}_0+\dfrac{1}{2} \displaystyle \sum_{n=1}^{\infty}(a^2_n+b^2_n)}$
+\item $X_{rms} = \displaystyle \sqrt{\displaystyle \sum_{n=-\infty}^{\infty}|c_n|^2}$
+\end{itemize}
+
+\bigskip
+
+\textbf{Teorema de Parseval}
+
+\begin{itemize}
+\item $P_{1\Omega}=a^2_0 + \dfrac{1}{2}\displaystyle \sum_{n=1}^{\infty}(a^2_n+b^2_n) = \dfrac{1}{T}\displaystyle \int_{t_0}^{t_0+T}x^2(t)\,dt$
+\end{itemize}
+
+\end{multicols}
+
+\newpage
+
+\begin{multicols}{2}
+\textbf{Integrales de interés}
+
+
+\begin{itemize}
+\item $C\in\setR$ 
+\item $\displaystyle \int x^n\,dx = \frac{x^{n+1}}{n+1}+C$; $n\neq -1$ 
+\item $\displaystyle \int x^{-1}\,dx = \ln x+C$ 
+\item $\displaystyle \int e^{ax}\,dx = \frac{e^{ax}}{a}+C$ 
+\item $\displaystyle \int x e^{ax}\,dx = \frac{e^{ax}}{a^2}\left(ax-1\right)+C$
+\item $\displaystyle \int \sen(ax)\,dx = -\frac{\cos(ax)}{a}+C$ 
+\item $\displaystyle \int x\sen(ax)\,dx = \frac{1}{a^2}\left[\sen(ax)-ax\cos(ax)\right]+C$
+\item $\displaystyle \int \cos(ax)\,dx = \frac{\sen(ax)}{a}+C$ 
+\item $\displaystyle \int x\cos(ax)\,dx = \frac{1}{a^2}\left[\cos(ax)+ax\sen(ax)\right]+C$
+\item $\displaystyle \int \sen^2(ax)\,dx = \frac{1}{2}x - \frac{1}{4a}\sen(2ax)+C$ 
+\item $\displaystyle \int \cos^2(ax)\,dx = \frac{1}{2}x + \frac{1}{4a}\sen(2ax)+C$
+\item $\displaystyle \int \ln(ax)\,dx = x(\ln ax) - x + C$
+\item $\displaystyle \int \frac{1}{x^2+a^2}\,dx = \frac{1}{a}\arctan\left(\frac{x}{a}\right) + C$
+\end{itemize}
+
+\bigskip
+
+\textbf{Valores de interés}
+
+\begin{itemize}
+\item $\cos(2n\pi) = 1$
+\item $\sen(2n\pi) = 0$
+\item $\cos(n\pi) = (-1)^n$
+\item $\sen(n\pi) = 0$
+\item $\cos\left(\dfrac{n\pi}{2}\right) = \left\{\begin{matrix}
+(-1)^{\frac{n}{2}} & \text{n par}\\ 
+0 & \text{n impar}
+\end{matrix}\right.$
+\item $\sen\left(\dfrac{n\pi}{2}\right) = \left\{\begin{matrix}
+(-1)^{\frac{n-1}{2}} & \text{n impar}\\ 
+0 & \text{n par}
+\end{matrix}\right.$
+\item $e^{j2\pi n} = 1$
+\item $e^{j\pi n} = (-1)^n $
+\end{itemize}
+
+\columnbreak
+\bigskip
+
+\textbf{Identidades trigonométricas de interés}
+
+\begin{itemize}
+\item $\csc(x) = \dfrac{1}{\sen(x)}$
+\item $\sec(x) = \dfrac{1}{\cos(x)}$
+\item $\tan(x) = \dfrac{\sen(x)}{\cos(x)}$
+\item $\cot(x) = \dfrac{1}{\tan(x)} = \dfrac{\cos(x)}{\sen(x)}$
+\item $\sen^2(x) + \cos^2(x) = 1$
+\item $1 + \tan^2(x) = \sec^2(x)$
+\item $1 + \cot^2(x) = \csc^2(x)$
+\item $\sen(-x) = -\sen(x)$
+\item $\cos(-x) = \cos(x)$
+\item $\tan(-x) = -\tan(x)$
+\item $\sen\left(x + \dfrac{\pi}{2}\right) = \cos(x)$
+\item $\cos\left(x - \dfrac{\pi}{2}\right) = \sen(x)$
+\item $\sen(A \pm B) = \sen(A)\cos(B) \pm \cos(A)\sen(B)$
+\item $\cos(A \pm B) = \cos(A)\cos(B) \mp \sen(A)\sen(B)$
+\item $\sen(2A) = 2\sen(A)\cos(B)$
+\item $\cos(2A) = \cos^2(A) - \sen^2(A) = 1 - 2\sen^{2}(A) = 2\cos^2(A)-1$
+\item $\tan(2A) = \dfrac{2\tan(A)}{1-\tan^2(A)}$
+\item $\sen^2(A) = \dfrac{1}{2} - \dfrac{1}{2}\cos(2A)$
+\item $\cos^2(A) = \dfrac{1}{2} + \dfrac{1}{2}\cos(2A)$
+\item $2\sen(A)\cos(B) = \sen(A-B) + \sen(A+B)$
+\item $2\cos(A)\cos(B) = \cos(A-B) + \cos(A+B)$
+\item $2\sen(A)\sen(B) = \cos(A-B) - \cos(A+B)$
+\end{itemize}
+
+\end{multicols}
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\large{\underline{\textbf{Unidad 7: Redes de 2 Puertos}}}
+\normalsize
+\medskip
+
+\begin{multicols}{2}
+
+\textbf{Parámetros de impedancia (z)}
+
+\begin{itemize}
+\item $\mathbf{V}_1 = \mathbf{z}_{11}\mathbf{I}_1 + \mathbf{z}_{12}\mathbf{I}_2$
+\item $\mathbf{V}_2 = \mathbf{z}_{21}\mathbf{I}_1 + \mathbf{z}_{22}\mathbf{I}_2$
+\item $\begin{bmatrix}
+\mathbf{V}_1\\
+\mathbf{V}_2 
+\end{bmatrix}=
+\begin{bmatrix}
+\mathbf{z}_{11} & \mathbf{z}_{12}\\ 
+\mathbf{z}_{21} & \mathbf{z}_{22}
+\end{bmatrix}
+\begin{bmatrix}
+\mathbf{I}_1\\ 
+\mathbf{I}_2
+\end{bmatrix}$
+\end{itemize}
+
+\medskip
+
+\begin{center}
+$\begin{matrix}
+\mathbf{z}_{11} = \dfrac{\mathbf{V}_1}{\mathbf{I}_1}\Bigg|_{\mathbf{I}_2=0} &
+\mathbf{z}_{12} = \dfrac{\mathbf{V}_1}{\mathbf{I}_2}\Bigg|_{\mathbf{I}_1=0}\\
+& \\
+\mathbf{z}_{21} = \dfrac{\mathbf{V}_2}{\mathbf{I}_1}\Bigg|_{\mathbf{I}_2=0} & 
+\mathbf{z}_{22} = \dfrac{\mathbf{V}_2}{\mathbf{I}_2}\Bigg|_{\mathbf{I}_1=0}
+\end{matrix}$
+\end{center}
+
+\medskip
+
+\begin{itemize}
+\item Red recíproca $\mathbf{z}_{12}=\mathbf{z}_{21}$
+\item Red simétrica $\mathbf{z}_{11}=\mathbf{z}_{22}$
+\end{itemize}
+
+\medskip
+
+\begin{center}
+\textit{Modelo T (recíprocas)}
+\includegraphics[scale=0.85]{zmodel-T}
+\end{center}
+
+\bigskip
+
+\begin{center}
+\textit{Modelo equivalente}
+\includegraphics[scale=0.85]{zmodel}
+\end{center}
+
+\bigskip
+\textcolor{white}{H}
+\bigskip
+
+\columnbreak
+
+\textbf{Parámetros de admitancia (y)}
+
+\begin{itemize}
+\item $\mathbf{I}_1 = \mathbf{y}_{11}\mathbf{V}_1 + \mathbf{y}_{12}\mathbf{V}_2$
+\item $\mathbf{I}_2 = \mathbf{y}_{21}\mathbf{V}_1 + \mathbf{y}_{22}\mathbf{V}_2$
+\item $\begin{bmatrix}
+\mathbf{I}_1\\
+\mathbf{I}_2 
+\end{bmatrix}=
+\begin{bmatrix}
+\mathbf{y}_{11} & \mathbf{y}_{12}\\ 
+\mathbf{y}_{21} & \mathbf{y}_{22}
+\end{bmatrix}
+\begin{bmatrix}
+\mathbf{V}_1\\ 
+\mathbf{V}_2
+\end{bmatrix}$
+\end{itemize}
+
+\bigskip
+
+\begin{center}
+$\begin{matrix}
+\mathbf{y}_{11} = \dfrac{\mathbf{I}_1}{\mathbf{V}_1}\Bigg|_{\mathbf{V}_2=0} &
+\mathbf{y}_{12} = \dfrac{\mathbf{I}_1}{\mathbf{V}_2}\Bigg|_{\mathbf{V}_1=0}\\
+& \\
+\mathbf{y}_{21} = \dfrac{\mathbf{I}_2}{\mathbf{V}_1}\Bigg|_{\mathbf{V}_2=0} & 
+\mathbf{y}_{22} = \dfrac{\mathbf{I}_2}{\mathbf{V}_2}\Bigg|_{\mathbf{V}_1=0}
+\end{matrix}$
+\end{center}
+
+\bigskip
+\bigskip
+
+\begin{itemize}
+\item Red recíproca $\mathbf{y}_{12}=\mathbf{y}_{21}$
+\item Red simétrica $\mathbf{y}_{11}=\mathbf{y}_{22}$
+\end{itemize}
+
+\medskip
+\bigskip
+
+\begin{center}
+\textit{Modelo $\pi$ (recíprocas)}
+\includegraphics[scale=0.85]{ymodel-pi}
+\end{center}
+
+\bigskip
+\bigskip
+
+\begin{center}
+\textit{Modelo equivalente}
+\includegraphics[scale=0.85]{ymodel}
+\end{center}
+
+
+\newpage
+
+\textbf{Parámetros híbridos (h)}
+
+\begin{itemize}
+\item $\mathbf{V}_1 = \mathbf{h}_{11}\mathbf{I}_1 + \mathbf{h}_{12}\mathbf{V}_2$
+\item $\mathbf{I}_2 = \mathbf{h}_{21}\mathbf{I}_1 + \mathbf{h}_{22}\mathbf{V}_2$
+\item $\begin{bmatrix}
+\mathbf{V}_1\\
+\mathbf{I}_2 
+\end{bmatrix}=
+\begin{bmatrix}
+\mathbf{h}_{11} & \mathbf{h}_{12}\\ 
+\mathbf{h}_{21} & \mathbf{h}_{22}
+\end{bmatrix}
+\begin{bmatrix}
+\mathbf{I}_1\\ 
+\mathbf{V}_2
+\end{bmatrix}$
+\end{itemize}
+
+\medskip
+
+\begin{center}
+$\begin{matrix}
+\mathbf{h}_{11} = \dfrac{\mathbf{V}_1}{\mathbf{I}_1}\Bigg|_{\mathbf{V}_2=0} &
+\mathbf{h}_{12} = \dfrac{\mathbf{V}_1}{\mathbf{V}_2}\Bigg|_{\mathbf{I}_1=0}\\
+& \\
+\mathbf{h}_{21} = \dfrac{\mathbf{I}_2}{\mathbf{I}_1}\Bigg|_{\mathbf{V}_2=0} & 
+\mathbf{h}_{22} = \dfrac{\mathbf{I}_2}{\mathbf{V}_2}\Bigg|_{\mathbf{I}_1=0}
+\end{matrix}$
+\end{center}
+
+\medskip
+
+\begin{itemize}
+\item Red recíproca $\mathbf{h}_{12}=-\mathbf{h}_{21}$
+\end{itemize}
+
+
+
+\begin{center}
+\textit{Modelo equivalente}
+\includegraphics[scale=0.85]{hmodel}
+\end{center}
+
+\bigskip
+
+\textbf{Parámetros híbridos inversos (g)}
+
+\begin{itemize}
+\item $\mathbf{I}_1 = \mathbf{g}_{11}\mathbf{V}_1 + \mathbf{g}_{12}\mathbf{I}_2$
+\item $\mathbf{V}_2 = \mathbf{g}_{21}\mathbf{V}_1 + \mathbf{g}_{22}\mathbf{I}_2$
+\item $\begin{bmatrix}
+\mathbf{I}_1\\
+\mathbf{V}_2 
+\end{bmatrix}=
+\begin{bmatrix}
+\mathbf{g}_{11} & \mathbf{g}_{12}\\ 
+\mathbf{g}_{21} & \mathbf{g}_{22}
+\end{bmatrix}
+\begin{bmatrix}
+\mathbf{V}_1\\ 
+\mathbf{I}_2
+\end{bmatrix}$
+\end{itemize}
+
+\medskip
+
+\begin{center}
+$\begin{matrix}
+\mathbf{g}_{11} = \dfrac{\mathbf{I}_1}{\mathbf{V}_1}\Bigg|_{\mathbf{I}_2=0} &
+\mathbf{g}_{12} = \dfrac{\mathbf{I}_1}{\mathbf{I}_2}\Bigg|_{\mathbf{V}_1=0}\\
+& \\
+\mathbf{g}_{21} = \dfrac{\mathbf{V}_2}{\mathbf{V}_1}\Bigg|_{\mathbf{I}_2=0} & 
+\mathbf{g}_{22} = \dfrac{\mathbf{V}_2}{\mathbf{I}_2}\Bigg|_{\mathbf{V}_1=0}
+\end{matrix}$
+\end{center}
+
+\medskip
+
+\begin{center}
+\textit{Modelo equivalente}
+\includegraphics[scale=0.85]{gmodel}
+\end{center}
+
+\bigskip
+
+\textbf{Parámetros de transmisión (ABCD)}
+
+\begin{itemize}
+\item $\mathbf{V}_1 = \mathbf{A}\mathbf{V}_2 - \mathbf{B}\mathbf{I}_2$
+\item $\mathbf{I}_1 = \mathbf{C}\mathbf{V}_2 - \mathbf{D}\mathbf{I}_2$
+\item $\begin{bmatrix}
+\mathbf{V}_1\\
+\mathbf{I}_1 
+\end{bmatrix}=
+\begin{bmatrix}
+\mathbf{A} & \mathbf{B}\\ 
+\mathbf{C} & \mathbf{D}
+\end{bmatrix}
+\begin{bmatrix}
+\mathbf{V}_2\\ 
+-\mathbf{I}_2
+\end{bmatrix}$
+\end{itemize}
+
+\medskip
+
+\begin{center}
+$\begin{matrix}
+\mathbf{A} = \dfrac{\mathbf{V}_1}{\mathbf{V}_2}\Bigg|_{\mathbf{I}_2=0} &
+\mathbf{B} = -\dfrac{\mathbf{V}_1}{\mathbf{I}_2}\Bigg|_{\mathbf{V}_2=0}\\
+& \\
+\mathbf{C} = \dfrac{\mathbf{I}_1}{\mathbf{V}_2}\Bigg|_{\mathbf{I}_2=0} & 
+\mathbf{D} = -\dfrac{\mathbf{I}_1}{\mathbf{I}_2}\Bigg|_{\mathbf{V}_2=0}
+\end{matrix}$
+\end{center}
+
+\medskip
+
+\begin{itemize}
+\item Red recíproca $\mathbf{A}\mathbf{D}-\mathbf{B}\mathbf{C}=1$
+\end{itemize}
+
+
+\textbf{Parámetros de transmisión inversa (abcd)}
+
+\begin{itemize}
+\item $\mathbf{V}_2 = \mathbf{a}\mathbf{V}_1 - \mathbf{b}\mathbf{I}_1$
+\item $\mathbf{I}_2 = \mathbf{c}\mathbf{V}_1 - \mathbf{d}\mathbf{I}_1$
+\item $\begin{bmatrix}
+\mathbf{V}_2\\
+\mathbf{I}_2 
+\end{bmatrix}=
+\begin{bmatrix}
+\mathbf{a} & \mathbf{b}\\ 
+\mathbf{c} & \mathbf{d}
+\end{bmatrix}
+\begin{bmatrix}
+\mathbf{V}_1\\ 
+-\mathbf{I}_1
+\end{bmatrix}$
+\end{itemize}
+
+\medskip
+
+\begin{center}
+$\begin{matrix}
+\mathbf{a} = \dfrac{\mathbf{V}_2}{\mathbf{V}_1}\Bigg|_{\mathbf{I}_1=0} &
+\mathbf{b} = -\dfrac{\mathbf{V}_2}{\mathbf{I}_1}\Bigg|_{\mathbf{V}_1=0}\\
+& \\
+\mathbf{c} = \dfrac{\mathbf{I}_2}{\mathbf{V}_1}\Bigg|_{\mathbf{I}_1=0} & 
+\mathbf{d} = -\dfrac{\mathbf{I}_2}{\mathbf{I}_1}\Bigg|_{\mathbf{V}_1=0}
+\end{matrix}$
+\end{center}
+
+\medskip
+
+\begin{itemize}
+\item Red recíproca $\mathbf{a}\mathbf{d}-\mathbf{b}\mathbf{c}=1$
+\end{itemize}
+
+
+\end{multicols}
+
+\newpage
+
+\textbf{Interconexión de redes}
+
+\begin{multicols}{2}
+
+\begin{itemize}
+\item Conexión serie - serie
+\begin{itemize}
+\item $[\mathbf{z}] = [\mathbf{z}_a] + [\mathbf{z}_b]$
+\end{itemize}
+
+\item Conexión paralelo - paralelo
+\begin{itemize}
+\item $[\mathbf{y}] = [\mathbf{y}_a] + [\mathbf{y}_b]$
+\end{itemize}
+
+\item Conexión serie - paralelo
+\begin{itemize}
+\item $[\mathbf{h}] = [\mathbf{h}_a] + [\mathbf{h}_b]$
+\end{itemize}
+
+\item Conexión paralelo - serie
+\begin{itemize}
+\item $[\mathbf{g}] = [\mathbf{g}_a] + [\mathbf{g}_b]$
+\end{itemize}
+
+\item Conexión en cascada
+\begin{itemize}
+\item $[\mathbf{T}] = [\mathbf{T}_a][\mathbf{T}_b]$
+\end{itemize}
+\end{itemize}
+
+\end{multicols}
+
+\textbf{Conversión de parámetros}
+
+\begin{multicols}{2}
+\begin{itemize}
+\item $\Delta_z = \mathbf{z}_{11}\mathbf{z}_{22}-\mathbf{z}_{12}\mathbf{z}_{21}$
+\item $\Delta_y = \mathbf{y}_{11}\mathbf{y}_{22}-\mathbf{y}_{12}\mathbf{y}_{21}$
+\item $\Delta_h = \mathbf{h}_{11}\mathbf{h}_{22}-\mathbf{h}_{12}\mathbf{h}_{21}$
+\item $\Delta_g = \mathbf{g}_{11}\mathbf{g}_{22}-\mathbf{g}_{12}\mathbf{g}_{21}$
+\item $\Delta_T = \mathbf{A}\mathbf{D}-\mathbf{B}\mathbf{C}$
+\item $\Delta_t = \mathbf{a}\mathbf{d}-\mathbf{b}\mathbf{c}$
+\end{itemize}
+\end{multicols}
+
+\bigskip
+
+\begingroup
+\renewcommand{\arraystretch}{2}
+\begin{center}
+\begin{tabular}{|w{c}{5mm}|>{\centering\arraybackslash}m{20mm}|>{\centering\arraybackslash}m{20mm}|>{\centering\arraybackslash}m{20mm}|>{\centering\arraybackslash}m{20mm}|>{\centering\arraybackslash}m{20mm}|>{\centering\arraybackslash}m{20mm}|}
+    \hline
+    & $\mathbf{z}$ & $\mathbf{y}$ & $\mathbf{h}$ & $\mathbf{g}$ & $\mathbf{T}$ & $\mathbf{t}$ \\
+    \hline
+   $\mathbf{z}$ 
+   & $\begin{matrix} \mathbf{z}_{11} & \mathbf{z}_{12}\\ \mathbf{z}_{21} & \mathbf{z}_{22} \end{matrix}$ 
+   & $\begin{matrix} \dfrac{\mathbf{y}_{22}}{\Delta_y} & -\dfrac{\mathbf{y}_{12}}{\Delta_y} \\ -\dfrac{\mathbf{y}_{21}}{\Delta_y} & \dfrac{\mathbf{y}_{11}}{\Delta_y} \end{matrix}$
+   & $\begin{matrix} \dfrac{\Delta_h}{\mathbf{h}_{22}} & \dfrac{\mathbf{h}_{12}}{\mathbf{h}_{22}} \\ -\dfrac{\mathbf{h}_{21}}{\mathbf{h}_{22}} & \dfrac{1}{\mathbf{h}_{22}} \end{matrix}$
+   & $\begin{matrix} \dfrac{1}{\mathbf{g}_{11}} & -\dfrac{\mathbf{g}_{12}}{\mathbf{g}_{11}} \\ \dfrac{\mathbf{g}_{21}}{\mathbf{g}_{11}} & \dfrac{\Delta_{g}}{\mathbf{g}_{11}} \end{matrix}$
+   & $\begin{matrix} \dfrac{\mathbf{A}}{\mathbf{C}} & \dfrac{\Delta_{T}}{\mathbf{C}} \\ \dfrac{1}{\mathbf{C}} & \dfrac{\mathbf{D}}{\mathbf{C}} \end{matrix}$ 
+   & $\begin{matrix} \dfrac{\mathbf{d}}{\mathbf{c}} & \dfrac{1}{\mathbf{c}} \\ \dfrac{\Delta_t}{\mathbf{c}} & \dfrac{\mathbf{a}}{\mathbf{c}} \end{matrix}$ \\[7ex]\hline
+   $\mathbf{y}$ 
+   & $\begin{matrix} \dfrac{\mathbf{z}_{22}}{\Delta_z} & -\dfrac{\mathbf{z}_{12}}{\Delta_z} \\ -\dfrac{\mathbf{z}_{21}}{\Delta_z} & \dfrac{\mathbf{z}_{11}}{\Delta_z} \end{matrix}$  
+   &$\begin{matrix} \mathbf{y}_{11} & \mathbf{y}_{12}\\ \mathbf{y}_{21} & \mathbf{y}_{22} \end{matrix}$  
+   &$\begin{matrix} \dfrac{1}{\mathbf{h}_{11}} & -\dfrac{\mathbf{h}_{12}}{\mathbf{h}_{11}} \\ \dfrac{\mathbf{h}_{21}}{\mathbf{h}_{11}} & \dfrac{\Delta_h}{\mathbf{h}_{11}} \end{matrix}$  
+   &$\begin{matrix} \dfrac{\Delta_g}{\mathbf{g}_{22}} & \dfrac{\mathbf{g}_{12}}{\mathbf{g}_{22}} \\ -\dfrac{\mathbf{g}_{21}}{\mathbf{g}_{22}} & \dfrac{1}{\mathbf{g}_{22}} \end{matrix}$  
+   &$\begin{matrix} \dfrac{\mathbf{D}}{\mathbf{B}} & -\dfrac{\Delta_{T}}{\mathbf{B}} \\ -\dfrac{1}{\mathbf{B}} & \dfrac{\mathbf{A}}{\mathbf{B}} \end{matrix}$  
+   &$\begin{matrix} \dfrac{\mathbf{a}}{\mathbf{b}} & -\dfrac{1}{\mathbf{b}} \\ -\dfrac{\Delta_t}{\mathbf{b}} & \dfrac{\mathbf{d}}{\mathbf{b}} \end{matrix}$ \\[7ex]\hline
+   $\mathbf{h}$ 
+   &$\begin{matrix} \dfrac{\Delta_z}{\mathbf{z}_{22}} & \dfrac{\mathbf{z}_{12}}{\mathbf{z}_{22}} \\ -\dfrac{\mathbf{z}_{21}}{\mathbf{z}_{22}} & \dfrac{1}{\mathbf{z}_{22}} \end{matrix}$  
+   &$\begin{matrix} \dfrac{1}{\mathbf{y}_{11}} & -\dfrac{\mathbf{y}_{12}}{\mathbf{y}_{11}} \\ \dfrac{\mathbf{y}_{21}}{\mathbf{y}_{11}} & \dfrac{\Delta_y}{\mathbf{y}_{11}} \end{matrix}$  
+   &$\begin{matrix} \mathbf{h}_{11} & \mathbf{h}_{12}\\ \mathbf{h}_{21} & \mathbf{h}_{22} \end{matrix}$  
+   &$\begin{matrix} \dfrac{\mathbf{g}_{22}}{\Delta_g} & -\dfrac{\mathbf{g}_{12}}{\Delta_g} \\ -\dfrac{\mathbf{g}_{21}}{\Delta_g} & \dfrac{\mathbf{g}_{11}}{\Delta_g} \end{matrix}$  
+   &$\begin{matrix} \dfrac{\mathbf{B}}{\mathbf{D}} & \dfrac{\Delta_{T}}{\mathbf{D}} \\ -\dfrac{1}{\mathbf{D}} & \dfrac{\mathbf{C}}{\mathbf{D}} \end{matrix}$  
+   &$\begin{matrix} \dfrac{\mathbf{b}}{\mathbf{a}} & \dfrac{1}{\mathbf{a}} \\ \dfrac{\Delta_t}{\mathbf{a}} & \dfrac{\mathbf{c}}{\mathbf{a}} \end{matrix}$ \\[7ex]\hline
+   $\mathbf{g}$ 
+   &$\begin{matrix} \dfrac{1}{\mathbf{z}_{11}} & -\dfrac{\mathbf{z}_{12}}{\mathbf{z}_{11}} \\ \dfrac{\mathbf{z}_{21}}{\mathbf{z}_{11}} & \dfrac{\Delta_z}{\mathbf{z}_{11}} \end{matrix}$  
+   &$\begin{matrix} \dfrac{\Delta_y}{\mathbf{y}_{22}} & \dfrac{\mathbf{y}_{12}}{\mathbf{y}_{22}} \\ -\dfrac{\mathbf{y}_{21}}{\mathbf{y}_{22}} & \dfrac{1}{\mathbf{y}_{22}} \end{matrix}$  
+   &$\begin{matrix} \dfrac{\mathbf{h}_{22}}{\Delta_h} & -\dfrac{\mathbf{h}_{12}}{\Delta_h} \\ -\dfrac{\mathbf{h}_{21}}{\Delta_h} & \dfrac{\mathbf{h}_{11}}{\Delta_h} \end{matrix}$  
+   &$\begin{matrix} \mathbf{g}_{11} & \mathbf{g}_{12}\\ \mathbf{g}_{21} & \mathbf{g}_{22} \end{matrix}$  
+   &$\begin{matrix} \dfrac{\mathbf{C}}{\mathbf{A}} & -\dfrac{\Delta_{T}}{\mathbf{A}} \\ \dfrac{1}{\mathbf{A}} & \dfrac{\mathbf{B}}{\mathbf{A}} \end{matrix}$  
+   &$\begin{matrix} \dfrac{\mathbf{c}}{\mathbf{d}} & -\dfrac{1}{\mathbf{d}} \\ \dfrac{\Delta_t}{\mathbf{d}} & -\dfrac{\mathbf{b}}{\mathbf{d}} \end{matrix}$ \\[7ex]\hline
+   $\mathbf{T}$ 
+   &$\begin{matrix} \dfrac{\mathbf{z}_{11}}{\mathbf{z}_{21}} & \dfrac{\Delta_z}{\mathbf{z}_{21}} \\ \dfrac{1}{\mathbf{z}_{21}} & \dfrac{\mathbf{z}_{22}}{\mathbf{z}_{21}} \end{matrix}$  
+   &$\begin{matrix} -\dfrac{\mathbf{y}_{22}}{\mathbf{y}_{21}} & -\dfrac{1}{\mathbf{y}_{21}} \\ -\dfrac{\Delta_y}{\mathbf{y}_{21}} & -\dfrac{\mathbf{y}_{11}}{\mathbf{y}_{21}} \end{matrix}$  
+   &$\begin{matrix} -\dfrac{\Delta_h}{\mathbf{h}_{21}} & -\dfrac{\mathbf{h}_{11}}{\mathbf{h}_{21}} \\ -\dfrac{\mathbf{h}_{22}}{\mathbf{h}_{21}} & -\dfrac{1}{\mathbf{h}_{21}} \end{matrix}$  
+   &$\begin{matrix} \dfrac{1}{\mathbf{g}_{21}} & \dfrac{\mathbf{g}_{22}}{\mathbf{g}_{21}} \\ \dfrac{\mathbf{g}_{11}}{\mathbf{g}_{21}} & \dfrac{\Delta_{g}}{\mathbf{g}_{21}} \end{matrix}$  
+   &$\begin{matrix} \mathbf{A} & \mathbf{B}\\ \mathbf{C} & \mathbf{D} \end{matrix}$  &$\begin{matrix} \dfrac{\mathbf{d}}{\Delta_t} & \dfrac{\mathbf{b}}{\Delta_t} \\ \dfrac{\mathbf{c}}{\Delta_t} & \dfrac{\mathbf{a}}{\Delta_t} \end{matrix}$ \\[7ex]\hline
+   $\mathbf{t}$ 
+   &$\begin{matrix} \dfrac{\mathbf{z}_{22}}{\mathbf{z}_{12}} & \dfrac{\Delta_z}{\mathbf{z}_{12}} \\ \dfrac{1}{\mathbf{z}_{12}} & \dfrac{\mathbf{z}_{11}}{\mathbf{z}_{12}} \end{matrix}$  
+   &$\begin{matrix} -\dfrac{\mathbf{y}_{11}}{\mathbf{y}_{12}} & -\dfrac{1}{\mathbf{y}_{12}} \\ -\dfrac{\Delta_y}{\mathbf{y}_{12}} & -\dfrac{\mathbf{y}_{22}}{\mathbf{y}_{12}} \end{matrix}$  
+   &$\begin{matrix} \dfrac{1}{\mathbf{h}_{12}} & \dfrac{\mathbf{h}_{11}}{\mathbf{h}_{12}} \\ \dfrac{\mathbf{h}_{22}}{\mathbf{h}_{12}} & \dfrac{\Delta_h}{\mathbf{h}_{12}} \end{matrix}$  
+   &$\begin{matrix} -\dfrac{\Delta_g}{\mathbf{g}_{12}} & -\dfrac{\mathbf{g}_{22}}{\mathbf{g}_{12}} \\ -\dfrac{\mathbf{g}_{11}}{\mathbf{g}_{12}} & -\dfrac{1}{\mathbf{g}_{12}} \end{matrix}$  
+   &$\begin{matrix} \dfrac{\mathbf{D}}{\Delta_T} & \dfrac{\mathbf{B}}{\Delta_T} \\ \dfrac{\mathbf{C}}{\Delta_T} & \dfrac{\mathbf{A}}{\Delta_T} \end{matrix}$  
+   &$\begin{matrix} \mathbf{a} & \mathbf{b}\\ \mathbf{c} & \mathbf{d} \end{matrix}$ \\[7ex]\hline
+\end{tabular}
+\end{center}
+\endgroup
+
+
+
+
+\end{document}

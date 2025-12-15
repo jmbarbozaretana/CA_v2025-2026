@@ -1,0 +1,105 @@
+%%%%%%%%%%%%%%%
+%% Problema1 %%
+%% 2025 S2   %%
+%% SGB       %%
+
+\Problema{10}{Análisis de Circuitos en CA}
+
+\medskip
+
+Para el circuito mostrado, la fuente de corriente tiene la forma de onda $i(t)$.
+
+\begin{center}
+  \includegraphics[scale=1]{prob01a} \\
+  \vspace{2ex}
+  \includegraphics[scale=1]{prob01b}
+\end{center}
+
+\begin{subpunto}
+\item Analice la forma de onda de $i(t)$ y determine su amplitud, periodo y frecuencia angular. A partir de lo cual determine el fasor $\phr{I}$ asociado a $i(t)$. Además calcule analíticamente $\phr{I}_1$, $\phr{I}_2$ y $\phr{V}$. \partialPoints{5}
+
+\shortsolution{\textbf{Respuesta:} 
+$I_m = 4 \, A$, $T = 16 \, ms$, $\omega = 125\pi \approx 392.7 \, rad/s$, $\phr{I} = 4 \angle 45^\circ$, $\phr{I}_1 = 3.58 \angle 18.43^\circ$, $\phr{I}_2 = 1.79 \angle 108^\circ$ y $\phr{V} = 7.16 \angle 18.43^\circ$.
+
+}
+
+\solution{
+
+\textbf{Solución:}
+
+De la lectura de la gráfica se lee fácilmente que $I_m = 4 \, A$ y que $T = 16 \, ms$. Esto permite calcular
+\begin{equation*}
+  \omega = \dfrac{2 \pi}{T} = \dfrac{2 \pi}{16 \times 10^{-3}} = 125\pi \approx 392.7 \, rad/s.
+\end{equation*}
+
+El desfase se lee de la forma de onda como $2 \, ms$ de adelanto y, por regla de tres:
+\begin{equation*}
+  \theta_i = \dfrac{360^\circ (2 \, ms)}{16 \, ms} = 45^\circ 
+\end{equation*}
+
+Así el fasor de corriente de la fuente sería
+\begin{equation*}
+  \phr{I} = 4 \angle 45^\circ
+\end{equation*}
+
+\calif{2 ptos hasta esta respuesta.}
+
+El voltaje se puede calcular con la impedancia equivalente:
+\begin{align*}
+  \phr{V} &= \phr{I} \phr{Z}_{eq} = (\phr{I} \angle 45^\circ) \left( \dfrac{-j6}{2 - j4} \right) \\
+          &= 7.155 \angle 18.43^\circ \calif{1 ptos.}
+\end{align*}
+
+y las corrientes por ley de Ohm:
+\begin{align*}
+  \phr{I}_1 &= \dfrac{7.155 \angle 18.43^\circ}{2} 
+             = 3.577 \angle 18.43^\circ \calif{1 ptos.} \\
+  \phr{I}_2 &= \dfrac{7.155 \angle 18.43^\circ}{-j4} 
+             = 1.7883.577 \angle 108.43^\circ \calif{1 ptos.}
+\end{align*}
+
+}
+
+\item Utilizando una escala de $1 \, cm = 1 \, A$ ó $1 \, cm = 1 \, V$, según sea necesario, dibuje el diagrama de fasores para $\phr{I}$, $\phr{I}_1$, $\phr{I}_2$ y $\phr{V}$. Etiquete claramente el gráfico con magnitudes y ángulos. \partialPoints{4}
+
+\shortsolution{\textbf{Respuesta:} 
+
+\begin{center}
+  \includegraphics[scale=1.5]{prob01a_sol}
+\end{center}
+
+}
+
+\solution{
+
+\textbf{Solución:}
+
+\begin{center}
+  \includegraphics[scale=1.5]{prob01a_sol}
+\end{center}
+
+}
+
+\item ¿Cómo se cumple gráficamente la LCK en el diagrama de fasores? \partialPoints{1}
+
+\shortsolution{\textbf{Respuesta:} 
+
+Gráficamente se cumple que $\phr{I} = \phr{I}_1 + \phr{I}_2$.
+\begin{center}
+  \includegraphics[scale=1.5]{prob01b_sol}
+\end{center}
+
+}
+
+\solution{
+
+\textbf{Solución:}
+
+Gráficamente se cumple que $\phr{I} = \phr{I}_1 + \phr{I}_2$.
+\begin{center}
+  \includegraphics[scale=1.5]{prob01b_sol}
+\end{center}
+
+}
+
+\end{subpunto}

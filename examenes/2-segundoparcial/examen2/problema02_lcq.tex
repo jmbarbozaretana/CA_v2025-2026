@@ -1,0 +1,106 @@
+%% 2do Examen parcial S2 2025
+%% Laura Cabrera Quirós
+
+\Problema{3}{Respuesta en Frecuencia y Filtros}
+\vspace{2mm}
+
+Considere el circuito de la Figura \ref{fig:filtro}, que corresponde a un filtro pasa banda donde se sabe que su frecuencia central está definida por $\dfrac{1}{RC}$.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[scale=1]{prob02.pdf}
+  \caption{Circuito filtro pasa banda}
+  \label{fig:filtro}
+\end{figure}
+
+Resuelva lo siguiente:
+
+\begin{subpunto}
+  \item Encuentre la función de respuesta en frecuencia  $\phr{H}(\omega)$ de este circuito como función de $C$ y $R$, tomando $\phr{V}_s$ como entrada y $\phr{V}_o$ como salida. Debe desarrollar su respuesta hasta llegar a una división de polinomios. \partialPoints{1}
+  
+  \solution{
+  \begin{center}
+  \includegraphics[scale=1]{prob02_sol.pdf}
+  	\end{center}
+  	Por divisor de tensión:
+  \begin{align*}
+    \phr{V}_o &= \dfrac{\phr{V}_aR}{R+1/j\omega C}\\
+               &= \dfrac{\phr{V}_aj\omega RC}{j\omega RC+1} \\
+    \phr{V}_a &= \dfrac{\phr{V}_o(j\omega RC+1)}{j\omega RC}  \calif{1Punto}
+  \end{align*}
+  
+  Además, mediante un nodo y sustituyendo expresión anterior:
+  
+  \begin{align*}
+  	\dfrac{\phr{V}_s-\phr{V}_a}{R}&=\dfrac{\phr{V}_a}{1/j\omega C}+\dfrac{\phr{V}_a}{1/j\omega C+1}\\
+  	\phr{V}_s&=\phr{V}_a\left(1+j\omega RC+\dfrac{j\omega RC}{j\omega RC+1}\right) \calif{1Puntos}\\
+  	\phr{V}_s&=\phr{V}_o\dfrac{(j\omega RC+1)}{j\omega RC}  \left(1+j\omega RC+\dfrac{j\omega RC}{j\omega RC+1}\right) \\
+  	\phr{V}_s&=\phr{V}_o\left(\dfrac{j\omega RC+1}{j\omega RC}+(j\omega RC+1)+1\right)\\
+  	\phr{V}_s&=\phr{V}_o\left(\dfrac{j\omega RC+1}{j\omega RC}+j\omega RC+2\right)\calif{1 Punto}
+  \end{align*}
+  
+  Y finalmente, desarrollando para obtener $\phr{H}(\omega)$ como una división de polinomios:
+  
+  \begin{align*}
+  	\phr{V}_s&=\phr{V}_o\left(\dfrac{3j\omega RC-(\omega RC)^2+1}{j\omega RC}\right)\\
+  	\phr{H}(\omega)&=\dfrac{\phr{V}_o}{\phr{V}_s}=\dfrac{j\omega RC}{3j\omega RC+1-(\omega RC)^2} \calif{2 Puntos}
+  \end{align*}
+  
+  \calif{Tener un equivalente de la función correcta, pero sin desarrollo a polinomios quitaría un punto}
+}    
+  \item Encuentre la respuesta en magnitud para este filtro. \partialPoints{0.5}
+  
+  \solution{  
+  	 \begin{align*}
+  		|\phr{H}(\omega)| &= \left|\dfrac{j\omega RC}{3j\omega RC+1-(\omega RC)^2}\right|=\dfrac{\omega RC}{\sqrt{(3\omega RC)^2+(1-(\omega RC)^2)^2}}\calif{1 Punto}\\
+  	\end{align*}
+  }
+  
+  \item Calcule el valor máximo de ganacia en decibeles para este filtro. \partialPoints{0.5}
+
+
+\solution{  
+  
+
+  En el enunciado se da la frecuencia de resonancia, en donde teóricamente se pueden obtener un máximo para la ganancia en un pasabanda. Evaluando en este punto:
+  \begin{align*}
+    |\phr{H}(1/RC)| &=\dfrac{(1/RC) RC}{\sqrt{(3(1/RC) RC)^2+(1-((1/RC) RC)^2)^2}}=\dfrac{1}{3}\calif{0.5 Punto}\\
+    |\phr{H}(1/RC)|_{dB} &=20log_{10}(1/3)-9.54dB\calif{0.5 Punto}
+  \end{align*}
+
+  }
+    
+  \item Si se definen los valores de $C=1m$F y $R=1k\Omega$, encuentre las frecuencias de corte y el ancho de banda para el filtro, todas en $rad/s$.\partialPoints{1}
+  
+  \solution{
+
+ Para los valores dados:
+   \begin{align*}
+ 	\phr{H}(\omega)&=\dfrac{j\omega}{3j\omega+1-(\omega)^2} 
+ \end{align*}
+ Y la respuesta en magnitud:
+  \begin{align*}
+ 	|\phr{H}(\omega)| &= \dfrac{\omega}{\sqrt{(3\omega)^2+(1-\omega^2)^2}}=\dfrac{\omega}{\sqrt{9\omega^2+(1-2\omega^2+\omega^4)}}=\dfrac{\omega}{\sqrt{\omega^4+7\omega^2+1}}\\
+ \end{align*}
+  Finalmente, las frecuencias de corte se dan en el 70\% del valor maximo. Asi, tomando la respuesta del punto anterior:
+  
+	\begin{align*}
+	   	\dfrac{\omega}{\sqrt{\omega^4+7\omega^2+1}} &= \dfrac{|\phr{H}(\omega)|_{max}}{\sqrt{2}}\\
+	   	\dfrac{\omega}{\sqrt{\omega^4+7\omega^2+1}}&= \dfrac{1}{3\sqrt{2}}\\
+	   	\dfrac{\omega^2}{\omega^4+7\omega^2+1}&= \dfrac{1}{9(2)}\\
+		\omega^4+7\omega^2+1&=18\omega^2\\
+	   	\omega^4-11\omega^2+1&=0\
+	\end{align*}
+	Lo que genera cuatro soluciones, de las cuales las validas para el circuito serian:
+	\begin{align*}
+		\omega_1&=0.3 rad/s\\
+		\omega_2&=3.3 rad/s
+	\end{align*}
+	Lo que genera un ancho de banda de $\sim3rad/s$
+  }
+    
+  
+  \end{subpunto}
+    
+
+    

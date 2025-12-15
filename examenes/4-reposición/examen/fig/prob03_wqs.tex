@@ -1,0 +1,74 @@
+\documentclass[class=article,border=1pt]{standalone}
+\usepackage{verbatim}
+\usepackage{textcomp}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+\usepackage[europeanresistors,americaninductors,RPvoltages]{circuitikz}
+
+\begin{document}
+    \begin{circuitikz}  [american, scale=1.25]
+        
+        % Define Coordinates
+        \coordinate (GND) at (0, 0);
+        \coordinate (V1_plus) at (0, 3.5);
+        \coordinate (V1_minus) at (0, 0);
+        \coordinate (NodeA) at (2.5, 3.5); % Node between R1 and R2/R_in+
+        \coordinate (NodeB) at (3.5, 1.8);   % Node between R2, R4, and R3
+        \coordinate (OpAmpIn+) at (3.5, 3.5);
+        \coordinate (OpAmpIn-) at (3.5, 2.2);
+        \coordinate (OpAmpOut) at (6, 2.5);
+        \coordinate (NodeOut) at (8, 2.5);
+        \coordinate (V2_plus) at (9, 3.1);
+        \coordinate (V2_minus) at (10, 0);
+
+    
+        % R1 (400 Ohm)
+        \draw (V1_plus) to [short,o-] (0,3.5) to [R, l=$400\,\Omega$, i>^=$I_1$] (NodeA);
+
+        % R2 (1200 Ohm) to GND
+        \draw (NodeA) to [R, l_=$1.2\,k\Omega$] (2.5, 0);
+
+        % Op-Amp (Non-inverting input)
+        \draw (NodeA) to (OpAmpIn+);
+      
+        % Op-Amp Triangle
+        \node (opamp) [op amp, right of=OpAmpIn+, xshift=0.5cm, yshift=-0.5cm, noinv input up] at (OpAmpIn+) {};
+        \draw (opamp.+) -- (OpAmpIn+);
+        
+        % R4 (500 Ohm) to GND
+        \draw (NodeB) to [R, l=$500\,\Omega$] (3.5, 0);
+
+        % Op-Amp (Inverting input) - Connection to Node B
+        %\draw (OpAmpIn-) -- (NodeB);
+        %\draw (NodeB) to [short] (4, 1);
+        \draw (opamp.-) to [short] (3.5, 2.7) to [short] (3.5, 1.5);
+        
+        % R3 (1000 Ohm) Feedback
+        \draw (opamp.out)++(0.55,0) to [short,*-] (6.2, 1.8);
+        \draw  (6.2, 1.8) to [R, l=$1\,k\Omega$](NodeB);
+        
+        % R5 (200 Ohm)
+        \draw (opamp.out) to [R, l=$200\,\Omega$, i^<=$I_2$,-o] (V2_plus);
+        
+        
+        % Ground rail (Connecting all grounds)
+        \draw (GND) to [short,o-o] (9, 0);
+
+        % Add dot at critical nodes for clarity (optional, but good practice)
+        \fill (NodeA) circle (2pt);
+        \fill (NodeB) circle (2pt);
+        \fill (opamp.out)++(0.55,0) circle (2pt);
+        \fill (3.5,0) circle (2pt);
+        \fill (2.5,0) circle (2pt);
+        \fill (2.5,0) circle (2pt);
+        
+        \draw (8.7,1.5) node[right] {$V_2$};
+        \draw (-0.2,1.8) node[right] {$V_1$};
+        
+        \draw (-0.2,3.2) node[right] {$+$};
+        \draw (-0.2,0.2) node[right] {$-$};
+        \draw (8.7,2.8) node[right] {$+$};
+        \draw (8.7,0.2) node[right] {$-$};
+        
+    \end{circuitikz}
+\end{document}

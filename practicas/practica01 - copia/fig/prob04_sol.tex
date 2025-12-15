@@ -1,0 +1,142 @@
+\documentclass[class=article,border=10pt]{standalone}
+\usepackage{verbatim}
+\usepackage{textcomp}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+\usepackage[europeanresistors,americaninductors]{circuitikz}
+
+
+\usepackage[active,tightpage]{preview}
+\PreviewEnvironment{tikzpicture}
+\setlength\PreviewBorder{5pt}
+\usepackage{amsmath,amssymb}
+\usepackage{bodegraph}
+
+\usetikzlibrary{intersections}
+\usetikzlibrary{calc}
+\usetikzlibrary{positioning}
+
+\begin{document}
+
+% Define the layers to draw the diagram
+\pgfdeclarelayer{background}
+\pgfdeclarelayer{foreground}
+\pgfsetlayers{background,main,foreground}
+
+%\begin{preview}
+\begin{tikzpicture}[>=latex',
+    ref lines/.style={line width=2pts, blue!95},
+    ref points/.style={circle, black, opacity=0.7, fill, minimum size= 1pt, inner sep=0},
+    every node/.style={font=\small},
+    bode lines/.style={very thick, black},
+    Gclabel/.style={text=blue},
+    xscale=12/3,
+    gnuplot def/.style={samples=100,id=\arabic{idGnuplot},prefix=gnuplot/\jobname},
+    semilog lines/.style={thin, black!40},
+    semilog lines 2/.style={thin, black!60},
+    semilog half lines/.style={semilog lines 2, dashed },
+    Black lines/.style={very thick, blue},
+    Black grid/.style={ultra thin,brown},
+    Black abaque mag/.style={gray,ultra thin,dashed,smooth},
+    Black abaque phase/.style={gray,ultra thin,smooth},
+    Black label points/.style={font=\tiny},
+    Black label axes/.style={Black grid, font=\tiny},
+    Nyquist lines/.style={very thick, blue},
+    Nyquist grid/.style={ultra thin,brown},
+    Nyquist label axes/.style={Nyquist grid,font=\tiny},
+    Nyquist label points/.style={font=\tiny},
+    Temp lines/.style={very thick, blue},
+    Temp grid/.style={ultra thin,brown},
+    Temp label axes/.style={Temp grid, font=\tiny},
+    Temp label points/.style={font=\tiny},
+    Abaque grid/.style={ultra thin,brown!80},
+    Abaque lines/.style={thick, blue,smooth}
+    ]
+
+
+\begin{scope}[yscale=4/110]
+\UnitedB
+\OrdBode{20}
+\semilog{-1}{3}{-80}{60}
+
+%Draw lines (Magnitude)
+\draw[line width = 1pt, blue, dashed] (-1,26) -- (3,26);
+\draw[line width = 1pt, blue, dashed] (-1,0) -- (1,0) -- (3,40);
+\draw[line width = 1pt, blue, dashed] (-1,0) -- (2,0) -- (3,-20);
+\draw[line width = 1pt, blue, dashed] (-1,0) -- (0,0) -- (3,-60);
+\draw[line width = 1.5pt, red] (-1,26) -- (0,26) -- (1,6) -- (2,6) -- (3,-14);
+
+% Labels
+%\node (A) [Gclabel, black!90, text=black, draw,scale=0.7] 
+%    at (1.9,23) {$20\log_{10}|\omega|$};
+%\draw (A.west) edge [->, shorten >=1pt, thick, black, bend left=0.5] 
+%    (1.6,33);
+%\node (B) [Gclabel, black!90, text=black, draw,scale=0.7] 
+%    at (-0.75,15) {$20\log_{10}|1+j\omega|$};
+%\draw (B.east) edge [->, shorten >=1pt, thick, black, bend left=0.5] 
+%    (-0.3, 0);
+%\node (C) [Gclabel, black!90, text=black, draw,scale=0.7] 
+%    at (2.7,-40) {$-40\log_{10}\left|1+\dfrac{j\omega}{10}\right|$};
+%\draw (C.west) edge [->, shorten >=1pt, thick, black, bend left=0.5] 
+%    (2.2, -49);    
+    
+    
+\node [Gclabel, black, scale=0.7] at (0.65, 18) {$-20$dB/dec};
+\node [Gclabel, black, scale=0.7] at (2.7, -3) {$-20$dB/dec};
+
+% Axes label
+\node [below=6pt] at (1,-88) {Frecuencia $\omega$};
+\node [rotate=90] at (-1.2,5) {Ganancia (dB)};
+\end{scope}
+
+
+\begin{scope}[yshift=-6cm, yscale=3/180]
+\UniteDegre
+\OrdBode{90}
+\semilog{-1}{3}{-270}{90}
+
+%x=log_10(x_log)
+%Draw lines (Phase)
+\draw[line width = 1pt, blue, dashed] (-1,0) -- (0,0)  -- (2,90)  -- (3,90) ;
+\draw[line width = 1pt, blue, dashed] (-1,0) -- (1,0) -- (3,-90);
+\draw[line width = 1pt, blue, dashed] (-1,0) -- (1,-90) -- (3,-90);
+
+\draw[line width = 1.5pt, red] (-1,0) -- (0,-45) -- (2,-45) -- (3,-90);
+
+
+% Labels 
+%\node (A) [Gclabel, black!90, text=black, draw, scale=0.7] 
+%    at (2.9,75) {$90^{o}$};
+%\draw (A.west) edge [->, shorten >=1pt, thick, black, bend left=0.1] 
+%    (2.7,90);
+
+%\node (B) [Gclabel, black!90, text=black, draw, scale=0.7] 
+%    at (0.7,50) {$\tan^{-1}(\omega)$};
+%\draw (B.west) edge [->, shorten >=1pt, thick, black, bend left=0.3] 
+%    (0.4,63);
+
+%\node (C) [Gclabel, black!90, text=black, draw, scale=0.7] 
+%    at (1.8,-120) {$-2\tan^{-1}(\frac{\omega}{10})$};
+%\draw (C.west) edge [->, shorten >=1pt, thick, black, bend left=0.1] 
+%    (1.5,-137);
+
+\node [Gclabel, black, scale=0.7] at (-0.6, -35) {$-45^{o}$/dec};
+\node [Gclabel, black, scale=0.7] at (2.5, -55) {$-45^{o}$/dec};
+
+% Axes label
+\node [below=6pt] at (1, -280) {Frecuencia $\omega$};
+\node [rotate=90] at (-1.2, -90) {Fase ($^{o}$)};
+\end{scope}
+
+% Background
+\begin{pgfonlayer}{background}
+    \path (-1.4cm,2.8cm) node (tl) {};
+    \path (2.4cm, -8.4cm) node (br) {};
+    \path[fill=white!20] (tl) rectangle (br);
+\end{pgfonlayer}
+
+
+\end{tikzpicture}
+%\end{preview}
+
+\end{document}

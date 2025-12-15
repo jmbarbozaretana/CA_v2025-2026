@@ -1,0 +1,102 @@
+%% Quiz 4 Tutoría S12023
+%% Laura Cabrera
+
+\Pregunta{7}{Para el siguiente circuito}
+
+\begin{center}
+	\includegraphics[scale=1]{circ}
+\end{center}
+
+\begin{subpregunta}
+\item Determine la función de transferencia $\mathbf{H}(\omega)=\mathbf{V}_o(\omega)/\mathbf{V}_s(\omega)$ \partialPoints{2}	
+	
+\solution{
+\textbf{Solución:}
+Tomando el circuito en el dominio de la frecuencia se tiene:
+
+\begin{center}
+\includegraphics[scale=1]{circ_sol}
+\end{center}
+
+\begin{align*}
+\mathbf{V}_o &= \mathbf{V}_s\cdot \dfrac{j\omega L}{R+j\omega L}\\
+\dfrac{\mathbf{V}_o}{\mathbf{V}_s} &= \dfrac{j\omega L}{R+j\omega L}\\
+\mathbf{H}(\omega) &= \dfrac{j\omega L}{R+j\omega L}
+\end{align*}
+
+\calif{2\,pts}
+}	
+	
+\shortsolution{
+\textbf{Respuesta:}
+
+\begin{equation*}
+\mathbf{H}(\omega) = \dfrac{j\omega L}{R+j\omega L}
+\end{equation*}	
+	}
+
+\item Identifique el tipo de filtrado que presenta el circuito. Justifique su respuesta en base a la función de transferencia. \partialPoints{1}	
+
+\solution{
+\textbf{Solución:}
+A partir de la función de $\mathbf{H}(\omega)$ se tiene que
+
+\begin{align*}
+\mathbf{H}(0) &= 0\\
+\lim_{\omega \rightarrow \infty} \mathbf{H}(\omega) &= \lim_{\omega \rightarrow \infty} \dfrac{j\omega L}{j\omega\left(\dfrac{R}{j\omega}+L\right)}=\lim_{\omega \rightarrow \infty} = \dfrac{L}{\left(\dfrac{R}{j\omega}+L\right)} = 1
+\end{align*}
+
+Por lo tanto, el circuito anterior se comporta como un filtro pasa altas.
+
+
+\calif{0.5\,pts por el análisis en $\omega = 0$}
+
+\calif{0.5\,pts por el análisis en $\omega = \infty$}
+
+}		
+
+\shortsolution{
+\textbf{Respuesta:} Pasa altas
+}
+	
+\item Encuentre la expresión para calcular la frecuencia de corte del filtro y calcule el valor de esta (en Hertz) para $R=100\,\Omega$ y $L=2\,H$. \partialPoints{4}
+
+\solution{
+\textbf{Solución:}
+
+La función de respuesta de magnitud de $\mathbf{H}(\omega)$ es:
+
+\begin{align*}
+|\mathbf{H}(\omega)| = \dfrac{\omega L}{\sqrt{R^2 + \omega^2L^2}}
+\end{align*}
+
+\calif{1\,pto}
+
+Para calcular la frecuencia de corte se plantea:
+
+\begin{align*}
+|H(\omega_c)| &= \dfrac{1}{\sqrt{2}}\\
+\dfrac{\omega_c L}{\sqrt{R^2 + \omega_c^2L^2}} &= \dfrac{1}{\sqrt{2}}\\
+\left[\dfrac{\omega_c L}{\sqrt{R^2 + \omega_c^2L^2}}\right]^2 &= \left[\dfrac{1}{\sqrt{2}}\right]^2\\
+\dfrac{\omega_c^2 L^2}{R^2 + \omega_c^2L^2} &= \dfrac{1}{2}\\
+2\omega_c^2 L^2 &= R^2 + \omega_c^2L^2\\
+\omega_c &= \sqrt{\dfrac{R^2}{2L^2-L^2}}\\
+\omega_c &= \sqrt{\dfrac{R^2}{L^2}}\\
+\omega_c &= \dfrac{R}{L} 
+\end{align*}
+
+Con lo cual, utilizando los valores de $R$ y $L$ se tiene que $\omega_c = 50\,rad/s$ o $f_c=7.96\,Hz$.
+
+\calif{3\,pts distribuidos por el análisis realizado}
+
+}
+	
+\shortsolution{
+\textbf{Respuesta:} Se llega a la expresión $\omega_c = R/L$ y para los valores dados se llega a $\omega_c=50\,rad/s$ o $f_c = 7.96\,Hz$.
+}
+	
+\end{subpregunta}
+
+
+
+

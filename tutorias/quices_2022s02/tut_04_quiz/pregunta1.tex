@@ -1,0 +1,56 @@
+%% Quiz 4 Tutoría S2 2022
+%% José Miguel Barboza Retana
+
+
+\Problema{12}{Respuesta en Frecuencia}
+
+\medskip
+
+Sea el circuito
+
+\begin{center}
+    \includegraphics[scale=1.2]{prob1}
+\end{center}
+
+Considerando $v_i(t)$ como la señal de entrada y $v_o(t)$ la señal de salida en el circuito anterior.
+
+\begin{subpunto}
+	\item Determine el tipo de comportamiento en frecuencia que presenta el circuito anterior respecto a la frecuencia (paso bajas, pasa altas, pasabanda o rechaza banda). Justifique su respuesta. \partialPoints{2}
+	
+	\shortsolution{
+	\bigskip
+	\textbf{Respuesta:}
+	Presenta un comportamiento paso bajas. 
+	}
+	
+	\item Determine la función de respuesta en frecuencia $\mathbf{H}(\omega)=\mathbf{V}_o(\omega)/\mathbf{V}_i(\omega)$.\partialPoints{4}
+	
+	\shortsolution{
+	\bigskip
+	\textbf{Respuesta:}
+	\begin{equation*}
+		\mathbf{H}(\omega) = \dfrac{1}{1+j\omega 3RC+(j\omega)^2R^2C^2}
+	\end{equation*} 
+	}
+	
+	\item Considerando $R=1\,$k$\Omega$ y $C=10\mu$F, determine el ancho de banda $B$ de la respuesta en frecuencia $\mathbf{H}(\omega)$. \partialPoints{3}
+	
+	\shortsolution{
+	\bigskip
+	\textbf{Respuesta:}
+	\begin{equation*}
+		\omega_0 = 37.4\,rad/s
+	\end{equation*} 
+	}	
+	
+	\item Considerando $R=1\,$k$\Omega$ y $C=10\mu$F, trace el diagrama asintótico de Bode tanto de magnitud como de fase de la función de respuesta en frecuencia $\mathbf{H}(\omega)$. \partialPoints{3}
+	
+	\shortsolution{
+	\bigskip
+	\textbf{Respuesta:}
+	\begin{center}
+		\includegraphics[scale=1]{prob1_sol}
+	\end{center} 
+	}	
+	
+\end{subpunto}

@@ -1,0 +1,31 @@
+\Problema{5}{}
+\medskip
+
+Un circuito lineal con tensión de entrada $v_i(t)$ y tensión de salida $v_o(t)$ tiene la siguiente función de transferencia:
+
+\begin{eqnarray*}
+H(s) = \dfrac{s+4}{s(s+2)}
+\end{eqnarray*}
+
+\begin{subpunto}
+	\item Detemine la respuesta al impulso del circuito. \partialPoints{3}.
+
+	\shortsolution{
+	\bigskip
+	\textbf{Respuesta:}
+	\begin{equation*}
+		h(t)=(2-e^{-2t})u(t)
+	\end{equation*} 
+	}	
+	
+	\item Determine la tensión de salida $v_o(t)$ del circuito descrito por la función $H(s)$ si a éste se le aplica la señal de entrada $v_i(t)=\delta(t)-4e^{-4t}u(t)\,$V.\partialPoints{2}.
+	
+	\shortsolution{
+	\bigskip
+	\textbf{Respuesta:}
+	\begin{equation*}
+		v_o(t)=e^{-2t}u(t)\,V
+	\end{equation*} 
+	}	
+	
+\end{subpunto}

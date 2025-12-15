@@ -1,0 +1,23 @@
+\documentclass[convert=false,border=1pt]{standalone}
+\usepackage{verbatim}
+\usepackage{textcomp}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+\usepackage[europeanresistors,americaninductors,RPvoltages]{circuitikz}
+
+\begin{document}
+
+\begin{circuitikz}  [american, scale=1]
+    \draw (4.5,5) to [generic, l_=$\mathbf{Z_2}$,i_=$\mathbf{I_{BC}}$, -] (9,5)
+    (7,10) to [generic,l_=$\mathbf{Z_1}$,i_=$\mathbf{I_{AB}}$, -] (4.5,5)
+    (9,5) to[generic,l_=$\mathbf{Z_3}$,i_=$\mathbf{I_{CA}}$] (7,10);
+     \draw (2.5,10) to [short,-,i_=$\mathbf{I_{a}}$] (7,10);
+     \draw (2.5,5) to [short,-,i_=$\mathbf{I_{b}}$] (4.5,5);
+     \draw (2.5,3) to [short,-,i_=$\mathbf{I_{c}}$] (9,3);
+     \draw (9,3) to [short,-] (9,5);
+     \draw (2,3) node{$C$}  ;
+     \draw (2,5) node{$B$}  ;
+     \draw (2,10) node{$A$}  ;
+\end{circuitikz}
+
+\end{document}

@@ -1,0 +1,41 @@
+\documentclass[class=article,border=1pt]{standalone}
+\usepackage[europeanresistors,americaninductors,RPvoltages]{circuitikz}
+\usetikzlibrary{calc}
+\usepackage{verbatim}
+\usepackage{textcomp}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+\usepackage{amsmath}
+
+
+\begin{document}
+\begin{circuitikz}[american, scale=0.85]
+  %% Source
+  \coordinate (Csource);
+  \foreach \anch/\ang in {a/0,b/120,c/240}{%
+    \draw (Csource) to[sV=$\mathbf{V}_{\anch n} $,*-,american] +({-\ang+90}:3) coordinate (S\anch) ;
+  }
+  % Load
+  \coordinate (Cload)  at ($(Csource)+(10,0)$);
+  \foreach \anch/\ang in {a/0,b/-120,c/-240}{%
+    \draw (Cload) to[generic,l=$\mathbf{Z}_{\anch}$,*-] +({-\ang+90}:3) coordinate (L\anch);
+  }
+  
+  \draw (Csource) node[above left]{$n$};
+  \draw (Cload) node[above right]{$N$};
+  
+  %% Connections
+  \draw ($(Sa)+(3,0)$) to [generic,l=$1+j\, \Omega$,i=$\mathbf{I}_a$] ($(La)+(-3,0)$);
+  \draw (Sa) -- ($(Sa)+(3,0)$);
+  \draw (La) -- ($(La)+(-3,0)$);
+  \draw (Sb) to[generic,l=$1+j\, \Omega$,i=$\mathbf{I}_b$] (Lb);
+  
+  
+  \draw ($(Sc)+(5,-2)$) to [generic,l=$1+j\, \Omega$,i=$\mathbf{I}_c$] ($(Lc)+(-5,-2)$);
+  \draw (Sc) -- +(0,-2);
+  \draw ($(Lc)+(-5,-2)$) to [short,-]  ($(Lc)+(0,-2)$) -- (Lc);
+  \draw ($(Sc)+(0,-2)$) to [short,-]  ($(Sc)+(5,-2)$);
+  
+  %\draw (Csource) -- (Cload);
+\end{circuitikz}
+\end{document}

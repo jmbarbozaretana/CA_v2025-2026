@@ -1,0 +1,20 @@
+\documentclass[class=article,border=1pt]{standalone}
+\usepackage{verbatim}
+\usepackage{textcomp}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+\usepackage[europeanresistors,americaninductors]{circuitikz}
+
+\begin{document}
+
+\begin{circuitikz} [american, scale=1]
+    \draw 
+    (0,0) to [sV, v<=$\mathbf{V}_{s}$,i^>=$\mathbf{I}_s$] (0,3)     
+    (0,3) to [R, a^=$R$] (2.5,3)
+	(2.5,3) to [L,a^=$j\omega L$] (5,3)    
+    (5,0) to [C, a_= $\displaystyle\frac{1}{j\omega C}$] (5,3)
+    (0,0) to [short, -] (5,0)
+    ;
+\end{circuitikz}
+
+\end{document}

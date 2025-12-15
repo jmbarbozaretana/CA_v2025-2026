@@ -1,0 +1,31 @@
+\Problema{6}{}
+\medskip
+
+Sea el circuito
+
+\begin{center}
+    \includegraphics[scale=1.2]{prob2}
+\end{center}
+
+Considerando $v_s(t)$ como la tensión de entrada y $v_o(t)$ la tensión de salida en el circuito anterior:
+
+\begin{subpunto}
+	\item Determine la expresión de la función de transferencia del circuito.\partialPoints{4}
+	
+	\shortsolution{
+	\bigskip
+	\textbf{Respuesta:}
+	\begin{equation*}
+		H(s)=\dfrac{R_2}{s^2LC(R_1+R_2)+sR_1R_2C+R_1+R_2}
+	\end{equation*} 
+	}	
+	 
+	\item Considerando su función de transferencia y que $R_1=R_2=1\,\Omega$, $L=1$ H y $C=2$ F. ¿Es el circuito estable?. Justifique su respuesta.\partialPoints{2}.
+	
+	\shortsolution{
+	\bigskip
+	\textbf{Respuesta:}
+	El circuito presenta un comportamiento estable, ya que todos los polos de su $H(s)$ se encuentran en el semiplano izquierdo de $s$ ($\sigma<0$).  
+	}	
+	
+\end{subpunto}

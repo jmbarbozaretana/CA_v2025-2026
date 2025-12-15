@@ -1,0 +1,32 @@
+\documentclass[class=article,border=5pt]{standalone}
+\usepackage{verbatim}
+\usepackage{textcomp}
+\usepackage{biblatex}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+\usepackage[europeanresistors,americaninductors,RPvoltages]{circuitikz}
+
+\begin{document}
+
+\begin{circuitikz}  [american, scale=1]
+    \draw
+(0,0) node[op amp] (op1) {}
+(op1.-) to [short,-] ++(-1,0) coordinate (op_m)
+(op_m) to [R,l_=$R_1$] ++(-2,0) coordinate (fnode)
+(fnode) to[resistor,l=$R_F$,*-] ++(0,-2) node[ground] {}
+(fnode) to [C,l=$C$] ++(-2,0) coordinate (in)
+(in) to [short,-o] ++(-0,0) node[left]{$v_1 (t)$}
+(op_m) to [short,*-*] ++(0,-4) coordinate (op_m2)
+(op_m2) to [R,l_=$R_2$] ++(-2,0) coordinate (fnode)
+(fnode) to[resistor,l=$R_F$,*-] ++(0,-2) node[ground] {}
+(fnode) to [C,l=$C$] ++(-2,0) coordinate (in)
+(in) to [short,-o] ++(-0,0) node[left]{$v_2 (t)$}
+(op1.-)++(-0.5,0) to [short,*-] ++(0,1.5) coordinate (leftC)
+(leftC) to [R,l=$R_A$] (leftC -| op1.out) to[short,-*] (op1.out)
+(op1.out) to [short,-o] ++(1,0) coordinate(end) node[right]{$v_o (t)$}
+(op1.out)  to [R,l=$R_L$] ++(0,-2) to ++(0,0) node[ground]{}
+(op1.+) to ++(0,-0.75) node[ground]{}
+;
+
+\end{circuitikz}
+\end{document}

@@ -1,0 +1,57 @@
+\documentclass[class=article,border=10pt]{standalone}
+\usepackage{array,tabularx}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{verbatim}
+\usepackage{textcomp}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usetikzlibrary{shapes,arrows}
+\usepackage[europeanresistors,americaninductors,RPvoltages]{circuitikz}
+\pgfplotsset{width=10cm,compat=1.9}
+\usetikzlibrary{arrows}
+
+\begin{document}
+
+
+
+%Variables
+\def \minx {-4}
+\def \maxx {5}
+\def \miny {-2}
+\def \maxy {5}
+\def \delta {0.5}
+\def \IAx {4}
+\def \IAy {2}
+\def \IBx {-2}
+\def \IBy {4}
+\def \IRx {4}
+\def \IRy {0}
+
+
+
+
+\begin{tikzpicture}[scale=0.6]
+
+    % Draw axis
+    \draw[step=1,gray,thin] (\minx ,\miny ) grid (\maxx,\maxy);    
+    \foreach \x in {\minx,...,\maxx}
+     \node[anchor=north] at (\x,\miny ) {\x};
+    \foreach \y in {\miny,...,\maxy}
+    \node[anchor=east] at (\minx ,\y) {\y};
+    \draw [->] (\minx,0) -- (\maxx+\delta,0) node [right,scale=0.9]{Re};
+    \draw [->] (0,\miny) -- (0,\maxy+\delta) node [above,scale=0.9] {Im};
+    
+    % IR
+    \draw [-stealth,black!50!green,line width=1.5] (0,0) -- (\IRx,\IRy) [above,font=\small] node at (\IRx-0.5,\IRy+0.25) {$\mathbf{I_{A}}$};
+    
+     % IA
+     \draw [-stealth,red,line width=1.5] (0,0) -- (\IAx,\IAy) [above,font=\small] node at (\IAx-0.5,\IAy) {$\mathbf{I_{B}}$};
+    
+     % IR
+        \draw [-stealth,blue,line width=1.5] (0,0) -- (\IBx,\IBy) [above,font=\small] node at (\IBx-0.5,\IBy) {$\mathbf{I_{R}}$};
+     
+     
+
+\end{tikzpicture}
+\end{document}

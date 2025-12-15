@@ -1,0 +1,59 @@
+%% Quiz 1 Tutoría S2 2023
+%% Saúl Guadamuz Brenes
+
+\Pregunta{5}{Determine la función de transferencia a partir del diagrama de Bode que se muestra a continuación:}
+
+\begin{center}
+  \includegraphics[scale=2]{p02}
+\end{center}
+
+Brinde su respuesta en la forma
+\begin{equation*}
+	\phr{H}(s) = \dfrac{K(s + z_1)(s + z_2) \cdots}{(s + p_1)(s + p_2) \cdots} \bigg\vert_{s=j\omega}
+\end{equation*}
+
+Considere que el factor de ganancia constante es mayor a 0.
+    
+\shortsolution{
+
+\bigskip
+\textbf{Respuesta:}
+
+\begin{equation*}
+	\phr{H}(s) = \dfrac{100(s + 2)(s + 500)}{(s + 20)(s + 5000)} \bigg\vert_{s=j\omega}
+\end{equation*}
+}
+
+
+\solution{
+\bigskip
+\textbf{Solución:}
+
+Del diagrama de Bode se identifican:
+\begin{itemize}
+	\item Ceros:
+		\begin{itemize}
+			\item $1$ simple $@\, \omega = 2 \, rad/s$.
+			\item $1$ simple $@\, \omega = 500 \, rad/s$.
+		\end{itemize}
+	\item Polos:
+		\begin{itemize}
+			\item $1$ simple $@\, \omega = 20 \, rad/s$.
+			\item $1$ simple $@\, \omega = 5000 \, rad/s$.
+		\end{itemize}
+\end{itemize}
+
+Por lo que la función de transferencia es
+\begin{align*}
+	\phr{H}(\omega) &= \dfrac{(1 + j\omega/2)(1 + j\omega/500)}{(1 + j\omega/20)(1 + j\omega/5000)} \\
+								&= \dfrac{20\cdot 5000(2 + j\omega)(500 + j\omega)}{2\cdot 500(20 + j\omega)(5000 + j\omega)} \\
+								&= \dfrac{100 (j\omega + 2)(j\omega + 500)}{(j\omega + 20)(j\omega + 5000)}
+\end{align*}
+que en la forma solicitada sería
+\begin{equation*}
+	\phr{H}(s) = \dfrac{100 (s + 2)(s + 500)}{(s + 20)(s + 5000)} \bigg\vert_{s=j\omega}
+\end{equation*}
+
+\calif{1\,pto por cada factor polo y cero representado y 1\,pto por la correcta representación final como $H(s)$}
+
+}

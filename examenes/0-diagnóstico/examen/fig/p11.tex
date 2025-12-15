@@ -1,0 +1,39 @@
+\documentclass[class=article,border=10pt]{standalone}
+\usepackage{verbatim}
+\usepackage{textcomp}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+\usepackage[europeanresistors,americaninductors,RPvoltages]{circuitikz}
+
+\begin{document}
+\begin{circuitikz}  [american, scale=1]
+    
+\draw
+(-2,0) to[V, l^=\mbox{$v(t)$}] (-2,6)
+(3,6) to[L, l^=\mbox{$100\,$mH}] (3,3)
+(3,3) to[R, l^=\mbox{$10\,\Omega$}] (3,0)
+(6,6) to[R, l=\mbox{$10\,\Omega$}] (6,3)
+(6,3) to[R, l=\mbox{$10\,\Omega$}] (6,0)
+(3,3) to[R, l=\mbox{$10\,\Omega$}] (6,3)
+(-2,6) to [short] (6,6)
+(-2,0) to [short] (6,0)
+;
+
+\draw (0.5,4) to[,C, l=\mbox{C}] (0.5,2);
+
+\draw [black, dashed, thick] (0.5,6) -- (0.5,4);
+\draw [black, dashed, thick] (0.5,0) -- (0.5,2);
+
+\draw [blue, dashed, thick] (2.5,-0.5) -- (7.1,-0.5) -- (7.1,6.5) -- (2.5,6.5) -- cycle;
+
+\draw [blue, dashed, thick] (-0.2,-0.5) -- (1.5,-0.5) -- (1.5,6.5) -- (-0.2,6.5) -- cycle;
+
+
+\draw [blue] (5,7.2) node{\small $Red\,Electrica$};
+
+\draw [blue] (0.65,7.5) node{\small $Capacitor\,de$};
+\draw [blue] (0.67,7) node{\small $correccion\,f_p$};      
+    
+    
+\end{circuitikz}
+\end{document}

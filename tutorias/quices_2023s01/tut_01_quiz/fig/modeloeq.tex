@@ -1,0 +1,18 @@
+\documentclass[class=article,border=10pt]{standalone}
+\usepackage{verbatim}
+\usepackage{textcomp}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+\usepackage[europeanresistors,americaninductors,RPvoltages]{circuitikz}
+
+\begin{document}
+
+\begin{circuitikz}  [american, scale=1]
+    \draw 
+    (0,0) to[sV, v=$\mathbf{V}_{Th}$] (0,3.5)
+    (0,3.5) to [generic, l=$\mathbf{Z}_{Th}$] (4.5,3.5)
+    (4.5,3.5) to [R, l_=$2\,\Omega$,v^=$\mathbf{V}_o$] (4.5,0)
+    (0,0) to [short,-] (4.5,0);
+
+\end{circuitikz}
+\end{document}

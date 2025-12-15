@@ -1,0 +1,47 @@
+%% Quiz 1 Tutoría S22023
+%% Laura Cabrera Quiros
+
+\Pregunta{4}{Sea el siguiente circuito con una fuente de corriente alterna que trabaja a una frecuencia angular de $2\,rad/s$.}
+
+\begin{center}
+	\includegraphics[scale=1]{p01}
+\end{center}
+
+
+Se sabe que la onda de tensión en la resistencia $v_R(t)$ tiene una amplitud igual a $0.24\,V$ y está adelantada $45^o$ con respecto a la referencia estándar. Considerando además que el valor de la resistencia es de $100\,\Omega$ y el capacitor de $470\,\mu F$, determine la onda de tensión $v_c(t)$ para el capacitor.\\
+
+\shortsolution{
+
+\bigskip
+\textbf{Respuesta:}
+    \begin{align*}
+    v_c(t)= 2.55\cos(2 t -45^{\circ})\,V
+    \end{align*}
+}
+
+\solution{
+\textbf{Solución:}
+
+Lo primero es encontrar el fasor de $\mathbf{V}_R$, que según la información sería:
+
+\begin{equation*}
+	\mathbf{V}_R=0,24\angle 45^{\circ}\,V \rightarrow \calif{1\,pto}
+\end{equation*}
+	
+El fasor de la corriente se puede encontrar a partir de ley de Ohm en la resistencia, y sería:
+
+\begin{equation*}
+	\mathbf{I}=\dfrac{0,24\angle 45^o}{100}=2,4\angle{45^{\circ}}\,mA\rightarrow \calif{1\,pto}
+\end{equation*}
+
+Al ser un circuito en serie, esta es la misma corriente que pasa por el capacitor. Por ende:
+
+\begin{align*}
+	\mathbf{V}_C &= \dfrac{\mathbf{I}}{j\omega C}\\
+	\mathbf{V}_C &= \dfrac{2,4x10^{-3}\angle{45^{\circ}}}{j(2)(470\times 10^{-6})}\\
+	\mathbf{V}_C &= 2.55\angle{-45^{\circ}}\,V\rightarrow \calif{1.5\,ptos}
+\end{align*}
+
+Por lo tanto $v_c(t) = 2.55\cos(2t -45^{\circ})\,V\rightarrow \calif{0.5\,ptos}$. 
+
+}

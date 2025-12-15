@@ -1,0 +1,29 @@
+\documentclass[convert=false,border=1pt]{standalone}
+\usepackage{array,tabularx}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{verbatim}
+\usepackage{textcomp}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usetikzlibrary{shapes,arrows}
+\usepackage[americanvoltages,americanresistors,americaninductors,siunitx]{circuitikz}
+\pgfplotsset{width=10cm,compat=1.9}
+
+\begin{document}
+
+\begin{circuitikz}  [american, scale=1]
+  \draw 
+    (1,2.5) to [R, R=$1\,\Omega$] (6,2.5)
+    (1,2.5) to [R, R=$2\,\Omega$] (1,0)
+    (6,2.5) to [R, R=$3\,\Omega$] (6,0) 
+    (0,0) to [short,o-o] (7,0)
+    (0,2.5) to [short,o-] (1,2.5)
+    (6,2.5) to [short,-o] (7,2.5)
+    ;
+    \draw (0,2.8) node[]{\small $\textbf{1}$};
+    \draw (7,2.8) node[]{\small $\textbf{2}$}; 
+    
+\end{circuitikz}
+
+\end{document}

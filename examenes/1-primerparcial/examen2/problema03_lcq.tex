@@ -1,0 +1,178 @@
+%%%%%%%%%%%%%%%
+%% Problema3 %%
+%% 2025 S1   %%
+%% WQS       %%
+
+\Problema{3}{Análisis de Potencia en CA}
+
+\medskip
+
+Considere el circuito en el dominio fasorial que se muestra a continuación:
+
+\begin{center}
+  \includegraphics[scale=1]{prob03_lcq}
+\end{center}
+
+
+\begin{subpunto}
+	\item Encuentre el valor que debe tener la impedancia de carga $\mathbf{Z}_L$ para lograr la máxima transferencia de potencia para esta carga. \partialPoints{1.25}
+	
+	\solution{ Para la máxima transferencia de potencia se debe encontrar la $\mathbf{Z}_{TH}$, desconectando la $\mathbf{Z}_L$. Esto pues para la máxima transferencia de potencia se debe cumplir que $\mathbf{Z}_{L}=\mathbf{Z}_{TH}^*$. Al tener fuentes dependientes, se necesita una fuente de prueba:
+		
+	\begin{center}
+		\includegraphics[scale=1]{prob03_lcq - sol_a}
+	\end{center}
+	
+	
+	Donde $\mathbf{Z}_{TH}=\dfrac{\mathbf{V}_{ab}}{1\angle 0}$ \calif{1 Punto por equivalente para calculos}. En el nodo $\mathbf{V}_{o}$, usando LCK:
+	
+	\begin{eqnarray*}
+		1\angle 0&=&\dfrac{\mathbf{V}_o}{5j}-8\mathbf{I}_o
+	\end{eqnarray*}
+	
+	Y en la malla izquierda, respetando la dirección que tiene $\mathbf{I}_o$:
+	
+	\begin{eqnarray*}
+		-4\mathbf{I}_o&=&0.1\mathbf{V}_o\\
+		\mathbf{I}_o&=&-0.025\mathbf{V}_o
+	\end{eqnarray*}
+	
+	 \calif{1 Punto por relación entre $I_o$ y $V_o$}
+	 
+	Sustituyendo:
+		\begin{eqnarray*}
+		1\angle 0&=&\dfrac{\mathbf{V}_o}{5j}-8(-0.025\mathbf{V}_o)\\
+		1\angle 0&=&\mathbf{V}_o(0,2-0,2j)\\
+		\mathbf{V}_o&=&\dfrac{1\angle0}{0,2-0,2j}=\dfrac{5-5j}{2}  \\
+	\end{eqnarray*}
+	\calif{1 Punto por $V_o$}
+	
+	Finalmente $\mathbf{Z}_{TH}=\dfrac{(5-5j)/2}{1\angle 0}=\dfrac{5-5j}{2}\,\Omega$ y por lo tanto $\mathbf{Z}_{L}=\mathbf{Z}_{TH}^*=\dfrac{5+5j}{2}\,\Omega$
+	\calif{1 Punto}
+	}
+	
+	\item Calcule el valor de la potencia máxima lograda para el valor de $\mathbf{Z}_L$ calculado. \partialPoints{1.25}
+	
+	\solution{
+	
+	Para calcularla, lo mejor es usar el equivalente completo. Así, para encontrar el $\mathbf{V}_{TH}$ se tiene:
+	
+	\begin{center}
+		\includegraphics[scale=1]{prob03_lcq - sol_b}
+	\end{center}
+	
+	\calif{1 Punto por circuito}
+	
+	En este, en la sección derecha y dado que la corriente en el capacitor es 0 debido al abierto, se tiene que $\mathbf{V}_{TH}=\mathbf{V}_o$. A su vez:
+	
+	\begin{eqnarray*}
+		8\mathbf{I}_o&=&\dfrac{\mathbf{V}_o}{5j}+0\\
+		\mathbf{I}_o&=&\dfrac{\mathbf{V}_o}{8(5j)}
+	\end{eqnarray*}
+	
+	\calif{1 Punto por relacion entre $I_o$ y $V_o$}
+	
+	Y en la malla izquierda, desarrollando:
+	
+	\begin{eqnarray*}
+		20\angle 80^o&=&4\mathbf{I}_o+0,1\mathbf{V}_o\\
+		20\angle 80^o&=&4\dfrac{\mathbf{V}_o}{8(5j)}+0,1\mathbf{V}_o\\
+		20\angle 80^o&=&\mathbf{V}_o(0,1-0,1j)\\
+		\mathbf{V}_o&=&\mathbf{V}_{TH}=141,42\angle 125^o\,V
+	\end{eqnarray*}
+	
+	\calif{1 Punto por $V_o$}
+	
+	Seguidamente, para la potencia compleja:
+	\begin{eqnarray*}
+		\mathbf{S}&=&\dfrac{1}{2}\dfrac{|V|^2}{\mathbf{Z}_L^*}=\dfrac{1}{2}\dfrac{(141,42)^2}{5-5j}
+		=999,98+999,98j \,VA
+	\end{eqnarray*}
+	donde $P=\Re\{\mathbf{S}\}\simeq 1\,kW$
+	
+	\calif{1 Punto}
+	}
+	
+	\item Si se sabe que la fuente de tensión independiente opera a $120\,$Hz, defina cuál o cuáles componentes (R, L, C o mezclas) pueden formar parte de $\mathbf{Z}_L$ considerando el valor obtenido para lograr la máxima transferencia de potencia. Encuentre además el valor físico de estos componentes. \partialPoints{0.5}
+	
+	\solution{
+	
+	Dado que $\mathbf{Z}_{L}$ debe ser $5+5j\,\Omega$ se desglosa que esta está compuesta de una resistencia y una bobina en serie. La $R$ sería la parte real $5\Omega$ \calif{1 Punto}. La reactancia de la bobina sería: 
+	
+	\begin{eqnarray*}
+		j\omega L&=&5j\\
+		L&=&\dfrac{5}{2\pi 60}= 13,3\,H \calif{1 Punto}
+	\end{eqnarray*} 
+	}
+
+\end{subpunto}
+
+%\begin{subpunto}
+%\item Determine una expresión para $\mathbf{Z_L}(\mathbf{Z_1},\mathbf{Z_2},\mathbf{Z_3})$ que permita extraer la máxima potencia del circuito. Simplifique al máximo y expréselo como una única fracción. \partialPoints{3}
+%
+%\shortsolution{
+%\begin{align*}
+%\mathbf{Z_{L}}=\dfrac{(\mathbf{Z_1}\mathbf{Z_2}+\mathbf{Z_1}\mathbf{Z_3}+\mathbf{Z_2}\mathbf{Z_3})^*}{(\mathbf{Z_1}+\mathbf{Z_2})^*}
+%\end{align*}
+%}
+%
+%\solution{
+%Para máxima transferencia de potencia
+%\begin{align*}
+%\mathbf{Z_L}=\mathbf{Z_{th}}^*
+%\end{align*}
+%\calif{1 pt}
+%
+%por lo que desconectando la carga $\mathbf{Z_L}$ y apagando la fuente, entonces $\mathbf{Z_{th}}$ es
+%\begin{align*}
+%\mathbf{Z_{th}}=\mathbf{Z_1}||\mathbf{Z_2} + \mathbf{Z_3}\\
+%\mathbf{Z_{th}}=\dfrac{\mathbf{Z_1}\mathbf{Z_2}}{\mathbf{Z_1}+\mathbf{Z_2}}+\mathbf{Z_3}\\
+%\mathbf{Z_{th}}=\dfrac{\mathbf{Z_1}\mathbf{Z_2}+\mathbf{Z_1}\mathbf{Z_3}+\mathbf{Z_2}\mathbf{Z_3}}{\mathbf{Z_1}+\mathbf{Z_2}}
+%\end{align*}
+%\calif{1 pt}
+%
+%por lo tanto
+%\begin{align*}
+%\mathbf{Z_{L}}=\dfrac{(\mathbf{Z_1}\mathbf{Z_2}+\mathbf{Z_1}\mathbf{Z_3}+\mathbf{Z_2}\mathbf{Z_3})^*}{(\mathbf{Z_1}+\mathbf{Z_2})^*}
+%\end{align*}
+%\calif{1 pt}
+%}
+%
+%\item Calcule el valor de la potencia total entregada por la fuente para el valor de $\mathbf{Z_L}$ que permita la máxima transferencia de potencia a la carga. Para ello, considere que $\mathbf{V_s}=10\angle 0^{\circ}\,V_{rms},\mathbf{Z_1}=1\,\Omega,\mathbf{Z_2}=j\,\Omega$ y $\mathbf{Z_3}=j\,\Omega$. \partialPoints{3}
+%
+%\shortsolution{
+%\begin{align*}
+%P_{max}=25\,W
+%\end{align*}
+%}
+%
+%\solution{
+%Con los valores dados, se tiene entonces que
+%\begin{align*}
+%\mathbf{Z_L}=\dfrac{(j+j+j^2)^*}{(1+j)^*}=\dfrac{(2j-1)^*}{(1+j)^*}=\dfrac{-2j-1}{1-j}=\dfrac{1-j3}{2}\,\Omega
+%\end{align*}
+%\calif{1 pt}
+%
+%Y obteniendo $V_{th}$ con
+%\begin{align*}
+%\mathbf{V_{th}}=\dfrac{\mathbf{V_s}\mathbf{Z_2}}{\mathbf{Z_1}+\mathbf{Z_2}}\\
+%\mathbf{V_{th}}=\dfrac{10j}{j+1}=5+j5\,V_{rms}
+%\end{align*}
+%\calif{1 pt}
+%
+%con lo que queda un circuito serie con dos impedancias $\mathbf{Z_{th}}=\dfrac{1+3j}{2}$ y $\mathbf{Z_L}=\dfrac{1-j3}{2}$ con
+%\begin{align*}
+%\mathbf{Z_{eq}}=\mathbf{Z_{th}}+\mathbf{Z_L}=1\,\Omega
+%\end{align*}
+%por lo que la potencia máxima se puede calcular como
+%\begin{align*}
+%P_{max}=\Re \left\{\dfrac{\mathbf{V_{th}\mathbf{Z_L}}}{\mathbf{Z_L}+\mathbf{Z_{th}}}\dfrac{\mathbf{V_{th}^*}}{(\mathbf{Z_L}+\mathbf{Z_{th}})^*}\right\}=\dfrac{|\mathbf{V_{th}}|^2}{2}=25\,W
+%\end{align*}
+%\calif{1 pt}
+%}
+%
+%\end{subpunto}
+%
+%
+%
+%
